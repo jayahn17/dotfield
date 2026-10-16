@@ -13,7 +13,7 @@
 // with one line per finding otherwise. When the folder is not tracked at all
 // the git half is reported as provisional and only the scan decides.
 import { execFileSync } from 'node:child_process';
-import { builtinModules } from 'node:module';
+import { isBuiltin } from 'node:module';
 import { existsSync, lstatSync, readdirSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
 import { dirname, extname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,7 +27,6 @@ export const SKIP_PATHS = new Set(['vendor/three']);
 /** Prose that names parent-repo paths on purpose (lineage, the ownership map). */
 export const PATH_EXEMPT = new Set(['VISION.md', 'references/PROVENANCE.md', 'references/BUILD_CONTRACT.md']);
 export const FORBIDDEN_PACKAGES = /^(zod|aframe|a-frame|@?three(?!$|\/)|express|react|vue|svelte)/i;
-const BUILTINS = new Set(builtinModules.flatMap((m) => [m, `node:${m}`]));
 const IMPORT_RES = [
   /\bimport\s+(?:[^'"`;]*?\s+from\s+)?['"]([^'"]+)['"]/g,
   /\bexport\s+(?:\*|\{[^}]*\})\s*(?:as\s+\w+\s+)?from\s+['"]([^'"]+)['"]/g,
@@ -77,7 +76,8 @@ export function gitFiles(root) {
     out.prefix = posix(relative(realpathSync(out.toplevel), realpathSync(root)));
     out.available = true;
     out.tracked = zlist(git(root, ['ls-files', '-z', '--', '.']));
-    out.untracked = zlist(git(root, ['ls-files', '-z', '--others', '--exclude-standard', '--', '.']));
+    // center/ is the owner's: init writes it untracked in the template (CI does), and a fork commits it.
+    out.untracked = zlist(git(root, ['ls-files', '-z', '--others', '--exclude-standard', '--', '.'])).filter((rel) => !rel.startsWith('center/'));
     for (const line of git(root, ['ls-files', '-s', '-z', '--', '.']).split('\0').filter(Boolean)) {
       const m = /^(\d{6}) \S+ \d\t(.+)$/.exec(line);
       if (m && m[1] === '120000') { const rel = posix(m[2]); let target = null; try { target = readlinkSync(resolve(root, rel)); } catch { target = null; } out.symlinks.push({ rel, target }); }
@@ -88,7 +88,8 @@ export function gitFiles(root) {
 }
 
 function classify(root, rel, spec) {
-  if (BUILTINS.has(spec)) return null;
+  // isBuiltin, not builtinModules: Node 22 and 23 leave prefix-only builtins such as node:test out of that list.
+  if (isBuiltin(spec)) return null;
   if (spec.startsWith('.') || spec.startsWith('/')) {
     const abs = spec.startsWith('/') ? spec : resolve(root, dirname(rel), spec);
     return inside(root, abs) ? null : { code: 'import-outside', detail: spec };

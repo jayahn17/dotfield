@@ -1,6 +1,6 @@
 {
   "name": "dotfield",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "schema_versions": {
     "brand": "dotfield.brand/1",
     "center-config": "dotfield.center-config/1",

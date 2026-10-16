@@ -3,18 +3,17 @@
 // (only under mcp/) and three (only as browser code under renderers/).
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { builtinModules } from 'node:module';
+import { isBuiltin } from 'node:module';
 import {
   ROOT, CODE_EXTS, SKIP_DIRS, walk, read, imports, resolveSpecifier, isInsideRoot,
 } from './helpers/scan.mjs';
 import { dirname, resolve } from 'node:path';
 
-const BUILTINS = new Set(builtinModules.flatMap((m) => [m, `node:${m}`]));
 const FORBIDDEN_PACKAGES = /^(zod|aframe|a-frame|@?three(?!$|\/)|express|react|vue|svelte)/i;
 const allCode = () => walk('.', { exts: CODE_EXTS, skip: new Set([...SKIP_DIRS, 'vendor']) });
 
 function classify(rel, spec) {
-  if (BUILTINS.has(spec)) return null;
+  if (isBuiltin(spec)) return null; // builtinModules omits node:test on Node 22 and 23
   if (spec.startsWith('.') || spec.startsWith('/')) {
     const abs = resolveSpecifier(rel, spec);
     return isInsideRoot(abs) ? null : `escapes the template root: ${spec}`;

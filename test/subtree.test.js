@@ -79,13 +79,14 @@ test('in a committed repo: an escaping import, a bare package, a ../ path, an un
     git(join(dir, 'parent'), 'add', 'dotfield/lib/esc.mjs', 'dotfield/scripts/bad.sh', 'dotfield/docs/bad.md', 'dotfield/lib/link.txt');
     git(join(dir, 'parent'), 'commit', '-q', '-m', 'escapes');
     put(repo, 'lib/untracked.mjs', 'export const u = 1;\n');
+    put(repo, 'center/center.config.json', '{}\n'); // what CI's init step leaves behind: the owner's, never a finding
     const dirty = checkSubtree({ root: repo });
     assert.equal(dirty.ok, false);
     const by = (code) => dirty.findings.filter((f) => f.code === code).map((f) => f.file).sort();
     assert.deepEqual(by('import-outside'), ['lib/esc.mjs']);
     assert.deepEqual(by('import-package'), ['lib/esc.mjs', 'lib/esc.mjs']);
     assert.deepEqual(by('path-outside'), ['docs/bad.md', 'lib/esc.mjs', 'scripts/bad.sh'], 'a quoted escaping import is also a path reference');
-    assert.deepEqual(by('untracked'), ['lib/untracked.mjs']);
+    assert.deepEqual(by('untracked'), ['lib/untracked.mjs'], 'an untracked center/ is not a finding');
     assert.deepEqual(by('symlink-outside'), ['lib/link.txt']);
     assert.equal(dirty.git.untracked, 1);
     const run = spawnSync(process.execPath, [join(ROOT, 'scripts', 'subtree-check.mjs'), '--root', repo], { encoding: 'utf8' });
@@ -93,6 +94,8 @@ test('in a committed repo: an escaping import, a bare package, a ../ path, an un
     assert.match(run.stdout, /FAIL import-outside lib\/esc\.mjs: (\.\.\/){2}server\/thing\.js/);
     assert.match(run.stdout, /subtree-check: FAILED/);
     assert.deepEqual(codesOf(scanFindings(dir, ['missing-file.mjs'])), [], 'an unreadable path is skipped, not a crash');
+    put(repo, 'lib/uses-test.mjs', "import test from 'node:test';\nexport default test;\n");
+    assert.deepEqual(codesOf(scanFindings(repo, ['lib/uses-test.mjs'])), [], 'node:test is a builtin on every supported Node (builtinModules omits it on 22 and 23)');
   });
 });
 

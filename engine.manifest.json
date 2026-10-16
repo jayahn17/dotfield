@@ -1,6 +1,6 @@
 {
   "schema_version": "dotfield.engine-manifest/1",
-  "engine_version": "0.1.1",
+  "engine_version": "0.1.2",
   "algorithm": "sha256",
   "excluded": [
     "center/**",
@@ -22,7 +22,7 @@
       "digest": "sha256:ae648ef7402b8a2ffdb78dc8ed846c0ba428d28e59b512ea93fac64e7d253344"
     },
     ".claude/skills/dotfield/SKILL.md": {
-      "digest": "sha256:5fed3184109185fe3cb284900340465bc90fedd7733bcd65a1c1b067854ca01f"
+      "digest": "sha256:c096cbabfb92152cd82a84f04cc82a3a057b2314e01239a34cbba72b5824a39e"
     },
     ".gitattributes": {
       "digest": "sha256:050148a6c79dc781a4b5ed23aaa8878d1dfe110043b836679b3249b8d1699430"
@@ -517,10 +517,10 @@
       "digest": "sha256:54b867fc6d6384ac0c095318aa880a96abca2bf9a21e3097822b85f7239c71f6"
     },
     "package-lock.json": {
-      "digest": "sha256:f5fda0c7ede02e551fe8ce881ab5404cdf295f46b732ad6008937cd7d82d0b40"
+      "digest": "sha256:8b5890a32cf7c9a745a096ff54ed0111454d83c4a1f811e74b8f6289fad2c83d"
     },
     "package.json": {
-      "digest": "sha256:d2599079731b6e0b80b187dd2916ddfeec5f13b6ab91e72a0e9cc0b4c579ab09",
+      "digest": "sha256:2de6091d1311dae7095ba5ca224e60c9c15de9013620b1b6627ad8a23181e5fd",
       "normalized": [
         "name",
         "description"
@@ -911,7 +911,7 @@
       "digest": "sha256:8837d2dffec906ee8be07008b96c6f79bfc1c7532cd223a0ab9b176d4397e163"
     },
     "references/INTERFACES.md": {
-      "digest": "sha256:5c9ca5b4a72038b7327e4af533dce22091d024a86a1782d11fb93f35254c4bab"
+      "digest": "sha256:51d10c1abc47781b24753bd973f8a103254a636211affb0a99ae5b901cba8e56"
     },
     "references/INTERFACES_V2.md": {
       "digest": "sha256:ae80efe1e386092a761720346a03187c98be993768e964a39b000a7a1a124dfe"
@@ -1112,7 +1112,7 @@
       "digest": "sha256:cdf6aafa2bd319b21b3a5c398b7e4394d7eca77053ceec8e23e3b4dbe9eb45b2"
     },
     "scripts/subtree-check.mjs": {
-      "digest": "sha256:840e2c169278036de0848376a7fbb12c8c9204a4ac001f11e6f1d3bbc9f5f9e0"
+      "digest": "sha256:415b3b4465e157656611dc1de113be8b1d8792ec1dcde1499b7e1bc8d36d6fc0"
     },
     "server/inbox.html": {
       "digest": "sha256:df0bd0f5eac6c1aa3bde8d287866a0364cc5803b380b441065c515979fc59a98"
@@ -1124,7 +1124,7 @@
       "digest": "sha256:404fa8aa83a47d599168ea4ca5b0055065a7213c42c0cb0c367b814325b6e39c"
     },
     "skill-release.json": {
-      "digest": "sha256:0b708926b1fe76fe191963a95254908b8fbf4a8e8a30dcc36ad870e57b241aac",
+      "digest": "sha256:d25b246cb6909fb6807c0f0da61bfa8ab07d1de6ef668adb566cb8d645e19581",
       "normalized": [
         "name"
       ]
@@ -1694,7 +1694,7 @@
       "digest": "sha256:e55c9135aec5eafaa4dbe2963285fbe87e19137e0c1395de297815f3245fa26f"
     },
     "test/no-son-imports.test.js": {
-      "digest": "sha256:e71b631c192b6a859fa5fd260b3f5e1e188d0324daa2a7db8c3dc0a2f057a0a8"
+      "digest": "sha256:3889e9b1c665523bfff4358064d6826f7ba5e85ca8bedf419dc975431a25dad7"
     },
     "test/overlay.test.js": {
       "digest": "sha256:fadb5a84023da331338021d48cd1506ed35a51c8025b02bb8cda1be4417ae16d"
@@ -1757,7 +1757,7 @@
       "digest": "sha256:1caeb5ac00e0264d5a001cea91887721084b7268c06a8eadcc6e4ec83034f0f3"
     },
     "test/subtree.test.js": {
-      "digest": "sha256:5ea161c418d888c53880f1398d539413c9170a05685f202e23c6c54b768461d2"
+      "digest": "sha256:7f40876647cffc949f97c3c415fa9fa184802524fb2e8066a16354ea7cfb9efe"
     },
     "test/svg-golden.test.js": {
       "digest": "sha256:d118395464a9168da31385704a8eca353d5ecbd0cd491276b2c2f4d714b6f269"
