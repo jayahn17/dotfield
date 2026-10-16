@@ -241,7 +241,7 @@ Moved verbatim to [`references/HISTORY.md`](references/HISTORY.md) §11; the v2 
 | Migrations | v1.1 | prototype | one round-trip fixture | first real bump not yet needed |
 | Pack updates (`center/pack-lock.json` + `migrate`) | v1.1 | prototype | `node --test test/migrate.test.js test/fork-sim.test.js`: untouched files updated with a backup, owner edits kept, deletions respected, a fork merges an upstream pack change with no conflict | a conflict is merged by hand (the shipped copy is set beside the backup); no real upstream pack release has happened yet |
 | Backup and restore | v1.1 | local_beta | `node --test test/backup.test.js`: export → fresh center → `import records` + `approve` restores every record | the encrypted `data/` archive in `recipes/backup-and-restore.md` is documented, not tested; a restore from an export starts with new keys |
-| Skill outside a fork (npx) | v1.1 | prototype | `test/skill.test.js` pins both prefixes and the release tag; a packed tarball rendered a sketch into an empty folder through npx (2026-10-15) | proven against the public repository only once `v0.1.0` is tagged there |
+| Skill outside a fork (npx) | v1.1 | local_beta | `test/skill.test.js` pins both prefixes and the release tag; `npx -y github:jayahn17/dotfield#v0.1.0` rendered a sketch into an empty folder from the public repository (2026-10-15), and `npx skills add jayahn17/dotfield --list` finds the skill | the first run fetches the optional MCP SDK too (about 11 s); each release moves the pinned tag |
 
 When a slice ships, move its row up **with the proof**, and update this table in the same commit.
 

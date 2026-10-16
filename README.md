@@ -84,6 +84,6 @@ Git carries `center/`; nothing carries `data/` until you do. [`recipes/backup-an
 
 ## Claude, with or without a fork
 
-Open `claude` in your fork and the skill (`.claude/skills/dotfield/SKILL.md`) and the MCP tools are found on their own. Without a fork, install only the skill (`npx skills add jayahn17/dotfield`): it runs the same verbs as `npx -y github:jayahn17/dotfield#v0.1.0 <verb>`, pinned to the release it shipped with, and writes only to the working folder's `.dotfield/`. Either way the skill never runs `init`, `approve`, `export` or `migrate`: those are yours.
+Open `claude` in your fork and the skill (`.claude/skills/dotfield/SKILL.md`) and the MCP tools are found on their own. Without a fork, install only the skill (`npx skills add jayahn17/dotfield`): it runs the same verbs as `npx -y github:jayahn17/dotfield#v0.1.1 <verb>`, pinned to the release it shipped with, and writes only to the working folder's `.dotfield/`. Either way the skill never runs `init`, `approve`, `export` or `migrate`: those are yours.
 
 This file is `fork_editable` (see `skill-release.json`): a fork rewrites it freely without tripping `DF_ENGINE_MODIFIED`.

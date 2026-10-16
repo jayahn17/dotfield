@@ -8,7 +8,7 @@
 // inside its own temp dir; no network, no provider.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { discoverRooms } from '../lib/rooms.mjs';
 import { createStore } from '../lib/store.mjs';
@@ -24,6 +24,9 @@ import { loadSchema, validate } from '../lib/validate.mjs';
 import { shared } from './fixtures/ir/build-fixtures.mjs';
 import { NOW, cloneRoom, patchJson, readJson, scaffoldCenter } from './helpers/center.mjs';
 import { withTmp } from './helpers/tmp.mjs';
+
+/** The engine version every projection stamps: package.json's, whatever the release. */
+const ENGINE_VERSION = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
 
 const ENV = {};
 const KEY = 'project-test-session-key';
@@ -93,7 +96,7 @@ test('notes graph for self: schema-valid, gate-clean, deterministic; one node pe
   assert.deepEqual(s.views['3d'], { layout: 'lift', scale_m: 6, lift: { mode: 'group-weight', amplitude_m: 1.5 } });
   assert.deepEqual(s.views.vr, { enabled: true, scale_m: 4 });
   assert.deepEqual(s.views.interactive, { focus: null, reach: 'both', lenses: [{ id: 'ideas', label: 'Ideas', match: { tags: ['idea'] } }], default_lens: null, deep_link: true });
-  assert.deepEqual({ ...s.projected, mac: 'x' }, { by: 'lib/project.mjs', engine_version: '0.1.0', viewer: 'self', at: '2026-10-01T10:15:00Z', dropped: 0, limit: { focus: null, reach: null, lens: null, max_nodes: 600 }, mac: 'x' });
+  assert.deepEqual({ ...s.projected, mac: 'x' }, { by: 'lib/project.mjs', engine_version: ENGINE_VERSION, viewer: 'self', at: '2026-10-01T10:15:00Z', dropped: 0, limit: { focus: null, reach: null, lens: null, max_nodes: 600 }, mac: 'x' });
   assert.ok(privacy.verifyStamp(s, KEY) && !privacy.verifyStamp(s, 'another key'));
   assert.equal(s.receipt, undefined, 'render adds the receipt summary, not the projector');
 }));

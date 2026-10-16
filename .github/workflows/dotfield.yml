@@ -33,7 +33,6 @@ jobs:
         node: ['22', '24']
     env:
       CI: 'true'
-      RECEIPTS: ${{ runner.temp }}/receipts
       # The template refuses a tracked center/ (npm test and npm run check); a fork tracks its own, so the guard is off there.
       DOTFIELD_TEMPLATE_REPO: ${{ github.repository == 'jayahn17/dotfield' && '1' || '' }}
     steps:
@@ -44,10 +43,14 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
 
-      - name: Install (dependencies are {}; the MCP SDK is optional)
+      - name: Receipts live outside the tree (the manifest never hashes them)
+        # The runner context does not exist in a job-level env block, so the path is set here for every later step.
         run: |
-          mkdir -p "$RECEIPTS"
-          npm ci
+          mkdir -p "$RUNNER_TEMP/receipts"
+          echo "RECEIPTS=$RUNNER_TEMP/receipts" >> "$GITHUB_ENV"
+
+      - name: Install (dependencies are {}; the MCP SDK is optional)
+        run: npm ci
 
       - name: Vendored three.js, fetched and verified by pinned hash
         run: |

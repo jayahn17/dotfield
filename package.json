@@ -1,6 +1,6 @@
 {
   "name": "dotfield",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "One private data center per professional: typed scene IR -> validated 2D/3D/VR/interactive HTML, proposal-only agent loop, signed boundary sharing. A template any profession can fork.",
   "type": "module",
   "private": false,

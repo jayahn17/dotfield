@@ -1,6 +1,6 @@
 {
   "schema_version": "dotfield.engine-manifest/1",
-  "engine_version": "0.1.0",
+  "engine_version": "0.1.1",
   "algorithm": "sha256",
   "excluded": [
     "center/**",
@@ -22,13 +22,13 @@
       "digest": "sha256:ae648ef7402b8a2ffdb78dc8ed846c0ba428d28e59b512ea93fac64e7d253344"
     },
     ".claude/skills/dotfield/SKILL.md": {
-      "digest": "sha256:ef2cee4bb79a7f148247aada050391a2622a367a2d0b9c019d0b940a6767a4e3"
+      "digest": "sha256:5fed3184109185fe3cb284900340465bc90fedd7733bcd65a1c1b067854ca01f"
     },
     ".gitattributes": {
       "digest": "sha256:050148a6c79dc781a4b5ed23aaa8878d1dfe110043b836679b3249b8d1699430"
     },
     ".github/workflows/dotfield.yml": {
-      "digest": "sha256:c3ed0cb836932b924b3e1f2bbde9b65808e0bbacd290ab00c011da607702eed4"
+      "digest": "sha256:23de0c6d1307f1f54d9ac11ee6019e8e47ba9e462e8e8511fc68d5696c6fc326"
     },
     ".gitignore": {
       "digest": "sha256:d3b9033ad3f9051330ce9b0d9d244daaeee470388cdaabcedb4913b032b8c779"
@@ -46,7 +46,7 @@
       "digest": "sha256:87b1659b7ef5873c33372efde794dcfe4a750a9483fef9982566f480bab1bae0"
     },
     "VISION.md": {
-      "digest": "sha256:77a24d060ed3d5345ec3e1e189c47dfa804d1e89002ec3c39ba6287341496a71"
+      "digest": "sha256:9f60127cc12636cb7c1a35a28bd006514b68bbfc302ceab0823f8a1bcae5f358"
     },
     "bin/dotfield.mjs": {
       "digest": "sha256:26e3dc28a4fd92a82df99f5f5f46da7fde534a9a60ba4bfdfe040900342b3665"
@@ -517,10 +517,10 @@
       "digest": "sha256:54b867fc6d6384ac0c095318aa880a96abca2bf9a21e3097822b85f7239c71f6"
     },
     "package-lock.json": {
-      "digest": "sha256:06fce2e7b0d8a38edbe52665880c3dd859f6c76edc3c4a40a37fad922e4cf7cf"
+      "digest": "sha256:f5fda0c7ede02e551fe8ce881ab5404cdf295f46b732ad6008937cd7d82d0b40"
     },
     "package.json": {
-      "digest": "sha256:14a754baf3881caa7262683ccc3f3e5f611eaec67a532e65f79bad5320711a7f",
+      "digest": "sha256:d2599079731b6e0b80b187dd2916ddfeec5f13b6ab91e72a0e9cc0b4c579ab09",
       "normalized": [
         "name",
         "description"
@@ -911,7 +911,7 @@
       "digest": "sha256:8837d2dffec906ee8be07008b96c6f79bfc1c7532cd223a0ab9b176d4397e163"
     },
     "references/INTERFACES.md": {
-      "digest": "sha256:8d549ba93b65729e5a706fb4534d242cb956da022fb99b97467ea0622894f314"
+      "digest": "sha256:5c9ca5b4a72038b7327e4af533dce22091d024a86a1782d11fb93f35254c4bab"
     },
     "references/INTERFACES_V2.md": {
       "digest": "sha256:ae80efe1e386092a761720346a03187c98be993768e964a39b000a7a1a124dfe"
@@ -926,7 +926,7 @@
       "digest": "sha256:e0980f7c20d0386bdcb9480a589c6211a4b9a5663b66009ba1cf54d80c0e3685"
     },
     "references/MATURITY.md": {
-      "digest": "sha256:83de0461540be557ff2010c077aa1cf1da4751a81ab21c2f489248695aff74dd"
+      "digest": "sha256:02838cea877a4ab4c8ed18325e65f73d0ff7d609522e7f52f071a60d5db306c5"
     },
     "references/PROVENANCE.md": {
       "digest": "sha256:78c29660bd0d3b314b0182035728bdce5e52b6ca9fde85ee09cee84dff50aec8"
@@ -1124,7 +1124,7 @@
       "digest": "sha256:404fa8aa83a47d599168ea4ca5b0055065a7213c42c0cb0c367b814325b6e39c"
     },
     "skill-release.json": {
-      "digest": "sha256:fd456af06111777d84364694dbc2794a2247ef09c19bafbc1f2d9bff34c5302c",
+      "digest": "sha256:0b708926b1fe76fe191963a95254908b8fbf4a8e8a30dcc36ad870e57b241aac",
       "normalized": [
         "name"
       ]
@@ -1703,7 +1703,7 @@
       "digest": "sha256:e0833ee59accbc576abf06705deeb4a5b5511a3870bd2e8edcedf908b3017404"
     },
     "test/project.test.js": {
-      "digest": "sha256:9ebe87bfa53a719d13c6a185de45943a50bdd6a48f943330201044a21490fffc"
+      "digest": "sha256:e5ef7dc512371230caabe4b40cd17998114f9b48fbe18f87815887b4ce731a57"
     },
     "test/proposals.test.js": {
       "digest": "sha256:2508c77b214b245ebbe1b4d7dd60e8b2d9bb139295246ff5e7cfbc311afcae2a"
@@ -1757,7 +1757,7 @@
       "digest": "sha256:1caeb5ac00e0264d5a001cea91887721084b7268c06a8eadcc6e4ec83034f0f3"
     },
     "test/subtree.test.js": {
-      "digest": "sha256:68f365ea7ba4294e6cc1c866d8c763eb125dbdcebe3a4eb505c080f10e4709d2"
+      "digest": "sha256:5ea161c418d888c53880f1398d539413c9170a05685f202e23c6c54b768461d2"
     },
     "test/svg-golden.test.js": {
       "digest": "sha256:d118395464a9168da31385704a8eca353d5ecbd0cd491276b2c2f4d714b6f269"

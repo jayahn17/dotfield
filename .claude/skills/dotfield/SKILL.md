@@ -5,10 +5,10 @@ allowed-tools: Bash(node bin/dotfield.mjs validate *), Bash(node bin/dotfield.mj
   Bash(node bin/dotfield.mjs run *), Bash(node bin/dotfield.mjs import *), Bash(node bin/dotfield.mjs share rule *),
   Bash(node bin/dotfield.mjs connect *), Bash(node bin/dotfield.mjs verify *), Bash(node bin/dotfield.mjs doctor *),
   Bash(node bin/dotfield.mjs prove *), Bash(node bin/dotfield.mjs add *), Bash(node bin/dotfield.mjs theme *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 validate *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 render *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 plan *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 run *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 import *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 share rule *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 connect *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 verify *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 doctor *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 prove *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 add *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 theme *)
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 validate *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 render *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 plan *),
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 run *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 import *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 share rule *),
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 connect *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 verify *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 doctor *),
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 prove *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 add *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 theme *)
 ---
 
 # Dotfield skill
@@ -19,7 +19,7 @@ Run every command from the fork root as `node bin/dotfield.mjs <verb> … --json
 
 ## Outside a fork
 
-When the working folder has no `bin/dotfield.mjs`, run the same verbs through npx from the public repository, pinned to the release this skill shipped with: `npx -y github:jayahn17/dotfield#v0.1.0 <verb> … --json`. npm fetches the engine once into its cache (Node ≥ 22.13, no other install); outputs and receipts land in this folder's `.dotfield/`, and nothing is written anywhere else. A sketch is the whole input for a diagram, so write one to `.dotfield/sketches/<name>.sketch.json` and render it:
+When the working folder has no `bin/dotfield.mjs`, run the same verbs through npx from the public repository, pinned to the release this skill shipped with: `npx -y github:jayahn17/dotfield#v0.1.1 <verb> … --json`. npm fetches the engine once into its cache (Node ≥ 22.13, no other install); outputs and receipts land in this folder's `.dotfield/`, and nothing is written anywhere else. A sketch is the whole input for a diagram, so write one to `.dotfield/sketches/<name>.sketch.json` and render it:
 
 ```json
 { "schema_version": "dotfield.sketch/1", "type": "architecture", "title": "Telemetry",

@@ -74,8 +74,8 @@ allowed-tools: Bash(node bin/dotfield.mjs validate *), Bash(node bin/dotfield.mj
   Bash(node bin/dotfield.mjs run *), Bash(node bin/dotfield.mjs import *), Bash(node bin/dotfield.mjs share rule *),
   Bash(node bin/dotfield.mjs connect *), Bash(node bin/dotfield.mjs verify *), Bash(node bin/dotfield.mjs doctor *),
   Bash(node bin/dotfield.mjs prove *), Bash(node bin/dotfield.mjs add *), Bash(node bin/dotfield.mjs theme *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 validate *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 render *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 plan *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 run *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 import *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 share rule *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 connect *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 verify *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 doctor *),
-  Bash(npx -y github:jayahn17/dotfield#v0.1.0 prove *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 add *), Bash(npx -y github:jayahn17/dotfield#v0.1.0 theme *)
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 validate *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 render *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 plan *),
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 run *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 import *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 share rule *),
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 connect *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 verify *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 doctor *),
+  Bash(npx -y github:jayahn17/dotfield#v0.1.1 prove *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 add *), Bash(npx -y github:jayahn17/dotfield#v0.1.1 theme *)
 ```

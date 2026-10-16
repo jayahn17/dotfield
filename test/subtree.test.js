@@ -101,7 +101,9 @@ test('the CI workflow runs Node 22 and 24 through every gate of VISION §10, in 
   assert.match(yml, /node: \['22', '24'\]/);
   assert.match(yml, /actions\/upload-artifact@v4/);
   assert.match(yml, /if: always\(\)/);
-  assert.match(yml, /RECEIPTS: \$\{\{ runner\.temp \}\}\/receipts/, 'receipts live outside the tree so the manifest never hashes them');
+  assert.match(yml, /echo "RECEIPTS=\$RUNNER_TEMP\/receipts" >> "\$GITHUB_ENV"/, 'receipts live outside the tree so the manifest never hashes them');
+  const jobEnv = /\n    env:\n((?: {6}.*\n)+)/.exec(yml);
+  assert.ok(jobEnv && !/\$\{\{\s*(runner|env|steps|job)\./.test(jobEnv[1]), 'a job-level env block may only read github, matrix, needs, strategy, vars, secrets or inputs (GitHub rejects the whole file otherwise)');
   const order = ['npm ci', 'scripts/fetch-vendor.mjs', 'npm test', 'doctor --json', 'init --pack starter --name Dotfield --json', 'pack-init-check.mjs --json', 'validate all --json', 'prove all --json', 'packs/draft/*/examples/scene-*.json', 'SOURCE_DATE_EPOCH', 'diff -r', 'node --check', 'npm run manifest', 'git diff --exit-code -- engine.manifest.json skill-release.json', 'scripts/subtree-check.mjs', 'scripts/demo-two-centers.sh'];
   let at = -1;
   for (const needle of order) { const i = yml.indexOf(needle, at + 1); assert.ok(i > at, `${needle} missing or out of order`); at = i; }
