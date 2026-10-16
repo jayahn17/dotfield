@@ -1,0 +1,6 @@
+[
+  { "paper_id": "paper-kalman", "citation": "Kalman 1960, A new approach to linear filtering", "doi": "10.1115/1.3662552", "method": "recursive least-squares state estimation", "relevance": 6, "tags": ["sensor-fusion", "estimation"], "influences": [], "published_on": "1960-03-01", "read_on": "2026-02-10" },
+  { "paper_id": "paper-orb3", "citation": "Campos et al. 2021, ORB-SLAM3", "doi": "10.1109/TRO.2021.3075644", "method": "feature-based visual-inertial SLAM with multi-map atlas", "relevance": 9, "tags": ["slam", "visual-inertial"], "influences": ["paper-kalman"], "published_on": "2021-05-25", "read_on": "2026-08-02" },
+  { "paper_id": "paper-lio", "citation": "Xu et al. 2022, FAST-LIO2", "doi": "10.1109/TRO.2022.3141876", "method": "tightly coupled lidar-inertial odometry on an ikd-tree", "relevance": 8, "tags": ["slam", "lidar", "sensor-fusion"], "influences": ["paper-kalman"], "published_on": "2022-01-14", "read_on": "2026-08-20" },
+  { "paper_id": "paper-vib-cal", "citation": "Lab note 2026, IMU drift under vibration", "method": "drift as a function of cumulative vibration energy rather than elapsed time", "relevance": 7, "tags": ["calibration", "vibration"], "influences": ["paper-kalman"], "published_on": "2026-06-30", "read_on": "2026-09-01", "notes": "Internal write-up; the calibration cadence idea starts here." }
+]

@@ -1,0 +1,7 @@
+{
+  "schema_version": "dotfield.kinds/1",
+  "description": "The robotics lab's own node kinds (schemas/kinds.schema.json). Once this pack is installed (init --pack robotics-lab), lib/rooms.mjs kindsFor() merges these rows over renderers/shapes.json, so a scene or sketch may use x-rig, x-sensor and x-actuator nodes; center/kinds.json and a sketch's kinds block can add or override rows.",
+  "x-rig": { "glyph2d": "square", "primitive3d": "box", "size_mult": 1.3, "label_anchor": "below", "legend": "Test rig", "layout_hint": "hub" },
+  "x-sensor": { "glyph2d": "diamond", "primitive3d": "octahedron", "size_mult": 0.8, "label_anchor": "below", "legend": "Sensor", "layout_hint": "leaf" },
+  "x-actuator": { "glyph2d": "hexagon", "primitive3d": "cylinder", "size_mult": 1, "label_anchor": "below", "legend": "Actuator", "layout_hint": "leaf" }
+}

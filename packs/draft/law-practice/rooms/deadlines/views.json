@@ -1,0 +1,10 @@
+[
+  {
+    "id": "wall", "label": "Deadline wall", "kind": "timeline", "theme": "paper", "date": "$.due_on",
+    "node": { "kind": "event", "label": "$.title", "sublabel": "$.kind", "tags": "$.tags",
+              "color_token_by": { "field": "$.status", "map": { "due": "accent", "done": "good", "missed": "bad", "vacated": "muted" } } },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "timeline" }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } },
+    "lenses": [ { "id": "due", "label": "Still due", "match": { "tags": ["due"] } } ]
+  }
+]

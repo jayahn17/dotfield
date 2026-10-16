@@ -1,0 +1,215 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "timeline",
+  "meta": {
+    "id": "scene-experiment-timeline",
+    "title": "Experiments — timeline",
+    "output": "out.html",
+    "theme": "story",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "experiments",
+    "view": "timeline"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [],
+  "nodes": [
+    {
+      "id": "experiments-exp-101",
+      "kind": "event",
+      "label": "Drift vs load cycles, bench",
+      "room": "experiments",
+      "record_id": "exp-101",
+      "weight": 0.7,
+      "tags": ["vibration", "sensor"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "supported: r = 0.91 against energy, 0.34 against time",
+      "fields": {
+        "title": "Drift vs load cycles, bench",
+        "metric": "r",
+        "value": 0.91,
+        "run_on": "2026-06-12",
+        "tags": ["vibration", "sensor"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-101",
+          "digest": "sha256:1f6c8d1aee6d9cad2796f33de9494ddaccc3833f92b7047cba6a9dcda72594b5"
+        },
+        "captured_on": "2026-06-12",
+        "happened_on": "2026-06-12",
+        "remembered_on": "2026-06-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-102",
+      "kind": "event",
+      "label": "Cohort re-analysis, traffic load",
+      "room": "experiments",
+      "record_id": "exp-102",
+      "weight": 0.8,
+      "tags": ["fatigue", "longitudinal-study"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "supported on 31 of 40 bridges",
+      "fields": {
+        "title": "Cohort re-analysis, traffic load",
+        "metric": "bridges",
+        "value": 31,
+        "run_on": "2026-07-03",
+        "tags": ["fatigue", "longitudinal-study"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-102",
+          "digest": "sha256:447c78d95248cf02a1ff73da71c8ada3ee9c7c84d8d21465e342803e24ed3d0b"
+        },
+        "captured_on": "2026-07-04",
+        "happened_on": "2026-07-03",
+        "remembered_on": "2026-07-04"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-103",
+      "kind": "event",
+      "label": "Modal shift under temperature",
+      "room": "experiments",
+      "record_id": "exp-103",
+      "weight": 0.6,
+      "tags": ["vibration", "statistics"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "partly: 62 percent of variance",
+      "fields": {
+        "title": "Modal shift under temperature",
+        "metric": "variance",
+        "value": 0.62,
+        "run_on": "2026-08-14",
+        "tags": ["vibration", "statistics"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-103",
+          "digest": "sha256:15d4b024360bb18d8ef6557c2d977f370e418414fb97596f3c3c1fb23bc1d010"
+        },
+        "captured_on": "2026-08-14",
+        "happened_on": "2026-08-14",
+        "remembered_on": "2026-08-14"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-104",
+      "kind": "event",
+      "label": "Joint model, drift and fatigue",
+      "room": "experiments",
+      "record_id": "exp-104",
+      "weight": 0.4,
+      "tags": ["fatigue", "sensor", "vibration"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "pending: fit converges, hold-out not yet run",
+      "fields": {
+        "title": "Joint model, drift and fatigue",
+        "metric": "rmse",
+        "value": 0.08,
+        "run_on": "2026-09-20",
+        "tags": ["fatigue", "sensor", "vibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-104",
+          "digest": "sha256:05b2c77d6784696e72dbdc1aff2159799d02ecbe5819be2d45728e49500f87b7"
+        },
+        "captured_on": "2026-09-21",
+        "happened_on": "2026-09-20",
+        "remembered_on": "2026-09-21"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    }
+  ],
+  "edges": [],
+  "views": {
+    "2d": {
+      "layout": "timeline",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "timeline"
+      }
+    },
+    "3d": {
+      "layout": "tier-wall",
+      "scale_m": 5
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "experiments-exp-101",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "fatigue",
+          "label": "Fatigue",
+          "match": {
+            "tags": ["fatigue"]
+          }
+        }
+      ],
+      "presentation": ["experiments-exp-101", "experiments-exp-102", "experiments-exp-103"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-experiments",
+      "kind": "record",
+      "ref": "experiments/examples.json",
+      "digest": "sha256:210532cfd1149c9266a08a6cc07835d69ec9b55a42626e11c8dddeb1dff59be3",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "experiments-exp-101": [237.5, 500],
+    "experiments-exp-102": [612.5, 500],
+    "experiments-exp-103": [987.5, 500],
+    "experiments-exp-104": [1362.5, 500]
+  },
+  "laid_out": true
+}

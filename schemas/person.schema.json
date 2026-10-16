@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.person/1",
+  "title": "Dotfield person",
+  "description": "One entry of center/people/people.json (VISION 7.1). The file is a wrapper {schema_version: 'dotfield.people/1', people: [person]} with exactly one kind: self; lib/overlay.mjs loadPeopleDir() validates every entry against this schema. handles are HMAC-SHA256 under data/keys/handle.salt, owner-only, never projected or exported. public_key is the raw ed25519 key in base64, entered only by `add person --fingerprint` after the word-list fingerprint was read out of band; there is no trust-on-first-use. Closed except ext.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["person_id", "kind", "display_name", "handles", "disciplines", "provenance", "privacy_mode"],
+  "properties": {
+    "schema_version": { "const": "dotfield.person/1" },
+    "person_id": { "$ref": "#/$defs/id" },
+    "kind": { "enum": ["self", "contact", "org", "agent"] },
+    "display_name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "handles": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^hmac-sha256:[0-9a-f]{64}$" } },
+    "disciplines": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "source", "weight"],
+        "properties": {
+          "label": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "source": { "enum": ["self", "inferred", "introduced"] },
+          "weight": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "public_key": { "type": "string", "pattern": "^[A-Za-z0-9+/]{43}=$", "description": "Raw ed25519 public key, 32 bytes in standard base64." },
+    "key_id": { "$ref": "#/$defs/id" },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "verified_on"],
+      "properties": {
+        "method": { "enum": ["fingerprint", "in_person", "video_call", "other"] },
+        "verified_on": { "type": "string", "format": "date" },
+        "fingerprint_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "sha256 of the normalised fingerprint words that were compared, so a receipt can name what was checked without repeating the words." }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["introduced_by_person_id", "introduced_on", "evidence_ref"],
+      "properties": {
+        "introduced_by_person_id": { "$ref": "#/$defs/id" },
+        "introduced_on": { "type": "string", "format": "date" },
+        "evidence_ref": { "type": ["string", "null"], "maxLength": 512 }
+      }
+    },
+    "privacy_mode": { "enum": ["private_live", "synthetic_data", "public_demo"] },
+    "ext": { "type": "object", "description": "Customer round-tripping only; never read by the engine." }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" }
+  }
+}

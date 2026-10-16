@@ -1,0 +1,9 @@
+{
+  "schema_version": "dotfield.brand/1",
+  "name": "Clinic",
+  "accent": "#1f6f8b",
+  "surface": "#f5f8f7",
+  "ink": "#15202b",
+  "font": { "display": "sans", "text": "sans", "mono": "mono" },
+  "room_preset": "light"
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "dotfield.disciplines/1",
+  "disciplines": [
+    { "label": "protocol", "patterns": ["protocol", "guideline", "pathway", "checklist", "dose"], "weight": 1, "source": "clinic" },
+    { "label": "outcome", "patterns": ["outcome", "improved", "unchanged", "recovery", "endpoint"], "weight": 0.9, "source": "clinic" },
+    { "label": "adherence", "patterns": ["adherence", "follow-up", "followup", "missed", "compliance"], "weight": 0.8, "source": "clinic" },
+    { "label": "triage", "patterns": ["triage", "urgency", "red-flag", "escalation"], "weight": 0.9, "source": "clinic" },
+    { "label": "evidence", "patterns": ["evidence", "trial", "cohort", "meta-analysis", "grade"], "weight": 0.9, "source": "clinic" },
+    { "label": "safety", "patterns": ["safety", "adverse", "contraindication", "interaction", "harm"], "weight": 1, "source": "clinic" },
+    { "label": "audit", "patterns": ["audit", "variance", "quality", "review"], "weight": 0.7, "source": "clinic" }
+  ]
+}

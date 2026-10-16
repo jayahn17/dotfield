@@ -1,0 +1,316 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "room",
+  "meta": {
+    "id": "scene-rig-room",
+    "title": "Robots — rig room",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true,
+    "room": "robots",
+    "view": "rig"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-bench-a",
+      "label": "bench-a",
+      "kind": "zone",
+      "color_token": "series-1",
+      "center_xyz_m": [-1.72, 0.4, 0.57],
+      "size_xyz_m": [2.65, 1.4, 2.35]
+    },
+    {
+      "id": "g-bench-b",
+      "label": "bench-b",
+      "kind": "zone",
+      "color_token": "series-2",
+      "center_xyz_m": [2.23, 0.68, 0.22],
+      "size_xyz_m": [1.45, 1.95, 2.45]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "robots-robot-hb1",
+      "kind": "asset",
+      "label": "Hallbot 1",
+      "room": "robots",
+      "record_id": "robot-hb1",
+      "weight": 0.5,
+      "tags": ["hardware", "mobile", "slam"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "differential drive",
+      "group": "g-bench-a",
+      "fields": {
+        "name": "Hallbot 1",
+        "platform": "differential drive",
+        "sensors": ["lidar-2d", "imu", "wheel-odometry"],
+        "tags": ["hardware", "mobile", "slam"]
+      },
+      "pose_m": {
+        "xyz": [-2, 0.4, 0],
+        "rpy": [0, 0, 0]
+      },
+      "size_m": [0.6, 0.8, 0.6],
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/robot-hb1",
+          "digest": "sha256:a67427fb821c3f986cbc15bed48dea52fa1f4d5998330f8c7928f13b95fdb520"
+        },
+        "captured_on": "2026-07-10",
+        "happened_on": "2026-07-10",
+        "remembered_on": "2026-07-10"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-robot-hb2",
+      "kind": "asset",
+      "label": "Hallbot 2",
+      "room": "robots",
+      "record_id": "robot-hb2",
+      "weight": 0.5,
+      "tags": ["hardware", "mobile", "slam"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "differential drive",
+      "group": "g-bench-a",
+      "fields": {
+        "name": "Hallbot 2",
+        "platform": "differential drive",
+        "sensors": ["lidar-2d", "imu", "camera"],
+        "tags": ["hardware", "mobile", "slam"]
+      },
+      "pose_m": {
+        "xyz": [-1, 0.4, 0.5],
+        "rpy": [0, 0, 1.57]
+      },
+      "size_m": [0.6, 0.8, 0.6],
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/robot-hb2",
+          "digest": "sha256:f2e64b5ab395223b49f7ac43605c9b76609fe05d59b856f08fc68d85792e7d24"
+        },
+        "captured_on": "2026-07-12",
+        "happened_on": "2026-07-12",
+        "remembered_on": "2026-07-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-lidar-rig",
+      "kind": "asset",
+      "label": "Lidar test rig",
+      "room": "robots",
+      "record_id": "lidar-rig",
+      "weight": 0.5,
+      "tags": ["hardware", "sensor", "vibration"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "static rig",
+      "group": "g-bench-b",
+      "fields": {
+        "name": "Lidar test rig",
+        "platform": "static rig",
+        "sensors": ["lidar-3d", "imu"],
+        "tags": ["hardware", "sensor", "vibration"]
+      },
+      "pose_m": {
+        "xyz": [2, 0.6, -0.5],
+        "rpy": [0, 0, 0]
+      },
+      "size_m": [0.4, 1.2, 0.4],
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/lidar-rig",
+          "digest": "sha256:03460a288c446cf3a3430786bf183f7364bf784f9b73a794e6fffbbea2a3b27c"
+        },
+        "captured_on": "2026-08-01",
+        "happened_on": "2026-08-01",
+        "remembered_on": "2026-08-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-arm-1",
+      "kind": "asset",
+      "label": "Bench arm",
+      "room": "robots",
+      "record_id": "arm-1",
+      "weight": 0.5,
+      "tags": ["hardware", "manipulation"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "6-dof arm",
+      "group": "g-bench-b",
+      "fields": {
+        "name": "Bench arm",
+        "platform": "6-dof arm",
+        "sensors": ["joint-encoders", "wrist-camera"],
+        "tags": ["hardware", "manipulation"]
+      },
+      "pose_m": {
+        "xyz": [2.5, 0.9, 1],
+        "rpy": [0, 0, 0]
+      },
+      "size_m": [0.3, 0.9, 0.3],
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/arm-1",
+          "digest": "sha256:eb4c8eebf304fcf808f5d7586c08ab060c5382b4dd1cb3387502393a6041e53f"
+        },
+        "captured_on": "2026-05-20",
+        "happened_on": "2026-05-20",
+        "remembered_on": "2026-05-20"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-dock-1",
+      "kind": "asset",
+      "label": "Charging dock",
+      "room": "robots",
+      "record_id": "dock-1",
+      "weight": 0.5,
+      "tags": ["power"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "dock",
+      "group": "g-bench-a",
+      "fields": {
+        "name": "Charging dock",
+        "platform": "dock",
+        "sensors": [],
+        "tags": ["power"]
+      },
+      "pose_m": {
+        "xyz": [-2.5, 0.1, 1.2],
+        "rpy": [0, 0, 0]
+      },
+      "size_m": [0.5, 0.2, 0.5],
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/dock-1",
+          "digest": "sha256:8c3c04422e029a5ad91a949162300b59d6dc09c2cb415c04b4fab237c46ea2bd"
+        },
+        "captured_on": "2026-07-10",
+        "happened_on": "2026-07-10",
+        "remembered_on": "2026-07-10"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "robots-robot-hb1",
+      "to": "robots-dock-1",
+      "kind": "contains",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "robots-robot-hb2",
+      "to": "robots-dock-1",
+      "kind": "contains",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "metric",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "metric"
+      }
+    },
+    "3d": {
+      "layout": "metric",
+      "scale_m": 1
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 1,
+      "floor_y": 0,
+      "eye_height_m": 1.6,
+      "entry_node": "robots-robot-hb1"
+    },
+    "interactive": {
+      "focus": "robots-robot-hb1",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "mobile",
+          "label": "Mobile platforms",
+          "match": {
+            "tags": ["mobile"]
+          }
+        }
+      ],
+      "presentation": ["robots-robot-hb1", "robots-robot-hb2", "robots-lidar-rig"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-robots",
+      "kind": "record",
+      "ref": "robots/examples.json",
+      "digest": "sha256:2dca35386efe98931042a289da851d4c2ec5e920e61d8ed4780224cb1c36ab5b",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "robots-robot-hb1": [311.25, 407.5],
+    "robots-robot-hb2": [561.25, 532.5],
+    "robots-lidar-rig": [1311.25, 282.5],
+    "robots-arm-1": [1436.25, 657.5],
+    "robots-dock-1": [186.25, 707.5]
+  },
+  "laid_out": true
+}

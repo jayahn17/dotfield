@@ -1,0 +1,373 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "meet",
+  "meta": {
+    "id": "meet-experiments-papers",
+    "title": "Meet — Experiments × Papers",
+    "theme": "studio",
+    "quality": "checked",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "meet-left",
+      "label": "Experiments",
+      "kind": "region",
+      "wraps": [
+        "experiments-exp-0412",
+        "experiments-exp-0402",
+        "experiments-exp-0404"
+      ],
+      "color_token": "series-1"
+    },
+    {
+      "id": "meet-right",
+      "label": "Papers",
+      "kind": "region",
+      "wraps": [
+        "papers-paper-orb3",
+        "papers-paper-vib",
+        "papers-paper-safety"
+      ],
+      "color_token": "series-2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "experiments-exp-0412",
+      "kind": "record",
+      "label": "ORB-SLAM3 on hall-loop",
+      "room": "experiments",
+      "record_id": "exp-0412",
+      "weight": 0.5,
+      "tags": [
+        "slam",
+        "indoor",
+        "vibration"
+      ],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0412",
+          "digest": "sha256:9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c"
+        },
+        "captured_on": "2026-09-18",
+        "happened_on": "2026-09-18"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": [
+        "ev-experiments-exp-0412"
+      ],
+      "group": "meet-left"
+    },
+    {
+      "id": "experiments-exp-0402",
+      "kind": "record",
+      "label": "IMU bias sweep",
+      "room": "experiments",
+      "record_id": "exp-0402",
+      "weight": 0.5,
+      "tags": [
+        "imu",
+        "calibration"
+      ],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0402",
+          "digest": "sha256:0402040204020402040204020402040204020402040204020402040204020402"
+        },
+        "captured_on": "2026-09-05",
+        "happened_on": "2026-09-05"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": [
+        "ev-experiments-exp-0402"
+      ],
+      "group": "meet-left"
+    },
+    {
+      "id": "experiments-exp-0404",
+      "kind": "record",
+      "label": "Stairwell attempt",
+      "room": "experiments",
+      "record_id": "exp-0404",
+      "weight": 0.5,
+      "tags": [
+        "slam",
+        "failed",
+        "estop"
+      ],
+      "color_token": "warn",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0404",
+          "digest": "sha256:0404040404040404040404040404040404040404040404040404040404040404"
+        },
+        "captured_on": "2026-09-12",
+        "happened_on": "2026-09-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": [
+        "ev-experiments-exp-0404"
+      ],
+      "group": "meet-left"
+    },
+    {
+      "id": "papers-paper-orb3",
+      "kind": "record",
+      "label": "ORB-SLAM3 (Campos 2021)",
+      "room": "papers",
+      "record_id": "paper-orb3",
+      "weight": 0.5,
+      "tags": [
+        "slam",
+        "loop-closure"
+      ],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-orb3",
+          "digest": "sha256:11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa"
+        },
+        "captured_on": "2026-08-02",
+        "happened_on": "2026-08-02"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": [
+        "ev-papers-paper-orb3"
+      ],
+      "group": "meet-right"
+    },
+    {
+      "id": "papers-paper-vib",
+      "kind": "record",
+      "label": "Vibration-aware IMU calibration",
+      "room": "papers",
+      "record_id": "paper-vib",
+      "weight": 0.5,
+      "tags": [
+        "calibration",
+        "vibration",
+        "imu"
+      ],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-vib",
+          "digest": "sha256:22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb"
+        },
+        "captured_on": "2026-08-20",
+        "happened_on": "2026-08-20"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": [
+        "ev-papers-paper-vib"
+      ],
+      "group": "meet-right"
+    },
+    {
+      "id": "papers-paper-safety",
+      "kind": "record",
+      "label": "Emergency stop practice in mobile robots",
+      "room": "papers",
+      "record_id": "paper-safety",
+      "weight": 0.5,
+      "tags": [
+        "safety",
+        "estop"
+      ],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-safety",
+          "digest": "sha256:33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc"
+        },
+        "captured_on": "2026-07-11",
+        "happened_on": "2026-07-11"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": [
+        "ev-papers-paper-safety"
+      ],
+      "group": "meet-right"
+    }
+  ],
+  "edges": [
+    {
+      "id": "cand-1",
+      "from": "experiments-exp-0402",
+      "to": "papers-paper-vib",
+      "kind": "candidate",
+      "directed": false,
+      "label": "calibration, imu",
+      "weight": 0.75,
+      "variant": "dashed",
+      "route": "auto"
+    },
+    {
+      "id": "cand-2",
+      "from": "experiments-exp-0412",
+      "to": "papers-paper-vib",
+      "kind": "candidate",
+      "directed": false,
+      "label": "discipline:vibration, vibration",
+      "weight": 0.429,
+      "variant": "dashed",
+      "route": "auto"
+    },
+    {
+      "id": "cand-3",
+      "from": "experiments-exp-0404",
+      "to": "papers-paper-orb3",
+      "kind": "candidate",
+      "directed": false,
+      "label": "discipline:slam, slam",
+      "weight": 0.4,
+      "variant": "dashed",
+      "route": "auto"
+    },
+    {
+      "id": "cand-4",
+      "from": "experiments-exp-0404",
+      "to": "papers-paper-safety",
+      "kind": "candidate",
+      "directed": false,
+      "label": "estop",
+      "weight": 0.4,
+      "variant": "dashed",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "lanes",
+      "seed": 1
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1.5
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4
+    },
+    "interactive": {
+      "focus": null,
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "left",
+          "label": "Experiments",
+          "match": {
+            "groups": [
+              "meet-left"
+            ]
+          }
+        },
+        {
+          "id": "right",
+          "label": "Papers",
+          "match": {
+            "groups": [
+              "meet-right"
+            ]
+          }
+        }
+      ],
+      "default_lens": null,
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-experiments-exp-0412",
+      "kind": "record",
+      "ref": "experiments/exp-0412",
+      "digest": "sha256:9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c",
+      "label": "SRC 0412"
+    },
+    {
+      "id": "ev-experiments-exp-0402",
+      "kind": "record",
+      "ref": "experiments/exp-0402",
+      "digest": "sha256:0402040204020402040204020402040204020402040204020402040204020402",
+      "label": "SRC 0402"
+    },
+    {
+      "id": "ev-experiments-exp-0404",
+      "kind": "record",
+      "ref": "experiments/exp-0404",
+      "digest": "sha256:0404040404040404040404040404040404040404040404040404040404040404",
+      "label": "SRC 0404"
+    },
+    {
+      "id": "ev-papers-paper-orb3",
+      "kind": "record",
+      "ref": "papers/paper-orb3",
+      "digest": "sha256:11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa",
+      "label": "SRC orb3"
+    },
+    {
+      "id": "ev-papers-paper-vib",
+      "kind": "record",
+      "ref": "papers/paper-vib",
+      "digest": "sha256:22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb22bb",
+      "label": "SRC -vib"
+    },
+    {
+      "id": "ev-papers-paper-safety",
+      "kind": "record",
+      "ref": "papers/paper-safety",
+      "digest": "sha256:33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc33cc",
+      "label": "SRC fety"
+    }
+  ]
+}

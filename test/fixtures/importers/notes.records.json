@@ -1,0 +1,5 @@
+[
+  { "note_id": "note-0101", "title": "Imported from JSON", "body": "An array of records is the second row shape.", "tags": ["import"], "links": ["note-0102"], "happened_on": "2026-09-24", "logged_on": "2026-09-24", "score": 3 },
+  { "note_id": "note-0102", "title": "Second JSON note", "tags": ["import", "json"], "links": [], "logged_on": "2026-09-25", "score": "6" },
+  { "note_id": "note-0103", "title": "Third JSON note", "body": "Dates arrive in several forms.", "tags": [], "links": ["note-0101"], "happened_on": "2026-09-26", "logged_on": "2026-09-26" }
+]

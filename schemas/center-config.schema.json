@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.center-config/1",
+  "title": "Dotfield center config",
+  "description": "center/center.config.json (VISION 9). Closed except ext. There is no multi_person flag: the three-state scope rule is internal code reached through --as (lib/scope.mjs). store.allow_env_pins defaults to false, so DOTFIELD_STORE_<ROOM>_FILE pins are honoured only under NODE_TEST_CONTEXT; store.object_store_url null means the file backend.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "center", "installed_packs", "provider", "server", "privacy", "connect", "approval", "store", "conductor"],
+  "properties": {
+    "$schema": { "type": "string", "maxLength": 200 },
+    "schema_version": { "const": "dotfield.center-config/1" },
+    "center": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "owner_person_id"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "owner_person_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$", "description": "The person_id of the one kind: self entry in center/people/people.json." },
+        "locale": { "type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$" }
+      }
+    },
+    "installed_packs": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "version", "digest"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+          "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter", "max_tokens_per_run", "allow_nested"],
+      "properties": {
+        "adapter": { "enum": ["dry", "claude-cli", "anthropic", "relay"] },
+        "model": { "type": ["string", "null"], "maxLength": 120 },
+        "max_tokens_per_run": { "type": "integer", "minimum": 256, "maximum": 400000 },
+        "allow_nested": { "type": "boolean", "description": "false: the claude-cli adapter refuses to start under CLAUDECODE." }
+      }
+    },
+    "server": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["port", "host"],
+      "properties": {
+        "port": { "type": "integer", "minimum": 1024, "maximum": 65535 },
+        "host": { "type": "string", "pattern": "^[A-Za-z0-9.:\\[\\]-]{1,253}$" }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default_privacy_level"],
+      "properties": {
+        "default_privacy_level": { "enum": ["public", "private", "sensitive", "blocked"] }
+      }
+    },
+    "connect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["threshold"],
+      "properties": {
+        "threshold": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_records_per_proposal"],
+      "properties": {
+        "max_records_per_proposal": { "type": "integer", "minimum": 1, "maximum": 10000 }
+      }
+    },
+    "store": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allow_env_pins", "object_store_url"],
+      "properties": {
+        "allow_env_pins": { "type": "boolean" },
+        "object_store_url": { "type": ["string", "null"], "pattern": "^https?://[^\\s]{1,1000}$", "maxLength": 1024 }
+      }
+    },
+    "conductor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["display", "lens"],
+      "properties": {
+        "display": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "lens": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "ext": { "type": "object" }
+  }
+}

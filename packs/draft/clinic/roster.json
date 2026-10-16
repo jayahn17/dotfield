@@ -1,0 +1,114 @@
+{
+  "schema_version": "dotfield.pack-roster/1",
+  "pack": "clinic",
+  "desks": [
+    {
+      "id": "audit",
+      "display": "Audit",
+      "tier": "support",
+      "domain": "clinical audit",
+      "primary_field": "quality improvement",
+      "adjacent_fields": [
+        "variance analysis"
+      ],
+      "lens": "an audit compares what the protocol says with what the case record shows, step by step",
+      "keywords": [
+        "audit",
+        "variance",
+        "quality",
+        "review",
+        "adherence"
+      ],
+      "challenger_for": ["safety-review"],
+      "influences": [
+        "evidence"
+      ],
+      "constraint": "works on synthetic case ids only; never joins cases to any external identifier",
+      "prompt": null,
+      "room": "cases",
+      "parent": null
+    },
+    {
+      "id": "evidence",
+      "display": "Evidence",
+      "tier": "core",
+      "domain": "evidence-based practice",
+      "primary_field": "clinical epidemiology",
+      "adjacent_fields": [
+        "guideline appraisal",
+        "biostatistics"
+      ],
+      "lens": "a protocol is a claim about outcomes with a grade of evidence; name the grade before the step",
+      "keywords": [
+        "evidence",
+        "protocol",
+        "guideline",
+        "grade",
+        "trial",
+        "cohort"
+      ],
+      "challenger_for": [],
+      "influences": [
+        "triage-support"
+      ],
+      "constraint": "never produces a diagnosis or a treatment decision; cites literature by record id",
+      "prompt": null,
+      "room": "protocols",
+      "parent": null
+    },
+    {
+      "id": "safety-review",
+      "display": "Safety review",
+      "tier": "challenger",
+      "domain": "patient safety",
+      "primary_field": "clinical risk",
+      "adjacent_fields": [
+        "adverse events",
+        "escalation"
+      ],
+      "lens": "every missed follow-up and every protocol deviation is a near miss until someone shows it was not",
+      "keywords": [
+        "safety",
+        "adverse",
+        "missed",
+        "escalation",
+        "deviation",
+        "harm"
+      ],
+      "challenger_for": [
+        "evidence",
+        "triage-support",
+        "audit"
+      ],
+      "influences": [],
+      "constraint": "never contacts a patient or a clinician; raises the case id and the protocol step for a human to act on",
+      "prompt": null,
+      "room": "followups",
+      "parent": null
+    },
+    {
+      "id": "triage-support",
+      "display": "Triage support",
+      "tier": "support",
+      "domain": "clinical triage",
+      "primary_field": "triage",
+      "adjacent_fields": [
+        "red-flag screening"
+      ],
+      "lens": "triage orders the questions a clinician asks next; it never answers them",
+      "keywords": [
+        "triage",
+        "urgency",
+        "red-flag",
+        "escalation",
+        "question"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "never a diagnosis; outputs are ordered questions that cite the protocol step they come from",
+      "prompt": null,
+      "room": "cases",
+      "parent": null
+    }
+  ]
+}

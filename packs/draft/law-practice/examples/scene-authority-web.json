@@ -1,0 +1,210 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-authority-web",
+    "title": "Authorities — citation web",
+    "output": "out.html",
+    "theme": "paper",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "authorities",
+    "view": "citations"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-court-of-appeal",
+      "label": "Court of Appeal",
+      "kind": "region",
+      "wraps": ["authorities-a-0001"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-high-court",
+      "label": "High Court",
+      "kind": "region",
+      "wraps": ["authorities-a-0002"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-statute",
+      "label": "statute",
+      "kind": "region",
+      "wraps": ["authorities-a-0003"],
+      "color_token": "series-3"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "authorities-a-0001",
+      "kind": "record",
+      "label": "Example Co v Sample Ltd (synthetic)",
+      "room": "authorities",
+      "record_id": "a-0001",
+      "weight": 0.5,
+      "tags": ["indemnity", "contract"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "an indemnity clause is read against the party that drafted it",
+      "group": "g-court-of-appeal",
+      "fields": {
+        "citation": "Example Co v Sample Ltd (synthetic)",
+        "court": "Court of Appeal",
+        "year": 2018,
+        "holding": "an indemnity clause is read against the party that drafted it",
+        "tags": ["indemnity", "contract"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "authorities/a-0001",
+          "digest": "sha256:6bbfc7b39c7b7536d3d6892d91ab64ef1660ad1090345dfa88ea8ea9bbf415d4"
+        },
+        "captured_on": "2026-02-03",
+        "happened_on": "2018-03-09",
+        "remembered_on": "2026-02-03"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-authorities"]
+    },
+    {
+      "id": "authorities-a-0002",
+      "kind": "record",
+      "label": "Harbour Authority v Visitor (synthetic)",
+      "room": "authorities",
+      "record_id": "a-0002",
+      "weight": 0.5,
+      "tags": ["negligence", "liability"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "an occupier owes a duty of care proportionate to the foreseeable use",
+      "group": "g-high-court",
+      "fields": {
+        "citation": "Harbour Authority v Visitor (synthetic)",
+        "court": "High Court",
+        "year": 2021,
+        "holding": "an occupier owes a duty of care proportionate to the foreseeable use",
+        "tags": ["negligence", "liability"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "authorities/a-0002",
+          "digest": "sha256:5bc05a54da4d819dfcb5e355e422a898740c3e34755ba72a8553a9fb29e6f4ff"
+        },
+        "captured_on": "2026-04-18",
+        "happened_on": "2021-11-02",
+        "remembered_on": "2026-04-18"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-authorities"]
+    },
+    {
+      "id": "authorities-a-0003",
+      "kind": "record",
+      "label": "Occupiers Statute s. 4 (synthetic)",
+      "room": "authorities",
+      "record_id": "a-0003",
+      "weight": 0.5,
+      "tags": ["liability", "statute"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "the common duty of care owed to lawful visitors",
+      "group": "g-statute",
+      "fields": {
+        "citation": "Occupiers Statute s. 4 (synthetic)",
+        "court": "statute",
+        "year": 1995,
+        "holding": "the common duty of care owed to lawful visitors",
+        "tags": ["liability", "statute"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "authorities/a-0003",
+          "digest": "sha256:1770bdb59f3dd60506d168273ddcc6ddef44c25d1e7fe2e25df6a223dd2bb1ff"
+        },
+        "captured_on": "2026-04-18",
+        "happened_on": "1995-01-01",
+        "remembered_on": "2026-04-18"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-authorities"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "authorities-a-0002",
+      "to": "authorities-a-0003",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "force",
+      "seed": 81,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "force"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "flat",
+        "amplitude_m": 0
+      }
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "authorities-a-0001",
+      "reach": "both",
+      "lenses": [],
+      "presentation": ["authorities-a-0001", "authorities-a-0002", "authorities-a-0003"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-authorities",
+      "kind": "record",
+      "ref": "authorities/examples.json",
+      "digest": "sha256:ee19a634acc8787a9192ebfd54a307ec8a26291ffb6fc7d5e3aae9164ea84a84",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "authorities-a-0001": [848.337, 505.922],
+    "authorities-a-0002": [751.663, 672.392],
+    "authorities-a-0003": [758.251, 327.608]
+  },
+  "laid_out": true
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": "dotfield.vendor/1",
+  "description": "The pinned browser asset: three@0.180.0 from jsdelivr, four ES modules under vendor/three/ (gitignored; filled by scripts/fetch-vendor.mjs, which refuses any byte that does not match these digests). renderers/html.mjs reads this file for the CDN importmap (url + integrity) and for the local file names under --embed-three. sha256_pre is the digest of the bytes as served; sha256_post is the digest on disk after the one specifier rewrite below (identical for the three files the rewrite does not touch).",
+  "package": "three",
+  "three_version": "0.180.0",
+  "three_revision": "180",
+  "cdn_base": "https://cdn.jsdelivr.net/npm/three@0.180.0/",
+  "local_dir": "vendor/three",
+  "rewrite": {
+    "file": "three/three.module.js",
+    "from": "./three.core.js",
+    "to": "three/core",
+    "count": 2,
+    "why": "three.module.js reaches its core by a relative specifier, which cannot resolve from a data: URL under --embed-three; the importmap maps three/core to the vendored core instead. In r180 the relative specifier appears exactly this many times (one import, one export-from); fetch-vendor.mjs asserts the count and refuses a file that names it any other number of times."
+  },
+  "files": [
+    {
+      "specifier": "three",
+      "file": "three/three.module.js",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+      "bytes_pre": 603113,
+      "sha256_pre": "sha256:c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+      "integrity": "sha256-yCEcaTRdLplJ3HqKyWk4BJeqBgClqKxqRZyM0C3Zy4o=",
+      "bytes_post": 603103,
+      "sha256_post": "sha256:cc12a3c28e4c4007daec6fe0df0232f9669045b5a7a8f386bd88b5e84368c8e8"
+    },
+    {
+      "specifier": "three/core",
+      "file": "three/three.core.js",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.core.js",
+      "bytes_pre": 1403455,
+      "sha256_pre": "sha256:eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+      "integrity": "sha256-6wd9JBf2HT5tkmTDF8q8TqNXae1rCrUzBnKSpVB4TCA=",
+      "bytes_post": 1403455,
+      "sha256_post": "sha256:eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20"
+    },
+    {
+      "specifier": "three/addons/controls/OrbitControls.js",
+      "file": "three/OrbitControls.js",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js",
+      "bytes_pre": 38703,
+      "sha256_pre": "sha256:b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c",
+      "integrity": "sha256-uXh5x0gXC6res/uEzqH/30Z04oPcBgQvNOKsuVp2BCw=",
+      "bytes_post": 38703,
+      "sha256_post": "sha256:b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c"
+    },
+    {
+      "specifier": "three/addons/webxr/XRButton.js",
+      "file": "three/XRButton.js",
+      "url": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/webxr/XRButton.js",
+      "bytes_pre": 4959,
+      "sha256_pre": "sha256:13ceb022e450bfc8ff48e7af8e39faceacf08fea84a844fb82858a126c4e0249",
+      "integrity": "sha256-E86wIuRQv8j/SOevjjn6zqzwj+qEqET7goWKEmxOAkk=",
+      "bytes_post": 4959,
+      "sha256_post": "sha256:13ceb022e450bfc8ff48e7af8e39faceacf08fea84a844fb82858a126c4e0249"
+    }
+  ]
+}

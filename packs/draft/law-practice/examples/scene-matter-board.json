@@ -1,0 +1,231 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "board",
+  "meta": {
+    "id": "scene-matter-board",
+    "title": "Matters — board",
+    "output": "out.html",
+    "theme": "paper",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "matters",
+    "view": "board"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-open",
+      "label": "open",
+      "kind": "lane",
+      "wraps": ["matters-m-2026-001", "matters-m-2026-003"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-on-hold",
+      "label": "on_hold",
+      "kind": "lane",
+      "wraps": ["matters-m-2026-002"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-closed",
+      "label": "closed",
+      "kind": "lane",
+      "wraps": ["matters-m-2025-017"],
+      "color_token": "series-3"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "matters-m-2026-001",
+      "kind": "record",
+      "label": "Northwind supply agreement",
+      "room": "matters",
+      "record_id": "m-2026-001",
+      "weight": 0.5,
+      "tags": ["open", "indemnity"],
+      "color_token": "accent",
+      "status": "accepted",
+      "sublabel": "contract",
+      "group": "g-open",
+      "fields": {
+        "practice_area": "contract",
+        "status": "open"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "matters/m-2026-001",
+          "digest": "sha256:e9cfc9a4044000a0b1a7736b5fb5f9453c6d7cac0c38464745380c7e4d67b694"
+        },
+        "captured_on": "2026-02-03",
+        "happened_on": "2026-02-03",
+        "remembered_on": "2026-02-03"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-matters"]
+    },
+    {
+      "id": "matters-m-2026-002",
+      "kind": "record",
+      "label": "Harbour slip and fall",
+      "room": "matters",
+      "record_id": "m-2026-002",
+      "weight": 0.5,
+      "tags": ["negligence"],
+      "color_token": "warn",
+      "status": "accepted",
+      "sublabel": "liability",
+      "group": "g-on-hold",
+      "fields": {
+        "practice_area": "liability",
+        "status": "on_hold"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "matters/m-2026-002",
+          "digest": "sha256:39d044892e05e4f69bdf3478037f38181407376716c34fefb5a215c32e657b96"
+        },
+        "captured_on": "2026-04-18",
+        "happened_on": "2026-04-18",
+        "remembered_on": "2026-04-18"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-matters"]
+    },
+    {
+      "id": "matters-m-2026-003",
+      "kind": "record",
+      "label": "Northwind privacy filing",
+      "room": "matters",
+      "record_id": "m-2026-003",
+      "weight": 0.5,
+      "tags": ["open", "privacy"],
+      "color_token": "accent",
+      "status": "accepted",
+      "sublabel": "compliance",
+      "group": "g-open",
+      "fields": {
+        "practice_area": "compliance",
+        "status": "open"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "matters/m-2026-003",
+          "digest": "sha256:90be3cd13dfa0c9b30f0da6b224df1ad1866a2b1f06ae2f1fb134b2ab36fb4c2"
+        },
+        "captured_on": "2026-06-09",
+        "happened_on": "2026-06-09",
+        "remembered_on": "2026-06-09"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-matters"]
+    },
+    {
+      "id": "matters-m-2025-017",
+      "kind": "record",
+      "label": "Orchard lease renewal",
+      "room": "matters",
+      "record_id": "m-2025-017",
+      "weight": 0.5,
+      "tags": ["lease"],
+      "color_token": "muted",
+      "status": "accepted",
+      "sublabel": "property",
+      "group": "g-closed",
+      "fields": {
+        "practice_area": "property",
+        "status": "closed"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "matters/m-2025-017",
+          "digest": "sha256:fe09b09aebd8773099d6dcec4845b7376c9ccd13f8603b2cb696e2a87c79fb39"
+        },
+        "captured_on": "2025-09-01",
+        "happened_on": "2025-09-01",
+        "remembered_on": "2025-09-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-matters"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "matters-m-2026-003",
+      "to": "matters-m-2026-001",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "lanes",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "lanes"
+      }
+    },
+    "3d": {
+      "layout": "tier-wall",
+      "scale_m": 5
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "matters-m-2026-001",
+      "reach": "both",
+      "lenses": [],
+      "presentation": ["matters-m-2026-001", "matters-m-2026-002", "matters-m-2026-003"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-matters",
+      "kind": "record",
+      "ref": "matters/examples.json",
+      "digest": "sha256:1058d58f0ad3a7b79f2c5c1e8b8bec2e5f10c9bb87640b6dc4530eb2119ba477",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "matters-m-2026-001": [300, 98],
+    "matters-m-2026-002": [800, 98],
+    "matters-m-2026-003": [300, 194],
+    "matters-m-2025-017": [1300, 98]
+  },
+  "laid_out": true
+}

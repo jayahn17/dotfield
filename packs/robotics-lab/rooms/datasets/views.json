@@ -1,0 +1,10 @@
+[
+  {
+    "id": "shelf", "label": "Dataset shelf", "kind": "graph", "theme": "studio",
+    "node": { "kind": "file", "label": "$.name", "sublabel": "$.modality", "tags": "$.tags", "weight": "$.size_gb/10" },
+    "group_by": { "field": "$.modality", "kind": "region" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 5 }, "3d": { "layout": "lift", "scale_m": 5, "lift": { "mode": "weight", "amplitude_m": 1 } }, "vr": { "enabled": true, "scale_m": 4 } },
+    "lenses": [ { "id": "open", "label": "Open licence", "match": { "tags": ["open"] } } ]
+  }
+]

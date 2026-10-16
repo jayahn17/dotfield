@@ -1,0 +1,42 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "followups",
+  "label": "Follow-ups",
+  "icon": "calendar",
+  "pack": "clinic",
+  "purpose": "Every follow-up a protocol step generates for a synthetic case: due date, kind and status. The board shows what is due, done and missed; it never names a person.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "followups", "max_records": 2000, "max_record_bytes": 4096 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "followup_id",
+    "label_field": "kind",
+    "sublabel_field": "status",
+    "tag_field": "tags",
+    "dates": { "happened_on": "due_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "case_id", "to_room": "cases", "kind": "member" } ],
+    "default_privacy_level": "sensitive",
+    "public_fields": []
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "safety-review", "display": "Safety review", "tier": "challenger", "domain": "patient safety",
+      "primary_field": "clinical risk", "adjacent_fields": ["adverse events", "escalation"],
+      "lens": "every missed follow-up and every protocol deviation is a near miss until someone shows it was not",
+      "keywords": ["safety", "adverse", "missed", "escalation", "deviation", "harm"],
+      "challenger_for": ["evidence", "triage-support", "audit"], "influences": [],
+      "constraint": "never contacts a patient or a clinician; raises the case id and the protocol step for a human to act on",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "contact_patient", "export_cases", "aggregate_cases"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "board view lanes follow-ups by status", "no field of a follow-up ever appears in a projection", "a proposal never changes data/rooms/followups.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove followups exits 0 and the board renders with no DF_IR_* or DF_LAYOUT_* failure; the pack stays draft until its README conditions are met."
+}

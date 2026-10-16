@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dataset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dataset_id", "name", "modality", "logged_on"],
+  "properties": {
+    "dataset_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "modality": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "size_gb": { "type": "number", "minimum": 0, "maximum": 10 },
+    "license": { "type": "string", "maxLength": 60 },
+    "path_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "sha256 of the file list; the path itself stays on the owner's disk." },
+    "robot_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "passes": { "type": "integer", "minimum": 0 },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "captured_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" }
+  }
+}

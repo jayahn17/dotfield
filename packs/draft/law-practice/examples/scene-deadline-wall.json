@@ -1,0 +1,203 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "timeline",
+  "meta": {
+    "id": "scene-deadline-wall",
+    "title": "Deadlines — wall",
+    "output": "out.html",
+    "theme": "paper",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "deadlines",
+    "view": "wall"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [],
+  "nodes": [
+    {
+      "id": "deadlines-d-0001",
+      "kind": "event",
+      "label": "Response to indemnity notice",
+      "room": "deadlines",
+      "record_id": "d-0001",
+      "weight": 0.5,
+      "tags": ["indemnity"],
+      "color_token": "good",
+      "status": "accepted",
+      "sublabel": "response",
+      "fields": {
+        "kind": "response",
+        "status": "done"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "deadlines/d-0001",
+          "digest": "sha256:8783d80c7f38e3284b5ba73ab93b4ee233f329029d64c3be23c191a720a5016c"
+        },
+        "captured_on": "2026-02-03",
+        "happened_on": "2026-03-15",
+        "remembered_on": "2026-02-03"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-deadlines"]
+    },
+    {
+      "id": "deadlines-d-0002",
+      "kind": "event",
+      "label": "Mediation statement",
+      "room": "deadlines",
+      "record_id": "d-0002",
+      "weight": 0.5,
+      "tags": ["due", "mediation"],
+      "color_token": "accent",
+      "status": "accepted",
+      "sublabel": "filing",
+      "fields": {
+        "kind": "filing",
+        "status": "due"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "deadlines/d-0002",
+          "digest": "sha256:b896403c75507e0c9c7e20e1b66053e4a8cb51999f0c1f5b2fb9059feb9a9fa5"
+        },
+        "captured_on": "2026-08-01",
+        "happened_on": "2026-10-20",
+        "remembered_on": "2026-08-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-deadlines"]
+    },
+    {
+      "id": "deadlines-d-0003",
+      "kind": "event",
+      "label": "Limitation period check",
+      "room": "deadlines",
+      "record_id": "d-0003",
+      "weight": 0.5,
+      "tags": ["due", "limitation"],
+      "color_token": "accent",
+      "status": "accepted",
+      "sublabel": "internal",
+      "fields": {
+        "kind": "internal",
+        "status": "due"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "deadlines/d-0003",
+          "digest": "sha256:ca3a06bedda2d3b7927b0437cca55fb805c1d74d91ba5cc76d249345cb17a8ca"
+        },
+        "captured_on": "2026-04-18",
+        "happened_on": "2026-11-30",
+        "remembered_on": "2026-04-18"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-deadlines"]
+    },
+    {
+      "id": "deadlines-d-0004",
+      "kind": "event",
+      "label": "Regulator filing",
+      "room": "deadlines",
+      "record_id": "d-0004",
+      "weight": 0.5,
+      "tags": ["privacy"],
+      "color_token": "bad",
+      "status": "accepted",
+      "sublabel": "filing",
+      "fields": {
+        "kind": "filing",
+        "status": "missed"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "deadlines/d-0004",
+          "digest": "sha256:54177abe3e7fb6fbeecfda95242610827824d9d534cd8c1614de5a157d7c554f"
+        },
+        "captured_on": "2026-06-09",
+        "happened_on": "2026-09-30",
+        "remembered_on": "2026-06-09"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-deadlines"]
+    }
+  ],
+  "edges": [],
+  "views": {
+    "2d": {
+      "layout": "timeline",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "timeline"
+      }
+    },
+    "3d": {
+      "layout": "tier-wall",
+      "scale_m": 5
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "deadlines-d-0001",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "due",
+          "label": "Still due",
+          "match": {
+            "tags": ["due"]
+          }
+        }
+      ],
+      "presentation": ["deadlines-d-0001", "deadlines-d-0002", "deadlines-d-0003"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-deadlines",
+      "kind": "record",
+      "ref": "deadlines/examples.json",
+      "digest": "sha256:e709e07527ee9af34ed3a6eb60a65db2a2e6c55a1ec0ec3b0c29043d2b697c7c",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "deadlines-d-0001": [237.5, 500],
+    "deadlines-d-0002": [987.5, 500],
+    "deadlines-d-0003": [1362.5, 500],
+    "deadlines-d-0004": [612.5, 500]
+  },
+  "laid_out": true
+}

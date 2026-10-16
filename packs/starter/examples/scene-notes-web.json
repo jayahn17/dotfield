@@ -1,0 +1,332 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-notes-web",
+    "title": "Notes — note web",
+    "output": "out.html",
+    "theme": "paper",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true,
+    "room": "notes",
+    "view": "graph"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-idea",
+      "label": "idea",
+      "kind": "discipline",
+      "wraps": ["notes-note-0001", "notes-note-0005"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-dataset",
+      "label": "dataset",
+      "kind": "discipline",
+      "wraps": ["notes-note-0002"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-reading",
+      "label": "reading",
+      "kind": "discipline",
+      "wraps": ["notes-note-0003"],
+      "color_token": "series-3"
+    },
+    {
+      "id": "g-plan",
+      "label": "plan",
+      "kind": "discipline",
+      "wraps": ["notes-note-0004"],
+      "color_token": "series-4"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "notes-note-0001",
+      "kind": "note",
+      "label": "Calibrate before the long run",
+      "room": "notes",
+      "record_id": "note-0001",
+      "weight": 0.7,
+      "tags": ["idea", "calibration"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "The drift grows with cumulative vibration, not with the calendar.",
+      "group": "g-idea",
+      "fields": {
+        "title": "Calibrate before the long run",
+        "tags": ["idea", "calibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "notes/note-0001",
+          "digest": "sha256:f4c6c2ac14e7ccfd636799414c66ad1c37d0bcb8b8f4203023853691037dd8d0"
+        },
+        "captured_on": "2026-09-19",
+        "happened_on": "2026-09-18",
+        "remembered_on": "2026-09-19"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-notes"]
+    },
+    {
+      "id": "notes-note-0002",
+      "kind": "note",
+      "label": "Hall loop dataset notes",
+      "room": "notes",
+      "record_id": "note-0002",
+      "weight": 0.4,
+      "tags": ["dataset", "indoor"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "Twelve passes, two with the lights off; the dark passes are the interesting ones.",
+      "group": "g-dataset",
+      "fields": {
+        "title": "Hall loop dataset notes",
+        "tags": ["dataset", "indoor"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "notes/note-0002",
+          "digest": "sha256:a37e0a8da380248cc6f06a355710596b8843156cb092afbc495e471b39a32d24"
+        },
+        "captured_on": "2026-09-12",
+        "happened_on": "2026-09-12",
+        "remembered_on": "2026-09-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-notes"]
+    },
+    {
+      "id": "notes-note-0003",
+      "kind": "note",
+      "label": "Reading: loop closure survey",
+      "room": "notes",
+      "record_id": "note-0003",
+      "weight": 0.5,
+      "tags": ["reading", "slam"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "Three families of methods; only one scales to the hall.",
+      "group": "g-reading",
+      "fields": {
+        "title": "Reading: loop closure survey",
+        "tags": ["reading", "slam"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "notes/note-0003",
+          "digest": "sha256:93a9a19984ce898739f3e49f04742bc23a045287426c510268c1ea5de63fcc25"
+        },
+        "captured_on": "2026-09-02",
+        "happened_on": "2026-08-30",
+        "remembered_on": "2026-09-02"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-notes"]
+    },
+    {
+      "id": "notes-note-0004",
+      "kind": "note",
+      "label": "Weekly plan",
+      "room": "notes",
+      "record_id": "note-0004",
+      "weight": 0.2,
+      "tags": ["plan"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "Finish the calibration note, re-run the dark passes, draft the summary.",
+      "group": "g-plan",
+      "fields": {
+        "title": "Weekly plan",
+        "tags": ["plan"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "notes/note-0004",
+          "digest": "sha256:379bbae81c88f8b38c7025c6bf84f59b4f7760952764932416d9bfa2674f400d"
+        },
+        "captured_on": "2026-09-21",
+        "happened_on": "2026-09-21",
+        "remembered_on": "2026-09-21"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-notes"]
+    },
+    {
+      "id": "notes-note-0005",
+      "kind": "note",
+      "label": "Ask Ada about inspection cadence",
+      "room": "notes",
+      "record_id": "note-0005",
+      "weight": 0.6,
+      "tags": ["idea", "vibration"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "Her bridge inspections are scheduled by load cycles; the same logic might fit our IMU.",
+      "group": "g-idea",
+      "fields": {
+        "title": "Ask Ada about inspection cadence",
+        "tags": ["idea", "vibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "notes/note-0005",
+          "digest": "sha256:a6688dd9e494604bdc0f88c983ea68e8e380adb1a5430b6e92eccf6f077cff90"
+        },
+        "captured_on": "2026-09-24",
+        "happened_on": "2026-09-24",
+        "remembered_on": "2026-09-24"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-notes"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "notes-note-0001",
+      "to": "notes-note-0002",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "notes-note-0003",
+      "to": "notes-note-0001",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e3",
+      "from": "notes-note-0003",
+      "to": "notes-note-0002",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e4",
+      "from": "notes-note-0004",
+      "to": "notes-note-0001",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e5",
+      "from": "notes-note-0005",
+      "to": "notes-note-0001",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "force",
+      "seed": 7,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "force"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1.5
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "entry_node": "notes-note-0001"
+    },
+    "interactive": {
+      "focus": "notes-note-0001",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "ideas",
+          "label": "Ideas",
+          "match": {
+            "tags": ["idea"]
+          }
+        },
+        {
+          "id": "plans",
+          "label": "Plans",
+          "match": {
+            "tags": ["plan"]
+          }
+        }
+      ],
+      "presentation": ["notes-note-0001", "notes-note-0002", "notes-note-0003"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-notes",
+      "kind": "record",
+      "ref": "notes/examples.json",
+      "digest": "sha256:fe9cbdc8297eb8a5f36feceae47882e78674f7d3f60987633fa619a21f2ae7c0",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "notes-note-0001": [857.495, 495.465],
+    "notes-note-0002": [644.205, 560.905],
+    "notes-note-0003": [955.195, 299.271],
+    "notes-note-0004": [884.715, 702.529],
+    "notes-note-0005": [840.214, 453.22]
+  },
+  "labels": {
+    "notes-note-0005": "right"
+  },
+  "laid_out": true
+}

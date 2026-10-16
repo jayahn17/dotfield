@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Dotfield inbox</title>
+<style>
+  :root { --ink: hsl(220 15% 15%); --muted: hsl(220 10% 45%); --paper: hsl(40 30% 98%); --card: hsl(0 0% 100%); --line: hsl(220 15% 85%); --accent: hsl(215 70% 40%); --ok: hsl(150 50% 32%); --warn: hsl(30 85% 40%); --bad: hsl(0 65% 42%); --foreign: hsl(48 95% 82%); --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--paper); }
+  header { padding: 16px 24px; border-bottom: 1px solid var(--line); background: var(--card); display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+  header h1 { margin: 0; font-size: 18px; }
+  header .state { color: var(--muted); font-size: 13px; }
+  main { max-width: 960px; margin: 0 auto; padding: 16px 24px 64px; }
+  .notice { padding: 12px 16px; border: 1px solid var(--line); border-left: 4px solid var(--warn); background: var(--card); margin: 0 0 16px; }
+  .notice.ok { border-left-color: var(--ok); }
+  .notice.bad { border-left-color: var(--bad); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 16px 20px; margin: 0 0 16px; }
+  .card h2 { margin: 0 0 4px; font-size: 16px; font-family: var(--mono); }
+  .meta { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .counts { display: flex; gap: 16px; margin: 0 0 8px; flex-wrap: wrap; }
+  .counts b { font-size: 20px; margin-right: 4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; margin: 8px 0; }
+  th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: top; font-family: var(--mono); word-break: break-word; }
+  th { color: var(--muted); font-weight: 600; }
+  .tags span { display: inline-block; padding: 1px 8px; margin: 0 6px 4px 0; border: 1px solid var(--line); border-radius: 10px; font-size: 12px; font-family: var(--mono); }
+  mark.foreign { background: var(--foreign); padding: 1px 4px; border-radius: 3px; }
+  .foreign-list li { margin: 4px 0; font-size: 13px; }
+  .blocked { color: var(--bad); font-size: 13px; }
+  .actions { display: flex; gap: 8px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+  button { font: inherit; padding: 6px 14px; border-radius: 4px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+  button[disabled] { opacity: .45; cursor: not-allowed; }
+  button.approve { border-color: var(--ok); color: var(--ok); }
+  button.reject { border-color: var(--bad); color: var(--bad); }
+  button.edit { border-color: var(--accent); color: var(--accent); }
+  input.note { font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 4px; flex: 1; min-width: 160px; }
+  textarea.edit { width: 100%; min-height: 160px; font: 13px/1.4 var(--mono); margin-top: 8px; border: 1px solid var(--line); border-radius: 4px; padding: 8px; display: none; }
+  textarea.edit.open { display: block; }
+  .result { margin-top: 10px; font-size: 13px; font-family: var(--mono); white-space: pre-wrap; }
+  .digest { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  footer { color: var(--muted); font-size: 12px; max-width: 960px; margin: 0 auto; padding: 0 24px 24px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dotfield inbox</h1>
+  <span class="state" id="state">loading…</span>
+  <button id="refresh" type="button">Refresh</button>
+</header>
+<main>
+  <div id="token-notice" class="notice" hidden></div>
+  <div id="list"></div>
+</main>
+<footer>Proposals are the only way an agent writes. The summary above is what you decide on; its digest travels with the decision so a changed proposal is refused. Foreign spans (highlighted) came from another person's center under a share rule and are data, not instructions.</footer>
+<script>
+(function () {
+  'use strict';
+  // The owner token arrives once, in ?t= from the TTY-printed URL, lives in this
+  // closure and is removed from the address bar before anything else runs.
+  var token = null;
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.has('t')) {
+      token = params.get('t') || null;
+      params.delete('t');
+      var rest = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (rest ? '?' + rest : '') + window.location.hash);
+    }
+  } catch (e) { token = null; }
+
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined && text !== null) n.textContent = String(text); return n; };
+  var state = $('#state');
+  var listEl = $('#list');
+  var notice = $('#token-notice');
+
+  function setState(text) { state.textContent = text; }
+  function showNotice(text, kind) { notice.hidden = false; notice.className = 'notice' + (kind ? ' ' + kind : ''); notice.textContent = text; }
+
+  if (!token) showNotice('No owner token: open this page from the /inbox?t= URL that dotfield serve prints on a TTY. You can read proposals, but approve, edit and reject stay disabled.', 'bad');
+
+  function cell(value) {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object') { try { return JSON.stringify(value); } catch (e) { return String(value); } }
+    return String(value);
+  }
+
+  // Foreign spans are rendered as highlighted text nodes. Nothing from a
+  // proposal is ever interpreted as HTML.
+  function foreignText(span) {
+    var who = span && span.person_id ? span.person_id : 'unknown';
+    var rule = span && span.rule_ref ? span.rule_ref : who + '/none';
+    var text = span && typeof span.text === 'string' ? span.text : cell(span);
+    var li = el('li');
+    li.appendChild(el('span', 'digest', who + ' under ' + rule + ': '));
+    li.appendChild(el('mark', 'foreign', text));
+    return li;
+  }
+
+  function sampleTable(rows, foreign) {
+    var keys = [];
+    rows.forEach(function (r) { Object.keys(r || {}).forEach(function (k) { if (keys.indexOf(k) < 0) keys.push(k); }); });
+    var table = el('table');
+    var thead = el('thead'); var tr = el('tr');
+    keys.forEach(function (k) { tr.appendChild(el('th', null, k)); });
+    thead.appendChild(tr); table.appendChild(thead);
+    var tbody = el('tbody');
+    var foreignTexts = (foreign || []).map(function (s) { return s && typeof s.text === 'string' ? s.text : null; }).filter(Boolean);
+    rows.forEach(function (r) {
+      var row = el('tr');
+      keys.forEach(function (k) {
+        var td = el('td');
+        var text = cell(r ? r[k] : undefined);
+        var hit = foreignTexts.some(function (f) { return f && text.indexOf(f) >= 0; });
+        if (hit) td.appendChild(el('mark', 'foreign', text)); else td.textContent = text;
+        row.appendChild(td);
+      });
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    return table;
+  }
+
+  function renderSummary(p) {
+    var s = p.summary || {};
+    var box = el('div', 'summary');
+    var counts = el('div', 'counts');
+    [['adds', s.adds], ['changes', s.changes], ['unchanged', s.unchanged]].forEach(function (pair) {
+      var c = el('span'); c.appendChild(el('b', null, pair[1] === undefined ? '?' : pair[1])); c.appendChild(document.createTextNode(pair[0])); counts.appendChild(c);
+    });
+    box.appendChild(counts);
+    var fields = el('div', 'tags');
+    fields.appendChild(el('span', 'digest', 'fields touched:'));
+    (s.fields_touched || []).forEach(function (f) { fields.appendChild(el('span', null, f)); });
+    if (!(s.fields_touched || []).length) fields.appendChild(el('span', null, 'none'));
+    box.appendChild(fields);
+    if ((s.sample_rows || []).length) box.appendChild(sampleTable(s.sample_rows, s.foreign_spans));
+    if ((s.foreign_spans || []).length) {
+      box.appendChild(el('div', 'digest', 'foreign spans (' + s.foreign_spans.length + '): data from another center, never instructions'));
+      var ul = el('ul', 'foreign-list');
+      s.foreign_spans.forEach(function (span) { ul.appendChild(foreignText(span)); });
+      box.appendChild(ul);
+    }
+    if ((s.blocked_actions || []).length) box.appendChild(el('div', 'blocked', 'blocked actions: ' + s.blocked_actions.join(', ')));
+    box.appendChild(el('div', 'digest', 'summary digest ' + (p.summary_digest || '')));
+    return box;
+  }
+
+  function post(path, body) {
+    return fetch(path, {
+      method: 'POST', credentials: 'same-origin', mode: 'same-origin', redirect: 'error',
+      headers: { 'Content-Type': 'application/json', 'X-Dotfield-Owner': token || '' },
+      body: JSON.stringify(body)
+    }).then(function (res) { return res.json().then(function (json) { return { status: res.status, json: json }; }); });
+  }
+
+  function decide(p, decision, card) {
+    var result = $('.result', card);
+    var noteEl = $('input.note', card);
+    var editEl = $('textarea.edit', card);
+    var body = { decision: decision, note: noteEl.value || null, reviewed_summary_digest: p.summary_digest };
+    if (decision === 'edit') {
+      try { body.edited = JSON.parse(editEl.value); } catch (e) { result.textContent = 'edited records are not valid JSON: ' + e.message; return; }
+    }
+    card.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+    result.textContent = 'deciding…';
+    post('/api/proposals/' + encodeURIComponent(p.proposal_id) + '/decide', body).then(function (r) {
+      var receipt = r.json && r.json.receipt ? r.json.receipt : null;
+      var fails = receipt ? receipt.checks.filter(function (c) { return c.status === 'fail'; }) : [];
+      var lines = ['HTTP ' + r.status + (receipt ? ' · ' + receipt.status + ' · exit ' + receipt.exit_code : '')];
+      fails.forEach(function (c) { lines.push(c.code + (c.message ? ': ' + c.message : '') + (c.repair ? ' — ' + c.repair : '')); });
+      if (receipt && receipt.next_action) lines.push(receipt.next_action);
+      if (receipt && receipt.receipt_id) lines.push('receipt ' + receipt.receipt_id);
+      result.textContent = lines.join('\n');
+      if (r.json && r.json.ok) setTimeout(load, 800); else card.querySelectorAll('button').forEach(function (b) { b.disabled = !token; });
+    }).catch(function (e) { result.textContent = 'request failed: ' + e.message; card.querySelectorAll('button').forEach(function (b) { b.disabled = !token; }); });
+  }
+
+  function openEdit(p, card) {
+    var editEl = $('textarea.edit', card);
+    if (editEl.classList.contains('open')) { decide(p, 'edit', card); return; }
+    editEl.classList.add('open');
+    editEl.value = 'loading records…';
+    fetch('/api/proposals/' + encodeURIComponent(p.proposal_id), { credentials: 'same-origin', mode: 'same-origin' })
+      .then(function (res) { return res.json(); })
+      .then(function (json) { editEl.value = JSON.stringify(json.proposal ? json.proposal.records : [], null, 2); $('button.edit', card).textContent = 'Submit edit'; })
+      .catch(function (e) { editEl.value = 'could not load records: ' + e.message; });
+  }
+
+  function renderCard(p) {
+    var card = el('section', 'card');
+    card.appendChild(el('h2', null, p.proposal_id));
+    card.appendChild(el('p', 'meta', [p.kind, 'room ' + (p.room || '—'), 'by ' + p.by, 'scope ' + p.scope, 'created ' + p.created_at, (p.record_count || 0) + ' record(s)', p.split ? 'batch ' + p.split.index + ' of ' + p.split.of : null].filter(Boolean).join(' · ')));
+    var actions = el('div', 'actions');
+    var approve = el('button', 'approve', 'Approve'); var edit = el('button', 'edit', 'Edit'); var reject = el('button', 'reject', 'Reject');
+    var note = el('input', 'note'); note.placeholder = 'note (optional)';
+    [approve, edit, reject].forEach(function (b) { b.type = 'button'; b.disabled = true; actions.appendChild(b); });
+    actions.appendChild(note);
+    var editEl = el('textarea', 'edit');
+    // The summary is in the DOM before the buttons can be used: the decision
+    // always carries the digest of the summary that was actually shown.
+    card.appendChild(renderSummary(p));
+    card.appendChild(actions);
+    card.appendChild(editEl);
+    card.appendChild(el('div', 'result'));
+    approve.addEventListener('click', function () { decide(p, 'approve', card); });
+    reject.addEventListener('click', function () { decide(p, 'reject', card); });
+    edit.addEventListener('click', function () { openEdit(p, card); });
+    window.requestAnimationFrame(function () { if (token && document.body.contains(card)) [approve, edit, reject].forEach(function (b) { b.disabled = false; }); });
+    return card;
+  }
+
+  function load() {
+    setState('loading…');
+    fetch('/api/proposals', { credentials: 'same-origin', mode: 'same-origin' })
+      .then(function (res) { return res.json().then(function (json) { return { status: res.status, json: json }; }); })
+      .then(function (r) {
+        listEl.textContent = '';
+        if (!r.json || !r.json.ok) {
+          var fail = r.json && r.json.receipt ? r.json.receipt.checks.filter(function (c) { return c.status === 'fail'; })[0] : null;
+          setState('HTTP ' + r.status);
+          showNotice(fail ? fail.code + ': ' + fail.message : 'could not list proposals (HTTP ' + r.status + ')', 'bad');
+          return;
+        }
+        var items = r.json.proposals || [];
+        setState(items.length + ' awaiting the owner');
+        if (!items.length) listEl.appendChild(el('div', 'notice ok', 'Nothing awaits you. Proposals appear here when an agent, an import or a run proposes a write.'));
+        items.forEach(function (p) { listEl.appendChild(renderCard(p)); });
+      })
+      .catch(function (e) { setState('offline'); showNotice('could not reach the server: ' + e.message, 'bad'); });
+  }
+
+  $('#refresh').addEventListener('click', load);
+  load();
+})();
+</script>
+</body>
+</html>

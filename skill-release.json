@@ -1,0 +1,38 @@
+{
+  "name": "dotfield",
+  "version": "0.1.0",
+  "schema_versions": {
+    "brand": "dotfield.brand/1",
+    "center-config": "dotfield.center-config/1",
+    "circle": "dotfield.circle/1",
+    "delta": "dotfield.delta/1",
+    "kinds": "dotfield.kinds/1",
+    "pack": "dotfield.pack/1",
+    "person": "dotfield.person/1",
+    "projection": "dotfield.projection/1",
+    "proposal": "dotfield.proposal/1",
+    "receipt": "dotfield.receipt/1",
+    "record-meta": "dotfield.record-meta/1",
+    "room": "dotfield.room/1",
+    "roster": "dotfield.roster/1",
+    "run": "dotfield.run/1",
+    "scene": "dotfield.scene/1",
+    "share-rule": "dotfield.share-rule/1",
+    "sketch": "dotfield.sketch/1"
+  },
+  "rule_catalog_version": "1",
+  "three_revision": "180",
+  "min_node": "22.13",
+  "digests": {
+    "lib": "sha256:2946bce9321daf4137e5d4d25a9c6352edc7be7efb1d0d4a8a72524cc434e403",
+    "schemas": "sha256:553efa57cc7b126096ab4f6d1e70fbca0b501f7914ac954917949d6114faa51c"
+  },
+  "fork_editable": [
+    "README.md",
+    "AGENTS.md",
+    "templates/",
+    "package.json#name",
+    "package.json#description",
+    "skill-release.json#name"
+  ]
+}

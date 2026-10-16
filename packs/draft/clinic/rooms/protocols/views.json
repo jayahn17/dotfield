@@ -1,0 +1,18 @@
+[
+  {
+    "id": "outcomes", "label": "Protocol to outcome", "kind": "graph", "theme": "light",
+    "node": { "kind": "record", "label": "$.title", "sublabel": "$.condition", "tags": "$.tags",
+              "color_token_by": { "field": "$.evidence_grade", "map": { "a": "good", "b": "series-2", "c": "warn", "d": "bad" } } },
+    "include_rooms": ["cases", "literature"],
+    "group_by": { "field": "$.condition", "kind": "discipline" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 91 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "group-weight", "amplitude_m": 1.2 } }, "vr": { "enabled": false } },
+    "lenses": [ { "id": "grade-a", "label": "Grade A", "match": { "tags": ["grade-a"] } } ]
+  },
+  {
+    "id": "versions", "label": "Protocol versions", "kind": "timeline", "theme": "light", "date": "$.effective_on",
+    "node": { "kind": "event", "label": "$.title", "sublabel": "$.version", "tags": "$.tags" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": { "2d": { "layout": "timeline" }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } }
+  }
+]

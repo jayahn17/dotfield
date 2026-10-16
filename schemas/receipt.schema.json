@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.receipt/1",
+  "title": "Dotfield receipt",
+  "description": "The envelope every CLI verb, HTTP route and MCP tool returns (VISION 8.4). Closed: no open maps. Built only by lib/receipt.mjs buildReceipt().",
+  "type": "object",
+  "required": [
+    "receipt_id", "schema_version", "command", "argv", "generated_at", "engine_version", "release_tag",
+    "engine_digests", "status", "ok", "exit_code", "maturity", "scope", "viewer", "mode", "store",
+    "inputs", "checks", "outputs", "owner_decision", "blocked_actions", "provider",
+    "foreign_spans_digest", "evidence", "next_action", "digest"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "receipt_id": { "type": "string", "pattern": "^rcpt_[0-9]{8}T[0-9]{6}Z_[0-9a-f]{4}$" },
+    "schema_version": { "const": "dotfield.receipt/1" },
+    "command": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "argv": { "type": "array", "items": { "type": "string", "maxLength": 4096 } },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "engine_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.-]+)?$" },
+    "release_tag": { "enum": ["v1.0", "v1.1-provisional"] },
+    "engine_digests": {
+      "type": "object",
+      "required": ["lib", "schemas", "match_release", "meaning"],
+      "additionalProperties": false,
+      "properties": {
+        "lib": { "$ref": "#/$defs/digest" },
+        "schemas": { "$ref": "#/$defs/digest" },
+        "match_release": { "type": ["boolean", "null"] },
+        "meaning": { "const": "detects unintended local edits; not tamper evidence" }
+      }
+    },
+    "status": { "enum": ["read", "proposal", "written", "awaiting_owner", "approved", "rejected", "blocked", "refused", "error"] },
+    "ok": { "type": "boolean" },
+    "exit_code": { "enum": [0, 1, 2, 3, 4, 5] },
+    "maturity": { "enum": ["contract_only", "prototype", "local_beta", "tested", null] },
+    "scope": { "type": ["string", "null"], "pattern": "^(owner|public|person_[a-z0-9][a-z0-9_.:-]{0,79})$" },
+    "viewer": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "mode": { "enum": ["read_only", "proposal_only", "blocked", null] },
+    "store": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["target", "backend"],
+          "additionalProperties": false,
+          "properties": {
+            "target": { "type": ["string", "null"], "maxLength": 1024 },
+            "backend": { "enum": ["file", "object", "memory"] }
+          }
+        }
+      ]
+    },
+    "inputs": { "type": "array", "items": { "$ref": "#/$defs/input" } },
+    "checks": { "type": "array", "items": { "$ref": "#/$defs/check" } },
+    "outputs": { "type": "array", "items": { "$ref": "#/$defs/output" } },
+    "owner_decision": {
+      "type": "object",
+      "required": ["state", "reviewed_summary_digest"],
+      "additionalProperties": false,
+      "properties": {
+        "state": { "enum": ["not_required", "awaiting_owner", "approved", "edited", "rejected"] },
+        "reviewed_summary_digest": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/digest" }] }
+      }
+    },
+    "blocked_actions": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 120 } },
+    "provider": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["adapter"],
+          "additionalProperties": false,
+          "properties": {
+            "adapter": { "enum": ["dry", "claude-cli", "anthropic", "relay"] },
+            "model": { "type": ["string", "null"], "maxLength": 120 },
+            "tokens_used": { "type": ["integer", "null"], "minimum": 0 },
+            "argv_digest": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/digest" }] }
+          }
+        }
+      ]
+    },
+    "foreign_spans_digest": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/digest" }] },
+    "evidence": {
+      "type": "object",
+      "required": ["browser", "screenshot_ref", "device"],
+      "additionalProperties": false,
+      "properties": {
+        "browser": { "enum": ["captured", "not_captured"] },
+        "screenshot_ref": { "type": ["string", "null"], "maxLength": 1024 },
+        "device": { "type": ["string", "null"], "maxLength": 120 }
+      }
+    },
+    "next_action": { "type": "string", "minLength": 1, "maxLength": 600 },
+    "digest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "ref": { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "input": {
+      "type": "object",
+      "required": ["ref", "digest"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "$ref": "#/$defs/ref" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "bytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["ref", "digest"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "$ref": "#/$defs/ref" },
+        "digest": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/digest" }] },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "kind": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "embedded_three": { "type": "boolean" },
+        "action": { "enum": ["written", "removed", "redacted"] }
+      }
+    },
+    "check": {
+      "type": "object",
+      "required": ["code", "gate", "blocking", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string", "pattern": "^DF_[A-Z0-9_]+$" },
+        "gate": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "blocking": { "type": "boolean" },
+        "status": { "enum": ["pass", "fail"] },
+        "path": { "type": "string", "maxLength": 1024 },
+        "message": { "type": "string", "maxLength": 2000 },
+        "repair": { "type": "string", "maxLength": 2000 }
+      }
+    }
+  }
+}

@@ -1,0 +1,155 @@
+# The Dotfield gate (VISION §10 "CI"). This file lives inside dotfield/ so it
+# survives `git subtree split`; GitHub runs it once dotfield/ is a repository
+# root (until then the parent repository may call `cd dotfield && npm test`).
+# Every step writes its receipt under $RUNNER_TEMP/receipts (never inside the
+# tree: the manifest would hash it) and the whole folder is uploaded, green or
+# red. Node 22 and 24, no provider, no browser: browser evidence is opt-in
+# (scripts/evidence.mjs, recipes/vr-on-quest.md), so renders stay provisional.
+# The v2 close (2026-10-08) added the archify corpus step and a showcase render
+# of every template and example at --view all.
+name: dotfield
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dotfield-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: gate (node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
+    env:
+      CI: 'true'
+      RECEIPTS: ${{ runner.temp }}/receipts
+      # The template refuses a tracked center/ (npm test and npm run check); a fork tracks its own, so the guard is off there.
+      DOTFIELD_TEMPLATE_REPO: ${{ github.repository == 'jayahn17/dotfield' && '1' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install (dependencies are {}; the MCP SDK is optional)
+        run: |
+          mkdir -p "$RECEIPTS"
+          npm ci
+
+      - name: Vendored three.js, fetched and verified by pinned hash
+        run: |
+          node scripts/fetch-vendor.mjs --json > "$RECEIPTS/fetch-vendor.json"
+          node scripts/fetch-vendor.mjs --verify
+
+      - name: npm test
+        run: npm test
+
+      - name: npm run check (manifest, rules, contrast, every pack instantiates, subtree, benchmark block)
+        run: npm run check
+
+      - name: archify corpus (pinned bytes verified offline, then imported, validated and rendered at showcase)
+        run: |
+          node scripts/fetch-archify-corpus.mjs --verify
+          node --test test/archify-corpus.test.js
+
+      - name: Render every template and example at showcase (--view all, three embedded)
+        shell: bash
+        run: |
+          set -euo pipefail
+          n=0
+          for f in templates/*.sketch.json examples/scene-*.json; do
+            out="$RECEIPTS/showcase-$(echo "$f" | tr '/' '-' | sed 's/\.json$//').json"
+            node bin/dotfield.mjs render "$f" --view all --quality showcase --json > "$out" || { echo "showcase render failed: $f"; cat "$out"; exit 1; }
+            node -e 'const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")); const f = r.checks.filter((c) => c.status === "fail"); if (r.ok !== true || r.exit_code !== 0) { console.error(JSON.stringify(f, null, 2)); process.exit(1); } console.log(`${process.argv[2]}: ${r.status}, ${f.length} non-blocking row(s)${f.length ? ": " + [...new Set(f.map((c) => c.code))].join(", ") : ""}`);' "$out" "$f"
+            n=$((n + 1))
+          done
+          echo "showcase: rendered $n file(s)"
+
+      - name: doctor --json with no keys (what a fresh clone reports)
+        run: |
+          node bin/dotfield.mjs doctor --json > "$RECEIPTS/doctor-no-keys.json" || { cat "$RECEIPTS/doctor-no-keys.json"; exit 1; }
+          node -e 'const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")); const f = r.checks.filter((c) => c.status === "fail"); console.log(`doctor: ${r.status}, ${f.length} non-blocking finding(s): ${[...new Set(f.map((c) => c.code))].join(", ") || "none"}`); if (f.some((c) => c.code === "DF_ENGINE_MODIFIED")) { console.error("DF_ENGINE_MODIFIED: run npm run manifest in the same commit as the engine change"); process.exit(1); }' "$RECEIPTS/doctor-no-keys.json"
+
+      - name: init --pack starter on a fresh clone (a fork keeps the center it tracks)
+        env:
+          SOURCE_DATE_EPOCH: '1790849700'
+        shell: bash
+        run: |
+          if [ -f center/center.config.json ]; then echo "center/ is tracked here (a fork): validating it as it is"; exit 0; fi
+          node bin/dotfield.mjs init --pack starter --name Dotfield --json > "$RECEIPTS/init-starter.json" || { cat "$RECEIPTS/init-starter.json"; exit 1; }
+          node scripts/pack-init-check.mjs --json > "$RECEIPTS/pack-init-check.json" || { cat "$RECEIPTS/pack-init-check.json"; exit 1; }
+
+      - name: validate all --json
+        run: node bin/dotfield.mjs validate all --json > "$RECEIPTS/validate-all.json" || { cat "$RECEIPTS/validate-all.json"; exit 1; }
+
+      - name: prove all --json
+        run: node bin/dotfield.mjs prove all --json > "$RECEIPTS/prove-all.json" || { cat "$RECEIPTS/prove-all.json"; exit 1; }
+
+      - name: Render every example and pack scene (the views each scene enables)
+        shell: bash
+        run: |
+          set -euo pipefail
+          n=0
+          for f in examples/scene-*.json packs/*/examples/scene-*.json packs/draft/*/examples/scene-*.json; do
+            views="$(node -e 'const s = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")); const v = s.views || {}; const out = ["2d"]; if (v["3d"] && v["3d"].enabled !== false) out.push("3d"); if (v.vr && v.vr.enabled === true) out.push("vr"); console.log(out.join(","));' "$f")"
+            out="$RECEIPTS/render-$(echo "$f" | tr '/' '-' | sed 's/\.json$//').json"
+            node bin/dotfield.mjs render "$f" --view "$views" --json > "$out" || { echo "render failed: $f ($views)"; cat "$out"; exit 1; }
+            node -e 'const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")); if (r.ok !== true) { console.error(JSON.stringify(r.checks.filter((c) => c.status === "fail"), null, 2)); process.exit(1); }' "$out"
+            n=$((n + 1))
+          done
+          echo "rendered $n scene(s)"
+
+      - name: Two renders under one SOURCE_DATE_EPOCH are byte-identical
+        env:
+          SOURCE_DATE_EPOCH: '1790849700'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node bin/dotfield.mjs render examples/scene-graph.json --view 2d,3d,vr --json > "$RECEIPTS/render-repro-1.json"
+          dir="$(node -e 'const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")); console.log(require("path").dirname(r.outputs[0].ref));' "$RECEIPTS/render-repro-1.json")"
+          rm -rf "$RUNNER_TEMP/first" && cp -R "$dir" "$RUNNER_TEMP/first"
+          node bin/dotfield.mjs render examples/scene-graph.json --view 2d,3d,vr --json > "$RECEIPTS/render-repro-2.json"
+          diff -r "$RUNNER_TEMP/first" "$dir" && echo "reproducible: $dir"
+
+      - name: node --check over bin lib renderers server mcp importers scripts test
+        run: find bin lib renderers server mcp importers scripts test -type f \( -name '*.mjs' -o -name '*.js' -o -name '*.cjs' \) -print0 | xargs -0 -n1 node --check
+
+      - name: npm run manifest leaves no diff
+        run: |
+          npm run manifest
+          git diff --exit-code -- engine.manifest.json skill-release.json
+
+      - name: subtree check (nothing references a path outside the folder)
+        run: |
+          node scripts/subtree-check.mjs --json > "$RECEIPTS/subtree-check.json" || true
+          node scripts/subtree-check.mjs
+
+      - name: Two-center demo (DOTFIELD_OWNER_TOKEN_FILE set explicitly by the script)
+        run: DEMO_RECEIPTS="$RECEIPTS/demo-two-centers" bash scripts/demo-two-centers.sh
+
+      - name: Collect the receipt index
+        if: always()
+        run: |
+          if [ -d .dotfield/receipts ]; then mkdir -p "$RECEIPTS/index" && cp -R .dotfield/receipts/. "$RECEIPTS/index"/; fi
+          ls -R "$RECEIPTS" | head -100
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: receipts-node-${{ matrix.node }}
+          path: ${{ runner.temp }}/receipts
+          if-no-files-found: warn
+          retention-days: 14

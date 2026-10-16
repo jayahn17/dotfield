@@ -1,0 +1,352 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "lifecycle",
+  "meta": {
+    "id": "review-cycle",
+    "title": "Paper — review cycle",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "showcase",
+    "privacy_mode": "synthetic_data",
+    "maturity": "prototype",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [],
+  "nodes": [
+    {
+      "id": "draft",
+      "kind": "event",
+      "label": "Draft",
+      "weight": 0.5,
+      "tags": ["initial"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "shape": "pill",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:review-cycle",
+          "digest": "sha256:6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "review",
+      "kind": "event",
+      "label": "In review",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-2",
+      "status": "accepted",
+      "shape": "pill",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:review-cycle",
+          "digest": "sha256:6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "revise",
+      "kind": "event",
+      "label": "Revising",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "warn",
+      "status": "accepted",
+      "shape": "pill",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:review-cycle",
+          "digest": "sha256:6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c6c"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "approved",
+      "kind": "event",
+      "label": "Approved",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "good",
+      "status": "accepted",
+      "shape": "pill",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:review-cycle",
+          "digest": "sha256:6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "archived",
+      "kind": "event",
+      "label": "Archived",
+      "weight": 0.5,
+      "tags": ["final"],
+      "color_token": "muted",
+      "status": "accepted",
+      "shape": "pill",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:review-cycle",
+          "digest": "sha256:6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "t1",
+      "from": "draft",
+      "to": "review",
+      "kind": "transition",
+      "directed": true,
+      "label": "submit",
+      "order": 1,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "t2",
+      "from": "review",
+      "to": "revise",
+      "kind": "transition",
+      "directed": true,
+      "label": "changes asked",
+      "order": 2,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "t3",
+      "from": "revise",
+      "to": "review",
+      "kind": "transition",
+      "directed": true,
+      "label": "resubmit",
+      "order": 3,
+      "variant": "dashed",
+      "route": "orthogonal"
+    },
+    {
+      "id": "t4",
+      "from": "review",
+      "to": "review",
+      "kind": "transition",
+      "directed": true,
+      "label": "reassign",
+      "order": 4,
+      "variant": "dashed",
+      "route": "orthogonal"
+    },
+    {
+      "id": "t5",
+      "from": "review",
+      "to": "approved",
+      "kind": "transition",
+      "directed": true,
+      "label": "approve",
+      "order": 5,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "t6",
+      "from": "approved",
+      "to": "archived",
+      "kind": "transition",
+      "directed": true,
+      "label": "archive",
+      "order": 6,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "t7",
+      "from": "draft",
+      "to": "archived",
+      "kind": "transition",
+      "directed": true,
+      "label": "withdraw",
+      "order": 7,
+      "variant": "dashed",
+      "route": "orthogonal"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "lifecycle",
+      "direction": "right",
+      "seed": 0,
+      "spacing": 88,
+      "viewBox": [0, 0, 1200, 720],
+      "plan": {
+        "mode": "lifecycle",
+        "reversed": ["t3"],
+        "layers": 4,
+        "dummies": 2,
+        "crossings": 0
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "camera": {
+        "position": [0, 2.2, 8],
+        "target": [0, 0, 0]
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "floor_y": 0,
+      "eye_height_m": 1.6,
+      "entry_node": "draft",
+      "label_budget": 32
+    },
+    "time": {
+      "axis": "order",
+      "step": "beat",
+      "playhead": null,
+      "motion": "playback"
+    },
+    "interactive": {
+      "focus": "review",
+      "reach": "both",
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "kind": "import",
+      "ref": "sketch:review-cycle",
+      "digest": "sha256:6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "draft": [193.543, 426.363],
+    "review": [457.543, 310.613],
+    "revise": [721.543, 265.863],
+    "approved": [721.543, 401.863],
+    "archived": [985.543, 460.363]
+  },
+  "routes": {
+    "t1": [
+      [202.971, 423.029],
+      [330.33, 423.029],
+      [330.33, 313.946],
+      [448.115, 313.946]
+    ],
+    "t2": [
+      [466.971, 307.279],
+      [563.715, 307.279],
+      [563.715, 265.863],
+      [711.543, 265.863]
+    ],
+    "t3": [
+      [731.543, 265.863],
+      [820.439, 265.863],
+      [820.439, 201.138],
+      [292.268, 201.138],
+      [292.268, 307.279],
+      [448.115, 307.279]
+    ],
+    "t4": [
+      [451.543, 302.613],
+      [451.543, 264.613],
+      [463.543, 264.613],
+      [463.543, 302.613]
+    ],
+    "t5": [
+      [466.971, 313.946],
+      [593.466, 313.946],
+      [593.466, 401.863],
+      [711.543, 401.863]
+    ],
+    "t6": [
+      [731.543, 401.863],
+      [858.672, 401.863],
+      [858.672, 457.029],
+      [976.115, 457.029]
+    ],
+    "t7": [
+      [202.971, 429.696],
+      [368.392, 429.696],
+      [368.392, 427.613],
+      [623.217, 427.613],
+      [623.217, 518.862],
+      [896.905, 518.862],
+      [896.905, 463.696],
+      [976.115, 463.696]
+    ]
+  },
+  "laid_out": true,
+  "projected": {
+    "by": "lib/project.mjs",
+    "engine_version": "0.1.0",
+    "viewer": "self",
+    "at": "2026-10-01T10:14:58Z",
+    "dropped": 0,
+    "limit": {
+      "focus": null,
+      "reach": null,
+      "lens": null,
+      "max_nodes": 2000
+    },
+    "mac": "hmac-sha256:3b626470e71040d9fce14b9c311d33240fb7b2a799f05241602bb0c5f1328f89"
+  },
+  "receipt": {
+    "receipt_id": "rcpt_20261007T090000Z_1c02",
+    "source_digest": "sha256:88d888d888d888d888d888d888d888d888d888d888d888d888d888d888d888d8",
+    "tokens_digest": "sha256:0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+    "validator_version": "1",
+    "checks_passed": 31
+  }
+}

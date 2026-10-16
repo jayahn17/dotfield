@@ -1,0 +1,7 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "graph", "title": "Reading web",
+  "groups": { "methods": ["SLAM", "visual odometry", "calibration"], "papers": ["ORB-SLAM3", "VINS-Mono"] },
+  "nodes": ["SLAM", "visual odometry", "calibration", "ORB-SLAM3", "VINS-Mono", { "id": "open question", "kind": "idea" }],
+  "edges": ["ORB-SLAM3 -> SLAM", "VINS-Mono -> visual odometry", "visual odometry -- SLAM", "calibration -> visual odometry",
+            "open question -- calibration"]
+}

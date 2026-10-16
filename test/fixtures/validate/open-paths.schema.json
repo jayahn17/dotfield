@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.open-paths-fixture/1",
+  "description": "Fixture: a closed document with exactly the kind of open maps VISION 2.3 names (a pattern-keyed positions table, a bounded fields map, a value map, an ext round-trip map).",
+  "type": "object",
+  "required": ["schema_version", "nodes", "positions", "views"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "dotfield.open-paths-fixture/1" },
+    "nodes": { "type": "array", "items": { "$ref": "#/$defs/node" } },
+    "positions": {
+      "type": "object",
+      "patternProperties": { "^[a-z0-9][a-z0-9_.:-]{0,79}$": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 } },
+      "additionalProperties": false
+    },
+    "views": {
+      "type": "object",
+      "required": ["interactive"],
+      "additionalProperties": false,
+      "properties": {
+        "interactive": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "color_token_by": {
+              "type": "object",
+              "required": ["field", "map"],
+              "additionalProperties": false,
+              "properties": {
+                "field": { "type": "string" },
+                "map": { "type": "object", "additionalProperties": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ext": { "type": "object" }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": ["id", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+        "label": { "type": "string", "maxLength": 120 },
+        "fields": { "type": "object", "maxProperties": 32 },
+        "audience": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "object", "required": ["privacy_level"], "additionalProperties": false,
+              "properties": { "privacy_level": { "enum": ["public", "private", "sensitive", "blocked"] } } }
+          ]
+        }
+      }
+    }
+  }
+}

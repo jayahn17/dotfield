@@ -1,0 +1,16 @@
+[
+  {
+    "id": "influence", "label": "Influence graph", "kind": "graph", "theme": "studio",
+    "node": { "kind": "record", "label": "$.citation", "sublabel": "$.method", "tags": "$.tags", "weight": "$.relevance/10" },
+    "group_by": { "field": "$.tags[0]", "kind": "discipline" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "force", "seed": 13 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "weight", "amplitude_m": 1.5 } }, "vr": { "enabled": true, "scale_m": 4 } },
+    "lenses": [ { "id": "slam", "label": "SLAM", "match": { "tags": ["slam"] } } ]
+  },
+  {
+    "id": "reading", "label": "Reading order", "kind": "timeline", "theme": "studio", "date": "$.read_on",
+    "node": { "kind": "event", "label": "$.citation", "sublabel": "$.method", "tags": "$.tags" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "timeline" }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } }
+  }
+]

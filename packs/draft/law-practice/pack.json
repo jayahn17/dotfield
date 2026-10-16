@@ -1,0 +1,22 @@
+{
+  "schema_version": "dotfield.pack/1",
+  "id": "law-practice",
+  "label": "Law practice",
+  "profession": "practising lawyer",
+  "summary": "Matters, clients, deadlines and authorities for a small practice. A draft: it validates and renders, and init refuses it until the three conditions in its README are met.",
+  "version": "0.1.0",
+  "maturity": "contract_only",
+  "rooms": ["matters", "clients", "deadlines", "authorities"],
+  "roster": "roster.json",
+  "disciplines": "disciplines.json",
+  "theme": "theme.json",
+  "boundary_vocab": ["contract", "liability", "compliance", "evidence"],
+  "share_defaults": { "privacy_level": "sensitive", "redaction_operators": ["mask"] },
+  "views_off": ["vr"],
+  "regulatory_notes": [
+    "Research only, not licensed legal advice: every desk carries that constraint and no output is a filing.",
+    "Not a system of record for the docket; the firm's calendar stays the authority for deadlines.",
+    "Client identity stays out of every projection: matters expose practice_area and status only, clients expose nothing."
+  ],
+  "recipes": ["first-hour.md"]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Experiment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["exp_id", "title", "hypothesis", "run_on", "logged_on"],
+  "properties": {
+    "exp_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "hypothesis": { "type": "string", "minLength": 1, "maxLength": 400 },
+    "outcome": { "type": "string", "maxLength": 200 },
+    "metric": { "type": "string", "maxLength": 40 },
+    "value": { "type": "number" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 10 },
+    "dataset_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "paper_ids": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "run_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" },
+    "notes": { "type": "string", "maxLength": 4000 }
+  }
+}

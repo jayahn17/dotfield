@@ -1,0 +1,62 @@
+{
+  "schema_version": "dotfield.people/1",
+  "people": [
+    {
+      "person_id": "alpha",
+      "kind": "self",
+      "display_name": "Center Alpha (sensors)",
+      "handles": [],
+      "disciplines": [
+        {
+          "label": "sensor",
+          "source": "self",
+          "weight": 1
+        },
+        {
+          "label": "vibration",
+          "source": "self",
+          "weight": 0.7
+        }
+      ],
+      "public_key": "OjW7l++jUSRSsrevdG/kKRuLr2UCwBZ2RvAV2/eFBBc=",
+      "key_id": "alpha-k1",
+      "provenance": {
+        "introduced_by_person_id": "alpha",
+        "introduced_on": "2026-09-01",
+        "evidence_ref": null
+      },
+      "privacy_mode": "synthetic_data"
+    },
+    {
+      "person_id": "beta",
+      "kind": "contact",
+      "display_name": "Center Beta (structures)",
+      "handles": [],
+      "disciplines": [
+        {
+          "label": "fatigue",
+          "source": "introduced",
+          "weight": 1
+        },
+        {
+          "label": "longitudinal-study",
+          "source": "introduced",
+          "weight": 0.7
+        }
+      ],
+      "public_key": "w5wMMZkhHJao66bX8qZq1QSNwxCoINz7V3uijyoEho0=",
+      "key_id": "beta-k1",
+      "provenance": {
+        "introduced_by_person_id": "alpha",
+        "introduced_on": "2026-09-01",
+        "evidence_ref": null
+      },
+      "privacy_mode": "synthetic_data",
+      "verification": {
+        "method": "fingerprint",
+        "verified_on": "2026-09-15",
+        "fingerprint_digest": "sha256:0a18726bed4ee2b6d42876a99d17d17eab8fe90740c219a5a216227b6d96cda6"
+      }
+    }
+  ]
+}

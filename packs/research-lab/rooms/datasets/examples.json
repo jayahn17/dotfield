@@ -1,0 +1,5 @@
+[
+  { "dataset_id": "ds-bench-sweep", "name": "Bench vibration sweep", "modality": "imu", "n_subjects": 3, "license": "internal", "path_digest": "sha256:1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff", "tags": ["vibration", "sensor"], "collected_on": "2026-06-01", "logged_on": "2026-06-02" },
+  { "dataset_id": "ds-bridge-cohort", "name": "Bridge sensor cohort", "modality": "accelerometer+strain", "n_subjects": 40, "license": "CC-BY-NC-4.0", "path_digest": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789", "tags": ["longitudinal-study", "fatigue"], "collected_on": "2023-01-15", "logged_on": "2026-04-20" },
+  { "dataset_id": "ds-temp-log", "name": "Deck temperature log", "modality": "thermocouple", "n_subjects": 12, "license": "CC-BY-4.0", "path_digest": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210", "tags": ["statistics", "sensor"], "collected_on": "2025-11-30", "logged_on": "2026-08-10" }
+]

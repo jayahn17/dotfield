@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../schemas/room.schema.json",
+  "schema_version": "dotfield.room/1",
+  "id": "notes",
+  "label": "Notes",
+  "icon": "note",
+  "pack": "starter",
+  "purpose": "Short dated notes with tags and links between them; the first room every center has.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "local_beta",
+  "store": { "scope": "owner", "namespace": "notes", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "note_id",
+    "label_field": "title",
+    "sublabel_field": "body",
+    "tag_field": "tags",
+    "weight_field": "score",
+    "dates": { "happened_on": "happened_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "links", "to_room": "notes", "kind": "relates" } ],
+    "default_privacy_level": "private",
+    "public_fields": ["title", "tags"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "scribe", "display": "Scribe", "tier": "core", "domain": "note taking",
+      "primary_field": "writing", "adjacent_fields": ["archiving"],
+      "lens": "a note is a dated claim with a source, not a passing thought",
+      "keywords": ["note", "journal", "draft", "summary"],
+      "challenger_for": [], "influences": [],
+      "constraint": "never invents a date; an undated note carries logged_on only",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "graph view emits one node per note and one edge per link", "a proposal never changes data/rooms/notes.json"]
+  },
+  "done_definition": "Done as local_beta when dotfield prove notes exits 0 and both views render with no DF_IR_* or DF_LAYOUT_* failure."
+}

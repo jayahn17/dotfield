@@ -1,0 +1,278 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-influence-graph",
+    "title": "Papers — influence graph",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true,
+    "room": "papers",
+    "view": "influence"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-sensor-fusion",
+      "label": "sensor-fusion",
+      "kind": "discipline",
+      "wraps": ["papers-paper-kalman"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-slam",
+      "label": "slam",
+      "kind": "discipline",
+      "wraps": ["papers-paper-orb3", "papers-paper-lio"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-calibration",
+      "label": "calibration",
+      "kind": "discipline",
+      "wraps": ["papers-paper-vib-cal"],
+      "color_token": "series-3"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "papers-paper-kalman",
+      "kind": "record",
+      "label": "Kalman 1960, A new approach to linear filtering",
+      "room": "papers",
+      "record_id": "paper-kalman",
+      "weight": 0.6,
+      "tags": ["sensor-fusion", "estimation"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "recursive least-squares state estimation",
+      "group": "g-sensor-fusion",
+      "fields": {
+        "citation": "Kalman 1960, A new approach to linear filtering",
+        "doi": "10.1115/1.3662552",
+        "method": "recursive least-squares state estimation",
+        "tags": ["sensor-fusion", "estimation"],
+        "published_on": "1960-03-01"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-kalman",
+          "digest": "sha256:e2e0d7908119d069b54fd32c5b5248a68616f0a451eb91cf7bc5485ff9b0b571"
+        },
+        "captured_on": "2026-02-10",
+        "happened_on": "1960-03-01",
+        "remembered_on": "2026-02-10"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-orb3",
+      "kind": "record",
+      "label": "Campos et al. 2021, ORB-SLAM3",
+      "room": "papers",
+      "record_id": "paper-orb3",
+      "weight": 0.9,
+      "tags": ["slam", "visual-inertial"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "feature-based visual-inertial SLAM with multi-map atlas",
+      "group": "g-slam",
+      "fields": {
+        "citation": "Campos et al. 2021, ORB-SLAM3",
+        "doi": "10.1109/TRO.2021.3075644",
+        "method": "feature-based visual-inertial SLAM with multi-map atlas",
+        "tags": ["slam", "visual-inertial"],
+        "published_on": "2021-05-25"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-orb3",
+          "digest": "sha256:3012292e89e1a98652da1cb4dede2ff7f6d9ee7c31efd836539c1bcfa283cfa7"
+        },
+        "captured_on": "2026-08-02",
+        "happened_on": "2021-05-25",
+        "remembered_on": "2026-08-02"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-lio",
+      "kind": "record",
+      "label": "Xu et al. 2022, FAST-LIO2",
+      "room": "papers",
+      "record_id": "paper-lio",
+      "weight": 0.8,
+      "tags": ["slam", "lidar", "sensor-fusion"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "tightly coupled lidar-inertial odometry on an ikd-tree",
+      "group": "g-slam",
+      "fields": {
+        "citation": "Xu et al. 2022, FAST-LIO2",
+        "doi": "10.1109/TRO.2022.3141876",
+        "method": "tightly coupled lidar-inertial odometry on an ikd-tree",
+        "tags": ["slam", "lidar", "sensor-fusion"],
+        "published_on": "2022-01-14"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-lio",
+          "digest": "sha256:0bf5df1064474cace1737a7c5d6439702d78833b778563b3e981a6e8abf6bda4"
+        },
+        "captured_on": "2026-08-20",
+        "happened_on": "2022-01-14",
+        "remembered_on": "2026-08-20"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-vib-cal",
+      "kind": "record",
+      "label": "Lab note 2026, IMU drift under vibration",
+      "room": "papers",
+      "record_id": "paper-vib-cal",
+      "weight": 0.7,
+      "tags": ["calibration", "vibration"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "drift as a function of cumulative vibration energy rather than elapsed time",
+      "group": "g-calibration",
+      "fields": {
+        "citation": "Lab note 2026, IMU drift under vibration",
+        "method": "drift as a function of cumulative vibration energy rather than elapsed time",
+        "tags": ["calibration", "vibration"],
+        "published_on": "2026-06-30"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-vib-cal",
+          "digest": "sha256:ed95cb3472cad93b97a772d9f9999a7af4661f756c21ca83418b6f545d11029c"
+        },
+        "captured_on": "2026-09-01",
+        "happened_on": "2026-06-30",
+        "remembered_on": "2026-09-01"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "papers-paper-orb3",
+      "to": "papers-paper-kalman",
+      "kind": "influences",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "papers-paper-lio",
+      "to": "papers-paper-kalman",
+      "kind": "influences",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e3",
+      "from": "papers-paper-vib-cal",
+      "to": "papers-paper-kalman",
+      "kind": "influences",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "force",
+      "seed": 13,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "force"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "weight",
+        "amplitude_m": 1.5
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "entry_node": "papers-paper-kalman"
+    },
+    "interactive": {
+      "focus": "papers-paper-kalman",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "slam",
+          "label": "SLAM",
+          "match": {
+            "tags": ["slam"]
+          }
+        }
+      ],
+      "presentation": ["papers-paper-kalman", "papers-paper-orb3", "papers-paper-lio"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-papers",
+      "kind": "record",
+      "ref": "papers/examples.json",
+      "digest": "sha256:214553954c96575eeea3055cfb4951d837121975d728856e5e733e359f478306",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "papers-paper-kalman": [645.236, 614.447],
+    "papers-paper-orb3": [844.751, 551.131],
+    "papers-paper-lio": [847.154, 603.447],
+    "papers-paper-vib-cal": [954.164, 386.153]
+  },
+  "labels": {
+    "papers-paper-orb3": "right",
+    "papers-paper-lio": "right"
+  },
+  "laid_out": true
+}

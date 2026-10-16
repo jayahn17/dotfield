@@ -1,0 +1,42 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "authorities",
+  "label": "Authorities",
+  "icon": "book",
+  "pack": "law-practice",
+  "purpose": "Cases, statutes and commentary the matters rest on: citation, court, year, the holding in one line, and what each authority cites.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "authorities", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "authority_id",
+    "label_field": "citation",
+    "sublabel_field": "holding",
+    "tag_field": "tags",
+    "dates": { "happened_on": "decided_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "cites", "to_room": "authorities", "kind": "cites" } ],
+    "default_privacy_level": "public",
+    "public_fields": ["citation", "court", "year", "holding", "tags"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "researcher", "display": "Researcher", "tier": "core", "domain": "legal research",
+      "primary_field": "case law", "adjacent_fields": ["statutory interpretation", "citation checking"],
+      "lens": "an authority is a holding plus the facts it was decided on; cite the facts or the holding will not travel",
+      "keywords": ["authority", "citation", "holding", "statute", "precedent", "court"],
+      "challenger_for": ["conflicts"], "influences": ["intake"],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "file_with_court"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "citation view emits one directed edge per cites entry", "a proposal never changes data/rooms/authorities.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove authorities exits 0 and the citation view renders with no DF_IR_* or DF_LAYOUT_* failure; the pack stays draft until its README conditions are met."
+}

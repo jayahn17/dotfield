@@ -1,0 +1,18 @@
+[
+  {
+    "id": "graph", "label": "Method web", "kind": "graph", "theme": "studio",
+    "node": { "kind": "record", "label": "$.title", "sublabel": "$.metric", "tags": "$.tags", "weight": "$.score/10",
+              "color_token_by": { "field": "$.status", "map": { "done": "series-2", "running": "accent", "failed": "warn", "planned": "muted" } } },
+    "include_rooms": ["papers", "robots"],
+    "group_by": { "field": "$.tags[0]", "kind": "discipline" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 7 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "group-weight", "amplitude_m": 1.5 } }, "vr": { "enabled": true, "scale_m": 4 } },
+    "lenses": [ { "id": "failed", "label": "Failed runs", "match": { "tags": ["failed"] } } ]
+  },
+  {
+    "id": "timeline", "label": "Run history", "kind": "timeline", "theme": "studio", "date": "$.run_on",
+    "node": { "kind": "event", "label": "$.title", "sublabel": "$.metric", "tags": "$.tags" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "timeline" }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } }
+  }
+]

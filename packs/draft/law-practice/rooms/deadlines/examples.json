@@ -1,0 +1,6 @@
+[
+  { "deadline_id": "d-0001", "matter_id": "m-2026-001", "title": "Response to indemnity notice", "kind": "response", "due_on": "2026-03-15", "status": "done", "logged_on": "2026-02-03", "rule_ref": "contract clause 14.2", "tags": ["indemnity"] },
+  { "deadline_id": "d-0002", "matter_id": "m-2026-001", "title": "Mediation statement", "kind": "filing", "due_on": "2026-10-20", "status": "due", "logged_on": "2026-08-01", "tags": ["due", "mediation"] },
+  { "deadline_id": "d-0003", "matter_id": "m-2026-002", "title": "Limitation period check", "kind": "internal", "due_on": "2026-11-30", "status": "due", "logged_on": "2026-04-18", "rule_ref": "limitation statute", "tags": ["due", "limitation"] },
+  { "deadline_id": "d-0004", "matter_id": "m-2026-003", "title": "Regulator filing", "kind": "filing", "due_on": "2026-09-30", "status": "missed", "logged_on": "2026-06-09", "tags": ["privacy"] }
+]

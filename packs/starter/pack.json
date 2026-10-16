@@ -1,0 +1,18 @@
+{
+  "schema_version": "dotfield.pack/1",
+  "id": "starter",
+  "label": "Starter",
+  "profession": "any professional",
+  "summary": "The default pack of a fresh fork: dated notes with tags and links, and the people you work with. Two rooms, three desks, nothing shared until a rule says so.",
+  "version": "0.1.0",
+  "maturity": "local_beta",
+  "rooms": ["notes", "contacts"],
+  "roster": "roster.json",
+  "disciplines": "disciplines.json",
+  "theme": "theme.json",
+  "boundary_vocab": [],
+  "share_defaults": { "privacy_level": "private", "redaction_operators": ["pseudonymize"] },
+  "views_off": [],
+  "regulatory_notes": [],
+  "recipes": ["first-hour.md", "add-a-room.md", "share-a-projection.md", "backup-and-restore.md"]
+}

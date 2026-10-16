@@ -1,0 +1,227 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "workflow",
+  "meta": {
+    "id": "telemetry-pipeline",
+    "title": "Telemetry pipeline, after",
+    "theme": "studio",
+    "quality": "checked",
+    "privacy_mode": "synthetic_data",
+    "maturity": "prototype",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "nodes": [
+    {
+      "id": "bag",
+      "kind": "file",
+      "label": "Rosbag capture",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-1",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/bag.md",
+          "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "ingest",
+      "kind": "asset",
+      "label": "Ingest service v2",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-1",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/ingest.md",
+          "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "sync",
+      "kind": "asset",
+      "label": "Time sync",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/sync.md",
+          "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "store",
+      "kind": "record",
+      "label": "Parquet store",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/store.md",
+          "digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "report",
+      "kind": "file",
+      "label": "Run report",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-6",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/report.md",
+          "digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "bag",
+      "to": "ingest",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto",
+      "label": "frames"
+    },
+    {
+      "id": "e2",
+      "from": "ingest",
+      "to": "sync",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto",
+      "label": "aligned"
+    },
+    {
+      "id": "e5",
+      "from": "ingest",
+      "to": "store",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto",
+      "label": "rows"
+    },
+    {
+      "from": "sync",
+      "to": "report",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e6",
+      "from": "store",
+      "to": "report",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "positions": {
+    "bag": [
+      300,
+      300
+    ],
+    "ingest": [
+      700,
+      300
+    ],
+    "sync": [
+      1250,
+      180
+    ],
+    "store": [
+      300,
+      800
+    ],
+    "report": [
+      1100,
+      650
+    ]
+  },
+  "laid_out": true,
+  "views": {
+    "2d": {
+      "layout": "force",
+      "seed": 0,
+      "viewBox": [
+        0,
+        0,
+        1600,
+        1000
+      ]
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4
+    }
+  }
+}

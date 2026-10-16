@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "diagram_type": "lifecycle",
+  "meta": { "title": "Release lifecycle", "viewBox": [1040, 620], "quality_profile": "showcase" },
+  "lanes": [
+    { "id": "main", "label": "Release phases" },
+    { "id": "waits", "label": "Holds" },
+    { "id": "exits", "label": "Exits" }
+  ],
+  "states": [
+    { "id": "drafted", "type": "start", "label": "Drafted", "sublabel": "change opened", "lane": "main", "col": 0, "step": "01" },
+    { "id": "building", "type": "active", "label": "Building", "sublabel": "compile and test", "lane": "main", "col": 1, "step": "02" },
+    { "id": "staged", "type": "active", "label": "Staged", "sublabel": "canary traffic", "lane": "main", "col": 2, "step": "03" },
+    { "id": "released", "type": "success", "label": "Released", "lane": "main", "col": 3, "step": "04", "tag": "terminal" },
+    { "id": "on-hold", "type": "waiting", "label": "On hold", "sublabel": "owner review", "lane": "waits", "col": 2 },
+    { "id": "failed", "type": "failure", "label": "Failed", "lane": "exits", "col": 1 },
+    { "id": "abandoned", "type": "terminal", "label": "Abandoned", "lane": "exits", "col": 3 }
+  ],
+  "transitions": [
+    { "id": "hold", "from": "staged", "to": "on-hold", "label": "needs review", "fromSide": "bottom", "toSide": "top" },
+    { "id": "resume", "from": "on-hold", "to": "staged", "label": "approved", "variant": "dashed" },
+    { "id": "build-failed", "from": "building", "to": "failed", "label": "tests fail", "fromSide": "bottom", "toSide": "top", "via": [[420, 160], [420, 380]] },
+    { "id": "retry", "from": "failed", "to": "building", "label": "retry", "via": [[60, 380], [60, 80], [420, 80]] },
+    { "id": "rebuild", "from": "building", "to": "building", "label": "rebuild" },
+    { "id": "give-up", "from": "on-hold", "to": "abandoned", "label": "rejected" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "Main rail", "items": ["Four ordered phases from draft to release"] }
+  ]
+}

@@ -1,0 +1,5 @@
+[
+  { "authority_id": "a-0001", "citation": "Example Co v Sample Ltd (synthetic)", "court": "Court of Appeal", "year": 2018, "holding": "an indemnity clause is read against the party that drafted it", "cites": [], "tags": ["indemnity", "contract"], "decided_on": "2018-03-09", "logged_on": "2026-02-03" },
+  { "authority_id": "a-0002", "citation": "Harbour Authority v Visitor (synthetic)", "court": "High Court", "year": 2021, "holding": "an occupier owes a duty of care proportionate to the foreseeable use", "cites": ["a-0003"], "tags": ["negligence", "liability"], "decided_on": "2021-11-02", "logged_on": "2026-04-18" },
+  { "authority_id": "a-0003", "citation": "Occupiers Statute s. 4 (synthetic)", "court": "statute", "year": 1995, "holding": "the common duty of care owed to lawful visitors", "cites": [], "tags": ["liability", "statute"], "decided_on": "1995-01-01", "logged_on": "2026-04-18" }
+]

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Literature",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["lit_id", "citation", "finding", "logged_on"],
+  "properties": {
+    "lit_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "citation": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "doi": { "type": "string", "pattern": "^10\\.[0-9]{4,9}/[^\\s]{1,100}$" },
+    "finding": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "evidence_level": { "enum": ["meta-analysis", "rct", "cohort", "case-series", "expert"] },
+    "cites": { "type": "array", "maxItems": 32, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "published_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Client",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["client_id", "display_name", "kind", "logged_on"],
+  "properties": {
+    "client_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "display_name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "kind": { "enum": ["person", "org"] },
+    "conflict_tags": { "type": "array", "maxItems": 32, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "since_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" },
+    "note": { "type": "string", "maxLength": 2000 }
+  }
+}

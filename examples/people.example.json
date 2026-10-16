@@ -1,0 +1,81 @@
+{
+  "schema_version": "dotfield.people/1",
+  "people": [
+    {
+      "person_id": "self",
+      "kind": "self",
+      "display_name": "Owner",
+      "handles": [],
+      "disciplines": [
+        {
+          "label": "robot evaluation",
+          "source": "self",
+          "weight": 1
+        },
+        {
+          "label": "SLAM",
+          "source": "self",
+          "weight": 0.8
+        }
+      ],
+      "public_key": "XErNpTP6H+3IzqIz/u4PJsmPlb7MGnfRu13vEjBW0Zk=",
+      "key_id": "self-k1",
+      "provenance": {
+        "introduced_by_person_id": "self",
+        "introduced_on": "2026-01-01",
+        "evidence_ref": null
+      },
+      "privacy_mode": "private_live"
+    },
+    {
+      "person_id": "ada",
+      "kind": "contact",
+      "display_name": "Ada (structural)",
+      "handles": [],
+      "disciplines": [
+        {
+          "label": "structural engineering",
+          "source": "introduced",
+          "weight": 0.9
+        },
+        {
+          "label": "vibration",
+          "source": "inferred",
+          "weight": 0.6
+        }
+      ],
+      "public_key": "2RcNenzM1WjWmsn4tDdw1/bLuScfxxl2k7hq2HqE9gU=",
+      "key_id": "ada-k1",
+      "verification": {
+        "method": "fingerprint",
+        "verified_on": "2026-09-15",
+        "fingerprint_digest": "sha256:78431351dc9504957c0a3c756424aa0c3a572a680372ae556b1ae3f11bc743bb"
+      },
+      "provenance": {
+        "introduced_by_person_id": "self",
+        "introduced_on": "2026-06-01",
+        "evidence_ref": "contacts/ada"
+      },
+      "privacy_mode": "private_live"
+    },
+    {
+      "person_id": "hall-lab",
+      "kind": "org",
+      "display_name": "Hall Lab",
+      "handles": [],
+      "disciplines": [
+        {
+          "label": "experimental robotics",
+          "source": "self",
+          "weight": 1
+        }
+      ],
+      "provenance": {
+        "introduced_by_person_id": "self",
+        "introduced_on": "2026-01-01",
+        "evidence_ref": null
+      },
+      "privacy_mode": "synthetic_data"
+    }
+  ]
+}

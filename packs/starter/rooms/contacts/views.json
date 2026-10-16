@@ -1,0 +1,20 @@
+[
+  {
+    "id": "constellation", "label": "Contact constellation", "kind": "graph", "theme": "paper",
+    "node": { "kind": "person", "label": "$.display_name", "sublabel": "$.org", "tags": "$.disciplines" },
+    "group_by": { "field": "$.disciplines[0]", "kind": "discipline" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": {
+      "2d": { "layout": "cluster-disc", "seed": 11 },
+      "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "group-weight", "amplitude_m": 1.2 } },
+      "vr": { "enabled": true, "scale_m": 4 }
+    },
+    "lenses": [ { "id": "orgs", "label": "Organisations", "match": { "tags": ["org"] } } ]
+  },
+  {
+    "id": "met", "label": "When we met", "kind": "timeline", "theme": "paper", "date": "$.met_on",
+    "node": { "kind": "event", "label": "$.display_name", "sublabel": "$.org", "tags": "$.disciplines" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": { "2d": { "layout": "timeline" }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } }
+  }
+]

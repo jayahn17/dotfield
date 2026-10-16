@@ -1,0 +1,7 @@
+exp_id,title,metric,value,unit,score,status,run_on,logged_on,robot_id,dataset_id,paper_ids,tags
+exp-0407,Hall-loop at 0.8 m/s,ATE,0.039,m,8,done,2026-09-25,2026-09-25,robot-hb1,ds-hall-loop,paper-orb3;paper-kalman,slam;indoor
+exp-0408,Stairwell with wheel odometry,ATE,0.21,m,4,done,2026-09-26,2026-09-26,robot-hb2,ds-stairwell,paper-lio,slam;stairs;sensor-fusion
+exp-0409,Yard traverse baseline,ATE,0.33,m,5,done,2026-09-27,2026-09-28,robot-hb1,ds-yard,paper-lio,slam;outdoor
+exp-0410,Vibration sweep after recalibration,drift,0.0004,rad/s,8,done,2026-09-29,2026-09-29,lidar-rig,ds-bench-vib,paper-vib-cal,vibration;calibration
+exp-0411,"Dark pass, lights off",ATE,0.071,m,5,failed,2026-09-30,2026-09-30,robot-hb2,ds-hall-loop,paper-orb3,slam;indoor;failed
+exp-0412,Planned: stairwell at 0.5 m/s,ATE,0,m,0,planned,2026-10-06,2026-10-01,robot-hb2,ds-stairwell,paper-lio,slam;stairs;planned

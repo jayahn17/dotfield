@@ -1,0 +1,9 @@
+[
+  {
+    "id": "roster", "label": "Client roster", "kind": "graph", "theme": "paper",
+    "node": { "kind": "person", "label": "$.display_name", "sublabel": "$.kind", "tags": "$.conflict_tags" },
+    "group_by": { "field": "$.kind", "kind": "region" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 71 }, "3d": { "layout": "lift", "scale_m": 5, "lift": { "mode": "flat", "amplitude_m": 0 } }, "vr": { "enabled": false } }
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "diagram_type": "sequence",
+  "meta": { "title": "Checkout roundtrip", "viewBox": [900, 760], "animation": "trace", "visual_preset": "signal-flow", "quality_profile": "showcase" },
+  "participants": [
+    { "id": "shopper", "type": "external", "label": "Shopper", "sublabel": "web browser" },
+    { "id": "web", "type": "frontend", "label": "Storefront", "sublabel": "page shell" },
+    { "id": "api", "type": "backend", "label": "Orders API", "sublabel": "request edge",
+      "sources": ["services/orders/handler.mjs", { "path": "services/orders/README.md", "lines": "1-30" }] },
+    { "id": "guard", "type": "security", "label": "Fraud check" },
+    { "id": "bus", "type": "messagebus", "label": "Order events" },
+    { "id": "db", "type": "database", "label": "Orders table" }
+  ],
+  "segments": [
+    { "from": 150, "to": 300, "label": "Place order" },
+    { "from": 320, "to": 470, "label": "Persist and publish" },
+    { "from": 480, "to": 600, "label": "Confirm" }
+  ],
+  "messages": [
+    { "from": "shopper", "to": "web", "y": 180, "label": "submit cart", "variant": "emphasis" },
+    { "from": "web", "to": "api", "y": 220, "label": "POST /orders" },
+    { "from": "api", "to": "api", "y": 260, "label": "validate payload" },
+    { "from": "api", "to": "guard", "y": 300, "label": "score risk" },
+    { "from": "web", "to": "web", "y": 300, "label": "show spinner" },
+    { "from": "guard", "to": "api", "y": 340, "label": "low risk", "variant": "return" },
+    { "from": "api", "to": "db", "y": 380, "label": "insert order" },
+    { "from": "api", "to": "bus", "y": 410, "label": "order.created", "variant": "async" },
+    { "from": "db", "to": "api", "y": 440, "label": "row id", "variant": "return" },
+    { "from": "api", "to": "web", "y": 500, "label": "201 created", "variant": "return" },
+    { "from": "web", "to": "shopper", "y": 560, "label": "receipt page", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "api", "from": 214, "to": 506, "type": "backend" },
+    { "participant": "guard", "from": 294, "to": 346, "type": "security" },
+    { "participant": "db", "from": 374, "to": 446, "type": "database" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One request, one order", "items": ["The order row exists before the event is published", "The shopper sees a receipt only after the row id returns"] }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "dotfield.brand/1",
+  "name": "Law practice",
+  "accent": "#8a3b12",
+  "surface": "#f8f5ef",
+  "ink": "#1c1a17",
+  "font": { "display": "serif", "text": "serif", "mono": "mono" },
+  "room_preset": "paper"
+}

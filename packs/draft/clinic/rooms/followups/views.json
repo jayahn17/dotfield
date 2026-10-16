@@ -1,0 +1,11 @@
+[
+  {
+    "id": "board", "label": "Follow-up board", "kind": "board", "theme": "light", "lane": "$.status",
+    "node": { "kind": "event", "label": "$.kind", "sublabel": "$.status", "tags": "$.tags",
+              "color_token_by": { "field": "$.status", "map": { "due": "accent", "done": "good", "missed": "bad" } } },
+    "group_by": { "field": "$.status", "kind": "lane" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "lanes", "seed": 0 }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } },
+    "lenses": [ { "id": "missed", "label": "Missed", "match": { "tags": ["missed"] } } ]
+  }
+]

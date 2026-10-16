@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Matter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["matter_id", "title", "client_ref", "practice_area", "status", "opened_on", "logged_on"],
+  "properties": {
+    "matter_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "client_ref": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "practice_area": { "enum": ["contract", "liability", "compliance", "employment", "property", "other"] },
+    "status": { "enum": ["open", "on_hold", "closed"] },
+    "opened_on": { "type": "string", "format": "date" },
+    "closed_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" },
+    "deadlines": { "type": "array", "maxItems": 32, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "authority_ids": { "type": "array", "maxItems": 32, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "related": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "summary": { "type": "string", "maxLength": 4000 }
+  }
+}

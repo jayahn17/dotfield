@@ -1,0 +1,28 @@
+{
+  "name": "dotfield",
+  "version": "0.1.0",
+  "description": "One private data center per professional: typed scene IR -> validated 2D/3D/VR/interactive HTML, proposal-only agent loop, signed boundary sharing. A template any profession can fork.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "engines": { "node": ">=22.13" },
+  "bin": { "dotfield": "bin/dotfield.mjs" },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "gate": "node bin/dotfield.mjs validate all --json",
+    "doctor": "node bin/dotfield.mjs doctor --json",
+    "manifest": "node scripts/manifest.mjs",
+    "manifest:check": "node scripts/manifest.mjs --check",
+    "vendor": "node scripts/fetch-vendor.mjs",
+    "rules:md": "node scripts/gen-rules-md.mjs",
+    "contrast": "node scripts/contrast.mjs --check",
+    "bench": "node scripts/benchmark.mjs --write",
+    "bench:check": "node scripts/benchmark.mjs --check",
+    "demo": "node scripts/demo.mjs",
+    "archify:verify": "node scripts/fetch-archify-corpus.mjs --verify",
+    "archify:fetch": "node scripts/fetch-archify-corpus.mjs",
+    "check": "node scripts/manifest.mjs --check && node scripts/gen-rules-md.mjs --check && node scripts/contrast.mjs --check && node scripts/pack-init-check.mjs && node scripts/subtree-check.mjs && npm run bench:check -- --quick"
+  },
+  "dependencies": {},
+  "optionalDependencies": { "@modelcontextprotocol/sdk": "^1.29.0" }
+}

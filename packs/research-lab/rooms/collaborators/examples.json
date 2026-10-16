@@ -1,0 +1,6 @@
+[
+  { "collab_id": "collab-ada", "display_name": "Ada (structural)", "affiliation": "Bridge Office", "role": "external", "disciplines": ["structural", "fatigue", "inspection"], "met_on": "2026-06-01", "logged_on": "2026-06-01", "note": "Holds the bridge cohort; wants the drift model." },
+  { "collab_id": "collab-bo", "display_name": "Bo (sensors)", "affiliation": "Hall Lab", "role": "engineer", "disciplines": ["sensor", "vibration"], "introduced_by": "collab-ada", "met_on": "2026-03-14", "logged_on": "2026-03-14" },
+  { "collab_id": "collab-dee", "display_name": "Dee (statistics)", "affiliation": "Methods Unit", "role": "co-pi", "disciplines": ["statistics", "longitudinal-study"], "met_on": "2025-10-02", "logged_on": "2025-10-02" },
+  { "collab_id": "collab-eli", "display_name": "Eli (student)", "affiliation": "Research lab", "role": "student", "disciplines": ["sensor", "statistics"], "introduced_by": "collab-dee", "met_on": "2026-01-20", "logged_on": "2026-01-20" }
+]

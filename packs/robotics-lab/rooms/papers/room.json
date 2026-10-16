@@ -1,0 +1,33 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "papers",
+  "label": "Papers",
+  "icon": "book",
+  "pack": "robotics-lab",
+  "purpose": "The methods the lab tests: citation, DOI, the method in one line, and which earlier papers each one builds on.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "local_beta",
+  "store": { "scope": "owner", "namespace": "papers", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "paper_id",
+    "label_field": "citation",
+    "sublabel_field": "method",
+    "tag_field": "tags",
+    "weight_field": "relevance",
+    "dates": { "happened_on": "published_on", "remembered_on": "read_on" },
+    "link_fields": [ { "field": "influences", "to_room": "papers", "kind": "influences" } ],
+    "default_privacy_level": "public",
+    "public_fields": ["citation", "doi", "method", "tags", "published_on"]
+  },
+  "views": "views.json",
+  "desks": [],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["launch_hardware", "start_simulator", "upload_dataset"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "influence view emits one node per paper and one directed edge per influences entry", "a proposal never changes data/rooms/papers.json"]
+  },
+  "done_definition": "Done as local_beta when dotfield prove papers exits 0 and the influence view renders with no DF_IR_* or DF_LAYOUT_* failure."
+}

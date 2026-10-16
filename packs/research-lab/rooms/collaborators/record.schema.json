@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Collaborator",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["collab_id", "display_name", "logged_on"],
+  "properties": {
+    "collab_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "display_name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "affiliation": { "type": "string", "maxLength": 120 },
+    "role": { "enum": ["pi", "co-pi", "postdoc", "student", "engineer", "external"] },
+    "disciplines": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "introduced_by": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "met_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" },
+    "note": { "type": "string", "maxLength": 2000 }
+  }
+}

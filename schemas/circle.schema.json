@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.circle/1",
+  "title": "Dotfield circle",
+  "description": "One entry of center/people/circles.json (VISION 7.1), a wrapper {schema_version: 'dotfield.circles/1', circles: [circle]}. A circle is a named set of people a share rule can address as its receiver; the projector then emits one signed projection per member, never one file for the circle. There are no public circles: visibility is private or invite_only. Closed except ext.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["circle_id", "owner_person_id", "label", "members", "visibility"],
+  "properties": {
+    "schema_version": { "const": "dotfield.circle/1" },
+    "circle_id": { "$ref": "#/$defs/id" },
+    "owner_person_id": { "$ref": "#/$defs/id" },
+    "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "members": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["person_id", "role", "joined_on"],
+        "properties": {
+          "person_id": { "$ref": "#/$defs/id" },
+          "role": { "enum": ["viewer", "commenter", "annotator", "editor"] },
+          "joined_on": { "type": "string", "format": "date" },
+          "expires_on": { "type": ["string", "null"], "format": "date" }
+        }
+      }
+    },
+    "default_share_rule_id": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "visibility": { "enum": ["private", "invite_only"] },
+    "ext": { "type": "object", "description": "Customer round-tripping only; never read by the engine." }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" }
+  }
+}

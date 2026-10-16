@@ -1,0 +1,9 @@
+{
+  "schema_version": "dotfield.brand/1",
+  "name": "Starter",
+  "accent": "#1f5fbf",
+  "surface": "#f7f5f0",
+  "ink": "#1a1a1a",
+  "font": { "display": "sans", "text": "sans", "mono": "mono" },
+  "room_preset": "paper"
+}

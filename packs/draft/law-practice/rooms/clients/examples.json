@@ -1,0 +1,5 @@
+[
+  { "client_id": "c-0001", "display_name": "Northwind Traders (synthetic)", "kind": "org", "conflict_tags": ["northwind", "supply-chain"], "since_on": "2024-05-10", "logged_on": "2024-05-10" },
+  { "client_id": "c-0002", "display_name": "Client Two (synthetic)", "kind": "person", "conflict_tags": ["harbour-authority"], "since_on": "2026-04-18", "logged_on": "2026-04-18" },
+  { "client_id": "c-0003", "display_name": "Orchard Holdings (synthetic)", "kind": "org", "conflict_tags": ["orchard", "landlord"], "since_on": "2025-09-01", "logged_on": "2025-09-01" }
+]

@@ -1,0 +1,6 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "sequence", "title": "Sign in",
+  "nodes": [{ "id": "user", "kind": "person" }, "app", "auth", "store"],
+  "edges": ["user -> app: sign in", "app -> auth: verify", "auth -> store: lookup", "store --> auth: record",
+            "auth --> app: token", "app --> user: welcome"]
+}

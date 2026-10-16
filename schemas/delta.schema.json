@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.delta/1",
+  "title": "Dotfield delta",
+  "description": "The before/after record dotfield compare writes as delta.json beside out.html: the same object as the scene-level delta block of schemas/scene.schema.json ($defs.delta), plus schema_version. Written by lib/delta.mjs diffScenes, never authored. test/compare.test.js asserts the two declarations resolve to one shape.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "before", "after", "pairs", "unpaired_ratio", "nodes", "edges", "counts", "claims"],
+  "properties": {
+    "schema_version": { "const": "dotfield.delta/1" },
+    "before": { "$ref": "#/$defs/delta_input" },
+    "after": { "$ref": "#/$defs/delta_input" },
+    "pairs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "edges", "edges_by_endpoints"],
+      "properties": {
+        "nodes": { "type": "integer", "minimum": 0 },
+        "edges": { "type": "integer", "minimum": 0 },
+        "edges_by_endpoints": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "unpaired_ratio": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "1 - paired nodes / nodes of the smaller scene (0 when either is empty); above 0.8 the compare is refused (DF_DELTA_NO_STABLE_IDS)."
+    },
+    "nodes": { "type": "array", "maxItems": 20000, "items": { "$ref": "#/$defs/delta_node" } },
+    "edges": { "type": "array", "maxItems": 40000, "items": { "$ref": "#/$defs/delta_edge" } },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "edges"],
+      "properties": { "nodes": { "$ref": "#/$defs/delta_count" }, "edges": { "$ref": "#/$defs/delta_count" } }
+    },
+    "viewbox_grown_from": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "The after scene's views.2d.viewBox before it grew to cover every nodes[].from; absent when nothing grew."
+    },
+    "claims": { "const": "no risk assessment" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "vec2": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+    "short_text": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "delta_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "digest"],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024,
+          "description": "Root-relative path, the file name of an input outside the root, or room:<id>/<view>."
+        },
+        "digest": {
+          "$ref": "#/$defs/digest",
+          "description": "sha256 of the input file (the receipt's inputs[].digest), or of the canonical projected scene for a room view."
+        }
+      }
+    },
+    "delta_change": { "enum": ["added", "removed", "changed", "moved", "same"] },
+    "delta_axes": {
+      "description": "semantic (label, sublabel, kind, tags, status, fields, record_id, room; edge label, kind, order, at), topology (group membership and the edges a node touches; edge from, to, directed), geometry (positions beyond 1 px, pos, pose_m, size_m; edge routes, via, sides), provenance (the import envelope source.ref, source.digest and captured_on excluded), presentation (color_token, shape, weight; edge variant, route, weight, label_at), evidence (evidence_ids), scope (audience, boundary; edge rule_ref).",
+      "type": "array",
+      "maxItems": 7,
+      "items": { "enum": ["semantic", "topology", "geometry", "provenance", "presentation", "evidence", "scope"] }
+    },
+    "delta_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "change", "axes"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "change": { "$ref": "#/$defs/delta_change" },
+        "axes": { "$ref": "#/$defs/delta_axes" },
+        "from": {
+          "$ref": "#/$defs/vec2",
+          "description": "The before position: on every removed node (its ghost) and on every node whose geometry changed (the from -> to connector)."
+        },
+        "label": { "$ref": "#/$defs/short_text" },
+        "kind": {
+          "$ref": "#/$defs/node_kind",
+          "description": "Removed nodes only: the before kind, so the ghost draws its glyph."
+        }
+      }
+    },
+    "delta_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "change", "axes"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9~][a-z0-9_.:~-]{0,255}$",
+          "description": "The edge id, or for an id-less edge from~to~kind~n (n: its rank among the id-less edges of that key, after scene first)."
+        },
+        "change": { "$ref": "#/$defs/delta_change" },
+        "axes": { "$ref": "#/$defs/delta_axes" },
+        "ends": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Removed edges only: the before [from, to], so the ghost edge can be drawn."
+        }
+      }
+    },
+    "delta_count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed", "changed", "moved", "same"],
+      "properties": {
+        "added": { "type": "integer", "minimum": 0 },
+        "removed": { "type": "integer", "minimum": 0 },
+        "changed": { "type": "integer", "minimum": 0 },
+        "moved": { "type": "integer", "minimum": 0 },
+        "same": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "node_kind": {
+      "type": "string",
+      "pattern": "^(record|note|person|desk|tag|file|asset|event|place|boundary|annotation|idea|x-[a-z0-9][a-z0-9-]{0,30})$"
+    }
+  }
+}

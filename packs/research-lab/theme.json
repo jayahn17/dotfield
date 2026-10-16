@@ -1,0 +1,9 @@
+{
+  "schema_version": "dotfield.brand/1",
+  "name": "Research lab",
+  "accent": "#6b2d8b",
+  "surface": "#faf7f2",
+  "ink": "#201a24",
+  "font": { "display": "serif", "text": "sans", "mono": "mono" },
+  "room_preset": "story"
+}

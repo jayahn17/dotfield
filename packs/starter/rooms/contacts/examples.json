@@ -1,0 +1,6 @@
+[
+  { "contact_id": "contact-0001", "display_name": "Ada (structural)", "kind": "person", "org": "Bridge Office", "disciplines": ["structural-engineering", "vibration"], "handles": [], "met_on": "2026-06-01", "logged_on": "2026-06-01", "note": "Met at the inspection seminar; schedules checks by load cycles." },
+  { "contact_id": "contact-0002", "display_name": "Bo (lab manager)", "kind": "person", "org": "Hall Lab", "disciplines": ["robotics", "safety"], "handles": ["hmac-sha256:615ed3b66fa0f68a5d4ccce1666bedd1b08782c3cc8cd90bc3d3628ed5d414dd"], "met_on": "2026-03-14", "logged_on": "2026-03-14", "introduced_by": "contact-0004" },
+  { "contact_id": "contact-0003", "display_name": "Cy (reading group)", "kind": "person", "org": "Loop Closure Reading Group", "disciplines": ["slam", "reading"], "handles": [], "met_on": "2026-08-30", "logged_on": "2026-09-02", "introduced_by": "contact-0002" },
+  { "contact_id": "contact-0004", "display_name": "Hall Lab", "kind": "org", "org": "Hall Lab", "disciplines": ["org", "robotics"], "handles": [], "met_on": "2026-01-15", "logged_on": "2026-01-15" }
+]

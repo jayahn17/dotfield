@@ -1,0 +1,32 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "literature",
+  "label": "Literature",
+  "icon": "book",
+  "pack": "clinic",
+  "purpose": "The trials, cohorts and reviews the protocols cite: citation, DOI, the finding, the evidence level, what each one cites.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "literature", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "lit_id",
+    "label_field": "citation",
+    "sublabel_field": "finding",
+    "tag_field": "tags",
+    "dates": { "happened_on": "published_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "cites", "to_room": "literature", "kind": "cites" } ],
+    "default_privacy_level": "public",
+    "public_fields": ["citation", "doi", "finding", "evidence_level", "tags", "published_on"]
+  },
+  "views": "views.json",
+  "desks": [],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "contact_patient", "export_cases"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "web view emits one directed cites edge per cites entry", "a proposal never changes data/rooms/literature.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove literature exits 0 and the web renders with no DF_IR_* or DF_LAYOUT_* failure; the pack stays draft until its README conditions are met."
+}

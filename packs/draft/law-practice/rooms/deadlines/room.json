@@ -1,0 +1,42 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "deadlines",
+  "label": "Deadlines",
+  "icon": "calendar",
+  "pack": "law-practice",
+  "purpose": "Every dated obligation on a matter: filings, hearings, responses, internal reviews. A mirror of the firm's docket, never its replacement.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "deadlines", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "deadline_id",
+    "label_field": "title",
+    "sublabel_field": "kind",
+    "tag_field": "tags",
+    "dates": { "happened_on": "due_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "matter_id", "to_room": "matters", "kind": "member" } ],
+    "default_privacy_level": "private",
+    "public_fields": ["kind", "status"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "docket", "display": "Docket", "tier": "support", "domain": "deadline management",
+      "primary_field": "docketing", "adjacent_fields": ["court rules", "calendaring"],
+      "lens": "a deadline is a date plus the rule that produced it; both are written down or the date is a guess",
+      "keywords": ["deadline", "hearing", "filing", "docket", "limitation", "response"],
+      "challenger_for": [], "influences": [],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "file_with_court"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "wall view orders deadlines by due_on", "a proposal never changes data/rooms/deadlines.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove deadlines exits 0 and the wall renders with no DF_IR_* or DF_LAYOUT_* failure; the pack stays draft until its README conditions are met."
+}

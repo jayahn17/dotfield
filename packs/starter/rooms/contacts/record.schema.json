@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Contact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contact_id", "display_name", "logged_on"],
+  "properties": {
+    "contact_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "display_name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "kind": { "enum": ["person", "org"] },
+    "org": { "type": "string", "maxLength": 120 },
+    "disciplines": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "handles": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^hmac-sha256:[0-9a-f]{64}$" } },
+    "met_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" },
+    "introduced_by": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "note": { "type": "string", "maxLength": 2000 }
+  }
+}

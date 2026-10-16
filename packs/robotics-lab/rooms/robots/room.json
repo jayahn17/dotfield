@@ -1,0 +1,51 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "robots",
+  "label": "Robots",
+  "icon": "asset",
+  "pack": "robotics-lab",
+  "purpose": "Every platform in the lab with its sensors, URDF reference and metric pose on its bench, so the rig room places it where it stands.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "local_beta",
+  "store": { "scope": "owner", "namespace": "robots", "max_records": 500, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "robot_id",
+    "label_field": "name",
+    "sublabel_field": "platform",
+    "tag_field": "tags",
+    "dates": { "happened_on": "commissioned_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "dock_id", "to_room": "robots", "kind": "contains" } ],
+    "default_privacy_level": "private",
+    "public_fields": ["name", "platform", "sensors", "tags"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "sim-ops", "display": "Simulation ops", "tier": "core", "domain": "robot simulation",
+      "primary_field": "simulation", "adjacent_fields": ["URDF", "digital twins"],
+      "lens": "a robot is a URDF plus the sensors that disagree with it; simulate the disagreement, not the brochure",
+      "keywords": ["simulation", "urdf", "gazebo", "isaac", "digital-twin", "sensor"],
+      "challenger_for": [], "influences": ["data-ops"],
+      "constraint": "proposes a simulation plan as records; never starts a simulator (start_simulator is blocked)",
+      "prompt": null
+    },
+    {
+      "id": "safety", "display": "Safety", "tier": "challenger", "domain": "lab safety",
+      "primary_field": "functional safety", "adjacent_fields": ["e-stop design", "collision avoidance"],
+      "lens": "every run is a hazard until the e-stop path and the bench clearance are written down",
+      "keywords": ["estop", "safety", "interlock", "collision", "clearance", "hazard"],
+      "challenger_for": ["sim-ops", "method-review"], "influences": [],
+      "constraint": "never approves hardware; asks for the e-stop check record id before any plan that touches a robot (launch_hardware is blocked)",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["launch_hardware", "start_simulator", "upload_dataset"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "rig view places one asset per robot at its pose_m inside its bench zone", "a proposal never changes data/rooms/robots.json"]
+  },
+  "done_definition": "Done as local_beta when dotfield prove robots exits 0 and the rig view renders in 2D, 3D and VR with no DF_IR_* or DF_LAYOUT_* failure."
+}

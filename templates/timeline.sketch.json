@@ -1,0 +1,7 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "timeline", "title": "Thesis year",
+  "nodes": [{ "id": "proposal", "date": "2026-01-15" }, { "id": "pilot study", "date": "2026-03-02" },
+            { "id": "data collection", "date": "2026-05-11" }, { "id": "analysis", "date": "2026-08-03" },
+            { "id": "defense", "date": "2026-11-20" }],
+  "edges": ["proposal -> pilot study", "pilot study -> data collection", "data collection -> analysis", "analysis -> defense"]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "datasets",
+  "label": "Datasets",
+  "icon": "file",
+  "pack": "robotics-lab",
+  "purpose": "Every recording the lab runs against: modality, size, license and a digest of the files, never their path.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "local_beta",
+  "store": { "scope": "owner", "namespace": "datasets", "max_records": 1000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "dataset_id",
+    "label_field": "name",
+    "sublabel_field": "modality",
+    "tag_field": "tags",
+    "weight_field": "size_gb",
+    "dates": { "happened_on": "captured_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "robot_id", "to_room": "robots", "kind": "depends" } ],
+    "default_privacy_level": "private",
+    "public_fields": ["name", "modality", "license", "tags"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "data-ops", "display": "Data ops", "tier": "support", "domain": "dataset operations",
+      "primary_field": "data engineering", "adjacent_fields": ["storage", "licensing"],
+      "lens": "a dataset is a contract: modality, size, license, digest",
+      "keywords": ["dataset", "data", "license", "modality", "storage", "rosbag"],
+      "challenger_for": [], "influences": [],
+      "constraint": "never uploads; proposes the manifest row (upload_dataset is blocked)",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["upload_dataset", "launch_hardware", "start_simulator"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "shelf view emits one file node per dataset grouped by modality", "no record carries a filesystem path", "a proposal never changes data/rooms/datasets.json"]
+  },
+  "done_definition": "Done as local_beta when dotfield prove datasets exits 0 and the shelf view renders with no DF_IR_* or DF_LAYOUT_* failure."
+}

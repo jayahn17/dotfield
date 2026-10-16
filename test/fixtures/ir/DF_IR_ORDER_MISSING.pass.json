@@ -1,0 +1,177 @@
+{
+  "code": "DF_IR_ORDER_MISSING",
+  "expect": "pass",
+  "why": "every message edge of the sequence scene carries an integer order",
+  "scene": {
+    "schema_version": "dotfield.scene/1",
+    "kind": "sequence",
+    "meta": {
+      "id": "fixture-sequence",
+      "title": "Fixture sequence",
+      "theme": "studio",
+      "quality": "checked",
+      "privacy_mode": "synthetic_data",
+      "maturity": "prototype",
+      "legend": true
+    },
+    "viewer": {
+      "person_id": "self",
+      "mode": "self",
+      "rule_refs": []
+    },
+    "groups": [],
+    "nodes": [
+      {
+        "id": "n-1",
+        "kind": "person",
+        "label": "Operator",
+        "weight": 0.5,
+        "tags": [],
+        "color_token": "series-1",
+        "status": "accepted",
+        "provenance": {
+          "owner_person_id": "self",
+          "source": {
+            "kind": "import",
+            "ref": "sketch:fixture#n-1",
+            "digest": "sha256:5151515151515151515151515151515151515151515151515151515151515151"
+          },
+          "captured_on": "2026-09-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": []
+        },
+        "evidence_ids": ["ev-1"]
+      },
+      {
+        "id": "n-2",
+        "kind": "desk",
+        "label": "Conductor",
+        "weight": 0.5,
+        "tags": [],
+        "color_token": "series-2",
+        "status": "accepted",
+        "provenance": {
+          "owner_person_id": "self",
+          "source": {
+            "kind": "import",
+            "ref": "sketch:fixture#n-2",
+            "digest": "sha256:5252525252525252525252525252525252525252525252525252525252525252"
+          },
+          "captured_on": "2026-09-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": []
+        },
+        "evidence_ids": ["ev-1"]
+      },
+      {
+        "id": "n-3",
+        "kind": "desk",
+        "label": "Desk",
+        "weight": 0.5,
+        "tags": [],
+        "color_token": "series-3",
+        "status": "accepted",
+        "provenance": {
+          "owner_person_id": "self",
+          "source": {
+            "kind": "import",
+            "ref": "sketch:fixture#n-3",
+            "digest": "sha256:5353535353535353535353535353535353535353535353535353535353535353"
+          },
+          "captured_on": "2026-09-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": []
+        },
+        "evidence_ids": ["ev-1"]
+      }
+    ],
+    "edges": [
+      {
+        "id": "m1",
+        "from": "n-1",
+        "to": "n-2",
+        "kind": "message",
+        "directed": true,
+        "label": "brief",
+        "order": 1,
+        "variant": "solid",
+        "route": "straight"
+      },
+      {
+        "id": "m2",
+        "from": "n-2",
+        "to": "n-3",
+        "kind": "message",
+        "directed": true,
+        "label": "packet",
+        "order": 2,
+        "variant": "solid",
+        "route": "straight"
+      },
+      {
+        "id": "m3",
+        "from": "n-3",
+        "to": "n-3",
+        "kind": "message",
+        "directed": true,
+        "label": "work",
+        "order": 3,
+        "variant": "dashed",
+        "route": "straight"
+      }
+    ],
+    "positions": {
+      "n-1": [300, 140],
+      "n-2": [800, 140],
+      "n-3": [1300, 140]
+    },
+    "laid_out": true,
+    "views": {
+      "2d": {
+        "layout": "sequence",
+        "viewBox": [0, 0, 1600, 700],
+        "plan": {
+          "mode": "sequence",
+          "beats": 3
+        }
+      },
+      "time": {
+        "axis": "order",
+        "step": "beat",
+        "playhead": null,
+        "motion": "still"
+      }
+    },
+    "evidence": [
+      {
+        "id": "ev-1",
+        "kind": "record",
+        "ref": "notes/note-1",
+        "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "label": "SRC 1"
+      }
+    ],
+    "routes": {
+      "m1": [
+        [300, 236],
+        [800, 236]
+      ],
+      "m2": [
+        [800, 332],
+        [1300, 332]
+      ],
+      "m3": [
+        [1300, 428],
+        [1340, 428],
+        [1340, 468],
+        [1300, 468]
+      ]
+    }
+  }
+}

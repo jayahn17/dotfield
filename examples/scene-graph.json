@@ -1,0 +1,383 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "experiments-graph",
+    "title": "Experiments — method web",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-slam",
+      "label": "SLAM",
+      "kind": "discipline",
+      "wraps": ["exp-0412", "paper-orb3"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-people",
+      "label": "Collaborators",
+      "kind": "person",
+      "wraps": ["person-ada", "person-ada-calib-cadence"],
+      "color_token": "series-5"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "exp-0412",
+      "kind": "record",
+      "label": "ORB-SLAM3 on hall-loop",
+      "sublabel": "ATE 0.042 m",
+      "room": "experiments",
+      "record_id": "exp-0412",
+      "group": "g-slam",
+      "weight": 0.7,
+      "tags": ["slam", "indoor"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "fields": {
+        "title": "ORB-SLAM3 on hall-loop",
+        "metric": "ATE",
+        "value": 0.042,
+        "run_on": "2026-09-18",
+        "tags": ["slam", "indoor"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0412",
+          "digest": "sha256:9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c"
+        },
+        "captured_on": "2026-09-18",
+        "happened_on": "2026-09-18",
+        "remembered_on": "2026-09-19"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "paper-orb3",
+      "kind": "record",
+      "label": "ORB-SLAM3 (Campos 2021)",
+      "room": "papers",
+      "record_id": "paper-orb3",
+      "group": "g-slam",
+      "weight": 0.5,
+      "tags": ["slam"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-orb3",
+          "digest": "sha256:11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa11aa"
+        },
+        "captured_on": "2026-08-02"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "robot-hb1",
+      "kind": "asset",
+      "label": "Hallbot 1",
+      "room": "robots",
+      "record_id": "robot-hb1",
+      "weight": 0.4,
+      "tags": ["hardware"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/robot-hb1",
+          "digest": "sha256:a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0"
+        },
+        "captured_on": "2026-07-10"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "person-ada",
+      "kind": "person",
+      "label": "Ada (structural)",
+      "group": "g-people",
+      "weight": 0.3,
+      "tags": ["structural-engineering"],
+      "color_token": "series-5",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "contacts/ada",
+          "digest": "sha256:c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4"
+        },
+        "captured_on": "2026-06-01"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "person-ada-calib-cadence",
+      "kind": "boundary",
+      "label": "Inspection cadence by cumulative vibration",
+      "group": "g-people",
+      "weight": 0.3,
+      "tags": ["vibration", "inspection"],
+      "color_token": "foreign",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "ada",
+        "source": {
+          "kind": "share",
+          "ref": "projection:ada-to-self-20260920",
+          "digest": "sha256:e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7"
+        },
+        "captured_on": "2026-09-20",
+        "released_on": "2026-09-20",
+        "imported_via_rule_ref": "ada/rule-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "boundary": {
+        "rule_ref": "ada/rule-01",
+        "digest": "sha256:e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7",
+        "shared_by": "ada",
+        "released_on": "2026-09-20",
+        "expires_on": "2027-09-20",
+        "key_id": "ada-k1"
+      },
+      "evidence_ids": ["ev-2"]
+    },
+    {
+      "id": "idea-vib-cadence",
+      "kind": "idea",
+      "label": "Recalibrate IMU by cumulative vibration, not calendar",
+      "weight": 0.6,
+      "tags": ["vibration", "calibration"],
+      "color_token": "accent",
+      "status": "proposal",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "run",
+          "ref": "run-20261001-01",
+          "digest": "sha256:f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1f1"
+        },
+        "captured_on": "2026-10-01",
+        "derived_from": [
+          {
+            "person_id": "ada",
+            "rule_ref": "ada/rule-01",
+            "key_id": "ada-k1"
+          }
+        ]
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1", "ev-2"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "exp-0412",
+      "to": "paper-orb3",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "exp-0412",
+      "to": "robot-hb1",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e3",
+      "from": "person-ada",
+      "to": "person-ada-calib-cadence",
+      "kind": "share",
+      "directed": true,
+      "variant": "dashed",
+      "route": "auto",
+      "rule_ref": "ada/rule-01"
+    },
+    {
+      "id": "e4",
+      "from": "idea-vib-cadence",
+      "to": "person-ada-calib-cadence",
+      "kind": "relates",
+      "directed": false,
+      "variant": "dashed",
+      "route": "auto"
+    },
+    {
+      "id": "e5",
+      "from": "idea-vib-cadence",
+      "to": "exp-0412",
+      "kind": "relates",
+      "directed": false,
+      "variant": "dashed",
+      "route": "auto"
+    }
+  ],
+  "positions": {
+    "exp-0412": [612, 418],
+    "paper-orb3": [748, 505],
+    "robot-hb1": [430, 560],
+    "person-ada": [1110, 420],
+    "person-ada-calib-cadence": [1180, 540],
+    "idea-vib-cadence": [880, 300]
+  },
+  "laid_out": true,
+  "views": {
+    "2d": {
+      "layout": "cluster-disc",
+      "seed": 7,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "cluster-disc"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "camera": {
+        "position": [0, 2.2, 8],
+        "target": [0, 0, 0]
+      },
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1.5
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "floor_y": 0,
+      "eye_height_m": 1.6,
+      "entry_node": "exp-0412",
+      "label_budget": 64
+    },
+    "time": {
+      "axis": "date",
+      "field": "happened_on",
+      "from": "2026-06-01",
+      "to": "2026-10-01",
+      "step": "week",
+      "playhead": null,
+      "cumulative": true,
+      "motion": "still"
+    },
+    "interactive": {
+      "focus": "exp-0412",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "mine",
+          "label": "Mine only",
+          "match": {
+            "owner": ["self"]
+          }
+        },
+        {
+          "id": "slam",
+          "label": "SLAM",
+          "match": {
+            "groups": ["g-slam"]
+          }
+        }
+      ],
+      "presentation": ["exp-0412", "paper-orb3", "idea-vib-cadence"],
+      "deep_link": true,
+      "steps": [
+        {
+          "id": "s1",
+          "label": "The experiment",
+          "nodes": ["exp-0412", "paper-orb3"]
+        },
+        {
+          "id": "s2",
+          "label": "The idea",
+          "nodes": ["idea-vib-cadence", "person-ada-calib-cadence"],
+          "edges": ["e4"]
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "kind": "record",
+      "ref": "experiments/exp-0412",
+      "digest": "sha256:9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c9b1c",
+      "label": "SRC 1"
+    },
+    {
+      "id": "ev-2",
+      "kind": "projection",
+      "ref": "data/overlays/ada.json#person-ada-calib-cadence",
+      "digest": "sha256:e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7",
+      "label": "SRC 2"
+    }
+  ],
+  "projected": {
+    "by": "lib/project.mjs",
+    "engine_version": "0.1.0",
+    "viewer": "self",
+    "at": "2026-10-01T10:14:58Z",
+    "dropped": 0,
+    "limit": {
+      "focus": null,
+      "reach": null,
+      "lens": null,
+      "max_nodes": 2000
+    },
+    "mac": "hmac-sha256:fe5bdcb14790dc39114c5949dfae9020e7cee25f7f6c9f29d264a00ff64d3a0f"
+  },
+  "receipt": {
+    "receipt_id": "rcpt_20261001T101500Z_7f3a",
+    "source_digest": "sha256:33d333d333d333d333d333d333d333d333d333d333d333d333d333d333d333d3",
+    "tokens_digest": "sha256:0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+    "validator_version": "1",
+    "checks_passed": 31
+  }
+}

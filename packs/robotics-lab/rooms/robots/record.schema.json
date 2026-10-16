@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Robot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["robot_id", "name", "platform", "pose_m", "logged_on"],
+  "properties": {
+    "robot_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "platform": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "sensors": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "urdf_ref": { "type": "string", "maxLength": 200, "description": "A name or repo-relative reference, never an absolute path." },
+    "pose_m": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["xyz", "rpy"],
+      "properties": {
+        "xyz": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } },
+        "rpy": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } }
+      }
+    },
+    "size_m": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number", "minimum": 0 } },
+    "bench": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "dock_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "commissioned_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" }
+  }
+}

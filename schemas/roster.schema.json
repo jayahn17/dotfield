@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.roster/1",
+  "title": "Dotfield merged roster",
+  "description": "The merged agent roster lib/agents/roster.mjs buildRoster(rooms, config) derives at boot: the conductor from center.config.json plus every desk of every valid room, lifted unchanged (a desk here accepts exactly the keys of room.schema.json#/$defs/desk plus room and parent). Closed except ext. Desk ids are unique across rooms; every challenger_for and influences target names a desk in this roster.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "conductor", "desks", "sources", "digest"],
+  "properties": {
+    "$schema": { "type": "string", "maxLength": 200 },
+    "schema_version": { "const": "dotfield.roster/1" },
+    "conductor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "display", "lens"],
+      "properties": {
+        "id": { "const": "conductor" },
+        "display": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "lens": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    },
+    "desks": {
+      "type": "array",
+      "maxItems": 192,
+      "items": { "$ref": "#/$defs/desk" }
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["room", "desk_ids"],
+        "properties": {
+          "room": { "$ref": "#/$defs/room_id" },
+          "desk_ids": { "type": "array", "maxItems": 12, "items": { "$ref": "#/$defs/desk_id" } }
+        }
+      }
+    },
+    "digest": { "$ref": "#/$defs/digest" },
+    "ext": { "type": "object" }
+  },
+  "$defs": {
+    "desk_id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+    "room_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "desk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "display", "tier", "domain", "primary_field", "lens", "keywords"],
+      "properties": {
+        "id": { "$ref": "#/$defs/desk_id" },
+        "display": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "tier": { "enum": ["core", "support", "challenger"] },
+        "parent": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/desk_id" } ] },
+        "room": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/room_id" } ] },
+        "domain": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "primary_field": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "adjacent_fields": { "type": "array", "maxItems": 8, "items": { "type": "string", "minLength": 1, "maxLength": 120 } },
+        "lens": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "keywords": { "type": "array", "minItems": 1, "maxItems": 24, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+        "challenger_for": { "type": "array", "maxItems": 12, "items": { "$ref": "#/$defs/desk_id" } },
+        "influences": { "type": "array", "maxItems": 12, "items": { "$ref": "#/$defs/desk_id" } },
+        "constraint": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "prompt": { "type": ["string", "null"], "maxLength": 4000 }
+      }
+    }
+  }
+}

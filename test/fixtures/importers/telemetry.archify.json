@@ -1,0 +1,37 @@
+{
+  "archify_version": "1",
+  "diagram_type": "dataflow",
+  "title": "Telemetry pipeline",
+  "quality_profile": "checked",
+  "visual_preset": "blueprint",
+  "icon": "pipeline",
+  "grid": { "columns": 3 },
+  "boundaries": [
+    { "id": "edge", "label": "Edge", "style": "dashed" },
+    { "id": "core", "label": "Core" },
+    { "id": "out", "label": "Outputs" }
+  ],
+  "components": [
+    { "id": "src-rosbag", "label": "rosbag capture", "type": "datasource", "boundary": "edge", "row": 0, "col": 0, "tech": "rosbag2",
+      "sources": ["tools/capture/record.sh", { "path": "/home/someone/lab/notes/capture.md", "lines": "1-40" }] },
+    { "id": "svc-ingest", "label": "Ingest service", "type": "service", "boundary": "edge", "row": 0, "col": 1, "tech": "node",
+      "description": "Splits a bag into frames", "sources": [{ "path": "services/ingest/index.mjs", "sha256": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f" }] },
+    { "id": "svc-sync", "label": "Time sync", "type": "service", "boundary": "core", "row": 0, "col": 2, "tech": "python",
+      "sources": ["services/sync/align.py"] },
+    { "id": "store-parquet", "label": "Parquet store", "type": "datastore", "boundary": "core", "row": 1, "col": 0, "tech": "parquet", "tags": ["cold"] },
+    { "id": "svc-eval", "label": "Evaluation job", "type": "job", "boundary": "core", "pos": { "x": 0.0, "y": 0.6 }, "tech": "python",
+      "sources": ["jobs/eval/run.py", "jobs/eval/metrics.py"] },
+    { "id": "out-report", "label": "Run report", "type": "artifact", "boundary": "out", "row": 1, "col": 2, "tech": "markdown", "icon": "document" },
+    { "id": "ops-dash", "label": "Ops dashboard", "type": "service", "row": 2, "col": 1, "tech": "html" }
+  ],
+  "connections": [
+    { "id": "f1", "from": "src-rosbag", "to": "svc-ingest", "label": "bag → frames", "order": 1 },
+    { "id": "f2", "from": "svc-ingest", "to": "svc-sync", "label": "frames", "order": 2, "route": "orthogonal", "via": [[1050, 180], [1050, 250]], "labelAt": 0.3 },
+    { "id": "f3", "from": "svc-sync", "to": "store-parquet", "label": "aligned rows", "order": 3, "protocol": "arrow-flight" },
+    { "id": "f4", "from": "store-parquet", "to": "svc-eval", "label": "rows", "order": 4, "route": "straight" },
+    { "id": "f5", "from": "svc-eval", "to": "out-report", "label": "ATE, RPE", "order": 5 },
+    { "id": "f6", "from": "svc-eval", "to": "ops-dash", "label": "live metrics", "order": 6 },
+    { "id": "f7", "from": "svc-eval", "to": "ops-dash", "label": "alerts", "order": 7 },
+    { "id": "f8", "from": "ops-dash", "to": "nowhere", "label": "dangling", "order": 8 }
+  ]
+}

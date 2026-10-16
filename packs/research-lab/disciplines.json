@@ -1,0 +1,14 @@
+{
+  "schema_version": "dotfield.disciplines/1",
+  "disciplines": [
+    { "label": "longitudinal-study", "patterns": ["longitudinal-study", "longitudinal", "cohort", "follow-up", "repeated-measures"], "weight": 1, "source": "research-lab" },
+    { "label": "sensor", "patterns": ["sensor", "sensing", "instrumentation", "telemetry"], "weight": 0.9, "source": "research-lab" },
+    { "label": "vibration", "patterns": ["vibration", "resonance", "damping", "modal"], "weight": 0.8, "source": "research-lab" },
+    { "label": "fatigue", "patterns": ["fatigue", "crack", "load-cycle", "wear", "degradation"], "weight": 0.9, "source": "research-lab" },
+    { "label": "statistics", "patterns": ["statistics", "regression", "bayesian", "power-analysis", "effect-size"], "weight": 0.8, "source": "research-lab" },
+    { "label": "literature", "patterns": ["literature", "survey", "review", "citation", "doi"], "weight": 0.7, "source": "research-lab" },
+    { "label": "data stewardship", "patterns": ["dataset", "license", "provenance", "anonymisation", "fair"], "weight": 0.7, "source": "research-lab" },
+    { "label": "funding", "patterns": ["grant", "funding", "proposal", "budget", "deliverable"], "weight": 0.6, "source": "research-lab" },
+    { "label": "structural engineering", "patterns": ["structural", "bridge", "beam", "inspection"], "weight": 0.7, "source": "research-lab" }
+  ]
+}

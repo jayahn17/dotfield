@@ -1,0 +1,643 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "workflow",
+  "meta": {
+    "id": "telemetry-platform",
+    "title": "Telemetry platform — architecture",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "showcase",
+    "privacy_mode": "synthetic_data",
+    "maturity": "prototype",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "z-edge",
+      "label": "Edge",
+      "kind": "zone",
+      "wraps": ["src-robots", "svc-gateway", "svc-recorder", "file-bags"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "z-core",
+      "label": "Core",
+      "kind": "zone",
+      "wraps": ["svc-ingest", "svc-sync", "store-lake", "svc-eval"],
+      "color_token": "series-3"
+    },
+    {
+      "id": "z-out",
+      "label": "Outputs",
+      "kind": "zone",
+      "wraps": ["svc-api", "out-dash", "out-report", "person-ops"],
+      "color_token": "series-6"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "src-robots",
+      "kind": "asset",
+      "label": "Robot fleet",
+      "weight": 0.5,
+      "tags": ["input"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "group": "z-edge",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a017a017a017a017a017a017a017a017a017a017a017a017a017a017a017a01"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-gateway",
+      "kind": "asset",
+      "label": "MQTT gateway",
+      "weight": 0.5,
+      "tags": ["service"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "group": "z-edge",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a027a027a027a027a027a027a027a027a027a027a027a027a027a027a027a02"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-recorder",
+      "kind": "asset",
+      "label": "Bag recorder",
+      "weight": 0.5,
+      "tags": ["service"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "group": "z-edge",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a037a037a037a037a037a037a037a037a037a037a037a037a037a037a037a03"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "file-bags",
+      "kind": "file",
+      "label": "rosbag archive",
+      "weight": 0.5,
+      "tags": ["storage"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "group": "z-edge",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a047a047a047a047a047a047a047a047a047a047a047a047a047a047a047a04"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-ingest",
+      "kind": "asset",
+      "label": "Ingest",
+      "weight": 0.5,
+      "tags": ["service"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "group": "z-core",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a057a057a057a057a057a057a057a057a057a057a057a057a057a057a057a05"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-sync",
+      "kind": "asset",
+      "label": "Time sync",
+      "weight": 0.5,
+      "tags": ["service"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "group": "z-core",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a067a067a067a067a067a067a067a067a067a067a067a067a067a067a067a06"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "store-lake",
+      "kind": "file",
+      "label": "Parquet lake",
+      "weight": 0.5,
+      "tags": ["storage"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "group": "z-core",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a077a077a077a077a077a077a077a077a077a077a077a077a077a077a077a07"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-eval",
+      "kind": "asset",
+      "label": "Eval jobs",
+      "weight": 0.5,
+      "tags": ["service", "metric"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "group": "z-core",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a087a087a087a087a087a087a087a087a087a087a087a087a087a087a087a08"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-api",
+      "kind": "asset",
+      "label": "Query API",
+      "weight": 0.5,
+      "tags": ["service"],
+      "color_token": "series-6",
+      "status": "accepted",
+      "group": "z-out",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a097a097a097a097a097a097a097a097a097a097a097a097a097a097a097a09"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "out-dash",
+      "kind": "file",
+      "label": "Dashboard",
+      "weight": 0.5,
+      "tags": ["output"],
+      "color_token": "series-6",
+      "status": "accepted",
+      "group": "z-out",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a7a0a"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "out-report",
+      "kind": "file",
+      "label": "Run report",
+      "weight": 0.5,
+      "tags": ["output"],
+      "color_token": "series-6",
+      "status": "accepted",
+      "group": "z-out",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b7a0b"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "person-ops",
+      "kind": "person",
+      "label": "Operator",
+      "weight": 0.5,
+      "tags": ["people"],
+      "color_token": "series-6",
+      "status": "accepted",
+      "group": "z-out",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:telemetry-platform",
+          "digest": "sha256:7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c7a0c"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "src-robots",
+      "to": "svc-gateway",
+      "kind": "flow",
+      "directed": true,
+      "label": "telemetry",
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e2",
+      "from": "src-robots",
+      "to": "svc-recorder",
+      "kind": "flow",
+      "directed": true,
+      "label": "raw topics",
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e3",
+      "from": "svc-gateway",
+      "to": "svc-ingest",
+      "kind": "flow",
+      "directed": true,
+      "label": "frames",
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e4",
+      "from": "svc-recorder",
+      "to": "file-bags",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e5",
+      "from": "svc-ingest",
+      "to": "store-lake",
+      "kind": "flow",
+      "directed": true,
+      "label": "rows",
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e6",
+      "from": "file-bags",
+      "to": "store-lake",
+      "kind": "flow",
+      "directed": true,
+      "label": "replay",
+      "variant": "solid",
+      "route": "orthogonal",
+      "from_side": "right"
+    },
+    {
+      "id": "e7",
+      "from": "svc-ingest",
+      "to": "svc-sync",
+      "kind": "flow",
+      "directed": true,
+      "label": "stamps",
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e8",
+      "from": "svc-sync",
+      "to": "svc-eval",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e9",
+      "from": "store-lake",
+      "to": "svc-eval",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e10",
+      "from": "store-lake",
+      "to": "svc-api",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "orthogonal",
+      "to_side": "top"
+    },
+    {
+      "id": "e11",
+      "from": "svc-eval",
+      "to": "out-report",
+      "kind": "flow",
+      "directed": true,
+      "label": "ATE, RPE",
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e12",
+      "from": "svc-api",
+      "to": "out-dash",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "orthogonal"
+    },
+    {
+      "id": "e13",
+      "from": "person-ops",
+      "to": "svc-api",
+      "kind": "flow",
+      "directed": true,
+      "label": "queries",
+      "variant": "solid",
+      "route": "orthogonal"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "layered",
+      "direction": "down",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 1031.75],
+      "plan": {
+        "mode": "layered",
+        "layers": 6,
+        "dummies": 0,
+        "crossings": 0
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "camera": {
+        "position": [0, 2.5, 8],
+        "target": [0, 0, 0]
+      },
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "floor_y": 0,
+      "eye_height_m": 1.6,
+      "entry_node": "svc-ingest",
+      "label_budget": 32
+    },
+    "interactive": {
+      "focus": "svc-ingest",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "services",
+          "label": "Services",
+          "match": {
+            "tags": ["service"]
+          }
+        },
+        {
+          "id": "core",
+          "label": "Core",
+          "match": {
+            "groups": ["z-core"]
+          }
+        }
+      ],
+      "presentation": ["src-robots", "svc-ingest", "store-lake", "person-ops"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "kind": "import",
+      "ref": "sketch:telemetry-platform",
+      "digest": "sha256:7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7f",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "src-robots": [805.164, 69],
+    "svc-gateway": [742.179, 245.75],
+    "svc-recorder": [868.149, 245.75],
+    "file-bags": [863.337, 422.5],
+    "svc-ingest": [617.633, 422.5],
+    "svc-sync": [500.225, 599.25],
+    "store-lake": [617.235, 599.25],
+    "svc-eval": [558.73, 776],
+    "svc-api": [980.385, 776],
+    "out-dash": [1093.627, 952.75],
+    "out-report": [981.081, 952.75],
+    "person-ops": [1093.627, 599.25]
+  },
+  "routes": {
+    "e1": [
+      [801.831, 78.428],
+      [801.831, 154.083],
+      [742.179, 154.083],
+      [742.179, 235.75]
+    ],
+    "e2": [
+      [808.497, 78.428],
+      [808.497, 188.417],
+      [868.149, 188.417],
+      [868.149, 235.75]
+    ],
+    "e3": [
+      [742.179, 255.75],
+      [742.179, 330.833],
+      [617.633, 330.833],
+      [617.633, 412.5]
+    ],
+    "e4": [
+      [868.149, 255.75],
+      [868.149, 365.167],
+      [863.337, 365.167],
+      [863.337, 412.5]
+    ],
+    "e5": [
+      [620.966, 431.928],
+      [620.966, 524.75],
+      [613.902, 524.75],
+      [613.902, 589.822]
+    ],
+    "e6": [
+      [873.337, 422.5],
+      [879.337, 422.5],
+      [879.337, 550.5],
+      [620.568, 550.5],
+      [620.568, 589.822]
+    ],
+    "e7": [
+      [614.3, 431.928],
+      [614.3, 499],
+      [500.225, 499],
+      [500.225, 589.25]
+    ],
+    "e8": [
+      [500.225, 609.25],
+      [500.225, 670.6],
+      [555.397, 670.6],
+      [555.397, 766.572]
+    ],
+    "e9": [
+      [613.902, 608.678],
+      [613.902, 691.2],
+      [562.063, 691.2],
+      [562.063, 766.572]
+    ],
+    "e10": [
+      [620.568, 608.678],
+      [620.568, 711.8],
+      [977.052, 711.8],
+      [977.052, 766.572]
+    ],
+    "e11": [
+      [558.73, 786],
+      [558.73, 861.083],
+      [981.081, 861.083],
+      [981.081, 942.75]
+    ],
+    "e12": [
+      [980.385, 786],
+      [980.385, 895.417],
+      [1093.627, 895.417],
+      [1093.627, 942.75]
+    ],
+    "e13": [
+      [1093.627, 609.25],
+      [1093.627, 732.4],
+      [983.718, 732.4],
+      [983.718, 766.572]
+    ]
+  },
+  "laid_out": true,
+  "projected": {
+    "by": "lib/project.mjs",
+    "engine_version": "0.1.0",
+    "viewer": "self",
+    "at": "2026-10-01T10:14:58Z",
+    "dropped": 0,
+    "limit": {
+      "focus": null,
+      "reach": null,
+      "lens": null,
+      "max_nodes": 2000
+    },
+    "mac": "hmac-sha256:36cea932d15c8e30db5ade9f63257fe4c23e2e37899840f8086eab2f541dec72"
+  },
+  "receipt": {
+    "receipt_id": "rcpt_20261007T090000Z_a703",
+    "source_digest": "sha256:99d999d999d999d999d999d999d999d999d999d999d999d999d999d999d999d9",
+    "tokens_digest": "sha256:0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+    "validator_version": "1",
+    "checks_passed": 31
+  }
+}

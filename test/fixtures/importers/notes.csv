@@ -1,0 +1,8 @@
+Title,body,tags,links,happened_on,logged_on,score,ref,source
+Calibrate before the long run,"The drift grows with vibration, not with the calendar.",idea;calibration,note-0002,2026-09-18,2026-09-19,7,note-0001,notebook
+Hall loop dataset notes,"Twelve passes, two with the lights off.
+The dark passes are the interesting ones.",dataset;indoor,,2026/09/12,2026-09-12,4,note-0002,notebook
+Reading: loop closure survey,Three families of methods; only one scales to the hall.,reading;slam,note-0001|note-0002,2026-08-30,2026-09-02,5,note-0003,reader
+Weekly plan,"Finish the calibration note, re-run the dark passes.",plan,note-0001,09/21/2026,2026-09-21,2,note-0004,notebook
+Bench photos sorted,,photos,,2026-09-22,2026-09-22,1,note-0005,phone
+Standup summary,"Short one: ""ship the summary"".",plan;standup,note-0004,2026-09-23,2026-09-23,3,note-0006,notebook

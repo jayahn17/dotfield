@@ -1,0 +1,10 @@
+[
+  {
+    "id": "constellation", "label": "Collaborator constellation", "kind": "graph", "theme": "story",
+    "node": { "kind": "person", "label": "$.display_name", "sublabel": "$.affiliation", "tags": "$.disciplines" },
+    "group_by": { "field": "$.disciplines[0]", "kind": "discipline" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 51 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "group-weight", "amplitude_m": 1.2 } }, "vr": { "enabled": true, "scale_m": 4 } },
+    "lenses": [ { "id": "external", "label": "External", "match": { "tags": ["structural"] } } ]
+  }
+]

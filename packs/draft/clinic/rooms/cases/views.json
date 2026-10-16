@@ -1,0 +1,9 @@
+[
+  {
+    "id": "timeline", "label": "Case timeline", "kind": "timeline", "theme": "light", "date": "$.opened_on",
+    "node": { "kind": "event", "label": "$.case_id", "sublabel": "$.outcome", "tags": "$.tags",
+              "color_token_by": { "field": "$.outcome", "map": { "improved": "good", "unchanged": "muted", "worse": "bad", "unknown": "warn" } } },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "timeline" }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } }
+  }
+]

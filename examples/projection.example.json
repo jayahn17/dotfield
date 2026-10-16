@@ -1,0 +1,95 @@
+{
+  "schema_version": "dotfield.projection/1",
+  "projection_id": "proj-self-to-ada-rule-01-20261001",
+  "grantor_person_id": "self",
+  "receiver": {
+    "type": "person",
+    "id": "ada"
+  },
+  "rule_refs": [
+    "self/rule-01"
+  ],
+  "switches": {
+    "view": true,
+    "annotate": true,
+    "re_share": false,
+    "aggregate": false,
+    "train": false
+  },
+  "released_on": "2026-10-01",
+  "expires_on": "2027-10-01",
+  "revoked_rule_refs": [],
+  "overlay": {
+    "id": "person-self",
+    "groups": [
+      {
+        "id": "person-self-g-slam",
+        "label": "SLAM",
+        "kind": "discipline"
+      },
+      {
+        "id": "person-self-g-vibration",
+        "label": "vibration",
+        "kind": "discipline"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "person-self-exp-0412",
+        "kind": "boundary",
+        "label": "ORB-SLAM3 on hall-loop",
+        "sublabel": "ATE",
+        "tags": [
+          "vibration",
+          "slam"
+        ],
+        "group": "person-self-g-slam",
+        "fields": {
+          "title": "ORB-SLAM3 on hall-loop",
+          "metric": "ATE",
+          "value": 0.042,
+          "run_on": "2026-09-18",
+          "tags": [
+            "vibration",
+            "slam"
+          ]
+        },
+        "provenance": {
+          "owner_person_id": "self",
+          "source": {
+            "kind": "share",
+            "ref": "proj-self-to-ada-rule-01-20261001",
+            "digest": "sha256:1854cee23ce5283cf7b6fb4310b0b710739e9cd178a25d94b07c5e389d0d4dbd"
+          },
+          "captured_on": "2026-09-18",
+          "happened_on": "2026-09-18",
+          "released_on": "2026-10-01",
+          "imported_via_rule_ref": "self/rule-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": [
+            "rule-01"
+          ]
+        },
+        "boundary": {
+          "rule_ref": "self/rule-01",
+          "digest": "sha256:1854cee23ce5283cf7b6fb4310b0b710739e9cd178a25d94b07c5e389d0d4dbd",
+          "shared_by": "self",
+          "released_on": "2026-10-01",
+          "key_id": "self-k1",
+          "expires_on": "2027-10-01"
+        }
+      }
+    ],
+    "edges": []
+  },
+  "receipt_id": "rcpt_20261001T110000Z_713c",
+  "digest": "sha256:c5231a424935e90736fd10d00b815f21a9cc578610547ee3a8ffdddff3eec66c",
+  "signature": {
+    "alg": "ed25519",
+    "key_id": "self-k1",
+    "signed": "canonical(projection minus signature)",
+    "sig": "zakDoI3hlJNeypdl5uHTWbWIflVWFysie58ZVx5yv+/jOxQapTq5PmP3COiFTrTqH/He9uchQMMDkUYaSLoWBg=="
+  }
+}

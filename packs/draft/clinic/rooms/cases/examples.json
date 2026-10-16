@@ -1,0 +1,6 @@
+[
+  { "case_id": "case-0a1b2c", "protocol_id": "p-sprain-2", "outcome": "improved", "age_band": "18-39", "opened_on": "2026-03-02", "closed_on": "2026-03-30", "logged_on": "2026-03-02", "tags": ["musculoskeletal"] },
+  { "case_id": "case-1c2d3e", "protocol_id": "p-hyp-1", "outcome": "unchanged", "age_band": "40-64", "opened_on": "2026-04-11", "logged_on": "2026-04-11", "tags": ["cardiovascular"] },
+  { "case_id": "case-2e3f40", "protocol_id": "p-triage-1", "outcome": "unknown", "age_band": "65+", "opened_on": "2026-05-20", "logged_on": "2026-05-20", "tags": ["triage"] },
+  { "case_id": "case-3f4051", "protocol_id": "p-sprain-2", "outcome": "worse", "age_band": "18-39", "opened_on": "2026-06-08", "closed_on": "2026-07-01", "logged_on": "2026-06-08", "tags": ["musculoskeletal", "escalated"] }
+]

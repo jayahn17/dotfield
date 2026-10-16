@@ -1,0 +1,188 @@
+{
+  "schema_version": "dotfield.projection/1",
+  "projection_id": "proj-alpha-to-beta-rule-01-20261001",
+  "grantor_person_id": "alpha",
+  "receiver": {
+    "type": "person",
+    "id": "beta"
+  },
+  "rule_refs": [
+    "alpha/rule-01"
+  ],
+  "switches": {
+    "view": true,
+    "annotate": true,
+    "re_share": false,
+    "aggregate": false,
+    "train": false
+  },
+  "released_on": "2026-10-01",
+  "expires_on": "2027-10-01",
+  "revoked_rule_refs": [],
+  "overlay": {
+    "id": "person-alpha",
+    "groups": [
+      {
+        "id": "person-alpha-g-vibration",
+        "label": "vibration",
+        "kind": "discipline"
+      },
+      {
+        "id": "person-alpha-g-fatigue",
+        "label": "fatigue",
+        "kind": "discipline"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "person-alpha-exp-101",
+        "kind": "boundary",
+        "label": "Drift vs load cycles, bench",
+        "tags": [
+          "vibration",
+          "sensor"
+        ],
+        "fields": {
+          "title": "Drift vs load cycles, bench",
+          "metric": "r",
+          "value": 0.91,
+          "run_on": "2026-06-12",
+          "tags": [
+            "vibration",
+            "sensor"
+          ]
+        },
+        "provenance": {
+          "owner_person_id": "alpha",
+          "source": {
+            "kind": "share",
+            "ref": "proj-alpha-to-beta-rule-01-20261001",
+            "digest": "sha256:f370ad7ba15edd2768af861ee25eb937f2e024c4620b5c8fd6ea24212e1d4e20"
+          },
+          "captured_on": "2026-06-12",
+          "happened_on": "2026-06-12",
+          "released_on": "2026-10-01",
+          "imported_via_rule_ref": "alpha/rule-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": [
+            "rule-01"
+          ]
+        },
+        "boundary": {
+          "rule_ref": "alpha/rule-01",
+          "digest": "sha256:f370ad7ba15edd2768af861ee25eb937f2e024c4620b5c8fd6ea24212e1d4e20",
+          "shared_by": "alpha",
+          "released_on": "2026-10-01",
+          "expires_on": "2027-10-01",
+          "key_id": "alpha-k1"
+        },
+        "group": "person-alpha-g-vibration"
+      },
+      {
+        "id": "person-alpha-exp-103",
+        "kind": "boundary",
+        "label": "Modal shift under temperature",
+        "tags": [
+          "vibration",
+          "statistics"
+        ],
+        "fields": {
+          "title": "Modal shift under temperature",
+          "metric": "variance",
+          "value": 0.62,
+          "run_on": "2026-08-14",
+          "tags": [
+            "vibration",
+            "statistics"
+          ]
+        },
+        "provenance": {
+          "owner_person_id": "alpha",
+          "source": {
+            "kind": "share",
+            "ref": "proj-alpha-to-beta-rule-01-20261001",
+            "digest": "sha256:ccd8e55039dfc510aa6c8d063a14fccca1e38f3e7e25816a46ba3691f5f274e0"
+          },
+          "captured_on": "2026-08-14",
+          "happened_on": "2026-08-14",
+          "released_on": "2026-10-01",
+          "imported_via_rule_ref": "alpha/rule-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": [
+            "rule-01"
+          ]
+        },
+        "boundary": {
+          "rule_ref": "alpha/rule-01",
+          "digest": "sha256:ccd8e55039dfc510aa6c8d063a14fccca1e38f3e7e25816a46ba3691f5f274e0",
+          "shared_by": "alpha",
+          "released_on": "2026-10-01",
+          "expires_on": "2027-10-01",
+          "key_id": "alpha-k1"
+        },
+        "group": "person-alpha-g-vibration"
+      },
+      {
+        "id": "person-alpha-exp-104",
+        "kind": "boundary",
+        "label": "Joint model, drift and fatigue",
+        "tags": [
+          "fatigue",
+          "sensor",
+          "vibration"
+        ],
+        "fields": {
+          "title": "Joint model, drift and fatigue",
+          "metric": "rmse",
+          "value": 0.08,
+          "run_on": "2026-09-20",
+          "tags": [
+            "fatigue",
+            "sensor",
+            "vibration"
+          ]
+        },
+        "provenance": {
+          "owner_person_id": "alpha",
+          "source": {
+            "kind": "share",
+            "ref": "proj-alpha-to-beta-rule-01-20261001",
+            "digest": "sha256:b5aa2badcede15fdcc80995f8c2854709520148a11ee515bf5d20460da0dcf7a"
+          },
+          "captured_on": "2026-09-21",
+          "happened_on": "2026-09-20",
+          "released_on": "2026-10-01",
+          "imported_via_rule_ref": "alpha/rule-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": [
+            "rule-01"
+          ]
+        },
+        "boundary": {
+          "rule_ref": "alpha/rule-01",
+          "digest": "sha256:b5aa2badcede15fdcc80995f8c2854709520148a11ee515bf5d20460da0dcf7a",
+          "shared_by": "alpha",
+          "released_on": "2026-10-01",
+          "expires_on": "2027-10-01",
+          "key_id": "alpha-k1"
+        },
+        "group": "person-alpha-g-fatigue"
+      }
+    ],
+    "edges": []
+  },
+  "receipt_id": "rcpt_20261001T101500Z_0000",
+  "digest": "sha256:2b0a21745bfe2576ab5db7447a56886dd5bdd4c29bde7595e7e851733dd79a9a",
+  "signature": {
+    "alg": "ed25519",
+    "key_id": "alpha-k1",
+    "signed": "canonical(projection minus signature)",
+    "sig": "GzjCtb7hF765/lWaImBaCzNZcYiETcYZVR9G3ipY9UJ+GaYAwbjpVzFX2UPynNL0KbX95lPfYYIiRSmTqljeBA=="
+  }
+}

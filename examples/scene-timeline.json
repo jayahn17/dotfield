@@ -1,0 +1,325 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "timeline",
+  "meta": {
+    "id": "run-history",
+    "title": "Experiments — run history",
+    "output": "out.html",
+    "theme": "paper",
+    "quality": "checked",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true,
+    "room": "experiments",
+    "view": "timeline"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-sept",
+      "label": "September runs",
+      "kind": "region",
+      "wraps": ["exp-0401", "exp-0402", "exp-0403", "exp-0404", "exp-0405"],
+      "color_token": "series-2"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "exp-0401",
+      "kind": "event",
+      "label": "Loop closure baseline",
+      "room": "experiments",
+      "record_id": "exp-0401",
+      "group": "g-sept",
+      "weight": 0.6,
+      "tags": ["slam"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0401",
+          "digest": "sha256:0401040104010401040104010401040104010401040104010401040104010401"
+        },
+        "captured_on": "2026-09-02",
+        "happened_on": "2026-09-02",
+        "remembered_on": "2026-09-02"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "exp-0402",
+      "kind": "event",
+      "label": "IMU bias sweep",
+      "room": "experiments",
+      "record_id": "exp-0402",
+      "group": "g-sept",
+      "weight": 0.6,
+      "tags": ["imu", "calibration"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0402",
+          "digest": "sha256:0402040204020402040204020402040204020402040204020402040204020402"
+        },
+        "captured_on": "2026-09-05",
+        "happened_on": "2026-09-05",
+        "remembered_on": "2026-09-05"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "exp-0403",
+      "kind": "event",
+      "label": "Hall-loop at 1.2 m/s",
+      "room": "experiments",
+      "record_id": "exp-0403",
+      "group": "g-sept",
+      "weight": 0.6,
+      "tags": ["slam", "indoor"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0403",
+          "digest": "sha256:0403040304030403040304030403040304030403040304030403040304030403"
+        },
+        "captured_on": "2026-09-09",
+        "happened_on": "2026-09-09",
+        "remembered_on": "2026-09-09"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "exp-0404",
+      "kind": "event",
+      "label": "Stairwell attempt",
+      "room": "experiments",
+      "record_id": "exp-0404",
+      "group": "g-sept",
+      "weight": 0.3,
+      "tags": ["slam", "failed"],
+      "color_token": "warn",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0404",
+          "digest": "sha256:0404040404040404040404040404040404040404040404040404040404040404"
+        },
+        "captured_on": "2026-09-12",
+        "happened_on": "2026-09-12",
+        "remembered_on": "2026-09-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "exp-0405",
+      "kind": "event",
+      "label": "Hall-loop with wheel odometry",
+      "room": "experiments",
+      "record_id": "exp-0405",
+      "group": "g-sept",
+      "weight": 0.6,
+      "tags": ["slam", "indoor"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0405",
+          "digest": "sha256:0405040504050405040504050405040504050405040504050405040504050405"
+        },
+        "captured_on": "2026-09-18",
+        "happened_on": "2026-09-18",
+        "remembered_on": "2026-09-18"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "exp-0406-plan",
+      "kind": "event",
+      "label": "Planned: stairwell with wheel odometry",
+      "room": "experiments",
+      "record_id": "exp-0406-plan",
+      "weight": 0.5,
+      "tags": ["slam", "planned"],
+      "color_token": "accent",
+      "status": "proposal",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "run",
+          "ref": "run-20260920-02",
+          "digest": "sha256:0406040604060406040604060406040604060406040604060406040604060406"
+        },
+        "captured_on": "2026-09-20",
+        "happened_on": "2026-10-05"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "exp-0401",
+      "to": "exp-0402",
+      "kind": "precedes",
+      "directed": true,
+      "variant": "solid",
+      "route": "straight",
+      "order": 1
+    },
+    {
+      "id": "e2",
+      "from": "exp-0402",
+      "to": "exp-0403",
+      "kind": "precedes",
+      "directed": true,
+      "variant": "solid",
+      "route": "straight",
+      "order": 2
+    },
+    {
+      "id": "e3",
+      "from": "exp-0403",
+      "to": "exp-0404",
+      "kind": "precedes",
+      "directed": true,
+      "variant": "solid",
+      "route": "straight",
+      "order": 3
+    },
+    {
+      "id": "e4",
+      "from": "exp-0404",
+      "to": "exp-0405",
+      "kind": "precedes",
+      "directed": true,
+      "variant": "solid",
+      "route": "straight",
+      "order": 4
+    },
+    {
+      "id": "e5",
+      "from": "exp-0405",
+      "to": "exp-0406-plan",
+      "kind": "precedes",
+      "directed": true,
+      "variant": "dashed",
+      "route": "straight",
+      "order": 5
+    }
+  ],
+  "positions": {
+    "exp-0401": [175, 440],
+    "exp-0402": [425, 440],
+    "exp-0403": [675, 440],
+    "exp-0404": [925, 440],
+    "exp-0405": [1175, 440],
+    "exp-0406-plan": [1425, 560]
+  },
+  "laid_out": true,
+  "views": {
+    "2d": {
+      "layout": "timeline",
+      "seed": 3,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "timeline"
+      }
+    },
+    "3d": {
+      "layout": "tier-wall",
+      "scale_m": 5,
+      "camera": {
+        "position": [0, 1.6, 7],
+        "target": [0, 1, 0]
+      }
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "exp-0403",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "failed",
+          "label": "Failed runs",
+          "match": {
+            "tags": ["failed"]
+          }
+        }
+      ],
+      "presentation": ["exp-0401", "exp-0404", "exp-0405"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "kind": "run",
+      "ref": "run-20260920-02",
+      "digest": "sha256:0406040604060406040604060406040604060406040604060406040604060406",
+      "label": "SRC 1"
+    }
+  ],
+  "projected": {
+    "by": "lib/project.mjs",
+    "engine_version": "0.1.0",
+    "viewer": "self",
+    "at": "2026-10-01T10:14:58Z",
+    "dropped": 0,
+    "limit": {
+      "focus": null,
+      "reach": null,
+      "lens": null,
+      "max_nodes": 2000
+    },
+    "mac": "hmac-sha256:3bb30156978ef27d844f7cb0bdff2d5dc947a3a50e799f6453b655039c2cd639"
+  },
+  "receipt": {
+    "receipt_id": "rcpt_20261001T101500Z_c0de",
+    "source_digest": "sha256:55d555d555d555d555d555d555d555d555d555d555d555d555d555d555d555d5",
+    "tokens_digest": "sha256:0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+    "validator_version": "1",
+    "checks_passed": 31
+  }
+}

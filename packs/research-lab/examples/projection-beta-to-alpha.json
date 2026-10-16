@@ -1,0 +1,199 @@
+{
+  "schema_version": "dotfield.projection/1",
+  "projection_id": "proj-beta-to-alpha-rule-01-20261001",
+  "grantor_person_id": "beta",
+  "receiver": {
+    "type": "person",
+    "id": "alpha"
+  },
+  "rule_refs": [
+    "beta/rule-01"
+  ],
+  "switches": {
+    "view": true,
+    "annotate": true,
+    "re_share": false,
+    "aggregate": false,
+    "train": false
+  },
+  "released_on": "2026-10-01",
+  "expires_on": "2027-10-01",
+  "revoked_rule_refs": [],
+  "overlay": {
+    "id": "person-beta",
+    "groups": [
+      {
+        "id": "person-beta-g-fatigue",
+        "label": "fatigue",
+        "kind": "discipline"
+      },
+      {
+        "id": "person-beta-g-longitudinal-study",
+        "label": "longitudinal-study",
+        "kind": "discipline"
+      },
+      {
+        "id": "person-beta-g-sensor",
+        "label": "sensor",
+        "kind": "discipline"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "person-beta-paper-miner",
+        "kind": "boundary",
+        "label": "Miner 1945, Cumulative damage in fatigue",
+        "tags": [
+          "fatigue",
+          "load-cycle"
+        ],
+        "fields": {
+          "citation": "Miner 1945, Cumulative damage in fatigue",
+          "venue": "J. Applied Mechanics",
+          "doi": "10.1115/1.4009458",
+          "finding": "damage accumulates linearly with load cycles across stress levels",
+          "tags": [
+            "fatigue",
+            "load-cycle"
+          ],
+          "published_on": "1945-09-01"
+        },
+        "provenance": {
+          "owner_person_id": "beta",
+          "source": {
+            "kind": "share",
+            "ref": "proj-beta-to-alpha-rule-01-20261001",
+            "digest": "sha256:e5887c9e49fa23cd251eaeeae1f1753b3b19e92e0ff73d00098a59fa4bad18ac"
+          },
+          "captured_on": "2026-03-02",
+          "happened_on": "1945-09-01",
+          "released_on": "2026-10-01",
+          "imported_via_rule_ref": "beta/rule-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": [
+            "rule-01"
+          ]
+        },
+        "boundary": {
+          "rule_ref": "beta/rule-01",
+          "digest": "sha256:e5887c9e49fa23cd251eaeeae1f1753b3b19e92e0ff73d00098a59fa4bad18ac",
+          "shared_by": "beta",
+          "released_on": "2026-10-01",
+          "expires_on": "2027-10-01",
+          "key_id": "beta-k1"
+        },
+        "sublabel": "damage accumulates linearly with load cycles across stress levels",
+        "group": "person-beta-g-fatigue"
+      },
+      {
+        "id": "person-beta-paper-cohort",
+        "kind": "boundary",
+        "label": "Cohort 2023, Ten-year bridge sensor cohort",
+        "tags": [
+          "longitudinal-study",
+          "fatigue",
+          "sensor"
+        ],
+        "fields": {
+          "citation": "Cohort 2023, Ten-year bridge sensor cohort",
+          "venue": "Structural Health Monitoring",
+          "finding": "a longitudinal cohort of 40 bridges; fatigue indicators track traffic load better than age",
+          "tags": [
+            "longitudinal-study",
+            "fatigue",
+            "sensor"
+          ],
+          "published_on": "2023-06-20"
+        },
+        "provenance": {
+          "owner_person_id": "beta",
+          "source": {
+            "kind": "share",
+            "ref": "proj-beta-to-alpha-rule-01-20261001",
+            "digest": "sha256:e1bd5adfc4a8815c5b2dee9267522486de882204849013a470af9c6f0f9db38b"
+          },
+          "captured_on": "2026-05-05",
+          "happened_on": "2023-06-20",
+          "released_on": "2026-10-01",
+          "imported_via_rule_ref": "beta/rule-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": [
+            "rule-01"
+          ]
+        },
+        "boundary": {
+          "rule_ref": "beta/rule-01",
+          "digest": "sha256:e1bd5adfc4a8815c5b2dee9267522486de882204849013a470af9c6f0f9db38b",
+          "shared_by": "beta",
+          "released_on": "2026-10-01",
+          "expires_on": "2027-10-01",
+          "key_id": "beta-k1"
+        },
+        "sublabel": "a longitudinal cohort of 40 bridges; fatigue indicators track traffic load better than age",
+        "group": "person-beta-g-longitudinal-study"
+      },
+      {
+        "id": "person-beta-paper-imu-drift",
+        "kind": "boundary",
+        "label": "Lab preprint 2026, IMU drift as a fatigue proxy",
+        "tags": [
+          "sensor",
+          "vibration",
+          "fatigue"
+        ],
+        "fields": {
+          "citation": "Lab preprint 2026, IMU drift as a fatigue proxy",
+          "venue": "preprint",
+          "finding": "cumulative vibration energy predicts sensor drift and structural fatigue with one model",
+          "tags": [
+            "sensor",
+            "vibration",
+            "fatigue"
+          ],
+          "published_on": "2026-08-01"
+        },
+        "provenance": {
+          "owner_person_id": "beta",
+          "source": {
+            "kind": "share",
+            "ref": "proj-beta-to-alpha-rule-01-20261001",
+            "digest": "sha256:7ba426f82686d6e67d816fcbca421a145e65eef91435335a858c3528dc4b0faa"
+          },
+          "captured_on": "2026-08-01",
+          "happened_on": "2026-08-01",
+          "released_on": "2026-10-01",
+          "imported_via_rule_ref": "beta/rule-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": [
+            "rule-01"
+          ]
+        },
+        "boundary": {
+          "rule_ref": "beta/rule-01",
+          "digest": "sha256:7ba426f82686d6e67d816fcbca421a145e65eef91435335a858c3528dc4b0faa",
+          "shared_by": "beta",
+          "released_on": "2026-10-01",
+          "expires_on": "2027-10-01",
+          "key_id": "beta-k1"
+        },
+        "sublabel": "cumulative vibration energy predicts sensor drift and structural fatigue with one model",
+        "group": "person-beta-g-sensor"
+      }
+    ],
+    "edges": []
+  },
+  "receipt_id": "rcpt_20261001T101500Z_0000",
+  "digest": "sha256:024c35c3ce385733986bc8b3d6aa3313a440e0c9239301984365c7ae3265d73d",
+  "signature": {
+    "alg": "ed25519",
+    "key_id": "beta-k1",
+    "signed": "canonical(projection minus signature)",
+    "sig": "d3iXE0F9PuIZzc2n5OVysERTn1Q2XAS+YEJb2zd+prKGWBnnN7azwGtbM6wA7a5JtBowvC3IoT+zKSOzhzXuCA=="
+  }
+}

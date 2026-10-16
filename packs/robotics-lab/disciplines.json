@@ -1,0 +1,15 @@
+{
+  "schema_version": "dotfield.disciplines/1",
+  "disciplines": [
+    { "label": "slam", "patterns": ["slam", "loop-closure", "odometry", "localization", "mapping"], "weight": 1, "source": "robotics-lab" },
+    { "label": "sensor-fusion", "patterns": ["sensor-fusion", "fusion", "kalman", "imu", "lidar"], "weight": 0.9, "source": "robotics-lab" },
+    { "label": "calibration", "patterns": ["calibration", "calibrate", "drift", "bias", "intrinsics"], "weight": 0.9, "source": "robotics-lab" },
+    { "label": "vibration", "patterns": ["vibration", "resonance", "damping", "shock"], "weight": 0.8, "source": "robotics-lab" },
+    { "label": "inspection", "patterns": ["inspection", "inspect", "cadence", "maintenance"], "weight": 0.7, "source": "robotics-lab" },
+    { "label": "safety", "patterns": ["estop", "e-stop", "safety", "interlock", "collision"], "weight": 1, "source": "robotics-lab" },
+    { "label": "simulation", "patterns": ["simulation", "sim", "gazebo", "isaac", "digital-twin"], "weight": 0.8, "source": "robotics-lab" },
+    { "label": "datasets", "patterns": ["dataset", "rosbag", "recording", "benchmark", "license"], "weight": 0.7, "source": "robotics-lab" },
+    { "label": "manipulation", "patterns": ["manipulation", "grasp", "gripper", "arm"], "weight": 0.7, "source": "robotics-lab" },
+    { "label": "mobile robots", "patterns": ["mobile", "wheeled", "legged", "navigation", "hallbot"], "weight": 0.8, "source": "robotics-lab" }
+  ]
+}

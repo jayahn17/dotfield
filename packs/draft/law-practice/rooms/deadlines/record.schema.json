@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Deadline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["deadline_id", "matter_id", "title", "kind", "due_on", "status", "logged_on"],
+  "properties": {
+    "deadline_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "matter_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "kind": { "enum": ["filing", "hearing", "response", "internal"] },
+    "due_on": { "type": "string", "format": "date" },
+    "status": { "enum": ["due", "done", "missed", "vacated"] },
+    "logged_on": { "type": "string", "format": "date" },
+    "rule_ref": { "type": "string", "maxLength": 200 },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } }
+  }
+}

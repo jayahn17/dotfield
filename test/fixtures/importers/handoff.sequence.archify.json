@@ -1,0 +1,10 @@
+{
+  "archify_version": "1",
+  "diagram_type": "sequence",
+  "title": "Handoff sequence",
+  "participants": ["operator", "conductor", "desk"],
+  "messages": [
+    { "from": "operator", "to": "conductor", "label": "brief", "order": 1 },
+    { "from": "conductor", "to": "desk", "label": "packet", "order": 2 }
+  ]
+}

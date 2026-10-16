@@ -1,0 +1,226 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "workflow",
+  "meta": {
+    "id": "telemetry-pipeline",
+    "title": "Telemetry pipeline, before",
+    "theme": "studio",
+    "quality": "checked",
+    "privacy_mode": "synthetic_data",
+    "maturity": "prototype",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "nodes": [
+    {
+      "id": "bag",
+      "kind": "file",
+      "label": "Rosbag capture",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-1",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/bag.md",
+          "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "ingest",
+      "kind": "asset",
+      "label": "Ingest service",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-1",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/ingest.md",
+          "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "sync",
+      "kind": "asset",
+      "label": "Time sync",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/sync.md",
+          "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "cache",
+      "kind": "record",
+      "label": "Frame cache",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/cache.md",
+          "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    },
+    {
+      "id": "report",
+      "kind": "file",
+      "label": "Run report",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-6",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "file",
+          "ref": "telemetry/report.md",
+          "digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "captured_on": "2026-10-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "bag",
+      "to": "ingest",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto",
+      "label": "frames"
+    },
+    {
+      "id": "e2",
+      "from": "ingest",
+      "to": "sync",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e3",
+      "from": "ingest",
+      "to": "cache",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto",
+      "label": "spill"
+    },
+    {
+      "from": "sync",
+      "to": "report",
+      "kind": "flow",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e4",
+      "from": "cache",
+      "to": "report",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "positions": {
+    "bag": [
+      300,
+      300
+    ],
+    "ingest": [
+      700,
+      300
+    ],
+    "sync": [
+      1100,
+      300
+    ],
+    "cache": [
+      700,
+      650
+    ],
+    "report": [
+      1100,
+      650
+    ]
+  },
+  "laid_out": true,
+  "views": {
+    "2d": {
+      "layout": "force",
+      "seed": 0,
+      "viewBox": [
+        0,
+        0,
+        1600,
+        1000
+      ]
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4
+    }
+  }
+}

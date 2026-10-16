@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Case (synthetic id)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "protocol_id", "outcome", "opened_on", "logged_on"],
+  "properties": {
+    "case_id": { "type": "string", "pattern": "^case-[0-9a-f]{6}$", "description": "A synthetic study id, never a patient identifier." },
+    "protocol_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "outcome": { "enum": ["improved", "unchanged", "worse", "unknown"] },
+    "age_band": { "enum": ["0-17", "18-39", "40-64", "65+"] },
+    "opened_on": { "type": "string", "format": "date" },
+    "closed_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" },
+    "tags": { "type": "array", "maxItems": 8, "items": { "type": "string", "minLength": 1, "maxLength": 40 } }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.run/1",
+  "title": "Dotfield run record",
+  "description": ".dotfield/runs/<run_id>/run.json — one pass of the agent loop (VISION 1, 7.4): brief, at most five specialist packets, one challenger, synthesis, then awaiting_owner. Only dotfield approve moves status past awaiting_owner (running -> awaiting_owner -> approved -> complete | rejected | error). Synthesis lands in proposal.proposed_writes and in data/proposals/ files named by proposal.proposal_ids; the loop never writes a store. Open maps: proposal.proposed_writes[*].record and ext.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "task", "status", "created_at", "scope", "routing", "steps", "proposal", "budget", "provider", "between", "with_person", "foreign_spans_digest", "foreign_spans_count", "receipt_ref"],
+  "properties": {
+    "$schema": { "type": "string", "maxLength": 200 },
+    "schema_version": { "const": "dotfield.run/1" },
+    "run_id": { "type": "string", "pattern": "^run_[0-9]{8}_[0-9]{6}_[0-9a-f]{6}$" },
+    "task": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "status": { "enum": ["running", "awaiting_owner", "approved", "complete", "rejected", "error"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rooms", "owner_person_id", "viewer"],
+      "properties": {
+        "rooms": { "type": "array", "maxItems": 64, "items": { "$ref": "#/$defs/room_id" } },
+        "owner_person_id": { "$ref": "#/$defs/person_id" },
+        "viewer": { "$ref": "#/$defs/person_id" }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["specialists", "challenger", "tokens"],
+      "properties": {
+        "specialists": { "type": "array", "maxItems": 5, "items": { "$ref": "#/$defs/desk_id" } },
+        "challenger": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/desk_id" } ] },
+        "tokens": { "type": "array", "maxItems": 64, "items": { "type": "string", "minLength": 1, "maxLength": 40 } }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "step", "desk", "prompt_digest", "response_digest", "tokens_used", "model", "excerpt"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 0, "maximum": 7 },
+          "step": { "enum": ["brief", "specialist", "challenger", "synthesis"] },
+          "desk": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+          "prompt_digest": { "$ref": "#/$defs/digest" },
+          "response_digest": { "$ref": "#/$defs/digest" },
+          "tokens_used": { "type": "integer", "minimum": 0 },
+          "model": { "type": ["string", "null"], "maxLength": 120 },
+          "excerpt": { "type": "string", "maxLength": 400 }
+        }
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposal_ids", "proposed_writes", "claims", "blocked_actions"],
+      "properties": {
+        "proposal_ids": { "type": "array", "maxItems": 64, "items": { "type": "string", "pattern": "^prop_[0-9]{8}T[0-9]{6}Z_[0-9a-f]{6}$" } },
+        "proposed_writes": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["room", "record"],
+            "properties": {
+              "room": { "$ref": "#/$defs/room_id" },
+              "record": { "type": "object", "maxProperties": 64 }
+            }
+          }
+        },
+        "claims": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text", "evidence_ids", "desk"],
+            "properties": {
+              "text": { "type": "string", "minLength": 1, "maxLength": 1000 },
+              "evidence_ids": { "type": "array", "maxItems": 64, "items": { "$ref": "#/$defs/node_id" } },
+              "desk": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" }
+            }
+          }
+        },
+        "blocked_actions": { "type": "array", "maxItems": 64, "items": { "type": "string", "minLength": 1, "maxLength": 120 } }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_tokens", "used", "exceeded"],
+      "properties": {
+        "max_tokens": { "type": "integer", "minimum": 1 },
+        "used": { "type": "integer", "minimum": 0 },
+        "exceeded": { "type": "boolean" }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter", "model", "argv_digest"],
+      "properties": {
+        "adapter": { "enum": ["dry", "claude-cli", "anthropic", "relay"] },
+        "model": { "type": ["string", "null"], "maxLength": 120 },
+        "argv_digest": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/digest" } ] }
+      }
+    },
+    "between": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/room_id" } }
+      ]
+    },
+    "with_person": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/person_id" } ] },
+    "foreign_spans_digest": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/digest" } ] },
+    "foreign_spans_count": { "type": "integer", "minimum": 0 },
+    "receipt_ref": { "type": ["string", "null"], "maxLength": 1024 },
+    "error": { "type": ["string", "null"], "maxLength": 1000 },
+    "ext": { "type": "object" }
+  },
+  "$defs": {
+    "desk_id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+    "room_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$" },
+    "person_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "node_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

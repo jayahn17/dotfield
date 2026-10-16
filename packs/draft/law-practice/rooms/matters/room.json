@@ -1,0 +1,47 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "matters",
+  "label": "Matters",
+  "icon": "folder",
+  "pack": "law-practice",
+  "purpose": "One matter per record: the client reference, the practice area, its status and dates, its deadlines, the authorities it rests on and the matters it relates to. The title names the client and stays private.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "matters", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "matter_id",
+    "label_field": "title",
+    "sublabel_field": "practice_area",
+    "tag_field": "tags",
+    "dates": { "happened_on": "opened_on", "remembered_on": "logged_on", "released_on": "closed_on" },
+    "link_fields": [
+      { "field": "client_ref", "to_room": "clients", "kind": "member" },
+      { "field": "deadlines", "to_room": "deadlines", "kind": "contains" },
+      { "field": "authority_ids", "to_room": "authorities", "kind": "cites" },
+      { "field": "related", "to_room": "matters", "kind": "relates" }
+    ],
+    "default_privacy_level": "private",
+    "public_fields": ["practice_area", "status"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "intake", "display": "Intake", "tier": "core", "domain": "matter intake",
+      "primary_field": "client intake", "adjacent_fields": ["engagement letters", "scoping"],
+      "lens": "a matter opens with a client reference, a practice area and a limitation date, or it does not open",
+      "keywords": ["intake", "matter", "engagement", "scope", "practice-area", "limitation"],
+      "challenger_for": [], "influences": ["docket"],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "file_with_court"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "board view lanes matters by status", "a projection carries practice_area and status only and a stub label", "a proposal never changes data/rooms/matters.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove matters exits 0 and both views render with no DF_IR_* or DF_LAYOUT_* failure; the pack stays draft until its README conditions are met."
+}

@@ -1,0 +1,6 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "architecture", "title": "Rig bench",
+  "kinds": { "x-rig": { "glyph2d": "square", "primitive3d": "box", "size_mult": 1.3, "label_anchor": "below", "legend": "Test rig" } },
+  "nodes": [{ "id": "rig a", "kind": "x-rig" }, { "id": "rig b", "kind": "x-rig" }, "logger", "dashboard"],
+  "edges": ["rig a -> logger: telemetry", "rig b -> logger: telemetry", "logger -> dashboard"]
+}

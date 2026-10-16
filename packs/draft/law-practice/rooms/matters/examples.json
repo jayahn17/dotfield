@@ -1,0 +1,6 @@
+[
+  { "matter_id": "m-2026-001", "title": "Northwind supply agreement", "client_ref": "c-0001", "practice_area": "contract", "status": "open", "opened_on": "2026-02-03", "logged_on": "2026-02-03", "deadlines": ["d-0001", "d-0002"], "authority_ids": ["a-0001"], "related": [], "tags": ["open", "indemnity"], "summary": "Synthetic: a supply agreement with a disputed indemnity clause." },
+  { "matter_id": "m-2026-002", "title": "Harbour slip and fall", "client_ref": "c-0002", "practice_area": "liability", "status": "on_hold", "opened_on": "2026-04-18", "logged_on": "2026-04-18", "deadlines": ["d-0003"], "authority_ids": ["a-0002", "a-0003"], "related": [], "tags": ["negligence"] },
+  { "matter_id": "m-2026-003", "title": "Northwind privacy filing", "client_ref": "c-0001", "practice_area": "compliance", "status": "open", "opened_on": "2026-06-09", "logged_on": "2026-06-09", "deadlines": ["d-0004"], "authority_ids": [], "related": ["m-2026-001"], "tags": ["open", "privacy"] },
+  { "matter_id": "m-2025-017", "title": "Orchard lease renewal", "client_ref": "c-0003", "practice_area": "property", "status": "closed", "opened_on": "2025-09-01", "closed_on": "2026-01-20", "logged_on": "2025-09-01", "deadlines": [], "authority_ids": ["a-0001"], "related": [], "tags": ["lease"] }
+]

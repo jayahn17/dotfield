@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.sketch/1",
+  "title": "Dotfield sketch",
+  "description": "A sketch (V2_PLAN 6, 7.1) is the shortest authored input: a diagram type, a title, node names and edge lines, ten lines for a template. importers/sketch.mjs expands it deterministically into a dotfield.scene/1 document (synthetic_data, prototype, quality checked, one import evidence row, every edge id'd e<index> with order = index, views 2d/3d/vr written) and lib/pipeline.mjs loadScene() runs that expansion whenever a file carries schema_version dotfield.sketch/1, so render, the gates and the receipt treat a sketch like any scene. A field this schema refuses is DF_IMPORT_SKETCH_INVALID with its path. Names are free text that slugs to a scene id (labels come from the names); edges are 'a -> b: label' (directed), 'a --> b: label' (directed, dashed) or 'a -- b' (undirected), or objects. groups map a group name to the names of its members. kinds declares x- kinds inline (the same rows as schemas/kinds.schema.json).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "type", "title", "nodes"],
+  "properties": {
+    "schema_version": { "const": "dotfield.sketch/1" },
+    "type": {
+      "description": "The diagram type: kind and default layout follow it (architecture: workflow + layered down; workflow: workflow + layered; dataflow: workflow + layered right; sequence: sequence + message edges; lifecycle: lifecycle + transition edges, first/last node tagged initial/final; graph: graph + force; timeline: timeline + timeline; board: board + lanes; room: room + metric, every node needs a pose).",
+      "enum": ["architecture", "workflow", "dataflow", "sequence", "lifecycle", "graph", "timeline", "board", "room"]
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "description": { "type": "string", "maxLength": 500 },
+    "theme": { "enum": ["default", "light", "paper", "studio", "field", "story", "editorial", "blueprint"] },
+    "direction": { "description": "layered and lifecycle only (views.2d.direction).", "enum": ["down", "right", "up", "left"] },
+    "nodes": { "type": "array", "minItems": 1, "maxItems": 500, "items": { "$ref": "#/$defs/node" } },
+    "edges": { "type": "array", "maxItems": 1000, "items": { "$ref": "#/$defs/edge" } },
+    "groups": {
+      "description": "Group name -> member names. A group becomes a zone (architecture, workflow, dataflow, room), a discipline (graph), a lane (board, sequence, lifecycle) or a region (timeline).",
+      "type": "object",
+      "maxProperties": 32,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^(?!.*(?:->|--|:))[A-Za-z0-9][A-Za-z0-9 _.()&'+/-]{0,79}$": {
+          "type": "array", "minItems": 1, "maxItems": 500,
+          "items": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^(?!.*(?:->|--|:))[A-Za-z0-9][A-Za-z0-9 _.()&'+/-]*$" }
+        }
+      }
+    },
+    "time": { "$ref": "#/$defs/time" },
+    "kinds": {
+      "description": "Inline x- kinds, merged last by lib/rooms.mjs kindsFor() (the expanded scene carries them under ext.kinds).",
+      "type": "object",
+      "maxProperties": 32,
+      "additionalProperties": false,
+      "patternProperties": { "^x-[a-z0-9][a-z0-9-]{0,30}$": { "$ref": "#/$defs/kind" } }
+    }
+  },
+  "$defs": {
+    "name": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^(?!.*(?:->|--|:))[A-Za-z0-9][A-Za-z0-9 _.()&'+/-]*$" },
+    "vec3": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } },
+    "node": {
+      "description": "A name, or an object. pose ([x, y, z] metres, or {xyz, rpy}) and size ([w, h, d] metres) place room nodes; date (YYYY-MM-DD) becomes provenance.happened_on, which timelines sort by and views.time reads.",
+      "type": ["string", "object"],
+      "minLength": 1, "maxLength": 80, "pattern": "^(?!.*(?:->|--|:))[A-Za-z0-9][A-Za-z0-9 _.()&'+/-]*$",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "kind": { "type": "string", "pattern": "^(record|note|person|desk|tag|file|asset|event|place|annotation|idea|x-[a-z0-9][a-z0-9-]{0,30})$" },
+        "group": { "$ref": "#/$defs/name" },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "tags": { "type": "array", "maxItems": 32, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+        "pose": {
+          "type": ["array", "object"], "minItems": 3, "maxItems": 3, "items": { "type": "number" },
+          "additionalProperties": false, "required": ["xyz"],
+          "properties": { "xyz": { "$ref": "#/$defs/vec3" }, "rpy": { "$ref": "#/$defs/vec3" } }
+        },
+        "size": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number", "minimum": 0.01, "maximum": 100 } },
+        "date": { "type": "string", "format": "date" }
+      }
+    },
+    "edge": {
+      "description": "'a -> b: label', 'a --> b: label' or 'a -- b' (whitespace around the arrow), or an object. Every edge gets the id e<index> and order = index (1-based) unless the object gives an order.",
+      "type": ["string", "object"],
+      "minLength": 4, "maxLength": 240, "pattern": "\\s(?:-->|->|--)\\s",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "$ref": "#/$defs/name" },
+        "to": { "$ref": "#/$defs/name" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "kind": { "enum": ["relates", "link", "cites", "influences", "depends", "member", "contains", "precedes", "flow", "annotates", "message", "transition"] },
+        "order": { "type": "integer", "minimum": 0 },
+        "from_side": { "enum": ["top", "bottom", "left", "right"] },
+        "to_side": { "enum": ["top", "bottom", "left", "right"] }
+      }
+    },
+    "time_point": { "type": ["string", "integer", "null"], "format": "date", "minimum": 0 },
+    "time": {
+      "description": "Merged over the type's default time block and written as views.time (the scene schema and the topology gate then check it: DF_IR_TIME_WINDOW_INVALID).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "axis": { "enum": ["date", "order"] },
+        "field": { "enum": ["happened_on", "captured_on", "remembered_on", "released_on"] },
+        "from": { "$ref": "#/$defs/time_point" },
+        "to": { "$ref": "#/$defs/time_point" },
+        "step": { "enum": ["day", "week", "month", "year", "event", "beat"] },
+        "playhead": { "$ref": "#/$defs/time_point" },
+        "cumulative": { "type": "boolean" },
+        "motion": { "enum": ["still", "trace", "playback"] },
+        "trace": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "trail": { "type": "number", "minimum": 0.05, "maximum": 1 },
+            "beads": { "type": "integer", "minimum": 1, "maximum": 8 },
+            "duration_ms": { "type": "integer", "minimum": 400, "maximum": 20000 }
+          }
+        }
+      }
+    },
+    "kind": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["glyph2d", "primitive3d", "size_mult", "label_anchor"],
+      "properties": {
+        "glyph2d": { "enum": ["circle", "square", "diamond", "hexagon", "triangle", "pill", "ring", "document", "pin", "shield", "bubble", "star"] },
+        "primitive3d": { "enum": ["sphere", "box", "octahedron", "cylinder", "cone", "capsule", "torus", "icosahedron", "tetrahedron", "dodecahedron"] },
+        "size_mult": { "type": "number", "minimum": 0.1, "maximum": 4 },
+        "label_anchor": { "enum": ["below", "above", "right", "left", "center"] },
+        "legend": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "layout_hint": { "enum": ["none", "hub", "leaf"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "source": "https://github.com/json-schema-org/JSON-Schema-Test-Suite",
+  "commit": "5b0ee1613e45fcc2bddac00e07c19cd49b00d8a8",
+  "draft": "draft2020-12",
+  "license": "MIT; see LICENSE in this directory (Copyright (c) 2012 Julian Berman)",
+  "retrieved_on": "2026-10-01",
+  "fetched_from": "raw.githubusercontent.com/json-schema-org/JSON-Schema-Test-Suite/main/tests/draft2020-12/",
+  "files": [
+    "type.json",
+    "enum.json",
+    "const.json",
+    "required.json",
+    "properties.json",
+    "patternProperties.json",
+    "additionalProperties.json",
+    "items.json",
+    "minItems.json",
+    "maxItems.json",
+    "minLength.json",
+    "maxLength.json",
+    "maxProperties.json",
+    "pattern.json",
+    "minimum.json",
+    "maximum.json",
+    "oneOf.json",
+    "ref.json",
+    "format.json"
+  ],
+  "optional_files": [
+    "optional/format/date.json",
+    "optional/format/date-time.json"
+  ],
+  "skip_policy": {
+    "group": "a test group is skipped, and named in the test output, when its schema uses a keyword outside the supported subset (lib/validate.mjs inspectSchema reports it); every other group must pass in full",
+    "case": "the two cases named 'only an annotation by default' in format.json are skipped because Dotfield asserts format date and date-time (the format-assertion vocabulary); the optional/format files prove the assertion"
+  },
+  "expected": {
+    "groups_run": 122,
+    "cases_run": 555,
+    "skipped_groups": 44,
+    "skipped_cases": 2,
+    "note": "pinned so a re-vendor that changes coverage is a visible edit here, not a silent drop"
+  }
+}

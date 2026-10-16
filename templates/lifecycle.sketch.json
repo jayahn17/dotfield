@@ -1,0 +1,5 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "lifecycle", "title": "Experiment run",
+  "nodes": ["planned", "running", "analysed", { "id": "aborted", "tags": ["final"] }, { "id": "published", "tags": ["final"] }],
+  "edges": ["planned -> running: start", "running -> analysed: finish", "running -> aborted: fault", "analysed -> published: write up"]
+}

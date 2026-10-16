@@ -1,0 +1,9 @@
+[
+  {
+    "id": "citations", "label": "Authority citation web", "kind": "graph", "theme": "paper",
+    "node": { "kind": "record", "label": "$.citation", "sublabel": "$.holding", "tags": "$.tags" },
+    "group_by": { "field": "$.court", "kind": "region" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "force", "seed": 81 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "flat", "amplitude_m": 0 } }, "vr": { "enabled": false } }
+  }
+]

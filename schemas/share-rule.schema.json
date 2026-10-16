@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.share-rule/1",
+  "title": "Dotfield share rule",
+  "description": "One rule of center/people/share-rules.json, a wrapper {schema_version: 'dotfield.share-rules/1', rules: [rule]} (VISION 7.1): the whitepaper's five switches and three dates at node level. subject.selector picks nodes: rooms (the node's room), optional tags (any overlap), kinds and explicit ids; a node is selected when the room/tag/kind criteria all hold or its id is listed. redaction.fields_allowed must be a subset of every selected room's record.public_fields (DF_SHARE_FIELD_NOT_PUBLIC); operators apply to the values of sensitive nodes and the salt keys the pseudonymize operator (it never leaves in a projection). aggregate and train true are refused by the projector in v1 (DF_SHARE_SWITCH_UNSUPPORTED). state moves draft -> awaiting_owner -> active -> revoked | expired and only dotfield approve reaches active; a rule in awaiting_owner emits nothing. Closed except ext.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "rule_id", "grantor_person_id", "receiver", "subject", "switches", "redaction", "dates", "state", "approval", "evidence_refs"],
+  "properties": {
+    "schema_version": { "const": "dotfield.share-rule/1" },
+    "rule_id": { "$ref": "#/$defs/id" },
+    "grantor_person_id": { "$ref": "#/$defs/id" },
+    "receiver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id"],
+      "properties": {
+        "type": { "enum": ["person", "circle"] },
+        "id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selector"],
+      "properties": {
+        "selector": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rooms"],
+          "properties": {
+            "rooms": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$" } },
+            "tags": { "type": "array", "maxItems": 32, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+            "kinds": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^(record|note|person|desk|tag|file|asset|event|place|boundary|annotation|idea|x-[a-z0-9][a-z0-9-]{0,30})$" } },
+            "ids": { "type": "array", "maxItems": 256, "items": { "$ref": "#/$defs/id" } }
+          }
+        }
+      }
+    },
+    "switches": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["view", "annotate", "re_share", "aggregate", "train"],
+      "properties": {
+        "view": { "type": "boolean" },
+        "annotate": { "type": "boolean" },
+        "re_share": { "type": "boolean" },
+        "aggregate": { "type": "boolean", "description": "Recorded in receipts and shown on the node card; the projector refuses true in v1." },
+        "train": { "type": "boolean", "description": "Recorded in receipts and shown on the node card; the projector refuses true in v1." }
+      }
+    },
+    "redaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["privacy_level_ceiling", "fields_allowed", "operators", "salt"],
+      "properties": {
+        "privacy_level_ceiling": { "enum": ["public", "private", "sensitive"] },
+        "fields_allowed": { "type": "array", "maxItems": 32, "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$" } },
+        "operators": { "type": "array", "maxItems": 5, "items": { "enum": ["replace", "redact", "mask", "pseudonymize", "keep_private"] } },
+        "salt": { "type": "string", "pattern": "^base64:[A-Za-z0-9+/]{43}=$", "description": "32 random bytes; keys pseudonymize and salts the projected-subset digest. Never copied into a projection." }
+      }
+    },
+    "dates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["granted_on", "released_on", "expires_on"],
+      "properties": {
+        "granted_on": { "type": "string", "format": "date" },
+        "released_on": { "type": ["string", "null"], "format": "date" },
+        "expires_on": { "type": ["string", "null"], "format": "date" }
+      }
+    },
+    "state": { "enum": ["draft", "awaiting_owner", "active", "revoked", "expired"] },
+    "approval": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["proposal_id", "decided_at", "receipt_ref"],
+          "properties": {
+            "proposal_id": { "type": "string", "pattern": "^prop_[0-9]{8}T[0-9]{6}Z_[0-9a-f]{6}$" },
+            "decided_at": { "type": "string", "format": "date-time" },
+            "receipt_ref": { "type": ["string", "null"], "maxLength": 1024 },
+            "revoked_at": { "type": ["string", "null"], "format": "date-time" }
+          }
+        }
+      ]
+    },
+    "evidence_refs": { "type": "array", "maxItems": 32, "items": { "type": "string", "minLength": 1, "maxLength": 512 } },
+    "ext": { "type": "object", "description": "Customer round-tripping only; never read by the engine." }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" }
+  }
+}

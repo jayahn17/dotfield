@@ -1,0 +1,168 @@
+{
+  "code": "DF_PRIVACY_ABSOLUTE_PATH",
+  "expect": "pass",
+  "why": "every ref is repo-relative or logical",
+  "scene": {
+    "schema_version": "dotfield.scene/1",
+    "kind": "graph",
+    "meta": {
+      "id": "fixture-graph",
+      "title": "Fixture graph",
+      "theme": "studio",
+      "quality": "checked",
+      "privacy_mode": "synthetic_data",
+      "maturity": "prototype",
+      "legend": true
+    },
+    "viewer": {
+      "person_id": "self",
+      "mode": "self",
+      "rule_refs": []
+    },
+    "groups": [
+      {
+        "id": "g-a",
+        "label": "Region A",
+        "kind": "region",
+        "wraps": ["n-1", "n-2"],
+        "color_token": "series-1"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "n-1",
+        "kind": "record",
+        "label": "One",
+        "room": "notes",
+        "record_id": "note-1",
+        "group": "g-a",
+        "weight": 0.6,
+        "tags": ["a"],
+        "color_token": "series-1",
+        "status": "accepted",
+        "fields": {
+          "title": "One",
+          "tags": ["a"]
+        },
+        "provenance": {
+          "owner_person_id": "self",
+          "source": {
+            "kind": "record",
+            "ref": "notes/note-1",
+            "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          "captured_on": "2026-09-01"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": []
+        },
+        "evidence_ids": ["ev-1"]
+      },
+      {
+        "id": "n-2",
+        "kind": "record",
+        "label": "Two",
+        "room": "notes",
+        "record_id": "note-2",
+        "group": "g-a",
+        "weight": 0.4,
+        "tags": ["b"],
+        "color_token": "series-2",
+        "status": "accepted",
+        "provenance": {
+          "owner_person_id": "self",
+          "source": {
+            "kind": "record",
+            "ref": "notes/note-2",
+            "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          "captured_on": "2026-09-02"
+        },
+        "audience": {
+          "privacy_level": "public",
+          "share_rule_ids": []
+        },
+        "evidence_ids": []
+      },
+      {
+        "id": "n-3",
+        "kind": "note",
+        "label": "Three",
+        "weight": 0.5,
+        "tags": [],
+        "color_token": "muted",
+        "status": "accepted",
+        "provenance": {
+          "owner_person_id": "self",
+          "source": {
+            "kind": "record",
+            "ref": "notes/note-3",
+            "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+          },
+          "captured_on": "2026-09-03"
+        },
+        "audience": {
+          "privacy_level": "private",
+          "share_rule_ids": []
+        },
+        "evidence_ids": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "from": "n-1",
+        "to": "n-2",
+        "kind": "cites",
+        "directed": true,
+        "variant": "solid",
+        "route": "auto"
+      },
+      {
+        "id": "e2",
+        "from": "n-3",
+        "to": "n-1",
+        "kind": "relates",
+        "directed": false,
+        "variant": "dashed",
+        "route": "auto"
+      }
+    ],
+    "positions": {
+      "n-1": [400, 300],
+      "n-2": [700, 300],
+      "n-3": [550, 600]
+    },
+    "laid_out": true,
+    "views": {
+      "2d": {
+        "layout": "cluster-disc",
+        "seed": 1,
+        "viewBox": [0, 0, 1200, 800]
+      },
+      "interactive": {
+        "focus": "n-1",
+        "reach": "both",
+        "lenses": [
+          {
+            "id": "a",
+            "label": "Region A",
+            "match": {
+              "groups": ["g-a"]
+            }
+          }
+        ]
+      }
+    },
+    "evidence": [
+      {
+        "id": "ev-1",
+        "kind": "record",
+        "ref": "notes/note-1",
+        "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "label": "SRC 1"
+      }
+    ]
+  }
+}

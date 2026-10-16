@@ -1,0 +1,9 @@
+# THE TRUTH (owner records, keys, proposals) — never committed
+data/
+# DERIVED (safe to rm -rf)
+.dotfield/
+# pinned browser assets fetched by scripts/fetch-vendor.mjs
+vendor/three/
+# generated from center/brand.json
+center/brand/tokens.generated.css
+node_modules/

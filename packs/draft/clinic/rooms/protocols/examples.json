@@ -1,0 +1,6 @@
+[
+  { "protocol_id": "p-sprain-1", "title": "Ankle sprain pathway", "condition": "ankle sprain", "version": "1.0", "steps_count": 6, "evidence_grade": "b", "lit_ids": ["l-0001"], "tags": ["musculoskeletal", "grade-b"], "effective_on": "2025-03-01", "logged_on": "2025-03-01" },
+  { "protocol_id": "p-sprain-2", "title": "Ankle sprain pathway", "condition": "ankle sprain", "version": "2.0", "steps_count": 7, "evidence_grade": "a", "lit_ids": ["l-0001", "l-0002"], "supersedes": "p-sprain-1", "tags": ["musculoskeletal", "grade-a"], "effective_on": "2026-02-01", "logged_on": "2026-02-01" },
+  { "protocol_id": "p-hyp-1", "title": "Hypertension review", "condition": "hypertension", "version": "1.0", "steps_count": 9, "evidence_grade": "a", "lit_ids": ["l-0003"], "tags": ["cardiovascular", "grade-a"], "effective_on": "2025-09-15", "logged_on": "2025-09-15" },
+  { "protocol_id": "p-triage-1", "title": "Headache red flags", "condition": "headache", "version": "1.1", "steps_count": 4, "evidence_grade": "c", "lit_ids": [], "tags": ["triage", "grade-c"], "effective_on": "2026-05-10", "logged_on": "2026-05-10" }
+]

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.kinds/1",
+  "title": "Dotfield x- kinds",
+  "description": "packs/<id>/kinds.json and center/kinds.json (V2_PLAN 7.2): one row per x-<custom> node kind, the same four fields as a renderers/shapes.json row plus an optional legend label and layout hint. lib/rooms.mjs kindsFor(ctx) merges renderers/shapes.json <- every installed pack's kinds.json (installed_packs order) <- center/kinds.json <- a sketch's kinds block (later wins, whole rows) and passes the table as ctx.shapes, so the topology gate (DF_IR_KIND_UNKNOWN), the layout metrics, svg.mjs and the render gate (DF_RENDER_SHAPE_UNKNOWN) read one table. Only x- kinds may be declared: the twelve core kinds stay the engine's. A file that does not validate is reported under DF_SCHEMA_* and contributes no row.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version"],
+  "maxProperties": 66,
+  "properties": {
+    "schema_version": { "const": "dotfield.kinds/1" },
+    "description": { "type": "string", "maxLength": 500 }
+  },
+  "patternProperties": {
+    "^x-[a-z0-9][a-z0-9-]{0,30}$": { "$ref": "#/$defs/kind" }
+  },
+  "$defs": {
+    "kind": {
+      "description": "One x- kind. glyph2d is one of the twelve glyphs svg.mjs draws, primitive3d one of the ten primitives three.mjs instances, size_mult multiplies the glyph radius (the layout and the clearance gate measure the multiplied radius), label_anchor is the default label side. legend names the kind in the legend rail; layout_hint is advisory metadata for authoring tools (lib/layout does not read it in v2.0).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["glyph2d", "primitive3d", "size_mult", "label_anchor"],
+      "properties": {
+        "glyph2d": { "enum": ["circle", "square", "diamond", "hexagon", "triangle", "pill", "ring", "document", "pin", "shield", "bubble", "star"] },
+        "primitive3d": { "enum": ["sphere", "box", "octahedron", "cylinder", "cone", "capsule", "torus", "icosahedron", "tetrahedron", "dodecahedron"] },
+        "size_mult": { "type": "number", "minimum": 0.1, "maximum": 4, "description": "Greater than zero; the 0.1 floor keeps the glyph visible and its label measurable (the validator has no exclusiveMinimum)." },
+        "label_anchor": { "enum": ["below", "above", "right", "left", "center"] },
+        "legend": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "layout_hint": { "enum": ["none", "hub", "leaf"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "dotfield.share-rule/1",
+  "rule_id": "rule-01",
+  "grantor_person_id": "self",
+  "receiver": {
+    "type": "person",
+    "id": "ada"
+  },
+  "subject": {
+    "selector": {
+      "rooms": [
+        "experiments"
+      ],
+      "tags": [
+        "vibration"
+      ],
+      "kinds": [
+        "record"
+      ]
+    }
+  },
+  "switches": {
+    "view": true,
+    "annotate": true,
+    "re_share": false,
+    "aggregate": false,
+    "train": false
+  },
+  "redaction": {
+    "privacy_level_ceiling": "private",
+    "fields_allowed": [
+      "title",
+      "metric",
+      "value",
+      "run_on",
+      "tags"
+    ],
+    "operators": [
+      "pseudonymize"
+    ],
+    "salt": "base64:+PSHIzZmQfqIhaspiDEJ9FizIfgFLNgj6iUEFiYVDgo="
+  },
+  "dates": {
+    "granted_on": "2026-10-01",
+    "released_on": null,
+    "expires_on": "2027-10-01"
+  },
+  "state": "awaiting_owner",
+  "approval": null,
+  "evidence_refs": []
+}

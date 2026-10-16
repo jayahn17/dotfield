@@ -1,0 +1,157 @@
+{
+  "$schema": "../schemas/run.schema.json",
+  "schema_version": "dotfield.run/1",
+  "run_id": "run_20261001_101500_c8842b",
+  "task": "summarize the calibration note and draft a journal entry from the reading",
+  "status": "awaiting_owner",
+  "created_at": "2026-10-01T10:15:00Z",
+  "scope": {
+    "rooms": [
+      "notes",
+      "papers"
+    ],
+    "owner_person_id": "self",
+    "viewer": "self"
+  },
+  "routing": {
+    "specialists": [
+      "scribe",
+      "lit-review"
+    ],
+    "challenger": "skeptic",
+    "tokens": [
+      "summarize",
+      "calibration",
+      "note",
+      "draft",
+      "journal",
+      "entry",
+      "reading"
+    ]
+  },
+  "steps": [
+    {
+      "index": 0,
+      "step": "brief",
+      "desk": "conductor",
+      "prompt_digest": "sha256:5abb12d475d18b065426dbb27f3d97af5e5098d3a0b32fbf43669ed4ef3e5ec8",
+      "response_digest": "sha256:620c407d292c6d80a5c729d43930140d7cb3e2f6e3c53a642b3a02e6f621d75b",
+      "tokens_used": 860,
+      "model": null,
+      "excerpt": "dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002] Task: summarize the calibration note and draft a journal entry from the reading Scope: rooms notes, papers. Desks routed: scribe, lit-review; challenger: skeptic. Context (6 nodes): - [notes:note-0001] room notes label: Calibrate before the long ru…"
+    },
+    {
+      "index": 1,
+      "step": "specialist",
+      "desk": "scribe",
+      "prompt_digest": "sha256:e62ac3caf73860309c0df540b140e4e53cd39403d5774592ba26be7e1fdbdbc3",
+      "response_digest": "sha256:cc7abb9207925bfb59841e6f7e264e6734bd499ad48d2e2630b90a1c26d8fab7",
+      "tokens_used": 1173,
+      "model": null,
+      "excerpt": "dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002] Task: summarize the calibration note and draft a journal entry from the reading Scope: rooms notes, papers. Mission brief from the conductor: dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note…"
+    },
+    {
+      "index": 2,
+      "step": "specialist",
+      "desk": "lit-review",
+      "prompt_digest": "sha256:40f37dfc70cbf4c4335b772f9565c092be34e15bfbf6a39b1324c27ea85652a8",
+      "response_digest": "sha256:cc7abb9207925bfb59841e6f7e264e6734bd499ad48d2e2630b90a1c26d8fab7",
+      "tokens_used": 1175,
+      "model": null,
+      "excerpt": "dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002] Task: summarize the calibration note and draft a journal entry from the reading Scope: rooms notes, papers. Mission brief from the conductor: dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note…"
+    },
+    {
+      "index": 3,
+      "step": "challenger",
+      "desk": "skeptic",
+      "prompt_digest": "sha256:1abbeb70e985f14ca8ed7ed426a5842af778da185661e9ac13fee34d5d40ff42",
+      "response_digest": "sha256:14fd098899987e42d67e0ebe66a6c050b3a07133bea7e688279d8ff036151408",
+      "tokens_used": 1205,
+      "model": null,
+      "excerpt": "dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002] Task: summarize the calibration note and draft a journal entry from the reading Scope: rooms notes, papers. Mission brief: dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note…"
+    },
+    {
+      "index": 4,
+      "step": "synthesis",
+      "desk": "conductor",
+      "prompt_digest": "sha256:8d2e48ea839412025e7b71ab1a42e61284891bcf488fee0fc23a95974a00c9d9",
+      "response_digest": "sha256:14fd098899987e42d67e0ebe66a6c050b3a07133bea7e688279d8ff036151408",
+      "tokens_used": 1293,
+      "model": null,
+      "excerpt": "dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002] Task: summarize the calibration note and draft a journal entry from the reading Scope: rooms notes, papers. Mission brief: dry echo: no model was called. Evidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note…"
+    }
+  ],
+  "proposal": {
+    "proposal_ids": [
+      "prop_20261001T101500Z_f92ed1"
+    ],
+    "proposed_writes": [
+      {
+        "room": "notes",
+        "record": {
+          "note_id": "run-20261001-101500-c8842b-idea",
+          "title": "summarize the calibration note and draft a journal entry from the reading",
+          "body": "dry echo: no model was called.\nEvidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002]\nTask: summarize the calibration note and draft a journal entry from the reading\nScope: rooms notes, papers.\nMission brief:\ndry echo: no model was called.\nEvidence: [notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002]\nTask: summarize the calibration note and draft a journal entry from the reading\nScope: rooms notes, papers.\nDesks routed: scribe, lit-review; challenger: skeptic.\n\nContext (6 nodes):\n- [notes:note-0001] room notes\n  label: Calibrate before the long run\n  sublabel: The drift grows with cumulative vibration, not with the calen",
+          "tags": [
+            "idea",
+            "run"
+          ],
+          "logged_on": "2026-10-01",
+          "happened_on": "2026-10-01"
+        }
+      }
+    ],
+    "claims": [
+      {
+        "text": "[notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002]",
+        "evidence_ids": [
+          "notes:note-0001",
+          "notes:note-0002",
+          "notes:note-0003",
+          "notes:note-0004",
+          "papers:note-0001",
+          "papers:note-0002"
+        ],
+        "desk": "conductor"
+      },
+      {
+        "text": "[notes:note-0001] [notes:note-0002] [notes:note-0003] [notes:note-0004] [papers:note-0001] [papers:note-0002]",
+        "evidence_ids": [
+          "notes:note-0001",
+          "notes:note-0002",
+          "notes:note-0003",
+          "notes:note-0004",
+          "papers:note-0001",
+          "papers:note-0002"
+        ],
+        "desk": "conductor"
+      },
+      {
+        "text": "[notes:note-0001] room notes",
+        "evidence_ids": [
+          "notes:note-0001"
+        ],
+        "desk": "conductor"
+      }
+    ],
+    "blocked_actions": [
+      "send_email"
+    ]
+  },
+  "budget": {
+    "max_tokens": 12000,
+    "used": 5706,
+    "exceeded": false
+  },
+  "provider": {
+    "adapter": "dry",
+    "model": null,
+    "argv_digest": null
+  },
+  "between": null,
+  "with_person": null,
+  "foreign_spans_digest": null,
+  "foreign_spans_count": 0,
+  "receipt_ref": ".dotfield/runs/run_20261001_101500_c8842b/receipt.json",
+  "error": null
+}

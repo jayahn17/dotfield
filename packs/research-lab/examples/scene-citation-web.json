@@ -1,0 +1,301 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-citation-web",
+    "title": "Papers — citation web",
+    "output": "out.html",
+    "theme": "story",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "papers",
+    "view": "citations"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-fatigue",
+      "label": "fatigue",
+      "kind": "discipline",
+      "wraps": ["papers-paper-miner"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-vibration",
+      "label": "vibration",
+      "kind": "discipline",
+      "wraps": ["papers-paper-shm-review"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-longitudinal-study",
+      "label": "longitudinal-study",
+      "kind": "discipline",
+      "wraps": ["papers-paper-cohort"],
+      "color_token": "series-3"
+    },
+    {
+      "id": "g-sensor",
+      "label": "sensor",
+      "kind": "discipline",
+      "wraps": ["papers-paper-imu-drift"],
+      "color_token": "series-4"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "papers-paper-miner",
+      "kind": "record",
+      "label": "Miner 1945, Cumulative damage in fatigue",
+      "room": "papers",
+      "record_id": "paper-miner",
+      "weight": 0.8,
+      "tags": ["fatigue", "load-cycle"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "damage accumulates linearly with load cycles across stress levels",
+      "group": "g-fatigue",
+      "fields": {
+        "citation": "Miner 1945, Cumulative damage in fatigue",
+        "venue": "J. Applied Mechanics",
+        "doi": "10.1115/1.4009458",
+        "finding": "damage accumulates linearly with load cycles across stress levels",
+        "tags": ["fatigue", "load-cycle"],
+        "published_on": "1945-09-01"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-miner",
+          "digest": "sha256:b411a81a584d9a3b9cbe0a39df44b6a68ab3b384e40547f8af5866d5533f4c51"
+        },
+        "captured_on": "2026-03-02",
+        "happened_on": "1945-09-01",
+        "remembered_on": "2026-03-02"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-shm-review",
+      "kind": "record",
+      "label": "Review 2019, Vibration-based structural health monitoring",
+      "room": "papers",
+      "record_id": "paper-shm-review",
+      "weight": 0.9,
+      "tags": ["vibration", "sensor", "review"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "modal shifts detect damage only when the operational variability is modelled",
+      "group": "g-vibration",
+      "fields": {
+        "citation": "Review 2019, Vibration-based structural health monitoring",
+        "venue": "Mech. Systems and Signal Processing",
+        "finding": "modal shifts detect damage only when the operational variability is modelled",
+        "tags": ["vibration", "sensor", "review"],
+        "published_on": "2019-02-15"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-shm-review",
+          "digest": "sha256:7f37fd70a7e75219805abbd743062b9e58c9b8c598b8cbb484b26cea64aac9f4"
+        },
+        "captured_on": "2026-04-10",
+        "happened_on": "2019-02-15",
+        "remembered_on": "2026-04-10"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-cohort",
+      "kind": "record",
+      "label": "Cohort 2023, Ten-year bridge sensor cohort",
+      "room": "papers",
+      "record_id": "paper-cohort",
+      "weight": 0.9,
+      "tags": ["longitudinal-study", "fatigue", "sensor"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "a longitudinal cohort of 40 bridges; fatigue indicators track traffic load better than age",
+      "group": "g-longitudinal-study",
+      "fields": {
+        "citation": "Cohort 2023, Ten-year bridge sensor cohort",
+        "venue": "Structural Health Monitoring",
+        "finding": "a longitudinal cohort of 40 bridges; fatigue indicators track traffic load better than age",
+        "tags": ["longitudinal-study", "fatigue", "sensor"],
+        "published_on": "2023-06-20"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-cohort",
+          "digest": "sha256:5724beeffd374a0497c99688f4c035354e996cb16d1ca6cfbaced7086c324b7a"
+        },
+        "captured_on": "2026-05-05",
+        "happened_on": "2023-06-20",
+        "remembered_on": "2026-05-05"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-imu-drift",
+      "kind": "record",
+      "label": "Lab preprint 2026, IMU drift as a fatigue proxy",
+      "room": "papers",
+      "record_id": "paper-imu-drift",
+      "weight": 0.7,
+      "tags": ["sensor", "vibration", "fatigue"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "cumulative vibration energy predicts sensor drift and structural fatigue with one model",
+      "group": "g-sensor",
+      "fields": {
+        "citation": "Lab preprint 2026, IMU drift as a fatigue proxy",
+        "venue": "preprint",
+        "finding": "cumulative vibration energy predicts sensor drift and structural fatigue with one model",
+        "tags": ["sensor", "vibration", "fatigue"],
+        "published_on": "2026-08-01"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-imu-drift",
+          "digest": "sha256:70ed22d976af01ee3db36a2c9d2860de3ef3a4ff65953fafdbc0cde437fca344"
+        },
+        "captured_on": "2026-08-01",
+        "happened_on": "2026-08-01",
+        "remembered_on": "2026-08-01"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "papers-paper-shm-review",
+      "to": "papers-paper-miner",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "papers-paper-cohort",
+      "to": "papers-paper-shm-review",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e3",
+      "from": "papers-paper-cohort",
+      "to": "papers-paper-miner",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e4",
+      "from": "papers-paper-imu-drift",
+      "to": "papers-paper-cohort",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e5",
+      "from": "papers-paper-imu-drift",
+      "to": "papers-paper-shm-review",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "force",
+      "seed": 21,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "force"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "weight",
+        "amplitude_m": 1.5
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "entry_node": "papers-paper-miner"
+    },
+    "interactive": {
+      "focus": "papers-paper-miner",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "fatigue",
+          "label": "Fatigue",
+          "match": {
+            "tags": ["fatigue"]
+          }
+        }
+      ],
+      "presentation": ["papers-paper-miner", "papers-paper-shm-review", "papers-paper-cohort"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-papers",
+      "kind": "record",
+      "ref": "papers/examples.json",
+      "digest": "sha256:1a6f5c8d59bf58a69b6d27e1e4cbc8ffef3ac988f5ed63baac103da8f8777081",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "papers-paper-miner": [752.332, 499.703],
+    "papers-paper-shm-review": [677.869, 680.33],
+    "papers-paper-cohort": [682.714, 319.67],
+    "papers-paper-imu-drift": [923.331, 597.886]
+  },
+  "laid_out": true
+}

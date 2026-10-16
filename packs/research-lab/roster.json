@@ -1,0 +1,119 @@
+{
+  "schema_version": "dotfield.pack-roster/1",
+  "pack": "research-lab",
+  "desks": [
+    {
+      "id": "data-desk",
+      "display": "Data desk",
+      "tier": "support",
+      "domain": "data stewardship",
+      "primary_field": "research data management",
+      "adjacent_fields": [
+        "licensing",
+        "anonymisation"
+      ],
+      "lens": "a dataset is a contract with its subjects and its licence before it is a file",
+      "keywords": [
+        "dataset",
+        "license",
+        "provenance",
+        "anonymisation",
+        "fair",
+        "consent"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "never uploads or re-identifies; proposes the manifest row only",
+      "prompt": null,
+      "room": "datasets",
+      "parent": null
+    },
+    {
+      "id": "grants",
+      "display": "Grants",
+      "tier": "support",
+      "domain": "research funding",
+      "primary_field": "grant writing",
+      "adjacent_fields": [
+        "budgeting",
+        "consortium building"
+      ],
+      "lens": "a proposal is a promise about deliverables; name the collaborator who owns each one",
+      "keywords": [
+        "grant",
+        "funding",
+        "proposal",
+        "budget",
+        "deliverable",
+        "consortium"
+      ],
+      "challenger_for": [],
+      "influences": [
+        "lit-review"
+      ],
+      "constraint": "never contacts anyone; proposes who to ask and why, by collaborator id",
+      "prompt": null,
+      "room": "collaborators",
+      "parent": null
+    },
+    {
+      "id": "lit-review",
+      "display": "Literature review",
+      "tier": "core",
+      "domain": "literature",
+      "primary_field": "research literature",
+      "adjacent_fields": [
+        "citation analysis",
+        "bibliometrics"
+      ],
+      "lens": "a paper is a method with a claimed regime of validity; cite the regime, not the title",
+      "keywords": [
+        "paper",
+        "citation",
+        "survey",
+        "review",
+        "doi",
+        "finding"
+      ],
+      "challenger_for": ["methods"],
+      "influences": [
+        "data-desk"
+      ],
+      "constraint": "cites by record id, never by memory",
+      "prompt": null,
+      "room": "papers",
+      "parent": null
+    },
+    {
+      "id": "methods",
+      "display": "Methods",
+      "tier": "challenger",
+      "domain": "research methods",
+      "primary_field": "experimental design",
+      "adjacent_fields": [
+        "statistics",
+        "metrology"
+      ],
+      "lens": "a result without its power analysis and its confound list is an anecdote",
+      "keywords": [
+        "method",
+        "power-analysis",
+        "confound",
+        "effect-size",
+        "replication",
+        "control"
+      ],
+      "challenger_for": [
+        "lit-review",
+        "grants"
+      ],
+      "influences": [
+        "data-desk"
+      ],
+      "constraint": "never reports a number without a record id as evidence and a stated uncertainty",
+      "prompt": null,
+      "room": "experiments",
+      "parent": null
+    }
+  ]
+}

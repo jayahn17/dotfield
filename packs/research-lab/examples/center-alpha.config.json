@@ -1,0 +1,37 @@
+{
+  "schema_version": "dotfield.center-config/1",
+  "center": {
+    "name": "Center Alpha",
+    "tagline": "Scratch center for the research-lab two-center demo (alpha); init --pack research-lab fills installed_packs.",
+    "owner_person_id": "alpha",
+    "locale": "en"
+  },
+  "installed_packs": [],
+  "provider": {
+    "adapter": "dry",
+    "model": null,
+    "max_tokens_per_run": 8000,
+    "allow_nested": false
+  },
+  "server": {
+    "port": 4100,
+    "host": "127.0.0.1"
+  },
+  "privacy": {
+    "default_privacy_level": "private"
+  },
+  "connect": {
+    "threshold": 0.35
+  },
+  "approval": {
+    "max_records_per_proposal": 200
+  },
+  "store": {
+    "allow_env_pins": false,
+    "object_store_url": null
+  },
+  "conductor": {
+    "display": "Conductor",
+    "lens": "turn one question into a mission brief, route it to at most five desks and one challenger, and stop at awaiting_owner"
+  }
+}

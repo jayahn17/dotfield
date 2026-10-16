@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.pack/1",
+  "title": "Dotfield profession pack",
+  "description": "packs/<id>/pack.json (VISION 6). A pack carries no code (JSON, one README and example CSV only): pack.json, one room template per rooms[] entry under rooms/<room>/ (the four room files), roster.json (the desks of its rooms, lifted as lib/agents/roster.mjs lifts them; never a conductor: DF_PACK_CONDUCTOR_IN_PACK), disciplines.json (the wrapper init copies to center/people/disciplines.json), theme.json (a brand.json preset without the center name) and examples/ (laid-out synthetic scenes; robotics-lab also ships runs.csv). boundary_vocab terms must appear in disciplines.json as a label or a pattern. A pack under packs/draft/ validates like any other and is refused by init with DF_PACK_DRAFT. Closed except ext. $defs.roster_file and $defs.disciplines_file are the grammars of the two sibling files.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "label", "profession", "summary", "version", "maturity", "rooms", "roster", "disciplines", "theme", "boundary_vocab", "share_defaults", "views_off", "regulatory_notes", "recipes"],
+  "properties": {
+    "$schema": { "type": "string", "maxLength": 200 },
+    "schema_version": { "const": "dotfield.pack/1" },
+    "id": { "$ref": "#/$defs/pack_id" },
+    "label": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "profession": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 400 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "maturity": { "enum": ["contract_only", "prototype", "local_beta", "tested"] },
+    "rooms": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "$ref": "#/$defs/room_id" }, "description": "One rooms/<id>/ folder per entry (DF_PACK_ROOM_MISSING)." },
+    "roster": { "const": "roster.json" },
+    "disciplines": { "const": "disciplines.json" },
+    "theme": { "const": "theme.json" },
+    "boundary_vocab": { "type": "array", "maxItems": 32, "items": { "$ref": "#/$defs/vocab" }, "description": "Terms the meeting layer scores across packs; each must be a discipline label or pattern in disciplines.json." },
+    "share_defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["privacy_level", "redaction_operators"],
+      "properties": {
+        "privacy_level": { "enum": ["public", "private", "sensitive", "blocked"] },
+        "redaction_operators": { "type": "array", "maxItems": 5, "items": { "enum": ["replace", "redact", "mask", "pseudonymize", "keep_private"] } }
+      }
+    },
+    "views_off": { "type": "array", "maxItems": 3, "items": { "enum": ["2d", "3d", "vr"] }, "description": "Views the pack disables for every room it installs; a room view also sets vr.enabled false." },
+    "regulatory_notes": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 400 } },
+    "recipes": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,59}\\.md$" }, "description": "Recipe file names under center/docs/recipes/ the pack points its owner at." },
+    "release_tag": { "enum": ["v1.0", "v1.1-provisional"], "description": "The release tag init stamps on the pack's receipts (VISION 13: research-lab is a v1.1 slice, so v1.1-provisional); absent means v1.0." },
+    "ext": { "type": "object", "description": "Customer round-tripping only; never read by the engine." }
+  },
+  "$defs": {
+    "pack_id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+    "room_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$" },
+    "desk_id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+    "vocab": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,39}$" },
+    "desk": {
+      "description": "room.schema.json#/$defs/desk as lib/agents/roster.mjs liftDesk() emits it: every array present, prompt and parent present, room filled.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "display", "tier", "parent", "room", "domain", "primary_field", "adjacent_fields", "lens", "keywords", "challenger_for", "influences", "constraint", "prompt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/desk_id" },
+        "display": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "tier": { "enum": ["core", "support", "challenger"] },
+        "parent": { "type": ["string", "null"], "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+        "room": { "$ref": "#/$defs/room_id" },
+        "domain": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "primary_field": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "adjacent_fields": { "type": "array", "maxItems": 8, "items": { "type": "string", "minLength": 1, "maxLength": 120 } },
+        "lens": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "keywords": { "type": "array", "minItems": 1, "maxItems": 24, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+        "challenger_for": { "type": "array", "maxItems": 12, "items": { "$ref": "#/$defs/desk_id" } },
+        "influences": { "type": "array", "maxItems": 12, "items": { "$ref": "#/$defs/desk_id" } },
+        "constraint": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "prompt": { "type": ["string", "null"], "maxLength": 4000 }
+      }
+    },
+    "roster_file": {
+      "description": "packs/<id>/roster.json: the pack's desks only. No conductor key and no desk with id conductor (DF_PACK_CONDUCTOR_IN_PACK); the conductor comes from center.config.json.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "pack", "desks"],
+      "properties": {
+        "schema_version": { "const": "dotfield.pack-roster/1" },
+        "pack": { "$ref": "#/$defs/pack_id" },
+        "desks": { "type": "array", "maxItems": 192, "items": { "$ref": "#/$defs/desk" } }
+      }
+    },
+    "discipline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "patterns", "weight", "source"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "patterns": { "type": "array", "minItems": 1, "maxItems": 24, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "source": { "$ref": "#/$defs/pack_id" }
+      }
+    },
+    "disciplines_file": {
+      "description": "packs/<id>/disciplines.json, byte-for-byte what init writes to center/people/disciplines.json: the wrapper lib/overlay.mjs loadPeopleDir() reads.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "disciplines"],
+      "properties": {
+        "schema_version": { "const": "dotfield.disciplines/1" },
+        "disciplines": { "type": "array", "minItems": 1, "maxItems": 64, "items": { "$ref": "#/$defs/discipline" } }
+      }
+    }
+  }
+}

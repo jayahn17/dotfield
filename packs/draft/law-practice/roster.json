@@ -1,0 +1,117 @@
+{
+  "schema_version": "dotfield.pack-roster/1",
+  "pack": "law-practice",
+  "desks": [
+    {
+      "id": "conflicts",
+      "display": "Conflicts",
+      "tier": "challenger",
+      "domain": "conflicts of interest",
+      "primary_field": "professional conduct",
+      "adjacent_fields": [
+        "intake",
+        "information walls"
+      ],
+      "lens": "before any matter opens, ask who is adverse to whom; a conflict found later is a matter lost",
+      "keywords": [
+        "conflict",
+        "adverse",
+        "waiver",
+        "wall",
+        "former-client",
+        "intake"
+      ],
+      "challenger_for": [
+        "intake",
+        "researcher"
+      ],
+      "influences": [],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null,
+      "room": "clients",
+      "parent": null
+    },
+    {
+      "id": "docket",
+      "display": "Docket",
+      "tier": "support",
+      "domain": "deadline management",
+      "primary_field": "docketing",
+      "adjacent_fields": [
+        "court rules",
+        "calendaring"
+      ],
+      "lens": "a deadline is a date plus the rule that produced it; both are written down or the date is a guess",
+      "keywords": [
+        "deadline",
+        "hearing",
+        "filing",
+        "docket",
+        "limitation",
+        "response"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null,
+      "room": "deadlines",
+      "parent": null
+    },
+    {
+      "id": "intake",
+      "display": "Intake",
+      "tier": "core",
+      "domain": "matter intake",
+      "primary_field": "client intake",
+      "adjacent_fields": [
+        "engagement letters",
+        "scoping"
+      ],
+      "lens": "a matter opens with a client reference, a practice area and a limitation date, or it does not open",
+      "keywords": [
+        "intake",
+        "matter",
+        "engagement",
+        "scope",
+        "practice-area",
+        "limitation"
+      ],
+      "challenger_for": [],
+      "influences": [
+        "docket"
+      ],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null,
+      "room": "matters",
+      "parent": null
+    },
+    {
+      "id": "researcher",
+      "display": "Researcher",
+      "tier": "core",
+      "domain": "legal research",
+      "primary_field": "case law",
+      "adjacent_fields": [
+        "statutory interpretation",
+        "citation checking"
+      ],
+      "lens": "an authority is a holding plus the facts it was decided on; cite the facts or the holding will not travel",
+      "keywords": [
+        "authority",
+        "citation",
+        "holding",
+        "statute",
+        "precedent",
+        "court"
+      ],
+      "challenger_for": ["conflicts"],
+      "influences": [
+        "intake"
+      ],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null,
+      "room": "authorities",
+      "parent": null
+    }
+  ]
+}

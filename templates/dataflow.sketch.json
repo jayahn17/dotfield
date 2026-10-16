@@ -1,0 +1,6 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "dataflow", "title": "Sensor pipeline",
+  "groups": { "capture": ["lidar", "imu"], "process": ["decode", "fuse"], "serve": ["map tiles"] },
+  "nodes": ["lidar", "imu", "decode", "fuse", "map tiles"],
+  "edges": ["lidar -> decode: points", "imu -> decode: poses", "decode -> fuse: frames", "fuse -> map tiles: scans"]
+}

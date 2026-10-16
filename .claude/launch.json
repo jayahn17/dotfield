@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dotfield",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/serve.mjs"],
+      "port": 4100
+    }
+  ]
+}

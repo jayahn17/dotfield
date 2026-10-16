@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Protocol",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_id", "title", "condition", "version", "logged_on"],
+  "properties": {
+    "protocol_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "condition": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "steps_count": { "type": "integer", "minimum": 1, "maximum": 200 },
+    "evidence_grade": { "enum": ["a", "b", "c", "d"] },
+    "lit_ids": { "type": "array", "maxItems": 32, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "supersedes": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "effective_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" }
+  }
+}

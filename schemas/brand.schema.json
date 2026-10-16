@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.brand/1",
+  "title": "Dotfield brand",
+  "description": "center/brand.json — the six fields a customer sets to tint a center, plus optional font files, logo, radius and density. lib/theme.mjs turns it into center/brand/tokens.generated.css. Colours are 6-digit hex (#rrggbb); fonts are ids of local stacks from renderers/font-metrics.json; file paths are bare names under center/brand/.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "accent", "surface", "ink", "font", "room_preset"],
+  "properties": {
+    "schema_version": { "type": "string", "enum": ["dotfield.brand/1"] },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80, "description": "Display name of the center." },
+    "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Interactive colour: links, focus ring, series-1. Must clear 4.5:1 on surface and its derived panels." },
+    "surface": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Page background (--df-bg). Panels and chrome are derived from it." },
+    "ink": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Primary text (--df-ink). muted and faint are derived from it." },
+    "font": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["display", "text", "mono"],
+      "properties": {
+        "display": { "type": "string", "enum": ["sans", "grotesk", "serif", "condensed", "mono"] },
+        "text": { "type": "string", "enum": ["sans", "grotesk", "serif", "condensed", "mono"] },
+        "mono": { "type": "string", "enum": ["sans", "grotesk", "serif", "condensed", "mono"] }
+      }
+    },
+    "room_preset": {
+      "type": "string",
+      "enum": ["default", "light", "paper", "studio", "field", "story", "editorial", "blueprint"],
+      "description": "The renderers/tokens.css theme the brand tints; its semantic colours seed good/warn/bad/info/foreign."
+    },
+    "files": {
+      "type": "array",
+      "maxItems": 12,
+      "description": "Brand font files under center/brand/, inlined as data: URIs and counted against the render size budget.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "family", "role"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^[A-Za-z0-9._-]+\\.woff2$" },
+          "family": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "role": { "type": "string", "enum": ["display", "text", "mono"] },
+          "weight": { "type": "integer", "minimum": 100, "maximum": 900 },
+          "style": { "type": "string", "enum": ["normal", "italic"] }
+        }
+      }
+    },
+    "logo": { "type": "string", "pattern": "^[A-Za-z0-9._-]+\\.(svg|png)$", "description": "Bare filename under center/brand/." },
+    "radius": { "type": "integer", "minimum": 0, "maximum": 24, "description": "Medium corner radius in px; sm/lg/xl are derived." },
+    "density": { "type": "string", "enum": ["compact", "comfortable", "spacious"], "description": "Scales the --df-space-* steps." }
+  }
+}

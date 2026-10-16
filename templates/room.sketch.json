@@ -1,0 +1,7 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "room", "title": "Rig room",
+  "groups": { "bench a": ["hallbot", "lidar rig"], "bench b": ["arm"] },
+  "nodes": [{ "id": "hallbot", "pose": [-2, 0.4, 0], "size": [0.6, 0.8, 0.6] }, { "id": "lidar rig", "pose": [-1, 1, 0.5], "size": [0.3, 0.3, 0.3] },
+            { "id": "arm", "pose": [2, 0.6, -0.5], "size": [0.5, 1.2, 0.5] }, { "id": "operator", "kind": "person", "pose": [0, 0.9, 2] }],
+  "edges": ["lidar rig -> hallbot: scans", "operator -> arm: drives"]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Experiment run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["exp_id", "title", "metric", "value", "run_on", "logged_on"],
+  "properties": {
+    "exp_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "metric": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "value": { "type": "number" },
+    "unit": { "type": "string", "maxLength": 20 },
+    "score": { "type": "number", "minimum": 0, "maximum": 10 },
+    "status": { "enum": ["done", "running", "failed", "planned"] },
+    "run_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" },
+    "robot_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "dataset_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "paper_ids": { "type": "array", "maxItems": 16, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "notes": { "type": "string", "maxLength": 4000 }
+  }
+}

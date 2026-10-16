@@ -1,0 +1,162 @@
+{
+  "schema_version": "dotfield.evaluation/1",
+  "title": "Read-only QA pairs over the starter pack, answered through the MCP tools",
+  "center": "packs/starter",
+  "purpose": "Token-free verification of the MCP surface: every pair calls one READ_LOCAL tool (or lists the tools) and states what a correct answer contains. The expectations are structural, so they hold for any center scaffolded from packs/starter; test/mcp.test.js runs them over test/fixtures/rooms/center-min (the same notes room) with a session key present.",
+  "operators": {
+    "path": "a dotted path into the tool's structuredContent (tools/list: {tools, names}); an absent path reads as null; room_ids and desk_ids are derived from registry.rooms and roster.desks",
+    "equals": "the value at path deep-equals the expectation",
+    "in": "the value at path is one of the listed values",
+    "includes": "the array at path contains the value",
+    "min_length": "the array or string at path is at least this long",
+    "every_keys_within": "every object in the array at path has only these keys",
+    "has_fail_code": "receipt.checks has a failing check with this code",
+    "none_match": "no string in the array at path matches this regular expression"
+  },
+  "pairs": [
+    {
+      "id": "eval-001-tool-list",
+      "question": "Which tools does the center expose, and can any of them approve, project, export or delete?",
+      "tool": "tools/list",
+      "arguments": {},
+      "expect": [
+        { "path": "tools", "min_length": 12 },
+        { "path": "names", "none_match": "approve|project|export|delete" },
+        { "path": "names", "includes": "dotfield_propose" },
+        { "path": "names", "includes": "dotfield_run" }
+      ]
+    },
+    {
+      "id": "eval-002-doctor",
+      "question": "Is the engine healthy, and which provider and store target does the center use?",
+      "tool": "dotfield_doctor",
+      "arguments": {},
+      "expect": [
+        { "path": "receipt.command", "equals": "doctor" },
+        { "path": "receipt.schema_version", "equals": "dotfield.receipt/1" },
+        { "path": "receipt.status", "in": ["read", "blocked"] },
+        { "path": "receipt.provider.adapter", "equals": "dry" },
+        { "path": "receipt.store.backend", "equals": "file" }
+      ]
+    },
+    {
+      "id": "eval-003-registry",
+      "question": "Which rooms are valid in this center?",
+      "tool": "dotfield_list_rooms",
+      "arguments": {},
+      "expect": [
+        { "path": "registry.schema_version", "equals": "dotfield.registry/1" },
+        { "path": "registry.rooms", "min_length": 1 },
+        { "path": "room_ids", "includes": "notes" },
+        { "path": "receipt.status", "equals": "read" }
+      ]
+    },
+    {
+      "id": "eval-004-notes-room",
+      "question": "How are writes to the notes room gated, and which fields may ever leave it?",
+      "tool": "dotfield_get_room",
+      "arguments": { "room": "notes" },
+      "expect": [
+        { "path": "room.manifest.mode", "equals": "proposal_only" },
+        { "path": "room.manifest.owner_gates.writes", "equals": "required" },
+        { "path": "room.manifest.owner_gates.share", "equals": "required" },
+        { "path": "room.manifest.record.public_fields", "equals": ["title", "tags"] },
+        { "path": "room.maturity", "in": ["contract_only", "prototype", "local_beta", "tested"] }
+      ]
+    },
+    {
+      "id": "eval-005-roster",
+      "question": "Which desks can a run route to, and who conducts?",
+      "tool": "dotfield_list_desks",
+      "arguments": {},
+      "expect": [
+        { "path": "roster.schema_version", "equals": "dotfield.roster/1" },
+        { "path": "roster.conductor.id", "equals": "conductor" },
+        { "path": "desk_ids", "includes": "scribe" }
+      ]
+    },
+    {
+      "id": "eval-006-public-records",
+      "question": "What does a stranger (no viewer) see of the notes room?",
+      "tool": "dotfield_records",
+      "arguments": { "room": "notes" },
+      "expect": [
+        { "path": "receipt.viewer", "equals": "public" },
+        { "path": "receipt.scope", "equals": "public" },
+        { "path": "records", "every_keys_within": ["title", "tags"] }
+      ]
+    },
+    {
+      "id": "eval-007-plan",
+      "question": "Which desks would handle a note-summary task, without spending tokens?",
+      "tool": "dotfield_plan",
+      "arguments": { "task": "summarize the calibration note into a journal entry" },
+      "expect": [
+        { "path": "plan.specialists", "includes": "scribe" },
+        { "path": "receipt.command", "equals": "plan" },
+        { "path": "receipt.provider", "equals": null }
+      ]
+    },
+    {
+      "id": "eval-008-validate-config",
+      "question": "Does center.config.json meet its schema?",
+      "tool": "dotfield_validate",
+      "arguments": { "target": "center/center.config.json" },
+      "expect": [
+        { "path": "receipt.command", "equals": "validate" },
+        { "path": "receipt.status", "equals": "read" },
+        { "path": "receipt.exit_code", "equals": 0 }
+      ]
+    },
+    {
+      "id": "eval-009-validate-inline-rejects",
+      "question": "Is a bare {schema_version: dotfield.room/1} a valid room manifest?",
+      "tool": "dotfield_validate",
+      "arguments": { "document": { "schema_version": "dotfield.room/1" } },
+      "expect": [
+        { "path": "kind", "equals": "room" },
+        { "path": "receipt.status", "equals": "blocked" },
+        { "path": "receipt.exit_code", "equals": 2 },
+        { "path": "receipt", "has_fail_code": "DF_SCHEMA_REQUIRED" }
+      ]
+    },
+    {
+      "id": "eval-010-public-scene",
+      "question": "What does the public projection of the notes graph look like, and is it stamped?",
+      "tool": "dotfield_scene",
+      "arguments": { "room": "notes", "view": "graph" },
+      "expect": [
+        { "path": "scene.schema_version", "equals": "dotfield.scene/1" },
+        { "path": "scene.kind", "equals": "graph" },
+        { "path": "scene.viewer.mode", "equals": "public" },
+        { "path": "scene.projected.by", "equals": "lib/project.mjs" },
+        { "path": "scene.projected.viewer", "equals": "public" },
+        { "path": "foreign_spans", "equals": [] }
+      ]
+    },
+    {
+      "id": "eval-011-unknown-viewer",
+      "question": "What happens when a viewer that is not in center/people/ asks for records?",
+      "tool": "dotfield_records",
+      "arguments": { "room": "notes", "viewer": "nobody-here" },
+      "expect": [
+        { "path": "receipt.status", "equals": "refused" },
+        { "path": "receipt", "has_fail_code": "DF_MCP_VIEWER_UNKNOWN" },
+        { "path": "receipt.ok", "equals": false },
+        { "path": "records", "equals": null }
+      ]
+    },
+    {
+      "id": "eval-012-missing-receipt",
+      "question": "What does verifying a receipt that does not exist return?",
+      "tool": "dotfield_receipt",
+      "arguments": { "path": ".dotfield/receipts/does-not-exist.json" },
+      "expect": [
+        { "path": "receipt.command", "equals": "verify" },
+        { "path": "receipt.status", "equals": "blocked" },
+        { "path": "receipt", "has_fail_code": "DF_RECEIPT_UNREADABLE" },
+        { "path": "verified", "equals": null }
+      ]
+    }
+  ]
+}

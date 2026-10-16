@@ -1,0 +1,119 @@
+{
+  "schema_version": "dotfield.pack-roster/1",
+  "pack": "robotics-lab",
+  "desks": [
+    {
+      "id": "data-ops",
+      "display": "Data ops",
+      "tier": "support",
+      "domain": "dataset operations",
+      "primary_field": "data engineering",
+      "adjacent_fields": [
+        "storage",
+        "licensing"
+      ],
+      "lens": "a dataset is a contract: modality, size, license, digest",
+      "keywords": [
+        "dataset",
+        "data",
+        "license",
+        "modality",
+        "storage",
+        "rosbag"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "never uploads; proposes the manifest row (upload_dataset is blocked)",
+      "prompt": null,
+      "room": "datasets",
+      "parent": null
+    },
+    {
+      "id": "method-review",
+      "display": "Method review",
+      "tier": "core",
+      "domain": "experimental robotics",
+      "primary_field": "robot evaluation",
+      "adjacent_fields": [
+        "statistics",
+        "metrology"
+      ],
+      "lens": "an experiment is a measurement with an error budget, not a demo",
+      "keywords": [
+        "experiment",
+        "metric",
+        "ATE",
+        "benchmark",
+        "ablation",
+        "error-budget"
+      ],
+      "challenger_for": [
+        "sim-ops"
+      ],
+      "influences": [
+        "data-ops"
+      ],
+      "constraint": "never reports a number without a record id as evidence",
+      "prompt": null,
+      "room": "experiments",
+      "parent": null
+    },
+    {
+      "id": "safety",
+      "display": "Safety",
+      "tier": "challenger",
+      "domain": "lab safety",
+      "primary_field": "functional safety",
+      "adjacent_fields": [
+        "e-stop design",
+        "collision avoidance"
+      ],
+      "lens": "every run is a hazard until the e-stop path and the bench clearance are written down",
+      "keywords": [
+        "estop",
+        "safety",
+        "interlock",
+        "collision",
+        "clearance",
+        "hazard"
+      ],
+      "challenger_for": [
+        "sim-ops",
+        "method-review"
+      ],
+      "influences": [],
+      "constraint": "never approves hardware; asks for the e-stop check record id before any plan that touches a robot (launch_hardware is blocked)",
+      "prompt": null,
+      "room": "robots",
+      "parent": null
+    },
+    {
+      "id": "sim-ops",
+      "display": "Simulation ops",
+      "tier": "core",
+      "domain": "robot simulation",
+      "primary_field": "simulation",
+      "adjacent_fields": [
+        "URDF",
+        "digital twins"
+      ],
+      "lens": "a robot is a URDF plus the sensors that disagree with it; simulate the disagreement, not the brochure",
+      "keywords": [
+        "simulation",
+        "urdf",
+        "gazebo",
+        "isaac",
+        "digital-twin",
+        "sensor"
+      ],
+      "challenger_for": [],
+      "influences": [
+        "data-ops"
+      ],
+      "constraint": "proposes a simulation plan as records; never starts a simulator (start_simulator is blocked)",
+      "prompt": null,
+      "room": "robots",
+      "parent": null
+    }
+  ]
+}

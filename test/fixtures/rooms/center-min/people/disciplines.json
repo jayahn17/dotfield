@@ -1,0 +1,4 @@
+{
+  "schema_version": "dotfield.disciplines/1",
+  "disciplines": [ { "label": "notes", "patterns": ["note", "journal", "draft"], "weight": 1, "source": "starter" } ]
+}

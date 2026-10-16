@@ -1,0 +1,6 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "architecture", "title": "Telemetry",
+  "groups": { "edge": ["bag", "ingest"], "core": ["sync", "store"] },
+  "nodes": ["bag", "ingest", "sync", "store", "report"],
+  "edges": ["bag -> ingest: frames", "ingest -> sync", "sync -> store: rows", "store -> report"]
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "dotfield.archify-corpus/1",
+  "description": "The archify example corpus Dotfield measures its archify importer against (V2_PLAN §11 archify-corpus): every *.json example under archify/examples/ at the pinned commit, vendored verbatim beside the archify LICENSE. scripts/fetch-archify-corpus.mjs fetched these bytes from raw.githubusercontent.com at this commit and refuses any byte that does not match a digest below; --verify re-hashes the folder with no network. test/archify-corpus.test.js imports, validates, lays out and renders every file at --quality showcase; lib/bench/corpus.mjs reports the clean fraction. At that commit archify/examples/ holds 15 *.json diagrams (all listed below), 5 *.html renders (archify output, not input, so not vendored) and locales/*.json (viewer string tables, not diagrams).",
+  "repo": "tt-a1i/archify",
+  "commit": "73aaa0696e8f72c232ea710e6fa94fd953f3e773",
+  "license": {
+    "name": "MIT License",
+    "spdx": "MIT",
+    "copyright": [
+      "Copyright (c) 2026 tt-a1i (Archify)",
+      "Copyright (c) 2025 Cocoon AI"
+    ],
+    "redistribution": "MIT permits redistribution provided the copyright and permission notice travel with the copies; the archify LICENSE is vendored here verbatim.",
+    "file": {
+      "file": "LICENSE",
+      "path": "LICENSE",
+      "bytes": 1102,
+      "sha256": "sha256:b799ab081703e7821ae5096d2c1abdf14bbdc75e8ea1c4045998c36ed6db9706"
+    }
+  },
+  "diagram_types": [
+    "architecture",
+    "workflow",
+    "dataflow",
+    "sequence",
+    "lifecycle"
+  ],
+  "diagram_types_source": "archify/schemas/README.md (one row per diagram schema) and the diagram_type const of archify/schemas/{architecture,workflow,dataflow,sequence,lifecycle}.schema.json at the pinned commit",
+  "files": [
+    {
+      "file": "agent-run.lifecycle.json",
+      "path": "archify/examples/agent-run.lifecycle.json",
+      "diagram_type": "lifecycle",
+      "schema_version": 1,
+      "bytes": 3405,
+      "sha256": "sha256:230242a7557663877766c43a9fe7cffe8b4fb66e4866457dccd24c63175b4917"
+    },
+    {
+      "file": "agent-tool-call.workflow.json",
+      "path": "archify/examples/agent-tool-call.workflow.json",
+      "diagram_type": "workflow",
+      "schema_version": 2,
+      "bytes": 4939,
+      "sha256": "sha256:d67965d50872c97e4ff3476271e645bf19fab6b3ab44e111bdb44b063e3aa36f"
+    },
+    {
+      "file": "async-job-roundtrip.sequence.json",
+      "path": "archify/examples/async-job-roundtrip.sequence.json",
+      "diagram_type": "sequence",
+      "schema_version": 1,
+      "bytes": 3766,
+      "sha256": "sha256:b8c6c52f1763ede2933c77deb8da59b3e06917bc41d27e66df896136456b859a"
+    },
+    {
+      "file": "brand-aware-delivery.architecture.json",
+      "path": "archify/examples/brand-aware-delivery.architecture.json",
+      "diagram_type": "architecture",
+      "schema_version": 1,
+      "bytes": 2789,
+      "sha256": "sha256:211c126ebdc5f0124617b1067cecfb858143a1a18fd10621d01f5765c7de3b5d"
+    },
+    {
+      "file": "cache-miss-request.sequence.json",
+      "path": "archify/examples/cache-miss-request.sequence.json",
+      "diagram_type": "sequence",
+      "schema_version": 1,
+      "bytes": 3805,
+      "sha256": "sha256:f8486daa803fff6c295cecca4604c561fbbf9acb2e83326022b5a87639e8afe6"
+    },
+    {
+      "file": "checkout-platform.base.architecture.json",
+      "path": "archify/examples/checkout-platform.base.architecture.json",
+      "diagram_type": "architecture",
+      "schema_version": 1,
+      "bytes": 2279,
+      "sha256": "sha256:81d55a2e86fc39f6473b32dfba986a12d3b7a705a95821844865b1dc831c9fe7"
+    },
+    {
+      "file": "checkout-platform.head.architecture.json",
+      "path": "archify/examples/checkout-platform.head.architecture.json",
+      "diagram_type": "architecture",
+      "schema_version": 1,
+      "bytes": 2413,
+      "sha256": "sha256:eb4ae056035dd3316414a5d7f6599525107b5d1af7bedbd905460ade77daf5c6"
+    },
+    {
+      "file": "deployment-release.lifecycle.json",
+      "path": "archify/examples/deployment-release.lifecycle.json",
+      "diagram_type": "lifecycle",
+      "schema_version": 2,
+      "bytes": 3507,
+      "sha256": "sha256:f565a8acfebdb21453e2bccd82d3760b4736e38fe194fb2f0804b57817eba813"
+    },
+    {
+      "file": "event-stream.dataflow.json",
+      "path": "archify/examples/event-stream.dataflow.json",
+      "diagram_type": "dataflow",
+      "schema_version": 1,
+      "bytes": 4769,
+      "sha256": "sha256:3bdd77674282009c7c68d588cf8a3c495bc98a3be1b9c45327fd1801a6f83a23"
+    },
+    {
+      "file": "holiday-planning.workflow.json",
+      "path": "archify/examples/holiday-planning.workflow.json",
+      "diagram_type": "workflow",
+      "schema_version": 2,
+      "bytes": 3019,
+      "sha256": "sha256:b98354f921ca45842fed235db09fd4f19d94adc16865876f438c0d699d05e1ea"
+    },
+    {
+      "file": "incident-response.workflow.json",
+      "path": "archify/examples/incident-response.workflow.json",
+      "diagram_type": "workflow",
+      "schema_version": 1,
+      "bytes": 4723,
+      "sha256": "sha256:630be98449925d2716ecb8439f404b2bff5fe65ba905b0ad0baea6d96890c526"
+    },
+    {
+      "file": "product-analytics.dataflow.json",
+      "path": "archify/examples/product-analytics.dataflow.json",
+      "diagram_type": "dataflow",
+      "schema_version": 1,
+      "bytes": 5035,
+      "sha256": "sha256:8a635db9e51a5b1a8d2955b9d66f5b9a450e0a298432ce8f2e2f0be11f372e05"
+    },
+    {
+      "file": "production-deployment.architecture.json",
+      "path": "archify/examples/production-deployment.architecture.json",
+      "diagram_type": "architecture",
+      "schema_version": 1,
+      "bytes": 4734,
+      "sha256": "sha256:cb54bad2dfd0c2d02aa5b496bde6839789a0f07f23062343c4458b8d38806c13"
+    },
+    {
+      "file": "release-delivery.workflow.json",
+      "path": "archify/examples/release-delivery.workflow.json",
+      "diagram_type": "workflow",
+      "schema_version": 1,
+      "bytes": 4510,
+      "sha256": "sha256:dbd5c174af66296caec372e7214cf4df7158b50a563508e16826b95ab8d1cd6c"
+    },
+    {
+      "file": "web-app.architecture.json",
+      "path": "archify/examples/web-app.architecture.json",
+      "diagram_type": "architecture",
+      "schema_version": 1,
+      "bytes": 3197,
+      "sha256": "sha256:95e051b27a9e4a3307e194c0f666fca4af51470be7e2228d400ff48aea5b353b"
+    }
+  ]
+}

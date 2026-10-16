@@ -1,0 +1,9 @@
+[
+  {
+    "id": "shelf", "label": "Dataset shelf", "kind": "graph", "theme": "story",
+    "node": { "kind": "file", "label": "$.name", "sublabel": "$.modality", "tags": "$.tags" },
+    "group_by": { "field": "$.modality", "kind": "region" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 41 }, "3d": { "layout": "lift", "scale_m": 5, "lift": { "mode": "flat", "amplitude_m": 0 } }, "vr": { "enabled": false } }
+  }
+]

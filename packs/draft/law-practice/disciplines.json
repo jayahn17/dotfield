@@ -1,0 +1,11 @@
+{
+  "schema_version": "dotfield.disciplines/1",
+  "disciplines": [
+    { "label": "contract", "patterns": ["contract", "agreement", "clause", "breach", "indemnity"], "weight": 1, "source": "law-practice" },
+    { "label": "liability", "patterns": ["liability", "negligence", "damages", "tort"], "weight": 0.9, "source": "law-practice" },
+    { "label": "compliance", "patterns": ["compliance", "regulation", "privacy", "licensing", "filing"], "weight": 0.9, "source": "law-practice" },
+    { "label": "evidence", "patterns": ["evidence", "discovery", "exhibit", "witness", "record"], "weight": 0.8, "source": "law-practice" },
+    { "label": "docket", "patterns": ["deadline", "hearing", "docket", "limitation", "response"], "weight": 0.8, "source": "law-practice" },
+    { "label": "conflicts", "patterns": ["conflict", "adverse", "waiver", "wall"], "weight": 0.9, "source": "law-practice" }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "contacts",
+  "label": "Contacts",
+  "icon": "person",
+  "pack": "starter",
+  "purpose": "The people and organisations you work with: who they are, what they know, who introduced them. Handles are HMAC values under data/keys/handle.salt and never leave.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "local_beta",
+  "store": { "scope": "owner", "namespace": "contacts", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "contact_id",
+    "label_field": "display_name",
+    "sublabel_field": "org",
+    "tag_field": "disciplines",
+    "dates": { "happened_on": "met_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "introduced_by", "to_room": "contacts", "kind": "relates" } ],
+    "default_privacy_level": "sensitive",
+    "public_fields": ["display_name", "disciplines"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "connector", "display": "Connector", "tier": "core", "domain": "professional contacts and introductions",
+      "primary_field": "relationship mapping", "adjacent_fields": ["collaboration", "disciplines"],
+      "lens": "a contact is a set of disciplines and an introduction path; the useful question is who knows whom across fields",
+      "keywords": ["contact", "meet", "met", "introduction", "introduce", "colleague", "conference", "network", "collaborator"],
+      "challenger_for": [], "influences": [],
+      "constraint": "never sends a message or makes an introduction and never stores a handle in the clear; proposes the contact record and who could introduce whom",
+      "prompt": null
+    },
+    {
+      "id": "skeptic", "display": "Skeptic", "tier": "challenger", "domain": "claims and sources",
+      "primary_field": "critical reading", "adjacent_fields": ["provenance", "epistemics"],
+      "lens": "every note and every contact is a claim; ask who said it, when, and what would show it wrong",
+      "keywords": ["doubt", "evidence", "source", "verify", "assumption", "counterexample"],
+      "challenger_for": ["scribe", "planner", "connector"], "influences": [],
+      "constraint": "never adds a record; only questions, each pointing at the note or contact id it doubts",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "export_handles"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "constellation view emits one person node per contact and one edge per introduced_by", "handles never appear in any projection or render", "a proposal never changes data/rooms/contacts.json"]
+  },
+  "done_definition": "Done as local_beta when dotfield prove contacts exits 0, both views render with no DF_IR_* or DF_LAYOUT_* failure, and a render --for another person carries display_name and disciplines only."
+}

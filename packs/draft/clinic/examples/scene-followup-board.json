@@ -1,0 +1,213 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "board",
+  "meta": {
+    "id": "scene-followup-board",
+    "title": "Follow-ups — board",
+    "output": "out.html",
+    "theme": "light",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "followups",
+    "view": "board"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-done",
+      "label": "done",
+      "kind": "lane",
+      "wraps": ["followups-f-0001", "followups-f-0003"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-missed",
+      "label": "missed",
+      "kind": "lane",
+      "wraps": ["followups-f-0002"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-due",
+      "label": "due",
+      "kind": "lane",
+      "wraps": ["followups-f-0004"],
+      "color_token": "series-3"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "followups-f-0001",
+      "kind": "event",
+      "label": "review",
+      "room": "followups",
+      "record_id": "f-0001",
+      "weight": 0.5,
+      "tags": ["musculoskeletal"],
+      "color_token": "good",
+      "status": "accepted",
+      "sublabel": "done",
+      "group": "g-done",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "followups/f-0001",
+          "digest": "sha256:a2876375b803925eea8affbe6ff9c3b0721a43c7c32f0a4228de1e61bdb0c4d6"
+        },
+        "captured_on": "2026-03-02",
+        "happened_on": "2026-03-16",
+        "remembered_on": "2026-03-02"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-followups"]
+    },
+    {
+      "id": "followups-f-0002",
+      "kind": "event",
+      "label": "test",
+      "room": "followups",
+      "record_id": "f-0002",
+      "weight": 0.5,
+      "tags": ["cardiovascular", "missed"],
+      "color_token": "bad",
+      "status": "accepted",
+      "sublabel": "missed",
+      "group": "g-missed",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "followups/f-0002",
+          "digest": "sha256:23178f361521d1d39fdd8574680947eb24a61b78b7597fa81d966f4b75fdd204"
+        },
+        "captured_on": "2026-04-11",
+        "happened_on": "2026-07-11",
+        "remembered_on": "2026-04-11"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-followups"]
+    },
+    {
+      "id": "followups-f-0003",
+      "kind": "event",
+      "label": "referral",
+      "room": "followups",
+      "record_id": "f-0003",
+      "weight": 0.5,
+      "tags": ["triage"],
+      "color_token": "good",
+      "status": "accepted",
+      "sublabel": "done",
+      "group": "g-done",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "followups/f-0003",
+          "digest": "sha256:61e0b82f800490eefb611aefd587193c823aa917c7596af7a133e1097f950105"
+        },
+        "captured_on": "2026-05-20",
+        "happened_on": "2026-05-27",
+        "remembered_on": "2026-05-20"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-followups"]
+    },
+    {
+      "id": "followups-f-0004",
+      "kind": "event",
+      "label": "call",
+      "room": "followups",
+      "record_id": "f-0004",
+      "weight": 0.5,
+      "tags": ["musculoskeletal", "escalated"],
+      "color_token": "accent",
+      "status": "accepted",
+      "sublabel": "due",
+      "group": "g-due",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "followups/f-0004",
+          "digest": "sha256:dd48a2f62c901853f2bba20692844a5b1ec5e4bc4a74af9a3d961b88a7a809c1"
+        },
+        "captured_on": "2026-07-01",
+        "happened_on": "2026-10-15",
+        "remembered_on": "2026-07-01"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-followups"]
+    }
+  ],
+  "edges": [],
+  "views": {
+    "2d": {
+      "layout": "lanes",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "lanes"
+      }
+    },
+    "3d": {
+      "layout": "tier-wall",
+      "scale_m": 5
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "followups-f-0001",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "missed",
+          "label": "Missed",
+          "match": {
+            "tags": ["missed"]
+          }
+        }
+      ],
+      "presentation": ["followups-f-0001", "followups-f-0002", "followups-f-0003"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-followups",
+      "kind": "record",
+      "ref": "followups/examples.json",
+      "digest": "sha256:c325ece786bafade941ca02742e7fbb782f74924da0b503a56b05fbff905eb70",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "followups-f-0001": [300, 98],
+    "followups-f-0002": [800, 98],
+    "followups-f-0003": [300, 194],
+    "followups-f-0004": [1300, 98]
+  },
+  "laid_out": true
+}

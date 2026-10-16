@@ -1,0 +1,18 @@
+{
+  "schema_version": "dotfield.pack/1",
+  "id": "robotics-lab",
+  "label": "Robotics lab",
+  "profession": "robotics researcher",
+  "summary": "Robots on benches, every experiment as a measurement with an error budget, the datasets they ran on and the papers they test. The pack the owner validates against their own data first.",
+  "version": "0.1.0",
+  "maturity": "local_beta",
+  "rooms": ["robots", "experiments", "datasets", "papers"],
+  "roster": "roster.json",
+  "disciplines": "disciplines.json",
+  "theme": "theme.json",
+  "boundary_vocab": ["sensor-fusion", "estop", "vibration", "inspection", "calibration"],
+  "share_defaults": { "privacy_level": "private", "redaction_operators": ["pseudonymize"] },
+  "views_off": [],
+  "regulatory_notes": [],
+  "recipes": ["first-hour.md", "add-a-room.md", "share-a-projection.md", "backup-and-restore.md"]
+}

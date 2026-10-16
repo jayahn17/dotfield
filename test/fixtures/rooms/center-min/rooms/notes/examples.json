@@ -1,0 +1,6 @@
+[
+  { "note_id": "note-0001", "title": "Calibrate before the long run", "body": "The drift grows with cumulative vibration, not with the calendar.", "tags": ["idea", "calibration"], "links": ["note-0002"], "happened_on": "2026-09-18", "logged_on": "2026-09-19", "score": 7 },
+  { "note_id": "note-0002", "title": "Hall loop dataset notes", "body": "Twelve passes, two with the lights off; the dark passes are the interesting ones.", "tags": ["dataset", "indoor"], "links": [], "happened_on": "2026-09-12", "logged_on": "2026-09-12", "score": 4 },
+  { "note_id": "note-0003", "title": "Reading: loop closure survey", "body": "Three families of methods; only one scales to the hall.", "tags": ["reading", "slam"], "links": ["note-0001", "note-0002"], "happened_on": "2026-08-30", "logged_on": "2026-09-02", "score": 5 },
+  { "note_id": "note-0004", "title": "Weekly plan", "body": "Finish the calibration note, re-run the dark passes, draft the summary.", "tags": ["plan"], "links": ["note-0001"], "happened_on": "2026-09-21", "logged_on": "2026-09-21", "score": 2 }
+]

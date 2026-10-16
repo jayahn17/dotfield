@@ -1,0 +1,585 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-protocol-outcomes",
+    "title": "Protocols — outcomes",
+    "output": "out.html",
+    "theme": "light",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "protocols",
+    "view": "outcomes"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-ankle-sprain",
+      "label": "ankle sprain",
+      "kind": "discipline",
+      "wraps": ["protocols-p-sprain-1", "protocols-p-sprain-2"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-hypertension",
+      "label": "hypertension",
+      "kind": "discipline",
+      "wraps": ["protocols-p-hyp-1"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-headache",
+      "label": "headache",
+      "kind": "discipline",
+      "wraps": ["protocols-p-triage-1"],
+      "color_token": "series-3"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "protocols-p-sprain-1",
+      "kind": "record",
+      "label": "Ankle sprain pathway",
+      "room": "protocols",
+      "record_id": "p-sprain-1",
+      "weight": 0.5,
+      "tags": ["musculoskeletal", "grade-b"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "ankle sprain",
+      "group": "g-ankle-sprain",
+      "fields": {
+        "title": "Ankle sprain pathway",
+        "condition": "ankle sprain",
+        "version": "1.0",
+        "steps_count": 6,
+        "tags": ["musculoskeletal", "grade-b"],
+        "effective_on": "2025-03-01"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "protocols/p-sprain-1",
+          "digest": "sha256:093358b57503e010e04e5348e1398e961b2e2058e412c1005dc87149f3ec476f"
+        },
+        "captured_on": "2025-03-01",
+        "happened_on": "2025-03-01",
+        "remembered_on": "2025-03-01"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-protocols"]
+    },
+    {
+      "id": "protocols-p-sprain-2",
+      "kind": "record",
+      "label": "Ankle sprain pathway",
+      "room": "protocols",
+      "record_id": "p-sprain-2",
+      "weight": 0.5,
+      "tags": ["musculoskeletal", "grade-a"],
+      "color_token": "good",
+      "status": "accepted",
+      "sublabel": "ankle sprain",
+      "group": "g-ankle-sprain",
+      "fields": {
+        "title": "Ankle sprain pathway",
+        "condition": "ankle sprain",
+        "version": "2.0",
+        "steps_count": 7,
+        "tags": ["musculoskeletal", "grade-a"],
+        "effective_on": "2026-02-01"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "protocols/p-sprain-2",
+          "digest": "sha256:092a10edcf9a28cdb267419f3af71196ca20aff57b52b43e32a6effdcca6d41c"
+        },
+        "captured_on": "2026-02-01",
+        "happened_on": "2026-02-01",
+        "remembered_on": "2026-02-01"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-protocols"]
+    },
+    {
+      "id": "protocols-p-hyp-1",
+      "kind": "record",
+      "label": "Hypertension review",
+      "room": "protocols",
+      "record_id": "p-hyp-1",
+      "weight": 0.5,
+      "tags": ["cardiovascular", "grade-a"],
+      "color_token": "good",
+      "status": "accepted",
+      "sublabel": "hypertension",
+      "group": "g-hypertension",
+      "fields": {
+        "title": "Hypertension review",
+        "condition": "hypertension",
+        "version": "1.0",
+        "steps_count": 9,
+        "tags": ["cardiovascular", "grade-a"],
+        "effective_on": "2025-09-15"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "protocols/p-hyp-1",
+          "digest": "sha256:7bb14d5c1b4945ab4ea820ba447e0aa1b02dd145f5dcd1cb0fdfa3e34c535f26"
+        },
+        "captured_on": "2025-09-15",
+        "happened_on": "2025-09-15",
+        "remembered_on": "2025-09-15"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-protocols"]
+    },
+    {
+      "id": "protocols-p-triage-1",
+      "kind": "record",
+      "label": "Headache red flags",
+      "room": "protocols",
+      "record_id": "p-triage-1",
+      "weight": 0.5,
+      "tags": ["triage", "grade-c"],
+      "color_token": "warn",
+      "status": "accepted",
+      "sublabel": "headache",
+      "group": "g-headache",
+      "fields": {
+        "title": "Headache red flags",
+        "condition": "headache",
+        "version": "1.1",
+        "steps_count": 4,
+        "tags": ["triage", "grade-c"],
+        "effective_on": "2026-05-10"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "protocols/p-triage-1",
+          "digest": "sha256:c842eac265e732a1e09418ed0387cd97474f75faca733544f42d85efa554eb6b"
+        },
+        "captured_on": "2026-05-10",
+        "happened_on": "2026-05-10",
+        "remembered_on": "2026-05-10"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-protocols"]
+    },
+    {
+      "id": "cases-case-0a1b2c",
+      "kind": "record",
+      "label": "case-0a1b2c",
+      "room": "cases",
+      "record_id": "case-0a1b2c",
+      "weight": 0.5,
+      "tags": ["musculoskeletal"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "improved",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "cases/case-0a1b2c",
+          "digest": "sha256:9c9b0d25aac2a38ca8a0beb26dee02b567e299603eea61377e8366e4e98f46db"
+        },
+        "captured_on": "2026-03-02",
+        "happened_on": "2026-03-02",
+        "remembered_on": "2026-03-02"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-cases"]
+    },
+    {
+      "id": "cases-case-1c2d3e",
+      "kind": "record",
+      "label": "case-1c2d3e",
+      "room": "cases",
+      "record_id": "case-1c2d3e",
+      "weight": 0.5,
+      "tags": ["cardiovascular"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "unchanged",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "cases/case-1c2d3e",
+          "digest": "sha256:7b55db5f94f91edf96ac9db6d8642b4c4887195815d6183e5036696c8de5380e"
+        },
+        "captured_on": "2026-04-11",
+        "happened_on": "2026-04-11",
+        "remembered_on": "2026-04-11"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-cases"]
+    },
+    {
+      "id": "cases-case-2e3f40",
+      "kind": "record",
+      "label": "case-2e3f40",
+      "room": "cases",
+      "record_id": "case-2e3f40",
+      "weight": 0.5,
+      "tags": ["triage"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "unknown",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "cases/case-2e3f40",
+          "digest": "sha256:abbd0b921b3a943a3bba61194325dd006ff422ddebb073e954f2ea32bf17e3ec"
+        },
+        "captured_on": "2026-05-20",
+        "happened_on": "2026-05-20",
+        "remembered_on": "2026-05-20"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-cases"]
+    },
+    {
+      "id": "cases-case-3f4051",
+      "kind": "record",
+      "label": "case-3f4051",
+      "room": "cases",
+      "record_id": "case-3f4051",
+      "weight": 0.5,
+      "tags": ["musculoskeletal", "escalated"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "worse",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "cases/case-3f4051",
+          "digest": "sha256:3a8158cf99a68d36ac384307895676f1078c4edab81c16771c1ea70ebf0d462a"
+        },
+        "captured_on": "2026-06-08",
+        "happened_on": "2026-06-08",
+        "remembered_on": "2026-06-08"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-cases"]
+    },
+    {
+      "id": "literature-l-0001",
+      "kind": "record",
+      "label": "Trial 2019, Early mobilisation after ankle sprain (synthetic)",
+      "room": "literature",
+      "record_id": "l-0001",
+      "weight": 0.5,
+      "tags": ["musculoskeletal", "rct"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "early mobilisation shortens return to activity without more re-injury",
+      "fields": {
+        "citation": "Trial 2019, Early mobilisation after ankle sprain (synthetic)",
+        "finding": "early mobilisation shortens return to activity without more re-injury",
+        "evidence_level": "rct",
+        "tags": ["musculoskeletal", "rct"],
+        "published_on": "2019-06-01"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "literature/l-0001",
+          "digest": "sha256:cfb122c6be4ffd629b7021b78e8f0f0c03d2d8516fdbf38348af95e5bf3d06c9"
+        },
+        "captured_on": "2025-02-20",
+        "happened_on": "2019-06-01",
+        "remembered_on": "2025-02-20"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-literature"]
+    },
+    {
+      "id": "literature-l-0002",
+      "kind": "record",
+      "label": "Meta-analysis 2024, Functional support in sprains (synthetic)",
+      "room": "literature",
+      "record_id": "l-0002",
+      "weight": 0.5,
+      "tags": ["musculoskeletal", "meta-analysis"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "functional support outperforms immobilisation on pain at four weeks",
+      "fields": {
+        "citation": "Meta-analysis 2024, Functional support in sprains (synthetic)",
+        "finding": "functional support outperforms immobilisation on pain at four weeks",
+        "evidence_level": "meta-analysis",
+        "tags": ["musculoskeletal", "meta-analysis"],
+        "published_on": "2024-01-15"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "literature/l-0002",
+          "digest": "sha256:906aa97ddf83092bcee123e926c8f16758ba4a96d9e4add63b0a4854915e46f1"
+        },
+        "captured_on": "2026-01-10",
+        "happened_on": "2024-01-15",
+        "remembered_on": "2026-01-10"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-literature"]
+    },
+    {
+      "id": "literature-l-0003",
+      "kind": "record",
+      "label": "Cohort 2022, Home blood pressure review intervals (synthetic)",
+      "room": "literature",
+      "record_id": "l-0003",
+      "weight": 0.5,
+      "tags": ["cardiovascular", "cohort"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "three-month review intervals hold control as well as monthly ones in stable patients",
+      "fields": {
+        "citation": "Cohort 2022, Home blood pressure review intervals (synthetic)",
+        "finding": "three-month review intervals hold control as well as monthly ones in stable patients",
+        "evidence_level": "cohort",
+        "tags": ["cardiovascular", "cohort"],
+        "published_on": "2022-09-30"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "literature/l-0003",
+          "digest": "sha256:d7d7e28a05288ae80e4cb6f0b4d981f7ee9e40dad866f6a803f7a85aa80db411"
+        },
+        "captured_on": "2025-09-01",
+        "happened_on": "2022-09-30",
+        "remembered_on": "2025-09-01"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-literature"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "protocols-p-sprain-1",
+      "to": "literature-l-0001",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "protocols-p-sprain-2",
+      "to": "literature-l-0001",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e3",
+      "from": "protocols-p-sprain-2",
+      "to": "literature-l-0002",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e4",
+      "from": "protocols-p-sprain-2",
+      "to": "protocols-p-sprain-1",
+      "kind": "precedes",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e5",
+      "from": "protocols-p-hyp-1",
+      "to": "literature-l-0003",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e6",
+      "from": "cases-case-0a1b2c",
+      "to": "protocols-p-sprain-2",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e7",
+      "from": "cases-case-1c2d3e",
+      "to": "protocols-p-hyp-1",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e8",
+      "from": "cases-case-2e3f40",
+      "to": "protocols-p-triage-1",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e9",
+      "from": "cases-case-3f4051",
+      "to": "protocols-p-sprain-2",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e10",
+      "from": "literature-l-0002",
+      "to": "literature-l-0001",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "cluster-disc",
+      "seed": 91,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "cluster-disc"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1.2
+      }
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "protocols-p-sprain-1",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "grade-a",
+          "label": "Grade A",
+          "match": {
+            "tags": ["grade-a"]
+          }
+        }
+      ],
+      "presentation": ["protocols-p-sprain-1", "protocols-p-sprain-2", "protocols-p-hyp-1"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-protocols",
+      "kind": "record",
+      "ref": "protocols/examples.json",
+      "digest": "sha256:129689ffa95931c907615907f5a2b192971459f0325bc57678f60e8a0c973c27",
+      "label": "SRC 1"
+    },
+    {
+      "id": "ev-cases",
+      "kind": "record",
+      "ref": "cases/examples.json",
+      "digest": "sha256:6e5873940e92b38d5da9e2158819c37564902d87c0d9451a3c8d6f1ec37a1e2c",
+      "label": "SRC 2"
+    },
+    {
+      "id": "ev-literature",
+      "kind": "record",
+      "ref": "literature/examples.json",
+      "digest": "sha256:9f09c5b67f83615b9163c1a45532784a7777e397b175b6bf6cf58fd4ea86bed1",
+      "label": "SRC 3"
+    }
+  ],
+  "positions": {
+    "protocols-p-sprain-1": [910.588, 730.488],
+    "protocols-p-sprain-2": [830.099, 771.842],
+    "protocols-p-hyp-1": [1110.892, 356.463],
+    "protocols-p-triage-1": [488.09, 622.334],
+    "cases-case-0a1b2c": [793.996, 367.899],
+    "cases-case-1c2d3e": [691.094, 420.769],
+    "cases-case-2e3f40": [757.641, 260.845],
+    "cases-case-3f4051": [821.551, 461.682],
+    "literature-l-0001": [615.314, 344.286],
+    "literature-l-0002": [875.264, 293.855],
+    "literature-l-0003": [706.51, 526.342]
+  },
+  "routes": {
+    "e2": [[830.099, 771.842], [686.851, 536.217], [615.314, 344.286]]
+  },
+  "labels": {
+    "protocols-p-sprain-1": "above",
+    "literature-l-0001": "left"
+  },
+  "laid_out": true
+}

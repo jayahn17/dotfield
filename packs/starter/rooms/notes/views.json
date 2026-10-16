@@ -1,0 +1,20 @@
+[
+  {
+    "id": "graph", "label": "Note web", "kind": "graph", "theme": "paper",
+    "node": { "kind": "note", "label": "$.title", "sublabel": "$.body", "tags": "$.tags", "weight": "$.score/10" },
+    "group_by": { "field": "$.tags[0]", "kind": "discipline" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": {
+      "2d": { "layout": "force", "seed": 7 },
+      "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "group-weight", "amplitude_m": 1.5 } },
+      "vr": { "enabled": true, "scale_m": 4 }
+    },
+    "lenses": [ { "id": "ideas", "label": "Ideas", "match": { "tags": ["idea"] } }, { "id": "plans", "label": "Plans", "match": { "tags": ["plan"] } } ]
+  },
+  {
+    "id": "timeline", "label": "Note history", "kind": "timeline", "theme": "paper", "date": "$.happened_on",
+    "node": { "kind": "event", "label": "$.title", "sublabel": "$.body", "tags": "$.tags" },
+    "limit": { "max_nodes": 400, "default_lens": null },
+    "views": { "2d": { "layout": "timeline" }, "3d": { "layout": "tier-wall", "scale_m": 5 }, "vr": { "enabled": false } }
+  }
+]

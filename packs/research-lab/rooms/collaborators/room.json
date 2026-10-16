@@ -1,0 +1,42 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "collaborators",
+  "label": "Collaborators",
+  "icon": "person",
+  "pack": "research-lab",
+  "purpose": "The people who hold the other half of a question: affiliation, disciplines, role on the project. Sensitive by default; only names and disciplines may ever be projected.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "collaborators", "max_records": 1000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "collab_id",
+    "label_field": "display_name",
+    "sublabel_field": "affiliation",
+    "tag_field": "disciplines",
+    "dates": { "happened_on": "met_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "introduced_by", "to_room": "collaborators", "kind": "relates" } ],
+    "default_privacy_level": "sensitive",
+    "public_fields": ["display_name", "disciplines"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "grants", "display": "Grants", "tier": "support", "domain": "research funding",
+      "primary_field": "grant writing", "adjacent_fields": ["budgeting", "consortium building"],
+      "lens": "a proposal is a promise about deliverables; name the collaborator who owns each one",
+      "keywords": ["grant", "funding", "proposal", "budget", "deliverable", "consortium"],
+      "challenger_for": [], "influences": ["lit-review"],
+      "constraint": "never contacts anyone; proposes who to ask and why, by collaborator id",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "export_contacts"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "constellation view emits one person node per collaborator", "affiliation and role never appear in a projection", "a proposal never changes data/rooms/collaborators.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove collaborators exits 0 and the constellation renders with no DF_IR_* or DF_LAYOUT_* failure; contract_only until then."
+}

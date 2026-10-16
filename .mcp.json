@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dotfield": {
+      "command": "node",
+      "args": ["mcp/stdio.mjs"]
+    }
+  }
+}

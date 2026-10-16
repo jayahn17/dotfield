@@ -1,0 +1,6 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "workflow", "title": "Sample intake", "direction": "right",
+  "groups": { "front desk": ["receive", "log"], "lab": ["prepare", "measure"], "office": ["report", "archive"] },
+  "nodes": ["receive", "log", "prepare", "measure", "report", "archive"],
+  "edges": ["receive -> log: barcode", "log -> prepare", "prepare -> measure", "measure -> report: values", "log -> archive"]
+}

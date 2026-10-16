@@ -1,0 +1,27 @@
+{
+  "schema_version": "dotfield.shapes/1",
+  "description": "The one shape table: node kind -> {glyph2d, primitive3d, size_mult, label_anchor}. renderers/svg.mjs draws glyph2d, renderers/three.mjs instances primitive3d, lib/layout/metrics.mjs multiplies the glyph radius by size_mult and places the label at label_anchor, so the layout, the clearance gate and both renderers agree on one geometry. An x-<custom> kind needs its own row here (DF_IR_KIND_UNKNOWN in the topology gate, DF_RENDER_SHAPE_UNKNOWN in the render gate).",
+  "status": {
+    "accepted": "the glyph filled with var(--df-<color_token>) in 2D; a solid InstancedMesh per primitive in 3D",
+    "proposal": "the same glyph with stroke-dasharray var(--df-proposal-dash) and a translucent fill in 2D; a wireframe twin InstancedMesh per primitive in 3D (one mesh pair per primitive: solid and proposal)"
+  },
+  "foreign": "a node owned by another person (kind boundary, or provenance.owner_person_id other than the viewer's center owner) keeps its glyph and gains the var(--df-foreign) outline ring in 2D and a foreign-coloured halo in 3D",
+  "size_mult_note": "1 for every shipped kind: test/fixtures/layout-{500,2000}.json pin positions computed from glyphRadius(node) * size_mult, so a change here means regenerating those fixtures in the same commit (DOTFIELD_WRITE_LAYOUT_FIXTURES=1 node --test test/layout.test.js).",
+  "glyphs2d": ["circle", "square", "diamond", "hexagon", "triangle", "pill", "ring", "document", "pin", "shield", "bubble", "star"],
+  "primitives3d": ["sphere", "box", "octahedron", "cylinder", "cone", "capsule", "torus", "icosahedron", "tetrahedron", "dodecahedron"],
+  "label_anchors": ["below", "above", "right", "left", "center"],
+  "kinds": {
+    "record":     { "glyph2d": "circle",   "primitive3d": "sphere",       "size_mult": 1, "label_anchor": "below" },
+    "note":       { "glyph2d": "square",   "primitive3d": "box",          "size_mult": 1, "label_anchor": "below" },
+    "person":     { "glyph2d": "ring",     "primitive3d": "torus",        "size_mult": 1, "label_anchor": "below" },
+    "desk":       { "glyph2d": "hexagon",  "primitive3d": "cylinder",     "size_mult": 1, "label_anchor": "below" },
+    "tag":        { "glyph2d": "pill",     "primitive3d": "capsule",      "size_mult": 1, "label_anchor": "below" },
+    "file":       { "glyph2d": "document", "primitive3d": "box",          "size_mult": 1, "label_anchor": "below" },
+    "asset":      { "glyph2d": "diamond",  "primitive3d": "octahedron",   "size_mult": 1, "label_anchor": "below" },
+    "event":      { "glyph2d": "triangle", "primitive3d": "cone",         "size_mult": 1, "label_anchor": "below" },
+    "place":      { "glyph2d": "pin",      "primitive3d": "cylinder",     "size_mult": 1, "label_anchor": "below" },
+    "boundary":   { "glyph2d": "shield",   "primitive3d": "icosahedron",  "size_mult": 1, "label_anchor": "below" },
+    "annotation": { "glyph2d": "bubble",   "primitive3d": "tetrahedron",  "size_mult": 1, "label_anchor": "below" },
+    "idea":       { "glyph2d": "star",     "primitive3d": "dodecahedron", "size_mult": 1, "label_anchor": "below" }
+  }
+}

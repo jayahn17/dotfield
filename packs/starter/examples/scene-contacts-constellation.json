@@ -1,0 +1,261 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-contacts-constellation",
+    "title": "Contacts — constellation",
+    "output": "out.html",
+    "theme": "paper",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true,
+    "room": "contacts",
+    "view": "constellation"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-structural-engineering",
+      "label": "structural-engineering",
+      "kind": "discipline",
+      "wraps": ["contacts-contact-0001"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-robotics",
+      "label": "robotics",
+      "kind": "discipline",
+      "wraps": ["contacts-contact-0002"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-slam",
+      "label": "slam",
+      "kind": "discipline",
+      "wraps": ["contacts-contact-0003"],
+      "color_token": "series-3"
+    },
+    {
+      "id": "g-org",
+      "label": "org",
+      "kind": "discipline",
+      "wraps": ["contacts-contact-0004"],
+      "color_token": "series-4"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "contacts-contact-0001",
+      "kind": "person",
+      "label": "Ada (structural)",
+      "room": "contacts",
+      "record_id": "contact-0001",
+      "weight": 0.5,
+      "tags": ["structural-engineering", "vibration"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "Bridge Office",
+      "group": "g-structural-engineering",
+      "fields": {
+        "display_name": "Ada (structural)",
+        "disciplines": ["structural-engineering", "vibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "contacts/contact-0001",
+          "digest": "sha256:76c9da5d8bcca698939139c4beee7a4931c7927fbfaba662d1ae86d9b3ed4e55"
+        },
+        "captured_on": "2026-06-01",
+        "happened_on": "2026-06-01",
+        "remembered_on": "2026-06-01"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-contacts"]
+    },
+    {
+      "id": "contacts-contact-0002",
+      "kind": "person",
+      "label": "Bo (lab manager)",
+      "room": "contacts",
+      "record_id": "contact-0002",
+      "weight": 0.5,
+      "tags": ["robotics", "safety"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "Hall Lab",
+      "group": "g-robotics",
+      "fields": {
+        "display_name": "Bo (lab manager)",
+        "disciplines": ["robotics", "safety"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "contacts/contact-0002",
+          "digest": "sha256:c0724d83baa4eb16bf3e16dff80fc621de004813e4e3cd1b8bdd158fbf212ef9"
+        },
+        "captured_on": "2026-03-14",
+        "happened_on": "2026-03-14",
+        "remembered_on": "2026-03-14"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-contacts"]
+    },
+    {
+      "id": "contacts-contact-0003",
+      "kind": "person",
+      "label": "Cy (reading group)",
+      "room": "contacts",
+      "record_id": "contact-0003",
+      "weight": 0.5,
+      "tags": ["slam", "reading"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "Loop Closure Reading Group",
+      "group": "g-slam",
+      "fields": {
+        "display_name": "Cy (reading group)",
+        "disciplines": ["slam", "reading"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "contacts/contact-0003",
+          "digest": "sha256:ecc5debf1fc791dff84fe3a8caa8a7dcf9b3c3e86f59179978e310e19e656717"
+        },
+        "captured_on": "2026-09-02",
+        "happened_on": "2026-08-30",
+        "remembered_on": "2026-09-02"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-contacts"]
+    },
+    {
+      "id": "contacts-contact-0004",
+      "kind": "person",
+      "label": "Hall Lab",
+      "room": "contacts",
+      "record_id": "contact-0004",
+      "weight": 0.5,
+      "tags": ["org", "robotics"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "Hall Lab",
+      "group": "g-org",
+      "fields": {
+        "display_name": "Hall Lab",
+        "disciplines": ["org", "robotics"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "contacts/contact-0004",
+          "digest": "sha256:286f068ffa8e2357ab9557ee9a798f66577a92d8def3403cdb9aebb00b92516f"
+        },
+        "captured_on": "2026-01-15",
+        "happened_on": "2026-01-15",
+        "remembered_on": "2026-01-15"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-contacts"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "contacts-contact-0002",
+      "to": "contacts-contact-0004",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "contacts-contact-0003",
+      "to": "contacts-contact-0002",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "cluster-disc",
+      "seed": 11,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "cluster-disc"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1.2
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "entry_node": "contacts-contact-0001"
+    },
+    "interactive": {
+      "focus": "contacts-contact-0001",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "orgs",
+          "label": "Organisations",
+          "match": {
+            "tags": ["org"]
+          }
+        }
+      ],
+      "presentation": ["contacts-contact-0001", "contacts-contact-0002", "contacts-contact-0003"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-contacts",
+      "kind": "record",
+      "ref": "contacts/examples.json",
+      "digest": "sha256:81a98024d3f8f599f82fc0a986fda3f4c637adb4e27a6f5bc36a0a2edd57e2c5",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "contacts-contact-0001": [731.411, 724.811],
+    "contacts-contact-0002": [643.922, 277.766],
+    "contacts-contact-0003": [774.879, 485.87],
+    "contacts-contact-0004": [965.9, 340.892]
+  },
+  "laid_out": true
+}

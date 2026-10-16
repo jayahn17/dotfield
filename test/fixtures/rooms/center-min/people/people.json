@@ -1,0 +1,14 @@
+{
+  "schema_version": "dotfield.people/1",
+  "people": [
+    {
+      "person_id": "self",
+      "kind": "self",
+      "display_name": "Owner",
+      "handles": [],
+      "disciplines": [ { "label": "notes", "source": "self", "weight": 1 } ],
+      "provenance": { "introduced_by_person_id": "self", "introduced_on": "2026-01-01", "evidence_ref": null },
+      "privacy_mode": "private_live"
+    }
+  ]
+}

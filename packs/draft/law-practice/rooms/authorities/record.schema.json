@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["authority_id", "citation", "holding", "logged_on"],
+  "properties": {
+    "authority_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "citation": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "court": { "type": "string", "maxLength": 80 },
+    "year": { "type": "integer", "minimum": 1000, "maximum": 2100 },
+    "holding": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "cites": { "type": "array", "maxItems": 32, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "decided_on": { "type": "string", "format": "date" },
+    "logged_on": { "type": "string", "format": "date" }
+  }
+}

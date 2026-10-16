@@ -1,0 +1,10 @@
+{
+  "schema_version": "dotfield.open-paths-fixture/1",
+  "nodes": [
+    { "id": "exp-0412", "label": "ORB-SLAM3 on hall-loop", "fields": { "metric": "ATE", "value": 0.042 }, "audience": { "privacy_level": "private" } },
+    { "id": "paper-orb3", "label": "ORB-SLAM3 (Campos 2021)", "audience": null }
+  ],
+  "positions": { "exp-0412": [612, 418], "paper-orb3": [748, 505] },
+  "views": { "interactive": { "color_token_by": { "field": "$.status", "map": { "done": "series-2", "running": "accent" } } } },
+  "ext": { "customer": { "anything": [1, 2, 3] } }
+}

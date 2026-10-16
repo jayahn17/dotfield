@@ -1,0 +1,9 @@
+[
+  {
+    "id": "web", "label": "Literature web", "kind": "graph", "theme": "light",
+    "node": { "kind": "record", "label": "$.citation", "sublabel": "$.finding", "tags": "$.tags" },
+    "group_by": { "field": "$.evidence_level", "kind": "region" },
+    "limit": { "max_nodes": 600, "default_lens": null },
+    "views": { "2d": { "layout": "force", "seed": 101 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "flat", "amplitude_m": 0 } }, "vr": { "enabled": false } }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "clients",
+  "label": "Clients",
+  "icon": "person",
+  "pack": "law-practice",
+  "purpose": "People and organisations the practice acts for, with the conflict tags that gate new intake. Sensitive: nothing here is ever projected; a rule over this room needs the mask operator and still emits stubs only.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "clients", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "client_id",
+    "label_field": "display_name",
+    "sublabel_field": "kind",
+    "tag_field": "conflict_tags",
+    "dates": { "happened_on": "since_on", "remembered_on": "logged_on" },
+    "link_fields": [],
+    "default_privacy_level": "sensitive",
+    "public_fields": []
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "conflicts", "display": "Conflicts", "tier": "challenger", "domain": "conflicts of interest",
+      "primary_field": "professional conduct", "adjacent_fields": ["intake", "information walls"],
+      "lens": "before any matter opens, ask who is adverse to whom; a conflict found later is a matter lost",
+      "keywords": ["conflict", "adverse", "waiver", "wall", "former-client", "intake"],
+      "challenger_for": ["intake", "researcher"], "influences": [],
+      "constraint": "research only, not licensed legal advice",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "file_with_court", "export_clients"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "roster view emits one person node per client", "no field of a client ever appears in a projection (public_fields is empty)", "a proposal never changes data/rooms/clients.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove clients exits 0 and a render --for another person of any view shows stubs only; the pack stays draft until its README conditions are met."
+}

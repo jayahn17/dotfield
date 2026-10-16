@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.proposal/1",
+  "title": "Dotfield proposal",
+  "description": "data/proposals/<id>.json — the approval queue (VISION 8.5). Written only by lib/proposals.mjs propose(); only decide() (reached through dotfield approve or the inbox decide route) moves status out of awaiting_owner. The summary is what the owner reviews; owner_decision.reviewed_summary_digest records the digest of what was seen. Open maps: records[*], summary.sample_rows[*], ext.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "proposal_id", "kind", "room", "scope", "by", "run_id", "source", "records", "summary", "summary_digest", "status", "owner_decision", "created_at", "decided_at", "receipt_ref", "split"],
+  "properties": {
+    "schema_version": { "const": "dotfield.proposal/1" },
+    "proposal_id": { "type": "string", "pattern": "^prop_[0-9]{8}T[0-9]{6}Z_[0-9a-f]{6}$" },
+    "kind": { "enum": ["records", "run", "rule", "pair"] },
+    "room": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$" },
+    "scope": { "type": "string", "pattern": "^(owner|person_[a-z0-9][a-z0-9_.:-]{0,79})$" },
+    "by": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:/-]{0,119}$", "description": "Who proposed: self, agent:<desk>, import:<kind>, run:<run_id>, or a person id." },
+    "run_id": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "source": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "ref", "digest"],
+          "properties": {
+            "kind": { "enum": ["record", "file", "url", "import", "run", "share"] },
+            "ref": { "type": "string", "minLength": 1, "maxLength": 1024 },
+            "digest": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/digest" } ] }
+          }
+        }
+      ]
+    },
+    "records": { "type": "array", "maxItems": 10000, "items": { "type": "object" } },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adds", "changes", "unchanged", "fields_touched", "sample_rows", "foreign_spans", "blocked_actions"],
+      "properties": {
+        "adds": { "type": "integer", "minimum": 0 },
+        "changes": { "type": "integer", "minimum": 0 },
+        "unchanged": { "type": "integer", "minimum": 0 },
+        "fields_touched": { "type": "array", "maxItems": 64, "items": { "type": "string", "minLength": 1, "maxLength": 64 } },
+        "sample_rows": { "type": "array", "maxItems": 5, "items": { "type": "object" } },
+        "foreign_spans": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["person_id", "rule_ref", "text"],
+            "properties": {
+              "person_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+              "rule_ref": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}/[a-z0-9][a-z0-9_.-]{0,39}$" },
+              "text": { "type": "string", "maxLength": 512 }
+            }
+          }
+        },
+        "blocked_actions": { "type": "array", "maxItems": 32, "items": { "type": "string", "minLength": 1, "maxLength": 120 } }
+      }
+    },
+    "summary_digest": { "$ref": "#/$defs/digest" },
+    "status": { "enum": ["draft", "awaiting_owner", "approved", "edited", "rejected"] },
+    "owner_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "decision", "reviewed_summary_digest", "note"],
+      "properties": {
+        "state": { "enum": ["not_required", "awaiting_owner", "approved", "edited", "rejected"] },
+        "decision": { "enum": ["approve", "edit", "reject", null] },
+        "reviewed_summary_digest": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/digest" } ] },
+        "note": { "type": ["string", "null"], "maxLength": 2000 }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "decided_at": { "type": ["string", "null"], "format": "date-time" },
+    "receipt_ref": { "type": ["string", "null"], "maxLength": 1024 },
+    "split": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["batch_id", "index", "of"],
+          "properties": {
+            "batch_id": { "type": "string", "pattern": "^[0-9a-f]{12}$" },
+            "index": { "type": "integer", "minimum": 1 },
+            "of": { "type": "integer", "minimum": 2 }
+          }
+        }
+      ]
+    },
+    "ext": { "type": "object" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

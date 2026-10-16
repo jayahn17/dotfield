@@ -1,0 +1,42 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "protocols",
+  "label": "Protocols",
+  "icon": "clipboard",
+  "pack": "clinic",
+  "purpose": "The clinic's protocol library: condition, version, steps, the literature each one rests on. Public by design; the one room this pack expects to share.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "protocols", "max_records": 1000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "protocol_id",
+    "label_field": "title",
+    "sublabel_field": "condition",
+    "tag_field": "tags",
+    "dates": { "happened_on": "effective_on", "remembered_on": "logged_on" },
+    "link_fields": [ { "field": "lit_ids", "to_room": "literature", "kind": "cites" }, { "field": "supersedes", "to_room": "protocols", "kind": "precedes" } ],
+    "default_privacy_level": "public",
+    "public_fields": ["title", "condition", "version", "steps_count", "tags", "effective_on"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "evidence", "display": "Evidence", "tier": "core", "domain": "evidence-based practice",
+      "primary_field": "clinical epidemiology", "adjacent_fields": ["guideline appraisal", "biostatistics"],
+      "lens": "a protocol is a claim about outcomes with a grade of evidence; name the grade before the step",
+      "keywords": ["evidence", "protocol", "guideline", "grade", "trial", "cohort"],
+      "challenger_for": [], "influences": ["triage-support"],
+      "constraint": "never produces a diagnosis or a treatment decision; cites literature by record id",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "contact_patient", "export_cases"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "outcomes view emits one node per protocol and one edge per cited literature", "a proposal never changes data/rooms/protocols.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove protocols exits 0 and both views render with no DF_IR_* or DF_LAYOUT_* failure; the pack stays draft until its README conditions are met."
+}

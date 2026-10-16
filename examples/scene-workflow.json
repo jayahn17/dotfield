@@ -1,0 +1,372 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "workflow",
+  "meta": {
+    "id": "telemetry-pipeline",
+    "title": "Telemetry pipeline (archify dataflow)",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "checked",
+    "privacy_mode": "synthetic_data",
+    "maturity": "prototype",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "z-edge",
+      "label": "Edge",
+      "kind": "zone",
+      "wraps": ["src-rosbag", "svc-ingest"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "z-core",
+      "label": "Core",
+      "kind": "zone",
+      "wraps": ["svc-sync", "store-parquet", "svc-eval"],
+      "color_token": "series-3"
+    },
+    {
+      "id": "z-out",
+      "label": "Outputs",
+      "kind": "zone",
+      "wraps": ["out-report"],
+      "color_token": "series-6"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "src-rosbag",
+      "kind": "file",
+      "label": "rosbag capture",
+      "group": "z-edge",
+      "weight": 0.5,
+      "tags": ["input"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "import:archify/telemetry.archify.json",
+          "digest": "sha256:7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a"
+        },
+        "captured_on": "2026-09-25"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-ingest",
+      "kind": "asset",
+      "label": "Ingest service",
+      "group": "z-edge",
+      "weight": 0.5,
+      "tags": ["service"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "import:archify/telemetry.archify.json",
+          "digest": "sha256:7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a"
+        },
+        "captured_on": "2026-09-25"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-sync",
+      "kind": "asset",
+      "label": "Time sync",
+      "group": "z-core",
+      "weight": 0.5,
+      "tags": ["service"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "import:archify/telemetry.archify.json",
+          "digest": "sha256:7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a"
+        },
+        "captured_on": "2026-09-25"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "store-parquet",
+      "kind": "file",
+      "label": "Parquet store",
+      "group": "z-core",
+      "weight": 0.5,
+      "tags": ["storage"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "import:archify/telemetry.archify.json",
+          "digest": "sha256:7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a"
+        },
+        "captured_on": "2026-09-25"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "svc-eval",
+      "kind": "asset",
+      "label": "Evaluation job",
+      "group": "z-core",
+      "weight": 0.5,
+      "tags": ["service", "metric"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "import:archify/telemetry.archify.json",
+          "digest": "sha256:7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a"
+        },
+        "captured_on": "2026-09-25"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "out-report",
+      "kind": "file",
+      "label": "Run report",
+      "group": "z-out",
+      "weight": 0.5,
+      "tags": ["output"],
+      "color_token": "series-6",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "import:archify/telemetry.archify.json",
+          "digest": "sha256:7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a"
+        },
+        "captured_on": "2026-09-25"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "f1",
+      "from": "src-rosbag",
+      "to": "svc-ingest",
+      "kind": "flow",
+      "directed": true,
+      "label": "bag → frames",
+      "order": 1,
+      "variant": "flow",
+      "route": "orthogonal"
+    },
+    {
+      "id": "f2",
+      "from": "svc-ingest",
+      "to": "svc-sync",
+      "kind": "flow",
+      "directed": true,
+      "label": "frames",
+      "order": 2,
+      "variant": "flow",
+      "route": "orthogonal"
+    },
+    {
+      "id": "f3",
+      "from": "svc-sync",
+      "to": "store-parquet",
+      "kind": "flow",
+      "directed": true,
+      "label": "aligned rows",
+      "order": 3,
+      "variant": "flow",
+      "route": "orthogonal"
+    },
+    {
+      "id": "f4",
+      "from": "store-parquet",
+      "to": "svc-eval",
+      "kind": "flow",
+      "directed": true,
+      "label": "rows",
+      "order": 4,
+      "variant": "flow",
+      "route": "orthogonal"
+    },
+    {
+      "id": "f5",
+      "from": "svc-eval",
+      "to": "out-report",
+      "kind": "flow",
+      "directed": true,
+      "label": "ATE, RPE",
+      "order": 5,
+      "variant": "flow",
+      "route": "orthogonal"
+    }
+  ],
+  "positions": {
+    "src-rosbag": [300, 183.333],
+    "svc-ingest": [800, 183.333],
+    "svc-sync": [300, 450],
+    "store-parquet": [800, 450],
+    "svc-eval": [1300, 450],
+    "out-report": [300, 716.667]
+  },
+  "laid_out": true,
+  "views": {
+    "2d": {
+      "layout": "grid",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 900],
+      "columns": 3,
+      "plan": {
+        "mode": "grid"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "camera": {
+        "position": [0, 2.5, 8],
+        "target": [0, 0, 0]
+      },
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "floor_y": 0,
+      "eye_height_m": 1.6,
+      "entry_node": "svc-ingest",
+      "label_budget": 32
+    },
+    "time": {
+      "axis": "order",
+      "step": "beat",
+      "playhead": null,
+      "motion": "trace",
+      "trace": {
+        "beads": 3
+      }
+    },
+    "interactive": {
+      "focus": "svc-ingest",
+      "reach": "out",
+      "lenses": [
+        {
+          "id": "services",
+          "label": "Services",
+          "match": {
+            "tags": ["service"]
+          }
+        }
+      ],
+      "presentation": ["src-rosbag", "svc-sync", "out-report"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "kind": "import",
+      "ref": "import:archify/telemetry.archify.json",
+      "digest": "sha256:7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a",
+      "label": "SRC 1"
+    }
+  ],
+  "ext": {
+    "archify": {
+      "source": "telemetry.archify.json",
+      "diagram_type": "dataflow",
+      "archify_version": "1",
+      "nodes": {
+        "src-rosbag": {
+          "type": "datasource",
+          "tech": "rosbag2"
+        },
+        "svc-ingest": {
+          "type": "service",
+          "tech": "node"
+        },
+        "svc-sync": {
+          "type": "service",
+          "tech": "python"
+        },
+        "store-parquet": {
+          "type": "datastore",
+          "tech": "parquet"
+        },
+        "svc-eval": {
+          "type": "job",
+          "tech": "python"
+        },
+        "out-report": {
+          "type": "artifact",
+          "tech": "markdown"
+        }
+      }
+    }
+  },
+  "projected": {
+    "by": "lib/project.mjs",
+    "engine_version": "0.1.0",
+    "viewer": "self",
+    "at": "2026-10-01T10:14:58Z",
+    "dropped": 0,
+    "limit": {
+      "focus": null,
+      "reach": null,
+      "lens": null,
+      "max_nodes": 2000
+    },
+    "mac": "hmac-sha256:231c2ce06cb867cebbd304ec08407496aad78b05deef575090798a06aa5fcab0"
+  },
+  "receipt": {
+    "receipt_id": "rcpt_20261001T101500Z_9a9a",
+    "source_digest": "sha256:66d666d666d666d666d666d666d666d666d666d666d666d666d666d666d666d6",
+    "tokens_digest": "sha256:0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+    "validator_version": "1",
+    "checks_passed": 31
+  }
+}

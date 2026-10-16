@@ -1,0 +1,140 @@
+{
+  "receipt_id": "rcpt_20261001T101500Z_9695",
+  "schema_version": "dotfield.receipt/1",
+  "command": "render",
+  "argv": [
+    "render",
+    "room:experiments/graph",
+    "out.html",
+    "--view",
+    "all",
+    "--for",
+    "ada"
+  ],
+  "generated_at": "2026-10-01T10:15:00Z",
+  "engine_version": "0.1.0",
+  "release_tag": "v1.1-provisional",
+  "engine_digests": {
+    "lib": "sha256:1f589837c67660e1d39b32ee07c804faf734fdc0c49f0f5ff4882a8a71ebae9d",
+    "schemas": "sha256:01562a459dc1a3803d1a9ab9c0b8ea1ad169eee151e9de314977ac64ca0cc929",
+    "match_release": null,
+    "meaning": "detects unintended local edits; not tamper evidence"
+  },
+  "status": "written",
+  "ok": true,
+  "exit_code": 0,
+  "maturity": "local_beta",
+  "scope": "owner",
+  "viewer": "ada",
+  "mode": "proposal_only",
+  "store": {
+    "target": "data/rooms/experiments.json",
+    "backend": "file"
+  },
+  "inputs": [
+    {
+      "ref": "center/rooms/experiments/room.json",
+      "digest": "sha256:b6938e839f445a0af66d86859667487a8a366ec4883c3981312223162211f990",
+      "bytes": 2048
+    },
+    {
+      "ref": "data/rooms/experiments.json",
+      "digest": "sha256:387fd729ffc3249ae5b3fbd71dda0e5fba9f2a924c6749c922ff0bea48b7cebf",
+      "bytes": 40960
+    }
+  ],
+  "checks": [
+    {
+      "code": "DF_SCHEMA_UNKNOWN_FIELD",
+      "gate": "schema",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_IR_DUP_ID",
+      "gate": "topology",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_IR_DANGLING_EDGE",
+      "gate": "topology",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_PRIVACY_VIEWER_EXCLUDED",
+      "gate": "privacy",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_RENDER_UNPROJECTED",
+      "gate": "render",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_LAYOUT_OVERLAP",
+      "gate": "layout",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_LAYOUT_LABEL_CLEARANCE",
+      "gate": "layout",
+      "blocking": false,
+      "status": "fail",
+      "path": "$.nodes[3]",
+      "message": "A label collides with a neighbouring glyph or label: label \"ORB-SLAM3 (Campos 2021)\" overlaps the glyph of paper-orb3",
+      "repair": "Shorten the label or raise views.2d.spacing."
+    },
+    {
+      "code": "DF_RENDER_HEX_LITERAL",
+      "gate": "render",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_RENDER_EXTERNAL_REF",
+      "gate": "render",
+      "blocking": true,
+      "status": "pass"
+    },
+    {
+      "code": "DF_RENDER_SIZE_BUDGET",
+      "gate": "render",
+      "blocking": true,
+      "status": "pass"
+    }
+  ],
+  "outputs": [
+    {
+      "ref": ".dotfield/renders/graph-experiments-20261001T101500Z/out.html",
+      "digest": "sha256:7ca25cc95fd10c4d0ac3fbcb423357a601c060db24bf141f72ab00d74192c5e0",
+      "bytes": 3012033,
+      "kind": "html",
+      "embedded_three": true
+    },
+    {
+      "ref": ".dotfield/renders/graph-experiments-20261001T101500Z/out.svg",
+      "digest": "sha256:db14976aa62f06e753e28372932b31e9b49c3afbf99c7cb4b31b994f78874fe5",
+      "bytes": 48211,
+      "kind": "svg"
+    }
+  ],
+  "owner_decision": {
+    "state": "not_required",
+    "reviewed_summary_digest": null
+  },
+  "blocked_actions": [],
+  "provider": null,
+  "foreign_spans_digest": null,
+  "evidence": {
+    "browser": "not_captured",
+    "screenshot_ref": null,
+    "device": null
+  },
+  "next_action": "Open the HTML in a browser (or on the headset via adb reverse) and record the screenshot path to move this render from provisional to reviewed.",
+  "digest": "sha256:e3a45407cc85808f42239768893ee947e27000c4ec2ea5a61374a6d4b0cea952"
+}

@@ -1,0 +1,257 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-collaborators",
+    "title": "Collaborators — constellation",
+    "output": "out.html",
+    "theme": "story",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "contract_only",
+    "legend": true,
+    "room": "collaborators",
+    "view": "constellation"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-structural",
+      "label": "structural",
+      "kind": "discipline",
+      "wraps": ["collaborators-collab-ada"],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-sensor",
+      "label": "sensor",
+      "kind": "discipline",
+      "wraps": ["collaborators-collab-bo", "collaborators-collab-eli"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-statistics",
+      "label": "statistics",
+      "kind": "discipline",
+      "wraps": ["collaborators-collab-dee"],
+      "color_token": "series-3"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "collaborators-collab-ada",
+      "kind": "person",
+      "label": "Ada (structural)",
+      "room": "collaborators",
+      "record_id": "collab-ada",
+      "weight": 0.5,
+      "tags": ["structural", "fatigue", "inspection"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "Bridge Office",
+      "group": "g-structural",
+      "fields": {
+        "display_name": "Ada (structural)",
+        "disciplines": ["structural", "fatigue", "inspection"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "collaborators/collab-ada",
+          "digest": "sha256:85fd126a0fc56df83e35e134f5a650f6e3fef8537dd54c81263f9072fffcb2c4"
+        },
+        "captured_on": "2026-06-01",
+        "happened_on": "2026-06-01",
+        "remembered_on": "2026-06-01"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-collaborators"]
+    },
+    {
+      "id": "collaborators-collab-bo",
+      "kind": "person",
+      "label": "Bo (sensors)",
+      "room": "collaborators",
+      "record_id": "collab-bo",
+      "weight": 0.5,
+      "tags": ["sensor", "vibration"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "Hall Lab",
+      "group": "g-sensor",
+      "fields": {
+        "display_name": "Bo (sensors)",
+        "disciplines": ["sensor", "vibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "collaborators/collab-bo",
+          "digest": "sha256:56972aa7f00441a6a6a6e6862b835ddcdfdbdb511517c32419e486d4651a79ed"
+        },
+        "captured_on": "2026-03-14",
+        "happened_on": "2026-03-14",
+        "remembered_on": "2026-03-14"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-collaborators"]
+    },
+    {
+      "id": "collaborators-collab-dee",
+      "kind": "person",
+      "label": "Dee (statistics)",
+      "room": "collaborators",
+      "record_id": "collab-dee",
+      "weight": 0.5,
+      "tags": ["statistics", "longitudinal-study"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "Methods Unit",
+      "group": "g-statistics",
+      "fields": {
+        "display_name": "Dee (statistics)",
+        "disciplines": ["statistics", "longitudinal-study"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "collaborators/collab-dee",
+          "digest": "sha256:8716bbcdda59e35b9e82d27577ef2ff44ac212e7c8cd4a1fedf202bd47a916c9"
+        },
+        "captured_on": "2025-10-02",
+        "happened_on": "2025-10-02",
+        "remembered_on": "2025-10-02"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-collaborators"]
+    },
+    {
+      "id": "collaborators-collab-eli",
+      "kind": "person",
+      "label": "Eli (student)",
+      "room": "collaborators",
+      "record_id": "collab-eli",
+      "weight": 0.5,
+      "tags": ["sensor", "statistics"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "Research lab",
+      "group": "g-sensor",
+      "fields": {
+        "display_name": "Eli (student)",
+        "disciplines": ["sensor", "statistics"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "collaborators/collab-eli",
+          "digest": "sha256:f961ea16c49d174476bb2e8dd8a24ee7d3c6007ef4e22f5fb0232a6b939de301"
+        },
+        "captured_on": "2026-01-20",
+        "happened_on": "2026-01-20",
+        "remembered_on": "2026-01-20"
+      },
+      "audience": {
+        "privacy_level": "sensitive",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-collaborators"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "collaborators-collab-bo",
+      "to": "collaborators-collab-ada",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "collaborators-collab-eli",
+      "to": "collaborators-collab-dee",
+      "kind": "relates",
+      "directed": false,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "cluster-disc",
+      "seed": 51,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "cluster-disc"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1.2
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "entry_node": "collaborators-collab-ada"
+    },
+    "interactive": {
+      "focus": "collaborators-collab-ada",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "external",
+          "label": "External",
+          "match": {
+            "tags": ["structural"]
+          }
+        }
+      ],
+      "presentation": ["collaborators-collab-ada", "collaborators-collab-bo", "collaborators-collab-dee"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-collaborators",
+      "kind": "record",
+      "ref": "collaborators/examples.json",
+      "digest": "sha256:c1d70212d395876ede2a13c974a7abd6c081cd8138b2d9120f163519e6428fc3",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "collaborators-collab-ada": [815.668, 723.187],
+    "collaborators-collab-bo": [886.473, 483.733],
+    "collaborators-collab-dee": [728.18, 276.142],
+    "collaborators-collab-eli": [824.224, 516.743]
+  },
+  "labels": {
+    "collaborators-collab-bo": "above"
+  },
+  "laid_out": true
+}

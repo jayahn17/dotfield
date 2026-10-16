@@ -1,0 +1,19 @@
+{
+  "schema_version": "dotfield.pack/1",
+  "id": "research-lab",
+  "label": "Research lab",
+  "profession": "research scientist",
+  "summary": "Papers, the experiments that test them, the datasets behind them and the collaborators who hold the other half. Ships the two-center demo: two scratch centers and two signed projections so connect --with runs without a second human.",
+  "version": "0.1.0",
+  "maturity": "contract_only",
+  "release_tag": "v1.1-provisional",
+  "rooms": ["papers", "experiments", "datasets", "collaborators"],
+  "roster": "roster.json",
+  "disciplines": "disciplines.json",
+  "theme": "theme.json",
+  "boundary_vocab": ["longitudinal-study", "sensor", "vibration", "fatigue"],
+  "share_defaults": { "privacy_level": "private", "redaction_operators": ["pseudonymize"] },
+  "views_off": [],
+  "regulatory_notes": [],
+  "recipes": ["first-hour.md", "share-a-projection.md", "backup-and-restore.md"]
+}

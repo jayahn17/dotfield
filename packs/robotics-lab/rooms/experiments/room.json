@@ -1,0 +1,47 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "experiments",
+  "label": "Experiments",
+  "icon": "flask",
+  "pack": "robotics-lab",
+  "purpose": "Every run of a robot against a dataset, the metric it produced, and the paper it tests.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "local_beta",
+  "store": { "scope": "owner", "namespace": "experiments", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "exp_id",
+    "label_field": "title",
+    "sublabel_field": "metric",
+    "tag_field": "tags",
+    "weight_field": "score",
+    "dates": { "happened_on": "run_on", "remembered_on": "logged_on" },
+    "link_fields": [
+      { "field": "robot_id", "to_room": "robots", "kind": "depends" },
+      { "field": "dataset_id", "to_room": "datasets", "kind": "depends" },
+      { "field": "paper_ids", "to_room": "papers", "kind": "cites" }
+    ],
+    "default_privacy_level": "private",
+    "public_fields": ["title", "metric", "value", "run_on", "tags"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "method-review", "display": "Method review", "tier": "core", "domain": "experimental robotics",
+      "primary_field": "robot evaluation", "adjacent_fields": ["statistics", "metrology"],
+      "lens": "an experiment is a measurement with an error budget, not a demo",
+      "keywords": ["experiment", "metric", "ATE", "benchmark", "ablation", "error-budget"],
+      "challenger_for": ["sim-ops"], "influences": ["data-ops"],
+      "constraint": "never reports a number without a record id as evidence",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["launch_hardware", "start_simulator", "upload_dataset"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "graph view emits one node per record and one edge per link field", "a proposal never changes data/rooms/experiments.json", "examples/runs.csv imports with no DF_RECORD_* failure"]
+  },
+  "done_definition": "Done as local_beta when dotfield prove experiments exits 0 and every view in views.json renders with no DF_IR_* or DF_LAYOUT_* failure."
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "citations", "label": "Citation web", "kind": "graph", "theme": "story",
+    "node": { "kind": "record", "label": "$.citation", "sublabel": "$.finding", "tags": "$.tags", "weight": "$.relevance/10" },
+    "group_by": { "field": "$.tags[0]", "kind": "discipline" },
+    "limit": { "max_nodes": 800, "default_lens": null },
+    "views": { "2d": { "layout": "force", "seed": 21 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "weight", "amplitude_m": 1.5 } }, "vr": { "enabled": true, "scale_m": 4 } },
+    "lenses": [ { "id": "fatigue", "label": "Fatigue", "match": { "tags": ["fatigue"] } } ]
+  },
+  {
+    "id": "influence", "label": "Influence graph", "kind": "graph", "theme": "story",
+    "node": { "kind": "record", "label": "$.citation", "sublabel": "$.venue", "tags": "$.tags", "weight": "$.relevance/10" },
+    "group_by": { "field": "$.venue", "kind": "region" },
+    "limit": { "max_nodes": 800, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 22 }, "3d": { "layout": "lift", "scale_m": 6, "lift": { "mode": "group-weight", "amplitude_m": 1.2 } }, "vr": { "enabled": true, "scale_m": 4 } }
+  }
+]

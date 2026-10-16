@@ -1,0 +1,51 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "cases",
+  "label": "Cases",
+  "icon": "folder",
+  "pack": "clinic",
+  "purpose": "One synthetic study id per case: which protocol was followed and what the outcome was. No names, no dates of birth, no free text about a person. Sensitive; public_fields is empty so nothing here is ever projected.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "cases", "max_records": 2000, "max_record_bytes": 4096 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "case_id",
+    "label_field": "case_id",
+    "sublabel_field": "outcome",
+    "tag_field": "tags",
+    "dates": { "happened_on": "opened_on", "remembered_on": "logged_on", "released_on": "closed_on" },
+    "link_fields": [ { "field": "protocol_id", "to_room": "protocols", "kind": "depends" } ],
+    "default_privacy_level": "sensitive",
+    "public_fields": []
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "triage-support", "display": "Triage support", "tier": "support", "domain": "clinical triage",
+      "primary_field": "triage", "adjacent_fields": ["red-flag screening"],
+      "lens": "triage orders the questions a clinician asks next; it never answers them",
+      "keywords": ["triage", "urgency", "red-flag", "escalation", "question"],
+      "challenger_for": [], "influences": [],
+      "constraint": "never a diagnosis; outputs are ordered questions that cite the protocol step they come from",
+      "prompt": null
+    },
+    {
+      "id": "audit", "display": "Audit", "tier": "support", "domain": "clinical audit",
+      "primary_field": "quality improvement", "adjacent_fields": ["variance analysis"],
+      "lens": "an audit compares what the protocol says with what the case record shows, step by step",
+      "keywords": ["audit", "variance", "quality", "review", "adherence"],
+      "challenger_for": ["safety-review"], "influences": ["evidence"],
+      "constraint": "works on synthetic case ids only; never joins cases to any external identifier",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "contact_patient", "export_cases", "aggregate_cases"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "timeline view orders cases by opened_on", "no field of a case ever appears in a projection (public_fields is empty)", "a proposal never changes data/rooms/cases.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove cases exits 0 and a render --for another person shows nothing from this room; the pack stays draft until its README conditions are met."
+}

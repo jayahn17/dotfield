@@ -1,0 +1,6 @@
+{
+  "schema_version": "dotfield.sketch/1", "type": "board", "title": "Lab sprint",
+  "groups": { "to do": ["order parts", "write tests"], "doing": ["calibrate arm"], "done": ["mount lidar", "flash firmware"] },
+  "nodes": ["order parts", "write tests", "calibrate arm", "mount lidar", "flash firmware"],
+  "edges": ["mount lidar -> calibrate arm", "flash firmware -> calibrate arm"]
+}

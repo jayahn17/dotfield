@@ -1,0 +1,279 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "timeline",
+  "meta": {
+    "id": "scene-run-history",
+    "title": "Experiments — run history",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true,
+    "room": "experiments",
+    "view": "timeline"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [],
+  "nodes": [
+    {
+      "id": "experiments-exp-0401",
+      "kind": "event",
+      "label": "Loop closure baseline",
+      "room": "experiments",
+      "record_id": "exp-0401",
+      "weight": 0.5,
+      "tags": ["slam", "indoor"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "fields": {
+        "title": "Loop closure baseline",
+        "metric": "ATE",
+        "value": 0.061,
+        "run_on": "2026-09-02",
+        "tags": ["slam", "indoor"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0401",
+          "digest": "sha256:f9d68c7ef56b037907df08abf7062f078f88aff95b0e0baf5a9e2de6c8fa7717"
+        },
+        "captured_on": "2026-09-02",
+        "happened_on": "2026-09-02",
+        "remembered_on": "2026-09-02"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0402",
+      "kind": "event",
+      "label": "IMU bias sweep",
+      "room": "experiments",
+      "record_id": "exp-0402",
+      "weight": 0.5,
+      "tags": ["calibration", "imu"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "bias",
+      "fields": {
+        "title": "IMU bias sweep",
+        "metric": "bias",
+        "value": 0.0031,
+        "run_on": "2026-09-05",
+        "tags": ["calibration", "imu"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0402",
+          "digest": "sha256:ddf2463bc6b97cdfc167a6cb879a0207b181109931e127be9b0be38bdbd435d5"
+        },
+        "captured_on": "2026-09-05",
+        "happened_on": "2026-09-05",
+        "remembered_on": "2026-09-05"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0403",
+      "kind": "event",
+      "label": "Hall-loop at 1.2 m/s",
+      "room": "experiments",
+      "record_id": "exp-0403",
+      "weight": 0.5,
+      "tags": ["slam", "indoor"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "fields": {
+        "title": "Hall-loop at 1.2 m/s",
+        "metric": "ATE",
+        "value": 0.048,
+        "run_on": "2026-09-09",
+        "tags": ["slam", "indoor"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0403",
+          "digest": "sha256:ad6033d4b1929286a4c49b8571bda91ee4acb85306dbecce05c6299834f973ce"
+        },
+        "captured_on": "2026-09-09",
+        "happened_on": "2026-09-09",
+        "remembered_on": "2026-09-09"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0404",
+      "kind": "event",
+      "label": "Stairwell attempt",
+      "room": "experiments",
+      "record_id": "exp-0404",
+      "weight": 0.5,
+      "tags": ["slam", "failed"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "fields": {
+        "title": "Stairwell attempt",
+        "metric": "ATE",
+        "value": 0.9,
+        "run_on": "2026-09-12",
+        "tags": ["slam", "failed"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0404",
+          "digest": "sha256:ff825a1f7481cc2d03b98826254e6e4fda8f269591b8330ab39fb0969abecc02"
+        },
+        "captured_on": "2026-09-12",
+        "happened_on": "2026-09-12",
+        "remembered_on": "2026-09-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0405",
+      "kind": "event",
+      "label": "Hall-loop with wheel odometry",
+      "room": "experiments",
+      "record_id": "exp-0405",
+      "weight": 0.5,
+      "tags": ["slam", "indoor", "sensor-fusion"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "fields": {
+        "title": "Hall-loop with wheel odometry",
+        "metric": "ATE",
+        "value": 0.042,
+        "run_on": "2026-09-18",
+        "tags": ["slam", "indoor", "sensor-fusion"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0405",
+          "digest": "sha256:da43e3eda4ca9e55a717a9bf90c3f11a9f6d75ea1126e864e6c99999efcf8035"
+        },
+        "captured_on": "2026-09-19",
+        "happened_on": "2026-09-18",
+        "remembered_on": "2026-09-19"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0406",
+      "kind": "event",
+      "label": "Vibration table calibration check",
+      "room": "experiments",
+      "record_id": "exp-0406",
+      "weight": 0.5,
+      "tags": ["vibration", "calibration"],
+      "color_token": "series-1",
+      "status": "accepted",
+      "sublabel": "drift",
+      "fields": {
+        "title": "Vibration table calibration check",
+        "metric": "drift",
+        "value": 0.0007,
+        "run_on": "2026-09-22",
+        "tags": ["vibration", "calibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0406",
+          "digest": "sha256:e1a1b0cad324e05a57093a64f66f201c90b0ac813b41e61d25081608d768dfcf"
+        },
+        "captured_on": "2026-09-22",
+        "happened_on": "2026-09-22",
+        "remembered_on": "2026-09-22"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    }
+  ],
+  "edges": [],
+  "views": {
+    "2d": {
+      "layout": "timeline",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "timeline"
+      }
+    },
+    "3d": {
+      "layout": "tier-wall",
+      "scale_m": 5
+    },
+    "vr": {
+      "enabled": false
+    },
+    "interactive": {
+      "focus": "experiments-exp-0401",
+      "reach": "both",
+      "lenses": [],
+      "presentation": ["experiments-exp-0401", "experiments-exp-0402", "experiments-exp-0403"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-experiments",
+      "kind": "record",
+      "ref": "experiments/examples.json",
+      "digest": "sha256:862f4f0c2796f8dafcd2b84704c886f7f9e21804cf49229e1c402b100bb2c442",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "experiments-exp-0401": [175, 500],
+    "experiments-exp-0402": [425, 500],
+    "experiments-exp-0403": [675, 500],
+    "experiments-exp-0404": [925, 500],
+    "experiments-exp-0405": [1175, 500],
+    "experiments-exp-0406": [1425, 500]
+  },
+  "laid_out": true
+}

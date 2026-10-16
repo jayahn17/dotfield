@@ -1,0 +1,277 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "sequence",
+  "meta": {
+    "id": "handoff",
+    "title": "Handoff — operator to desk",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "showcase",
+    "privacy_mode": "synthetic_data",
+    "maturity": "prototype",
+    "legend": true
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [],
+  "nodes": [
+    {
+      "id": "operator",
+      "kind": "person",
+      "label": "Operator",
+      "weight": 0.6,
+      "tags": [],
+      "color_token": "series-1",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:handoff",
+          "digest": "sha256:5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "conductor",
+      "kind": "desk",
+      "label": "Conductor",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-2",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:handoff",
+          "digest": "sha256:5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    },
+    {
+      "id": "desk-slam",
+      "kind": "desk",
+      "label": "SLAM desk",
+      "weight": 0.5,
+      "tags": [],
+      "color_token": "series-3",
+      "status": "accepted",
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "import",
+          "ref": "sketch:handoff",
+          "digest": "sha256:5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c"
+        },
+        "captured_on": "2026-10-07"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-1"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "m1",
+      "from": "operator",
+      "to": "conductor",
+      "kind": "message",
+      "directed": true,
+      "label": "brief",
+      "order": 1,
+      "variant": "solid",
+      "route": "straight"
+    },
+    {
+      "id": "m2",
+      "from": "conductor",
+      "to": "desk-slam",
+      "kind": "message",
+      "directed": true,
+      "label": "packet",
+      "order": 2,
+      "variant": "solid",
+      "route": "straight"
+    },
+    {
+      "id": "m3",
+      "from": "conductor",
+      "to": "operator",
+      "kind": "message",
+      "directed": true,
+      "label": "ack",
+      "order": 2,
+      "variant": "dashed",
+      "route": "straight"
+    },
+    {
+      "id": "m4",
+      "from": "desk-slam",
+      "to": "desk-slam",
+      "kind": "message",
+      "directed": true,
+      "label": "work",
+      "order": 3,
+      "variant": "dashed",
+      "route": "straight"
+    },
+    {
+      "id": "m5",
+      "from": "desk-slam",
+      "to": "conductor",
+      "kind": "message",
+      "directed": true,
+      "label": "result",
+      "order": 4,
+      "variant": "dashed",
+      "route": "straight"
+    },
+    {
+      "id": "m6",
+      "from": "desk-slam",
+      "to": "operator",
+      "kind": "message",
+      "directed": true,
+      "label": "summary",
+      "order": 5,
+      "variant": "solid",
+      "route": "straight"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "sequence",
+      "seed": 0,
+      "viewBox": [0, 0, 1600, 772],
+      "plan": {
+        "mode": "sequence",
+        "beats": 5
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "camera": {
+        "position": [0, 2.2, 8],
+        "target": [0, 0, 0]
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "floor_y": 0,
+      "eye_height_m": 1.6,
+      "entry_node": "operator",
+      "label_budget": 32
+    },
+    "time": {
+      "axis": "order",
+      "step": "beat",
+      "playhead": null,
+      "motion": "still"
+    },
+    "interactive": {
+      "focus": "conductor",
+      "reach": "both",
+      "deep_link": true,
+      "steps": [
+        {
+          "id": "s1",
+          "label": "The brief",
+          "nodes": ["operator", "conductor"],
+          "edges": ["m1"],
+          "playhead": 1
+        },
+        {
+          "id": "s2",
+          "label": "The answer",
+          "nodes": ["desk-slam", "operator"],
+          "edges": ["m6"],
+          "playhead": 5
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "kind": "import",
+      "ref": "sketch:handoff",
+      "digest": "sha256:5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d",
+      "label": "SRC 1"
+    }
+  ],
+  "positions": {
+    "operator": [300, 146],
+    "conductor": [800, 146],
+    "desk-slam": [1300, 146]
+  },
+  "routes": {
+    "m1": [
+      [300, 242],
+      [800, 242]
+    ],
+    "m2": [
+      [800, 338],
+      [1300, 338]
+    ],
+    "m3": [
+      [800, 338],
+      [300, 338]
+    ],
+    "m4": [
+      [1300, 434],
+      [1340, 434],
+      [1340, 474],
+      [1300, 474]
+    ],
+    "m5": [
+      [1300, 530],
+      [800, 530]
+    ],
+    "m6": [
+      [1300, 626],
+      [300, 626]
+    ]
+  },
+  "laid_out": true,
+  "projected": {
+    "by": "lib/project.mjs",
+    "engine_version": "0.1.0",
+    "viewer": "self",
+    "at": "2026-10-01T10:14:58Z",
+    "dropped": 0,
+    "limit": {
+      "focus": null,
+      "reach": null,
+      "lens": null,
+      "max_nodes": 2000
+    },
+    "mac": "hmac-sha256:b481aae6cb2bc8b850c2f54271414ab39ce4b5d61127c1a9afd78d86de2e83a3"
+  },
+  "receipt": {
+    "receipt_id": "rcpt_20261007T090000Z_5e01",
+    "source_digest": "sha256:77d777d777d777d777d777d777d777d777d777d777d777d777d777d777d777d7",
+    "tokens_digest": "sha256:0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+    "validator_version": "1",
+    "checks_passed": 31
+  }
+}

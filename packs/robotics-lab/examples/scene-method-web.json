@@ -1,0 +1,873 @@
+{
+  "schema_version": "dotfield.scene/1",
+  "kind": "graph",
+  "meta": {
+    "id": "scene-method-web",
+    "title": "Experiments — method web",
+    "output": "out.html",
+    "theme": "studio",
+    "quality": "checked",
+    "units": "m",
+    "up_axis": "y",
+    "privacy_mode": "synthetic_data",
+    "maturity": "local_beta",
+    "legend": true,
+    "room": "experiments",
+    "view": "graph"
+  },
+  "viewer": {
+    "person_id": "self",
+    "mode": "self",
+    "rule_refs": []
+  },
+  "groups": [
+    {
+      "id": "g-slam",
+      "label": "slam",
+      "kind": "discipline",
+      "wraps": [
+        "experiments-exp-0401",
+        "experiments-exp-0403",
+        "experiments-exp-0404",
+        "experiments-exp-0405",
+        "papers-paper-orb3",
+        "papers-paper-lio"
+      ],
+      "color_token": "series-1"
+    },
+    {
+      "id": "g-calibration",
+      "label": "calibration",
+      "kind": "discipline",
+      "wraps": ["experiments-exp-0402", "papers-paper-vib-cal"],
+      "color_token": "series-2"
+    },
+    {
+      "id": "g-vibration",
+      "label": "vibration",
+      "kind": "discipline",
+      "wraps": ["experiments-exp-0406"],
+      "color_token": "series-3"
+    },
+    {
+      "id": "g-sensor-fusion",
+      "label": "sensor-fusion",
+      "kind": "discipline",
+      "wraps": ["papers-paper-kalman"],
+      "color_token": "series-4"
+    },
+    {
+      "id": "g-hardware",
+      "label": "hardware",
+      "kind": "discipline",
+      "wraps": ["robots-robot-hb1", "robots-robot-hb2", "robots-lidar-rig", "robots-arm-1"],
+      "color_token": "series-5"
+    },
+    {
+      "id": "g-power",
+      "label": "power",
+      "kind": "discipline",
+      "wraps": ["robots-dock-1"],
+      "color_token": "series-6"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "experiments-exp-0401",
+      "kind": "record",
+      "label": "Loop closure baseline",
+      "room": "experiments",
+      "record_id": "exp-0401",
+      "weight": 0.5,
+      "tags": ["slam", "indoor"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "group": "g-slam",
+      "fields": {
+        "title": "Loop closure baseline",
+        "metric": "ATE",
+        "value": 0.061,
+        "run_on": "2026-09-02",
+        "tags": ["slam", "indoor"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0401",
+          "digest": "sha256:f9d68c7ef56b037907df08abf7062f078f88aff95b0e0baf5a9e2de6c8fa7717"
+        },
+        "captured_on": "2026-09-02",
+        "happened_on": "2026-09-02",
+        "remembered_on": "2026-09-02"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0402",
+      "kind": "record",
+      "label": "IMU bias sweep",
+      "room": "experiments",
+      "record_id": "exp-0402",
+      "weight": 0.6,
+      "tags": ["calibration", "imu"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "bias",
+      "group": "g-calibration",
+      "fields": {
+        "title": "IMU bias sweep",
+        "metric": "bias",
+        "value": 0.0031,
+        "run_on": "2026-09-05",
+        "tags": ["calibration", "imu"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0402",
+          "digest": "sha256:ddf2463bc6b97cdfc167a6cb879a0207b181109931e127be9b0be38bdbd435d5"
+        },
+        "captured_on": "2026-09-05",
+        "happened_on": "2026-09-05",
+        "remembered_on": "2026-09-05"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0403",
+      "kind": "record",
+      "label": "Hall-loop at 1.2 m/s",
+      "room": "experiments",
+      "record_id": "exp-0403",
+      "weight": 0.7,
+      "tags": ["slam", "indoor"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "group": "g-slam",
+      "fields": {
+        "title": "Hall-loop at 1.2 m/s",
+        "metric": "ATE",
+        "value": 0.048,
+        "run_on": "2026-09-09",
+        "tags": ["slam", "indoor"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0403",
+          "digest": "sha256:ad6033d4b1929286a4c49b8571bda91ee4acb85306dbecce05c6299834f973ce"
+        },
+        "captured_on": "2026-09-09",
+        "happened_on": "2026-09-09",
+        "remembered_on": "2026-09-09"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0404",
+      "kind": "record",
+      "label": "Stairwell attempt",
+      "room": "experiments",
+      "record_id": "exp-0404",
+      "weight": 0.2,
+      "tags": ["slam", "failed"],
+      "color_token": "warn",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "group": "g-slam",
+      "fields": {
+        "title": "Stairwell attempt",
+        "metric": "ATE",
+        "value": 0.9,
+        "run_on": "2026-09-12",
+        "tags": ["slam", "failed"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0404",
+          "digest": "sha256:ff825a1f7481cc2d03b98826254e6e4fda8f269591b8330ab39fb0969abecc02"
+        },
+        "captured_on": "2026-09-12",
+        "happened_on": "2026-09-12",
+        "remembered_on": "2026-09-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0405",
+      "kind": "record",
+      "label": "Hall-loop with wheel odometry",
+      "room": "experiments",
+      "record_id": "exp-0405",
+      "weight": 0.8,
+      "tags": ["slam", "indoor", "sensor-fusion"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "ATE",
+      "group": "g-slam",
+      "fields": {
+        "title": "Hall-loop with wheel odometry",
+        "metric": "ATE",
+        "value": 0.042,
+        "run_on": "2026-09-18",
+        "tags": ["slam", "indoor", "sensor-fusion"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0405",
+          "digest": "sha256:da43e3eda4ca9e55a717a9bf90c3f11a9f6d75ea1126e864e6c99999efcf8035"
+        },
+        "captured_on": "2026-09-19",
+        "happened_on": "2026-09-18",
+        "remembered_on": "2026-09-19"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "experiments-exp-0406",
+      "kind": "record",
+      "label": "Vibration table calibration check",
+      "room": "experiments",
+      "record_id": "exp-0406",
+      "weight": 0.7,
+      "tags": ["vibration", "calibration"],
+      "color_token": "series-2",
+      "status": "accepted",
+      "sublabel": "drift",
+      "group": "g-vibration",
+      "fields": {
+        "title": "Vibration table calibration check",
+        "metric": "drift",
+        "value": 0.0007,
+        "run_on": "2026-09-22",
+        "tags": ["vibration", "calibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "experiments/exp-0406",
+          "digest": "sha256:e1a1b0cad324e05a57093a64f66f201c90b0ac813b41e61d25081608d768dfcf"
+        },
+        "captured_on": "2026-09-22",
+        "happened_on": "2026-09-22",
+        "remembered_on": "2026-09-22"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-experiments"]
+    },
+    {
+      "id": "papers-paper-kalman",
+      "kind": "record",
+      "label": "Kalman 1960, A new approach to linear filtering",
+      "room": "papers",
+      "record_id": "paper-kalman",
+      "weight": 0.5,
+      "tags": ["sensor-fusion", "estimation"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "recursive least-squares state estimation",
+      "group": "g-sensor-fusion",
+      "fields": {
+        "citation": "Kalman 1960, A new approach to linear filtering",
+        "doi": "10.1115/1.3662552",
+        "method": "recursive least-squares state estimation",
+        "tags": ["sensor-fusion", "estimation"],
+        "published_on": "1960-03-01"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-kalman",
+          "digest": "sha256:e2e0d7908119d069b54fd32c5b5248a68616f0a451eb91cf7bc5485ff9b0b571"
+        },
+        "captured_on": "2026-02-10",
+        "happened_on": "1960-03-01",
+        "remembered_on": "2026-02-10"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-orb3",
+      "kind": "record",
+      "label": "Campos et al. 2021, ORB-SLAM3",
+      "room": "papers",
+      "record_id": "paper-orb3",
+      "weight": 0.5,
+      "tags": ["slam", "visual-inertial"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "feature-based visual-inertial SLAM with multi-map atlas",
+      "group": "g-slam",
+      "fields": {
+        "citation": "Campos et al. 2021, ORB-SLAM3",
+        "doi": "10.1109/TRO.2021.3075644",
+        "method": "feature-based visual-inertial SLAM with multi-map atlas",
+        "tags": ["slam", "visual-inertial"],
+        "published_on": "2021-05-25"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-orb3",
+          "digest": "sha256:3012292e89e1a98652da1cb4dede2ff7f6d9ee7c31efd836539c1bcfa283cfa7"
+        },
+        "captured_on": "2026-08-02",
+        "happened_on": "2021-05-25",
+        "remembered_on": "2026-08-02"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-lio",
+      "kind": "record",
+      "label": "Xu et al. 2022, FAST-LIO2",
+      "room": "papers",
+      "record_id": "paper-lio",
+      "weight": 0.5,
+      "tags": ["slam", "lidar", "sensor-fusion"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "tightly coupled lidar-inertial odometry on an ikd-tree",
+      "group": "g-slam",
+      "fields": {
+        "citation": "Xu et al. 2022, FAST-LIO2",
+        "doi": "10.1109/TRO.2022.3141876",
+        "method": "tightly coupled lidar-inertial odometry on an ikd-tree",
+        "tags": ["slam", "lidar", "sensor-fusion"],
+        "published_on": "2022-01-14"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-lio",
+          "digest": "sha256:0bf5df1064474cace1737a7c5d6439702d78833b778563b3e981a6e8abf6bda4"
+        },
+        "captured_on": "2026-08-20",
+        "happened_on": "2022-01-14",
+        "remembered_on": "2026-08-20"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "papers-paper-vib-cal",
+      "kind": "record",
+      "label": "Lab note 2026, IMU drift under vibration",
+      "room": "papers",
+      "record_id": "paper-vib-cal",
+      "weight": 0.5,
+      "tags": ["calibration", "vibration"],
+      "color_token": "series-3",
+      "status": "accepted",
+      "sublabel": "drift as a function of cumulative vibration energy rather than elapsed time",
+      "group": "g-calibration",
+      "fields": {
+        "citation": "Lab note 2026, IMU drift under vibration",
+        "method": "drift as a function of cumulative vibration energy rather than elapsed time",
+        "tags": ["calibration", "vibration"],
+        "published_on": "2026-06-30"
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "papers/paper-vib-cal",
+          "digest": "sha256:ed95cb3472cad93b97a772d9f9999a7af4661f756c21ca83418b6f545d11029c"
+        },
+        "captured_on": "2026-09-01",
+        "happened_on": "2026-06-30",
+        "remembered_on": "2026-09-01"
+      },
+      "audience": {
+        "privacy_level": "public",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-papers"]
+    },
+    {
+      "id": "robots-robot-hb1",
+      "kind": "record",
+      "label": "Hallbot 1",
+      "room": "robots",
+      "record_id": "robot-hb1",
+      "weight": 0.5,
+      "tags": ["hardware", "mobile", "slam"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "differential drive",
+      "group": "g-hardware",
+      "fields": {
+        "name": "Hallbot 1",
+        "platform": "differential drive",
+        "sensors": ["lidar-2d", "imu", "wheel-odometry"],
+        "tags": ["hardware", "mobile", "slam"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/robot-hb1",
+          "digest": "sha256:a67427fb821c3f986cbc15bed48dea52fa1f4d5998330f8c7928f13b95fdb520"
+        },
+        "captured_on": "2026-07-10",
+        "happened_on": "2026-07-10",
+        "remembered_on": "2026-07-10"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-robot-hb2",
+      "kind": "record",
+      "label": "Hallbot 2",
+      "room": "robots",
+      "record_id": "robot-hb2",
+      "weight": 0.5,
+      "tags": ["hardware", "mobile", "slam"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "differential drive",
+      "group": "g-hardware",
+      "fields": {
+        "name": "Hallbot 2",
+        "platform": "differential drive",
+        "sensors": ["lidar-2d", "imu", "camera"],
+        "tags": ["hardware", "mobile", "slam"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/robot-hb2",
+          "digest": "sha256:f2e64b5ab395223b49f7ac43605c9b76609fe05d59b856f08fc68d85792e7d24"
+        },
+        "captured_on": "2026-07-12",
+        "happened_on": "2026-07-12",
+        "remembered_on": "2026-07-12"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-lidar-rig",
+      "kind": "record",
+      "label": "Lidar test rig",
+      "room": "robots",
+      "record_id": "lidar-rig",
+      "weight": 0.5,
+      "tags": ["hardware", "sensor", "vibration"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "static rig",
+      "group": "g-hardware",
+      "fields": {
+        "name": "Lidar test rig",
+        "platform": "static rig",
+        "sensors": ["lidar-3d", "imu"],
+        "tags": ["hardware", "sensor", "vibration"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/lidar-rig",
+          "digest": "sha256:03460a288c446cf3a3430786bf183f7364bf784f9b73a794e6fffbbea2a3b27c"
+        },
+        "captured_on": "2026-08-01",
+        "happened_on": "2026-08-01",
+        "remembered_on": "2026-08-01"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-arm-1",
+      "kind": "record",
+      "label": "Bench arm",
+      "room": "robots",
+      "record_id": "arm-1",
+      "weight": 0.5,
+      "tags": ["hardware", "manipulation"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "6-dof arm",
+      "group": "g-hardware",
+      "fields": {
+        "name": "Bench arm",
+        "platform": "6-dof arm",
+        "sensors": ["joint-encoders", "wrist-camera"],
+        "tags": ["hardware", "manipulation"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/arm-1",
+          "digest": "sha256:eb4c8eebf304fcf808f5d7586c08ab060c5382b4dd1cb3387502393a6041e53f"
+        },
+        "captured_on": "2026-05-20",
+        "happened_on": "2026-05-20",
+        "remembered_on": "2026-05-20"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    },
+    {
+      "id": "robots-dock-1",
+      "kind": "record",
+      "label": "Charging dock",
+      "room": "robots",
+      "record_id": "dock-1",
+      "weight": 0.5,
+      "tags": ["power"],
+      "color_token": "series-4",
+      "status": "accepted",
+      "sublabel": "dock",
+      "group": "g-power",
+      "fields": {
+        "name": "Charging dock",
+        "platform": "dock",
+        "sensors": [],
+        "tags": ["power"]
+      },
+      "provenance": {
+        "owner_person_id": "self",
+        "source": {
+          "kind": "record",
+          "ref": "robots/dock-1",
+          "digest": "sha256:8c3c04422e029a5ad91a949162300b59d6dc09c2cb415c04b4fab237c46ea2bd"
+        },
+        "captured_on": "2026-07-10",
+        "happened_on": "2026-07-10",
+        "remembered_on": "2026-07-10"
+      },
+      "audience": {
+        "privacy_level": "private",
+        "share_rule_ids": []
+      },
+      "evidence_ids": ["ev-robots"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "experiments-exp-0401",
+      "to": "robots-robot-hb1",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e2",
+      "from": "experiments-exp-0401",
+      "to": "papers-paper-orb3",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e3",
+      "from": "experiments-exp-0402",
+      "to": "robots-lidar-rig",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e4",
+      "from": "experiments-exp-0402",
+      "to": "papers-paper-vib-cal",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e5",
+      "from": "experiments-exp-0403",
+      "to": "robots-robot-hb1",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e6",
+      "from": "experiments-exp-0403",
+      "to": "papers-paper-orb3",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e7",
+      "from": "experiments-exp-0403",
+      "to": "papers-paper-lio",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e8",
+      "from": "experiments-exp-0404",
+      "to": "robots-robot-hb2",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e9",
+      "from": "experiments-exp-0404",
+      "to": "papers-paper-lio",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e10",
+      "from": "experiments-exp-0405",
+      "to": "robots-robot-hb1",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e11",
+      "from": "experiments-exp-0405",
+      "to": "papers-paper-orb3",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e12",
+      "from": "experiments-exp-0405",
+      "to": "papers-paper-kalman",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e13",
+      "from": "experiments-exp-0406",
+      "to": "robots-lidar-rig",
+      "kind": "depends",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e14",
+      "from": "experiments-exp-0406",
+      "to": "papers-paper-vib-cal",
+      "kind": "cites",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e15",
+      "from": "papers-paper-orb3",
+      "to": "papers-paper-kalman",
+      "kind": "influences",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e16",
+      "from": "papers-paper-lio",
+      "to": "papers-paper-kalman",
+      "kind": "influences",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e17",
+      "from": "papers-paper-vib-cal",
+      "to": "papers-paper-kalman",
+      "kind": "influences",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e18",
+      "from": "robots-robot-hb1",
+      "to": "robots-dock-1",
+      "kind": "contains",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    },
+    {
+      "id": "e19",
+      "from": "robots-robot-hb2",
+      "to": "robots-dock-1",
+      "kind": "contains",
+      "directed": true,
+      "variant": "solid",
+      "route": "auto"
+    }
+  ],
+  "views": {
+    "2d": {
+      "layout": "cluster-disc",
+      "seed": 7,
+      "viewBox": [0, 0, 1600, 1000],
+      "plan": {
+        "mode": "cluster-disc"
+      }
+    },
+    "3d": {
+      "layout": "lift",
+      "scale_m": 6,
+      "lift": {
+        "mode": "group-weight",
+        "amplitude_m": 1.5
+      }
+    },
+    "vr": {
+      "enabled": true,
+      "scale_m": 4,
+      "entry_node": "experiments-exp-0401"
+    },
+    "interactive": {
+      "focus": "experiments-exp-0401",
+      "reach": "both",
+      "lenses": [
+        {
+          "id": "failed",
+          "label": "Failed runs",
+          "match": {
+            "tags": ["failed"]
+          }
+        }
+      ],
+      "presentation": ["experiments-exp-0401", "experiments-exp-0402", "experiments-exp-0403"],
+      "deep_link": true
+    }
+  },
+  "evidence": [
+    {
+      "id": "ev-experiments",
+      "kind": "record",
+      "ref": "experiments/examples.json",
+      "digest": "sha256:862f4f0c2796f8dafcd2b84704c886f7f9e21804cf49229e1c402b100bb2c442",
+      "label": "SRC 1"
+    },
+    {
+      "id": "ev-papers",
+      "kind": "record",
+      "ref": "papers/examples.json",
+      "digest": "sha256:214553954c96575eeea3055cfb4951d837121975d728856e5e733e359f478306",
+      "label": "SRC 2"
+    },
+    {
+      "id": "ev-robots",
+      "kind": "record",
+      "ref": "robots/examples.json",
+      "digest": "sha256:2dca35386efe98931042a289da851d4c2ec5e920e61d8ed4780224cb1c36ab5b",
+      "label": "SRC 3"
+    }
+  ],
+  "positions": {
+    "experiments-exp-0401": [779.933, 418.032],
+    "experiments-exp-0402": [620.226, 807.516],
+    "experiments-exp-0403": [724.506, 546.132],
+    "experiments-exp-0404": [889.765, 421.828],
+    "experiments-exp-0405": [828.343, 510.482],
+    "experiments-exp-0406": [518.855, 287.11],
+    "papers-paper-kalman": [794.542, 164.204],
+    "papers-paper-orb3": [839.336, 611.986],
+    "papers-paper-lio": [644.543, 486.778],
+    "papers-paper-vib-cal": [515.958, 872.776],
+    "robots-robot-hb1": [1090.583, 313.635],
+    "robots-robot-hb2": [1030.381, 341.68],
+    "robots-lidar-rig": [1069.314, 248.975],
+    "robots-arm-1": [1106.704, 366.259],
+    "robots-dock-1": [1084.231, 565.321]
+  },
+  "routes": {
+    "e1": [[779.933, 418.032], [1023.373, 320.827], [1090.583, 313.635]],
+    "e5": [[724.506, 546.132], [1042.176, 360.252], [1090.583, 313.635]],
+    "e15": [[839.336, 611.986], [852.024, 508.113], [794.542, 164.204]]
+  },
+  "labels": {
+    "experiments-exp-0405": "above",
+    "papers-paper-lio": "left",
+    "robots-robot-hb1": "right",
+    "robots-robot-hb2": "left"
+  },
+  "laid_out": true
+}

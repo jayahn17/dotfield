@@ -1,0 +1,43 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "papers",
+  "label": "Papers",
+  "icon": "book",
+  "pack": "research-lab",
+  "purpose": "The literature the lab reads and writes: citation, venue, the finding in one line, what each paper cites and what influenced it.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "papers", "max_records": 2000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "paper_id",
+    "label_field": "citation",
+    "sublabel_field": "finding",
+    "tag_field": "tags",
+    "weight_field": "relevance",
+    "dates": { "happened_on": "published_on", "remembered_on": "read_on" },
+    "link_fields": [ { "field": "cites", "to_room": "papers", "kind": "cites" }, { "field": "influences", "to_room": "papers", "kind": "influences" } ],
+    "default_privacy_level": "public",
+    "public_fields": ["citation", "venue", "doi", "finding", "tags", "published_on"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "lit-review", "display": "Literature review", "tier": "core", "domain": "literature",
+      "primary_field": "research literature", "adjacent_fields": ["citation analysis", "bibliometrics"],
+      "lens": "a paper is a method with a claimed regime of validity; cite the regime, not the title",
+      "keywords": ["paper", "citation", "survey", "review", "doi", "finding"],
+      "challenger_for": ["methods"], "influences": ["data-desk"],
+      "constraint": "cites by record id, never by memory",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["send_email", "submit_manuscript"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "citation view emits one directed cites edge per cites entry and one influences edge per influences entry", "a proposal never changes data/rooms/papers.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove papers exits 0 and both views render with no DF_IR_* or DF_LAYOUT_* failure; contract_only until then."
+}

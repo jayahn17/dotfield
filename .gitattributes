@@ -1,0 +1,2 @@
+# The archify corpus is pinned by sha256 (test/fixtures/archify/manifest.json): never let a checkout rewrite its line endings.
+test/fixtures/archify/** -text

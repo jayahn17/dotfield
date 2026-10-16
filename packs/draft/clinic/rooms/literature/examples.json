@@ -1,0 +1,5 @@
+[
+  { "lit_id": "l-0001", "citation": "Trial 2019, Early mobilisation after ankle sprain (synthetic)", "finding": "early mobilisation shortens return to activity without more re-injury", "evidence_level": "rct", "cites": [], "tags": ["musculoskeletal", "rct"], "published_on": "2019-06-01", "logged_on": "2025-02-20" },
+  { "lit_id": "l-0002", "citation": "Meta-analysis 2024, Functional support in sprains (synthetic)", "finding": "functional support outperforms immobilisation on pain at four weeks", "evidence_level": "meta-analysis", "cites": ["l-0001"], "tags": ["musculoskeletal", "meta-analysis"], "published_on": "2024-01-15", "logged_on": "2026-01-10" },
+  { "lit_id": "l-0003", "citation": "Cohort 2022, Home blood pressure review intervals (synthetic)", "finding": "three-month review intervals hold control as well as monthly ones in stable patients", "evidence_level": "cohort", "cites": [], "tags": ["cardiovascular", "cohort"], "published_on": "2022-09-30", "logged_on": "2025-09-01" }
+]

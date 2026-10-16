@@ -1,0 +1,260 @@
+{
+  "$schema": "../schemas/roster.schema.json",
+  "schema_version": "dotfield.roster/1",
+  "conductor": {
+    "id": "conductor",
+    "display": "Conductor",
+    "lens": "turn one question into a mission brief, route it to at most five desks and one challenger, and stop at awaiting_owner"
+  },
+  "desks": [
+    {
+      "id": "data-ops",
+      "display": "Data ops",
+      "tier": "support",
+      "domain": "dataset operations",
+      "primary_field": "data engineering",
+      "adjacent_fields": [
+        "storage",
+        "licensing"
+      ],
+      "lens": "a dataset is a contract: modality, size, license, digest",
+      "keywords": [
+        "dataset",
+        "data",
+        "license",
+        "modality",
+        "storage"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "never uploads; proposes the manifest row",
+      "prompt": null,
+      "room": "datasets",
+      "parent": null
+    },
+    {
+      "id": "lit-review",
+      "display": "Literature review",
+      "tier": "core",
+      "domain": "literature",
+      "primary_field": "robotics literature",
+      "adjacent_fields": [
+        "citation analysis"
+      ],
+      "lens": "a paper is a method with a claimed regime of validity",
+      "keywords": [
+        "paper",
+        "citation",
+        "survey",
+        "method",
+        "reading",
+        "doi"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "cites by record id, never by memory",
+      "prompt": null,
+      "room": "papers",
+      "parent": null
+    },
+    {
+      "id": "method-review",
+      "display": "Method review",
+      "tier": "challenger",
+      "domain": "experimental robotics",
+      "primary_field": "robot evaluation",
+      "adjacent_fields": [
+        "statistics",
+        "metrology"
+      ],
+      "lens": "an experiment is a measurement with an error budget, not a demo",
+      "keywords": [
+        "experiment",
+        "metric",
+        "ate",
+        "benchmark",
+        "ablation"
+      ],
+      "challenger_for": [
+        "sim-ops"
+      ],
+      "influences": [
+        "data-ops"
+      ],
+      "constraint": "never reports a number without a record id as evidence",
+      "prompt": null,
+      "room": "experiments",
+      "parent": null
+    },
+    {
+      "id": "planner",
+      "display": "Planner",
+      "tier": "support",
+      "domain": "planning",
+      "primary_field": "project planning",
+      "adjacent_fields": [
+        "scheduling"
+      ],
+      "lens": "a plan is a list of dated commitments with an owner",
+      "keywords": [
+        "plan",
+        "schedule",
+        "todo",
+        "milestone",
+        "deadline"
+      ],
+      "challenger_for": [],
+      "influences": [
+        "scribe"
+      ],
+      "constraint": "never commits the owner to a date without a note",
+      "prompt": null,
+      "room": "notes",
+      "parent": null
+    },
+    {
+      "id": "safety",
+      "display": "Safety",
+      "tier": "challenger",
+      "domain": "lab safety",
+      "primary_field": "hardware safety",
+      "adjacent_fields": [
+        "electrical engineering"
+      ],
+      "lens": "every launch is a hazard review first",
+      "keywords": [
+        "safety",
+        "estop",
+        "hardware",
+        "launch"
+      ],
+      "challenger_for": [
+        "sim-ops",
+        "data-ops"
+      ],
+      "influences": [],
+      "constraint": "never names launch_hardware as done",
+      "prompt": null,
+      "room": "experiments",
+      "parent": null
+    },
+    {
+      "id": "scribe",
+      "display": "Scribe",
+      "tier": "core",
+      "domain": "note taking",
+      "primary_field": "writing",
+      "adjacent_fields": [
+        "archiving"
+      ],
+      "lens": "a note is a dated claim with a source, not a passing thought",
+      "keywords": [
+        "note",
+        "journal",
+        "draft",
+        "summary"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "never invents a date; an undated note carries logged_on only",
+      "prompt": null,
+      "room": "notes",
+      "parent": null
+    },
+    {
+      "id": "sim-ops",
+      "display": "Simulation ops",
+      "tier": "core",
+      "domain": "robot simulation",
+      "primary_field": "simulation",
+      "adjacent_fields": [
+        "control",
+        "kinematics"
+      ],
+      "lens": "a simulator is a hypothesis about the plant, not the plant",
+      "keywords": [
+        "simulation",
+        "sim",
+        "urdf",
+        "gazebo",
+        "robot",
+        "platform"
+      ],
+      "challenger_for": [],
+      "influences": [
+        "data-ops"
+      ],
+      "constraint": "never starts a simulator; proposes the launch file",
+      "prompt": null,
+      "room": "robots",
+      "parent": null
+    },
+    {
+      "id": "skeptic",
+      "display": "Skeptic",
+      "tier": "challenger",
+      "domain": "review",
+      "primary_field": "methodology",
+      "adjacent_fields": [
+        "statistics"
+      ],
+      "lens": "the burden of proof is on the claim",
+      "keywords": [
+        "review",
+        "check",
+        "doubt",
+        "verify"
+      ],
+      "challenger_for": [
+        "scribe",
+        "planner"
+      ],
+      "influences": [],
+      "constraint": "never approves; it only asks for evidence",
+      "prompt": null,
+      "room": "contacts",
+      "parent": null
+    }
+  ],
+  "sources": [
+    {
+      "room": "contacts",
+      "desk_ids": [
+        "skeptic"
+      ]
+    },
+    {
+      "room": "datasets",
+      "desk_ids": [
+        "data-ops"
+      ]
+    },
+    {
+      "room": "experiments",
+      "desk_ids": [
+        "method-review",
+        "safety"
+      ]
+    },
+    {
+      "room": "notes",
+      "desk_ids": [
+        "scribe",
+        "planner"
+      ]
+    },
+    {
+      "room": "papers",
+      "desk_ids": [
+        "lit-review"
+      ]
+    },
+    {
+      "room": "robots",
+      "desk_ids": [
+        "sim-ops"
+      ]
+    }
+  ],
+  "digest": "sha256:8562b0e0ca3a3f2af587aa2c91661ca39819e6774820ee25ebf4449774213959"
+}

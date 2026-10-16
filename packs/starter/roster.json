@@ -1,0 +1,117 @@
+{
+  "schema_version": "dotfield.pack-roster/1",
+  "pack": "starter",
+  "desks": [
+    {
+      "id": "connector",
+      "display": "Connector",
+      "tier": "core",
+      "domain": "professional contacts and introductions",
+      "primary_field": "relationship mapping",
+      "adjacent_fields": [
+        "collaboration",
+        "disciplines"
+      ],
+      "lens": "a contact is a set of disciplines and an introduction path; the useful question is who knows whom across fields",
+      "keywords": [
+        "contact",
+        "meet",
+        "met",
+        "introduction",
+        "introduce",
+        "colleague",
+        "conference",
+        "network",
+        "collaborator"
+      ],
+      "challenger_for": [],
+      "influences": [],
+      "constraint": "never sends a message or makes an introduction and never stores a handle in the clear; proposes the contact record and who could introduce whom",
+      "prompt": null,
+      "room": "contacts",
+      "parent": null
+    },
+    {
+      "id": "planner",
+      "display": "Planner",
+      "tier": "support",
+      "domain": "weekly planning",
+      "primary_field": "planning",
+      "adjacent_fields": [
+        "prioritisation"
+      ],
+      "lens": "a plan is a short list of dated next actions, each pointing at the note that motivates it",
+      "keywords": [
+        "plan",
+        "weekly",
+        "next",
+        "milestone",
+        "roadmap"
+      ],
+      "challenger_for": [
+        "skeptic"
+      ],
+      "influences": [],
+      "constraint": "proposes at most seven actions and cites a note id for each",
+      "prompt": null,
+      "room": "notes",
+      "parent": null
+    },
+    {
+      "id": "scribe",
+      "display": "Scribe",
+      "tier": "core",
+      "domain": "note taking",
+      "primary_field": "writing",
+      "adjacent_fields": [
+        "archiving"
+      ],
+      "lens": "a note is a dated claim with a source, not a passing thought",
+      "keywords": [
+        "note",
+        "journal",
+        "draft",
+        "summary",
+        "write"
+      ],
+      "challenger_for": [],
+      "influences": [
+        "planner"
+      ],
+      "constraint": "never invents a date; an undated note carries logged_on only",
+      "prompt": null,
+      "room": "notes",
+      "parent": null
+    },
+    {
+      "id": "skeptic",
+      "display": "Skeptic",
+      "tier": "challenger",
+      "domain": "claims and sources",
+      "primary_field": "critical reading",
+      "adjacent_fields": [
+        "provenance",
+        "epistemics"
+      ],
+      "lens": "every note and every contact is a claim; ask who said it, when, and what would show it wrong",
+      "keywords": [
+        "doubt",
+        "evidence",
+        "source",
+        "verify",
+        "assumption",
+        "counterexample"
+      ],
+      "challenger_for": [
+        "scribe",
+        "planner",
+        "connector"
+      ],
+      "influences": [],
+      "constraint": "never adds a record; only questions, each pointing at the note or contact id it doubts",
+      "prompt": null,
+      "room": "contacts",
+      "parent": null
+    }
+  ]
+}

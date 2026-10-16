@@ -1,0 +1,22 @@
+{
+  "schema_version": "dotfield.pack/1",
+  "id": "clinic",
+  "label": "Clinic",
+  "profession": "clinician",
+  "summary": "A shareable protocol library, synthetic-id cases, the literature behind the protocols and the follow-ups they generate. A draft: it validates and renders, and init refuses it until the three conditions in its README are met.",
+  "version": "0.1.0",
+  "maturity": "contract_only",
+  "rooms": ["protocols", "cases", "literature", "followups"],
+  "roster": "roster.json",
+  "disciplines": "disciplines.json",
+  "theme": "theme.json",
+  "boundary_vocab": ["protocol", "outcome", "adherence", "triage"],
+  "share_defaults": { "privacy_level": "sensitive", "redaction_operators": ["redact"] },
+  "views_off": ["vr"],
+  "regulatory_notes": [
+    "Not a medical record system: case ids are synthetic study ids and never patient identifiers.",
+    "No desk produces a diagnosis; triage-support orders questions, never conclusions.",
+    "aggregate and train are blocked on every room regardless of mode; no rule can switch them on."
+  ],
+  "recipes": ["first-hour.md"]
+}

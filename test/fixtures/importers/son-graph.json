@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-09-30T08:00:00Z",
+  "root": "vault",
+  "nodes": [
+    { "id": "docs/calibration.md", "label": "Calibration cadence", "group": "docs", "kind": "note", "description": "Recalibrate by cumulative vibration, not by the calendar.", "tags": ["calibration", "vibration"], "size": 2048, "mtime": 1790000000, "degree": 4, "discipline": "robotics" },
+    { "id": "docs/hall-loop.md", "label": "Hall loop dataset", "group": "docs", "kind": "note", "description": "Twelve passes, two with the lights off.", "tags": ["dataset"], "size": 1024, "mtime": 1790000100, "degree": 3, "discipline": "robotics" },
+    { "id": "memory/weekly-plan.md", "label": "Weekly plan", "group": "memory", "kind": "note", "description": "", "tags": [], "size": 300, "mtime": 1790000200, "degree": 2, "discipline": "general", "path": "/home/someone/vault/memory/weekly-plan.md" },
+    { "id": "ghost:loop-closure-survey", "label": "loop closure survey", "group": "docs", "kind": "ghost", "discipline": "general", "degree": 1 },
+    { "id": "tag:calibration", "label": "#calibration", "group": "tag", "kind": "tag", "discipline": "general", "degree": 2 },
+    { "id": "agent:conductor", "label": "Conductor", "group": "agent", "kind": "agent", "discipline": "ai agents", "degree": 3, "tier": "core" },
+    { "id": "agent:method-review", "label": "Method review", "group": "agent", "kind": "agent", "discipline": "ai agents", "degree": 1, "tier": "support" }
+  ],
+  "links": [
+    { "source": "docs/calibration.md", "target": "docs/hall-loop.md", "kind": "wiki" },
+    { "source": "docs/calibration.md", "target": "ghost:loop-closure-survey", "kind": "wiki" },
+    { "source": "docs/calibration.md", "target": "tag:calibration", "kind": "tag" },
+    { "source": "memory/weekly-plan.md", "target": "docs/calibration.md", "kind": "md" },
+    { "source": "docs/hall-loop.md", "target": "memory/weekly-plan.md", "kind": "mention" },
+    { "source": "memory/weekly-plan.md", "target": "docs/hall-loop.md", "kind": "mention" },
+    { "source": "agent:conductor", "target": "agent:method-review", "kind": "workflow", "directed": true },
+    { "source": "agent:conductor", "target": "docs/calibration.md", "kind": "agent", "directed": true },
+    { "source": "agent:method-review", "target": "docs/missing.md", "kind": "agent", "directed": true },
+    { "source": "docs/hall-loop.md", "target": "docs/hall-loop.md", "kind": "wiki" }
+  ],
+  "groups": { "docs": 3, "memory": 1, "tag": 1, "agent": 2 },
+  "stats": { "notes": 3, "links": 10, "agents": 2, "tags": 1 }
+}

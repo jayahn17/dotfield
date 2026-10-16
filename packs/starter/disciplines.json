@@ -1,0 +1,10 @@
+{
+  "schema_version": "dotfield.disciplines/1",
+  "disciplines": [
+    { "label": "notes", "patterns": ["note", "journal", "draft", "summary"], "weight": 1, "source": "starter" },
+    { "label": "planning", "patterns": ["plan", "weekly", "milestone", "roadmap"], "weight": 0.8, "source": "starter" },
+    { "label": "reading", "patterns": ["reading", "survey", "paper", "book"], "weight": 0.7, "source": "starter" },
+    { "label": "calibration", "patterns": ["calibration", "calibrate", "drift"], "weight": 0.6, "source": "starter" },
+    { "label": "contacts", "patterns": ["contact", "colleague", "introduced", "org"], "weight": 0.8, "source": "starter" }
+  ]
+}

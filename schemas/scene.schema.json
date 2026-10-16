@@ -1,0 +1,527 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dotfield.scene/1",
+  "title": "Dotfield scene",
+  "description": "The one scene IR of VISION section 4: one typed document that 2D, 3D, VR and the interactive page all render. Closed everywhere except five open maps: positions, routes and labels (the geometry tables, pattern-keyed by node or edge id), nodes[].fields (at most 32 keys, 4 KB per node checked by the topology gate) and ext (customer round-tripping only). The views.json value map of VISION 2.3 lives in the room schema. Every id is lower-case ascii; every digest is sha256:<64 hex>; a rule_ref is <grantor_person_id>/<rule_id>.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "meta", "viewer", "nodes", "edges", "views"],
+  "properties": {
+    "schema_version": { "const": "dotfield.scene/1" },
+    "kind": {
+      "description": "Only changes the default layout: graph (records, people, concepts), room (metric space, pose_m), timeline (dated records), board (lanes by group), workflow (archify diagrams), meet (boundary candidates), sequence (participants on lanes with ordered message edges), lifecycle (states with ordered transition edges).",
+      "enum": ["graph", "room", "timeline", "board", "workflow", "meet", "sequence", "lifecycle"]
+    },
+    "meta": { "$ref": "#/$defs/meta" },
+    "viewer": { "$ref": "#/$defs/viewer" },
+    "groups": { "type": "array", "items": { "$ref": "#/$defs/group" } },
+    "nodes": { "type": "array", "items": { "$ref": "#/$defs/node" } },
+    "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+    "positions": {
+      "description": "The one positions table, written once by lib/layout/index.mjs in 2D; 3D lifts it, VR transforms it. Keyed by node id.",
+      "type": "object",
+      "patternProperties": { "^[a-z0-9][a-z0-9_.:-]{0,79}$": { "$ref": "#/$defs/vec2" } },
+      "additionalProperties": false
+    },
+    "routes": {
+      "description": "Edge id -> polyline in viewBox px. Dense in routed modes (layered, sequence, lifecycle: every edge with an id, the chord included); sparse elsewhere (only edges lib/layout/route.mjs changed). svg, the layout gate and three.mjs read scene.routes[id] ?? routePoints().",
+      "type": "object",
+      "patternProperties": { "^[a-z0-9][a-z0-9_.:-]{0,79}$": { "type": "array", "minItems": 2, "maxItems": 64, "items": { "$ref": "#/$defs/vec2" } } },
+      "additionalProperties": false
+    },
+    "labels": {
+      "description": "Node id -> label side, written by lib/layout/labels.mjs only where it differs from the shapes.json default; absence means the default side.",
+      "type": "object",
+      "patternProperties": { "^[a-z0-9][a-z0-9_.:-]{0,79}$": { "enum": ["below", "above", "right", "left", "center"] } },
+      "additionalProperties": false
+    },
+    "laid_out": { "type": "boolean", "description": "true once positions holds every node and routes is complete for the mode (routesComplete: dense in routed modes); goldens never re-simulate (DF_LAYOUT_ROUTE_MISSING when a routed mode lacks an entry or a key names no edge)." },
+    "views": { "$ref": "#/$defs/views" },
+    "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+    "projected": { "$ref": "#/$defs/projected" },
+    "receipt": { "$ref": "#/$defs/scene_receipt" },
+    "delta": { "$ref": "#/$defs/delta" },
+    "ext": { "type": "object", "description": "Customer round-tripping only (importers keep their source attributes here). Never read by renderers/ or lib/layout/. The one key the pipeline reads is ext.kinds: a sketch's inline kinds block, validated against schemas/kinds.schema.json and merged over the kinds table by lib/pipeline.mjs withSceneKinds()." }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "rule_ref": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]*/[a-z0-9][a-z0-9_.:-]*$" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "mac": { "type": "string", "pattern": "^hmac-sha256:[0-9a-f]{64}$" },
+    "date": { "type": "string", "format": "date" },
+    "color_token": { "type": "string", "pattern": "^(series-[1-6]|accent|accent-2|muted|good|warn|bad|foreign)$" },
+    "privacy_level": { "enum": ["public", "private", "sensitive", "blocked"] },
+    "unit_interval": { "type": "number", "minimum": 0, "maximum": 1 },
+    "vec2": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+    "vec3": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+    "id_list": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+    "short_text": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "side": { "enum": ["top", "bottom", "left", "right"] },
+    "time_point": {
+      "description": "A point on the views.time axis: a date (axis date), an integer >= 0 (axis order) or null (unset). One schema over three types: format applies only to the string, minimum only to the integer, so a malformed date is DF_SCHEMA_FORMAT and a negative integer DF_SCHEMA_MINIMUM; the topology gate pairs the type with the axis (DF_IR_TIME_WINDOW_INVALID).",
+      "type": ["string", "integer", "null"],
+      "format": "date",
+      "minimum": 0
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "theme", "quality", "privacy_mode", "maturity"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/short_text" },
+        "description": { "type": "string", "maxLength": 500 },
+        "output": { "type": "string", "minLength": 1, "maxLength": 256, "description": "Output file name; a bare name or a path relative to the center, never an absolute path." },
+        "theme": { "enum": ["default", "light", "paper", "studio", "field", "story", "editorial", "blueprint"], "description": "A renderers/tokens.css theme; `dotfield render --theme <name>` overrides it for one render (SVG, HTML, layout and render gates alike)." },
+        "quality": { "enum": ["draft", "checked", "showcase"], "description": "checked: clearance and route checks are non-blocking; showcase: they block." },
+        "units": { "enum": ["m"] },
+        "up_axis": { "enum": ["y", "z"] },
+        "privacy_mode": { "enum": ["synthetic_data", "private_live"] },
+        "maturity": { "enum": ["contract_only", "prototype", "local_beta", "tested"] },
+        "legend": { "type": "boolean" },
+        "room": { "$ref": "#/$defs/id" },
+        "view": { "$ref": "#/$defs/id" }
+      }
+    },
+    "viewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_id", "mode", "rule_refs"],
+      "properties": {
+        "person_id": { "$ref": "#/$defs/id" },
+        "mode": { "enum": ["self", "person", "public"] },
+        "rule_refs": { "type": "array", "items": { "$ref": "#/$defs/rule_ref" } }
+      }
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "$ref": "#/$defs/short_text" },
+        "kind": { "enum": ["region", "discipline", "circle", "zone", "lane", "person"] },
+        "wraps": { "$ref": "#/$defs/id_list", "description": "Graph-like scenes: the node ids the region wraps." },
+        "center_xyz_m": { "$ref": "#/$defs/vec3", "description": "Metric rooms: the box centre in metres." },
+        "size_xyz_m": { "$ref": "#/$defs/vec3", "description": "Metric rooms: the box size in metres." },
+        "color_token": { "$ref": "#/$defs/color_token" },
+        "collapsed": { "type": "boolean" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "label", "weight", "tags", "color_token", "status", "provenance", "audience", "evidence_ids"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "type": "string", "pattern": "^(record|note|person|desk|tag|file|asset|event|place|boundary|annotation|idea|x-[a-z0-9][a-z0-9-]{0,30})$" },
+        "label": { "$ref": "#/$defs/short_text" },
+        "sublabel": { "type": "string", "maxLength": 200 },
+        "room": { "$ref": "#/$defs/id" },
+        "record_id": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "group": { "$ref": "#/$defs/id" },
+        "weight": { "$ref": "#/$defs/unit_interval" },
+        "tags": { "type": "array", "maxItems": 32, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+        "shape": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,30}$", "description": "Overrides the shapes.json glyph for this node." },
+        "color_token": { "$ref": "#/$defs/color_token" },
+        "status": { "enum": ["accepted", "proposal"] },
+        "pos": {
+          "description": "graph|timeline|board|workflow|sequence|lifecycle only: authored 2D position, normalised -1..1 (room scenes ignore it: DF_LAYOUT_POSE_IGNORED).",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y"],
+          "properties": { "x": { "type": "number", "minimum": -1, "maximum": 1 }, "y": { "type": "number", "minimum": -1, "maximum": 1 } }
+        },
+        "pose_m": {
+          "description": "room only: metric pose (graph-like scenes ignore it: DF_LAYOUT_POSE_IGNORED).",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["xyz", "rpy"],
+          "properties": { "xyz": { "$ref": "#/$defs/vec3" }, "rpy": { "$ref": "#/$defs/vec3" } }
+        },
+        "size_m": { "$ref": "#/$defs/vec3" },
+        "fields": {
+          "description": "Only the record public_fields; at most 32 keys, 4 KB per node, string values at most 1 KB; never rendered as body text.",
+          "type": "object",
+          "maxProperties": 32,
+          "additionalProperties": {
+            "type": ["string", "number", "boolean", "null", "array"],
+            "maxLength": 1024,
+            "maxItems": 64,
+            "items": { "type": ["string", "number", "boolean", "null"], "maxLength": 1024 }
+          }
+        },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "audience": { "$ref": "#/$defs/audience" },
+        "evidence_ids": { "$ref": "#/$defs/id_list" },
+        "boundary": { "$ref": "#/$defs/boundary" }
+      }
+    },
+    "provenance": {
+      "description": "The whitepaper's three dates plus taint: who owns the node, where it came from, when it was captured, happened, remembered and released, and which foreign rules it derives from.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner_person_id", "source", "captured_on"],
+      "properties": {
+        "owner_person_id": { "$ref": "#/$defs/id" },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "ref", "digest"],
+          "properties": {
+            "kind": { "enum": ["record", "file", "url", "import", "run", "share"] },
+            "ref": { "type": "string", "minLength": 1, "maxLength": 512 },
+            "digest": { "$ref": "#/$defs/digest" }
+          }
+        },
+        "captured_on": { "$ref": "#/$defs/date" },
+        "happened_on": { "$ref": "#/$defs/date" },
+        "remembered_on": { "$ref": "#/$defs/date" },
+        "released_on": { "$ref": "#/$defs/date" },
+        "imported_via_rule_ref": { "$ref": "#/$defs/rule_ref" },
+        "derived_from": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["person_id", "rule_ref", "key_id"],
+            "properties": {
+              "person_id": { "$ref": "#/$defs/id" },
+              "rule_ref": { "$ref": "#/$defs/rule_ref" },
+              "key_id": { "$ref": "#/$defs/id" }
+            }
+          }
+        }
+      }
+    },
+    "audience": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["privacy_level", "share_rule_ids"],
+      "properties": {
+        "privacy_level": { "$ref": "#/$defs/privacy_level" },
+        "share_rule_ids": { "$ref": "#/$defs/id_list" }
+      }
+    },
+    "boundary": {
+      "description": "Only on kind boundary: the signed projection the node was imported from.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_ref", "digest", "shared_by", "released_on", "key_id"],
+      "properties": {
+        "rule_ref": { "$ref": "#/$defs/rule_ref" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "shared_by": { "$ref": "#/$defs/id" },
+        "released_on": { "$ref": "#/$defs/date" },
+        "expires_on": { "$ref": "#/$defs/date" },
+        "key_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "kind", "directed", "variant", "route"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "from": { "$ref": "#/$defs/id" },
+        "to": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["relates", "link", "cites", "influences", "depends", "member", "contains", "precedes", "flow", "share", "annotates", "candidate", "message", "transition"] },
+        "directed": { "type": "boolean" },
+        "label": { "type": "string", "maxLength": 120 },
+        "weight": { "$ref": "#/$defs/unit_interval" },
+        "order": { "type": "integer", "minimum": 0, "description": "Required on message and transition edges and on every edge of a sequence scene (DF_IR_ORDER_MISSING); equal order = one beat." },
+        "at": { "$ref": "#/$defs/date", "description": "The edge's own date on a date axis; else derived from the later endpoint." },
+        "from_side": { "$ref": "#/$defs/side", "description": "Port hint the channel router honours: which side of the from glyph the route leaves." },
+        "to_side": { "$ref": "#/$defs/side", "description": "Port hint the channel router honours: which side of the to glyph the route enters." },
+        "variant": { "enum": ["solid", "dashed", "flow"] },
+        "route": { "enum": ["auto", "straight", "orthogonal"] },
+        "via": { "type": "array", "maxItems": 16, "items": { "$ref": "#/$defs/vec2" } },
+        "label_at": { "$ref": "#/$defs/unit_interval" },
+        "rule_ref": { "$ref": "#/$defs/rule_ref", "description": "Required when kind is share (DF_IR_SHARE_EDGE_NO_RULE)." },
+        "evidence_ids": { "$ref": "#/$defs/id_list" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "ref", "digest", "label"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["record", "file", "url", "import", "run", "share", "projection"] },
+        "ref": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "digest": { "$ref": "#/$defs/digest" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    },
+    "views": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["2d"],
+      "properties": {
+        "2d": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["layout"],
+          "properties": {
+            "layout": { "enum": ["force", "cluster-disc", "grid", "timeline", "lanes", "metric", "layered", "sequence", "lifecycle"] },
+            "seed": { "type": "integer", "minimum": 0 },
+            "viewBox": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4 },
+            "spacing": { "type": "number", "minimum": 0 },
+            "padding": { "type": "number", "minimum": 0 },
+            "columns": { "type": "integer", "minimum": 1 },
+            "direction": { "enum": ["down", "right", "up", "left"], "description": "layered and lifecycle only (default down for workflow, right for lifecycle); grid ignores it." },
+            "label_budget": { "type": "integer", "minimum": 0, "maximum": 2000, "description": "Labels beyond the top-N by weight are hover-only and unmeasured; default all up to 300 nodes, then 300." },
+            "plan": {
+              "description": "Written by lib/layout for every mode; read, never recomputed, by the layout gate (DF_LAYOUT_LAYER_CYCLE_BROKEN from reversed, DF_LAYOUT_VIEWBOX_GROWN from viewbox_grown_from) and by svg-chrome.mjs. Arrays, so no new open path.",
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode"],
+              "properties": {
+                "mode": { "enum": ["force", "cluster-disc", "grid", "timeline", "lanes", "metric", "layered", "sequence", "lifecycle"] },
+                "reversed": { "$ref": "#/$defs/id_list" },
+                "skipped": { "$ref": "#/$defs/id_list" },
+                "layers": { "type": "integer", "minimum": 0 },
+                "dummies": { "type": "integer", "minimum": 0 },
+                "crossings": { "type": "integer", "minimum": 0 },
+                "beats": { "type": "integer", "minimum": 0 },
+                "viewbox_grown_from": { "$ref": "#/$defs/vec2" }
+              }
+            }
+          }
+        },
+        "3d": {
+          "description": "Stores only the lift parameters; z is derived from positions by lib/layout/lift.mjs.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["layout", "scale_m"],
+          "properties": {
+            "layout": { "enum": ["lift", "tier-wall", "metric"] },
+            "scale_m": { "type": "number", "minimum": 0.001 },
+            "camera": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["position", "target"],
+              "properties": { "position": { "$ref": "#/$defs/vec3" }, "target": { "$ref": "#/$defs/vec3" } }
+            },
+            "lift": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode", "amplitude_m"],
+              "properties": { "mode": { "enum": ["group-weight", "weight", "flat"] }, "amplitude_m": { "type": "number", "minimum": 0 } }
+            }
+          }
+        },
+        "vr": {
+          "description": "Stores only the transform from 3D; nothing is laid out again.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled"],
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "scale_m": { "type": "number", "minimum": 0.001 },
+            "floor_y": { "type": "number" },
+            "eye_height_m": { "type": "number", "minimum": 0 },
+            "entry_node": { "$ref": "#/$defs/id" },
+            "label_budget": { "type": "integer", "minimum": 0, "maximum": 512 },
+            "snap_turn_deg": { "enum": [0, 30, 45, 90], "description": "Snap-turn step in degrees (default 45; 0 disables); honoured by renderers/xr.mjs." }
+          }
+        },
+        "interactive": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "focus": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+            "reach": { "enum": ["in", "out", "both", "none"] },
+            "lenses": { "type": "array", "maxItems": 32, "items": { "$ref": "#/$defs/lens" } },
+            "default_lens": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+            "presentation": { "type": "array", "maxItems": 64, "items": { "$ref": "#/$defs/id" }, "description": "One-node-per-step shorthand; steps[] supersedes it when present." },
+            "steps": { "type": "array", "maxItems": 64, "items": { "$ref": "#/$defs/step" }, "description": "Authored walkthrough: each step names the nodes and edges it brings forward (DF_IR_DANGLING_VIEW_REF) and may move the playhead." },
+            "deep_link": { "type": "boolean" }
+          }
+        },
+        "time": { "$ref": "#/$defs/time" }
+      }
+    },
+    "time": {
+      "description": "The one playhead: an explicit, serialised window on a date or order axis, computed by lib/time/playhead.mjs and mirrored by renderers/viewer/time.js. Motion is opt-in, finite and seekable; the still frame at the playhead carries the whole meaning.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["axis"],
+      "properties": {
+        "axis": { "enum": ["date", "order"] },
+        "field": { "enum": ["happened_on", "captured_on", "remembered_on", "released_on"], "description": "The provenance date a node is born at on a date axis (default happened_on, captured_on fallback)." },
+        "from": { "$ref": "#/$defs/time_point" },
+        "to": { "$ref": "#/$defs/time_point" },
+        "step": { "enum": ["day", "week", "month", "year", "event", "beat"], "description": "beat is for axis order; day|week|month|year|event for axis date (DF_IR_TIME_WINDOW_INVALID)." },
+        "playhead": { "$ref": "#/$defs/time_point" },
+        "cumulative": { "type": "boolean" },
+        "motion": { "enum": ["still", "trace", "playback"] },
+        "trace": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "trail": { "type": "number", "minimum": 0.05, "maximum": 1 },
+            "beads": { "type": "integer", "minimum": 1, "maximum": 8 },
+            "duration_ms": { "type": "integer", "minimum": 400, "maximum": 20000 }
+          }
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodes"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "$ref": "#/$defs/short_text" },
+        "caption": { "type": "string", "maxLength": 200 },
+        "nodes": { "$ref": "#/$defs/id_list" },
+        "edges": { "$ref": "#/$defs/id_list" },
+        "playhead": { "$ref": "#/$defs/time_point" }
+      }
+    },
+    "lens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "match"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "$ref": "#/$defs/short_text" },
+        "match": {
+          "description": "A node matches when every listed selector admits it; selectors reuse authored ids, tags and kinds only.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "owner": { "$ref": "#/$defs/id_list" },
+            "groups": { "$ref": "#/$defs/id_list" },
+            "rooms": { "$ref": "#/$defs/id_list" },
+            "tags": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+            "kinds": { "type": "array", "items": { "type": "string", "pattern": "^(record|note|person|desk|tag|file|asset|event|place|boundary|annotation|idea|x-[a-z0-9][a-z0-9-]{0,30})$" } },
+            "status": { "type": "array", "items": { "enum": ["accepted", "proposal"] } }
+          }
+        }
+      }
+    },
+    "projected": {
+      "description": "Written only by lib/project.mjs. mac = hmac-sha256(session.key, canonical(scene minus projected and receipt)); lib/gates/privacy.mjs verifies it (DF_RENDER_UNPROJECTED).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["by", "engine_version", "viewer", "at", "dropped", "limit", "mac"],
+      "properties": {
+        "by": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "engine_version": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "viewer": { "$ref": "#/$defs/id" },
+        "at": { "type": "string", "format": "date-time" },
+        "dropped": { "type": "integer", "minimum": 0 },
+        "limit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["focus", "reach", "lens", "max_nodes"],
+          "properties": {
+            "focus": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+            "reach": { "type": ["string", "null"], "enum": ["in", "out", "both", "none", null] },
+            "lens": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+            "max_nodes": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "mac": { "$ref": "#/$defs/mac" }
+      }
+    },
+    "scene_receipt": {
+      "description": "The render receipt summary embedded after the gates ran; the full receipt lives next to the output.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_id", "source_digest", "tokens_digest", "validator_version", "checks_passed"],
+      "properties": {
+        "receipt_id": { "type": "string", "pattern": "^rcpt_[0-9]{8}T[0-9]{6}Z_[0-9a-f]{4}$" },
+        "source_digest": { "$ref": "#/$defs/digest" },
+        "tokens_digest": { "$ref": "#/$defs/digest" },
+        "validator_version": { "type": "string", "minLength": 1, "maxLength": 16 },
+        "checks_passed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "delta": {
+      "description": "Written by dotfield compare (lib/delta.mjs diffScenes) on the after scene it renders, never authored: the before/after inputs, how many nodes and edges paired, one row per node and edge of either scene with its change and the axes that differ, the counts, and the viewBox the after scene had before it grew (grow-only) to cover every nodes[].from. Nodes pair by id; edges by id, an id-less edge by (from, to, kind) (DF_DELTA_EDGE_PAIRED_BY_ENDPOINTS). It claims no risk assessment. schemas/delta.schema.json (dotfield.delta/1) is the same object as a standalone document (delta.json beside out.html).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["before", "after", "pairs", "unpaired_ratio", "nodes", "edges", "counts", "claims"],
+      "properties": {
+        "before": { "$ref": "#/$defs/delta_input" },
+        "after": { "$ref": "#/$defs/delta_input" },
+        "pairs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nodes", "edges", "edges_by_endpoints"],
+          "properties": {
+            "nodes": { "type": "integer", "minimum": 0 },
+            "edges": { "type": "integer", "minimum": 0 },
+            "edges_by_endpoints": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "unpaired_ratio": { "type": "number", "minimum": 0, "maximum": 1, "description": "1 - paired nodes / nodes of the smaller scene (0 when either is empty); above 0.8 the compare is refused (DF_DELTA_NO_STABLE_IDS)." },
+        "nodes": { "type": "array", "maxItems": 20000, "items": { "$ref": "#/$defs/delta_node" } },
+        "edges": { "type": "array", "maxItems": 40000, "items": { "$ref": "#/$defs/delta_edge" } },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nodes", "edges"],
+          "properties": { "nodes": { "$ref": "#/$defs/delta_count" }, "edges": { "$ref": "#/$defs/delta_count" } }
+        },
+        "viewbox_grown_from": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4, "description": "The after scene's views.2d.viewBox before it grew to cover every nodes[].from; absent when nothing grew." },
+        "claims": { "const": "no risk assessment" }
+      }
+    },
+    "delta_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "digest"],
+      "properties": {
+        "ref": { "type": "string", "minLength": 1, "maxLength": 1024, "description": "Root-relative path, the file name of an input outside the root, or room:<id>/<view>." },
+        "digest": { "$ref": "#/$defs/digest", "description": "sha256 of the input file (the receipt's inputs[].digest), or of the canonical projected scene for a room view." }
+      }
+    },
+    "delta_change": { "enum": ["added", "removed", "changed", "moved", "same"] },
+    "delta_axes": {
+      "description": "semantic (label, sublabel, kind, tags, status, fields, record_id, room; edge label, kind, order, at), topology (group membership and the edges a node touches; edge from, to, directed), geometry (positions beyond 1 px, pos, pose_m, size_m; edge routes, via, sides), provenance (the import envelope source.ref, source.digest and captured_on excluded), presentation (color_token, shape, weight; edge variant, route, weight, label_at), evidence (evidence_ids), scope (audience, boundary; edge rule_ref).",
+      "type": "array",
+      "maxItems": 7,
+      "items": { "enum": ["semantic", "topology", "geometry", "provenance", "presentation", "evidence", "scope"] }
+    },
+    "delta_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "change", "axes"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "change": { "$ref": "#/$defs/delta_change" },
+        "axes": { "$ref": "#/$defs/delta_axes" },
+        "from": { "$ref": "#/$defs/vec2", "description": "The before position: on every removed node (its ghost) and on every node whose geometry changed (the from -> to connector)." },
+        "label": { "$ref": "#/$defs/short_text" },
+        "kind": { "$ref": "#/$defs/node/properties/kind", "description": "Removed nodes only: the before kind, so the ghost draws its glyph." }
+      }
+    },
+    "delta_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "change", "axes"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9~][a-z0-9_.:~-]{0,255}$", "description": "The edge id, or for an id-less edge from~to~kind~n (n: its rank among the id-less edges of that key, after scene first)." },
+        "change": { "$ref": "#/$defs/delta_change" },
+        "axes": { "$ref": "#/$defs/delta_axes" },
+        "ends": { "type": "array", "items": { "$ref": "#/$defs/id" }, "minItems": 2, "maxItems": 2, "description": "Removed edges only: the before [from, to], so the ghost edge can be drawn." }
+      }
+    },
+    "delta_count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed", "changed", "moved", "same"],
+      "properties": {
+        "added": { "type": "integer", "minimum": 0 },
+        "removed": { "type": "integer", "minimum": 0 },
+        "changed": { "type": "integer", "minimum": 0 },
+        "moved": { "type": "integer", "minimum": 0 },
+        "same": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

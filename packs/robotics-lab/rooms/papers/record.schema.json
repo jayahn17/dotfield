@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Paper",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["paper_id", "citation", "method", "read_on"],
+  "properties": {
+    "paper_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" },
+    "citation": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "doi": { "type": "string", "pattern": "^10\\.[0-9]{4,9}/[^\\s]{1,100}$" },
+    "method": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "relevance": { "type": "number", "minimum": 0, "maximum": 10 },
+    "tags": { "type": "array", "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 40 } },
+    "influences": { "type": "array", "maxItems": 32, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$" } },
+    "published_on": { "type": "string", "format": "date" },
+    "read_on": { "type": "string", "format": "date" },
+    "notes": { "type": "string", "maxLength": 4000 }
+  }
+}

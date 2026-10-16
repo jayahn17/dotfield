@@ -1,0 +1,42 @@
+{
+  "schema_version": "dotfield.room/1",
+  "id": "datasets",
+  "label": "Datasets",
+  "icon": "file",
+  "pack": "research-lab",
+  "purpose": "What the experiments ran on: modality, subjects or specimens, license, collection window; a digest of the files, never their location.",
+  "mode": "proposal_only",
+  "privacy_mode": "synthetic_data",
+  "maturity": "contract_only",
+  "store": { "scope": "owner", "namespace": "datasets", "max_records": 1000, "max_record_bytes": 16384 },
+  "record": {
+    "schema": "record.schema.json",
+    "id_field": "dataset_id",
+    "label_field": "name",
+    "sublabel_field": "modality",
+    "tag_field": "tags",
+    "dates": { "happened_on": "collected_on", "remembered_on": "logged_on" },
+    "link_fields": [],
+    "default_privacy_level": "private",
+    "public_fields": ["name", "modality", "license", "tags"]
+  },
+  "views": "views.json",
+  "desks": [
+    {
+      "id": "data-desk", "display": "Data desk", "tier": "support", "domain": "data stewardship",
+      "primary_field": "research data management", "adjacent_fields": ["licensing", "anonymisation"],
+      "lens": "a dataset is a contract with its subjects and its licence before it is a file",
+      "keywords": ["dataset", "license", "provenance", "anonymisation", "fair", "consent"],
+      "challenger_for": [], "influences": [],
+      "constraint": "never uploads or re-identifies; proposes the manifest row only",
+      "prompt": null
+    }
+  ],
+  "owner_gates": { "writes": "required", "external_sends": "blocked", "share": "required", "aggregate": "blocked", "train": "blocked" },
+  "blocked_actions": ["upload_dataset", "send_email"],
+  "proof": {
+    "test": false,
+    "expected": ["examples.json validates", "shelf view emits one file node per dataset", "no record carries a filesystem path", "a proposal never changes data/rooms/datasets.json"]
+  },
+  "done_definition": "Done as prototype when dotfield prove datasets exits 0 and the shelf view renders with no DF_IR_* or DF_LAYOUT_* failure; contract_only until then."
+}

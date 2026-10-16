@@ -1,0 +1,39 @@
+{
+  "scene": {
+    "scene_id": "bench_room_prototype",
+    "title": "Bench room prototype",
+    "generated_at": "2026-09-30T08:00:00Z",
+    "description": "Synthetic copy of the spatial asset scene shape: zones with a metric box, assets with a pose.",
+    "room": { "name": "Bench room", "dimensions_xyz_m": [6.4, 2.8, 4.8], "floor_grid_m": 0.5 },
+    "view_modes": [{ "id": "room", "label": "Real room" }, { "id": "category", "label": "By category" }],
+    "performance_targets": { "desktop_target_fps": 55, "quest_target_fps": 72 }
+  },
+  "zones": [
+    { "zone_id": "zone_desk", "label": "Main desk", "center_xyz_m": [-1.35, 0.01, 0.45], "size_xyz_m": [1.8, 0.02, 1.3] },
+    { "zone_id": "zone_shelf", "label": "Parts shelf", "center_xyz_m": [1.55, 0.01, -0.85], "size_xyz_m": [1.6, 0.02, 1.1] },
+    { "zone_id": "zone_floor", "label": "Floor", "center_xyz_m": [0.0, 0.0, 1.2], "size_xyz_m": [3.0, 0.02, 2.0], "floor": true }
+  ],
+  "assets": [
+    { "asset_id": "asset_laptop", "display_name": "Field laptop", "kind": "physical", "asset_type": "laptop", "brand": "Generic", "model": "Field 16",
+      "condition": "good", "zone_id": "zone_desk", "zone_label": "Main desk", "project_label": "Rig bringup", "tags": ["compute"],
+      "size_xyz_m": [0.36, 0.02, 0.25], "pose": { "xyz": [-1.65, 0.24, 0.55], "rpy": [0.0, 0.1, 0.0] },
+      "documents": [
+        { "document_id": "doc_laptop_receipt", "kind": "receipt", "title": "Laptop receipt", "uri": "file:///home/someone/receipts/laptop.pdf", "checksum": null },
+        { "document_id": "doc_rig_repo", "kind": "repo", "title": "Rig bringup repository", "uri": "https://example.invalid/rig-bringup", "checksum": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a" }
+      ],
+      "metadata": { "digital_twin_status": "verified", "confidence_score": 0.9 },
+      "render": { "shape": "textured-box", "size_xyz_m": [0.36, 0.02, 0.25], "accent_color": "#8bd7ff", "image_uri": "generated-assets/asset_laptop-card.svg" },
+      "related_asset_ids": ["asset_imu", "asset_headset"] },
+    { "asset_id": "asset_imu", "display_name": "IMU breakout", "kind": "physical", "asset_type": "sensor", "zone_id": "zone_shelf", "tags": ["sensor", "imu"],
+      "size_xyz_m": [0.04, 0.01, 0.03],
+      "layouts": { "room": { "position_xyz_m": [1.4, 0.3, -0.8], "rotation_xyz_rad": [0.0, 0.0, 0.0] }, "category": { "position_xyz_m": [0.0, 0.3, 0.0], "rotation_xyz_rad": [0.0, 0.0, 0.0] } },
+      "related_asset_ids": ["asset_laptop"] },
+    { "asset_id": "asset_headset", "display_name": "VR headset", "kind": "physical", "asset_type": "headset", "zone_id": "zone_shelf", "tags": ["xr"],
+      "size_xyz_m": [0.19, 0.11, 0.12], "pose": { "xyz": [1.7, 0.35, -0.9], "rpy": [0.0, 0.0, 0.0] }, "handle": "@someone" },
+    { "asset_id": "asset_urdf", "display_name": "Rover URDF", "kind": "digital", "asset_type": "model", "zone_id": "zone_desk", "tags": ["urdf", "digital"],
+      "documents": [{ "document_id": "doc_urdf", "kind": "file", "title": "rover.urdf", "uri": "models/rover.urdf", "checksum": null }] },
+    { "asset_id": "asset_crate", "display_name": "Parts crate", "kind": "physical", "asset_type": "storage", "zone_id": "zone_missing", "tags": [],
+      "size_xyz_m": [0.6, 0.4, 0.4], "pose": { "xyz": [0.2, 0.2, 1.4], "rpy": [0.0, 0.0, 0.0] } }
+  ],
+  "agent_suggestions": [{ "desk": "sim-ops", "text": "Move the IMU next to the laptop before the next run." }]
+}

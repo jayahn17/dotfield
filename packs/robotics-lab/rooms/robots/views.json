@@ -1,0 +1,21 @@
+[
+  {
+    "id": "rig", "label": "Rig room", "kind": "room", "theme": "studio", "pose": "$.pose_m",
+    "node": { "kind": "asset", "label": "$.name", "sublabel": "$.platform", "tags": "$.tags" },
+    "group_by": { "field": "$.bench", "kind": "zone" },
+    "limit": { "max_nodes": 200, "default_lens": null },
+    "views": {
+      "2d": { "layout": "metric", "seed": 0 },
+      "3d": { "layout": "metric", "scale_m": 1 },
+      "vr": { "enabled": true, "scale_m": 1, "floor_y": 0, "eye_height_m": 1.6 }
+    },
+    "lenses": [ { "id": "mobile", "label": "Mobile platforms", "match": { "tags": ["mobile"] } } ]
+  },
+  {
+    "id": "fleet", "label": "Fleet by platform", "kind": "graph", "theme": "studio",
+    "node": { "kind": "asset", "label": "$.name", "sublabel": "$.platform", "tags": "$.tags" },
+    "group_by": { "field": "$.platform", "kind": "region" },
+    "limit": { "max_nodes": 200, "default_lens": null },
+    "views": { "2d": { "layout": "cluster-disc", "seed": 3 }, "3d": { "layout": "lift", "scale_m": 5, "lift": { "mode": "flat", "amplitude_m": 0 } }, "vr": { "enabled": false } }
+  }
+]

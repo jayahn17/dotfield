@@ -1,0 +1,6 @@
+[
+  { "followup_id": "f-0001", "case_id": "case-0a1b2c", "kind": "review", "due_on": "2026-03-16", "status": "done", "protocol_step": 5, "logged_on": "2026-03-02", "tags": ["musculoskeletal"] },
+  { "followup_id": "f-0002", "case_id": "case-1c2d3e", "kind": "test", "due_on": "2026-07-11", "status": "missed", "protocol_step": 3, "logged_on": "2026-04-11", "tags": ["cardiovascular", "missed"] },
+  { "followup_id": "f-0003", "case_id": "case-2e3f40", "kind": "referral", "due_on": "2026-05-27", "status": "done", "protocol_step": 4, "logged_on": "2026-05-20", "tags": ["triage"] },
+  { "followup_id": "f-0004", "case_id": "case-3f4051", "kind": "call", "due_on": "2026-10-15", "status": "due", "protocol_step": 7, "logged_on": "2026-07-01", "tags": ["musculoskeletal", "escalated"] }
+]
